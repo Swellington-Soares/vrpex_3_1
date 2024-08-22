@@ -1,0 +1,13 @@
+{
+    "user_not_allowed": "Você ainda não liberou seu acesso, envie seu ID %d no nosso discord: %s.",
+    "conn_check_banned": "verificando informações de banimento...",
+    "license_not_found": "Identificação não disponível.",
+    "conn_check_self": "Verificando suas informações...",
+    "discord_id_not_found": "Não foi possível detectar o seu discord.",
+    "fivem_id_not_found": "Não foi possível detectar sua conta Cfx, associe seu usuário pelo menu de configuração no FiveM.",
+    "user_created": "Seu usuário foi criado com sucesso. Envie seu ID %d no discord %s para liberar o acesso.",
+    "user_created_error": "Houve um problema ao criar seu usário, entre em contato com o suporte.",
+    "conn_check_allowed": "Verificando se você tá autorizado para entrar na cidade.",
+    "user_as_banned": "Você foi banido por [%s], seu ID: %d.",
+    "user_already_connected": "Sua conta foi acessada por outro lugar, desconectando todas."
+}

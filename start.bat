@@ -1,0 +1,1 @@
+fxserver +exec server.cfg
