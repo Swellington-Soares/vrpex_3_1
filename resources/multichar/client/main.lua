@@ -7,6 +7,8 @@ local _charList
 local last_selected_char = -1
 local in_char_creator = true
 
+local started = false
+
 local function CreateSpawnMenu()
     local character = _charList[last_selected_char]
     lib.print.info('LAST SELECTED', json.encode(character))
@@ -27,7 +29,7 @@ local function CreateSpawnMenu()
             cams[k] = CreateCamWithParams('DEFAULT_SCRIPTED_CAMERA', p.args[1].x, p.args[1].y, p.args[1].z + 150.0,
                 vec3(-75.0, 0.0, 0.0), 55.0, false, 2)
         end
-
+        ClearFocus()
         RenderScriptCams(true, false, 0, true, true)
         lib.registerMenu({
             id = 'spawn_menu',
@@ -55,7 +57,7 @@ local function CreateSpawnMenu()
             SetCamActiveWithInterp(cam1, cams[selected], 2000, 16, 8)
             while IsCamInterpolating(cam1) do Wait(0) end
             RenderScriptCams(false, true, 1000, true, true)
-            for _, xcam in next, cams do 
+            for _, xcam in next, cams do
                 if DoesCamExist(xcam) then
                     SetCamActive(xcam, false)
                     DestroyCam(xcam, true)
@@ -179,6 +181,13 @@ end
 local function CreateSelectorMenu()
     lib.callback('multichar:server:getCharacters', false, function(charList)
         _charList = charList
+        local pp = config.spawn_preview
+        local ped = PlayerPedId()
+        SetEntityCoordsNoOffset(cache.ped, pp.x, pp.y, pp.z, false, false, true)
+        SetEntityHeading(ped, pp.w)
+        ClearPedTasksImmediately(ped)
+        Wait(1000)
+        ClearFocus()
         if #_charList > 0 then
             local options = {
                 { label = locale('new_char'), args = { id = 'NEW_CHAR' } },
@@ -196,13 +205,6 @@ local function CreateSelectorMenu()
                     Wait(0)
                 end
             end)
-
-
-            local pp = config.spawn_preview
-            local ped = PlayerPedId()
-            SetEntityCoordsNoOffset(cache.ped, pp.x, pp.y, pp.z, false, false, true)
-            SetEntityHeading(ped, pp.w)
-            ClearPedTasksImmediately(ped)
 
             --update custom
             local cc1 = config.spawn_cam_forward
@@ -246,7 +248,7 @@ local function CreateSelectorMenu()
                     DoScreenFadeOut(0)
                     Wait(1000)
                     NewCharMenu()
-                else                    
+                else
                     CreateSpawnMenu()
                 end
             end)
@@ -260,11 +262,73 @@ local function CreateSelectorMenu()
 end
 
 CreateThread(function()
-    lib.hideMenu()
+    ClearFocus()
+    DoScreenFadeOut(0)
     lib.hideContext()
     lib.hideRadial()
-    lib.hideTextUI()
-    DoScreenFadeOut(0)
-    while not NetworkIsSessionStarted() do Wait(0) end
+    lib.hideTextUI()    
+    local timeout = GetGameTimer() + 10000
+    while true do
+        Wait(0)
+        if started or GetGameTimer() > timeout then break end
+    end
     CreateSelectorMenu()
 end)
+
+AddEventHandler('vrp:client:spawned', function()
+    Wait(0)
+    started = true
+end)
+
+DecorRegister('__ZUMBI__', 2)
+
+local function zombify(ped)
+  local movementClipset <const> = "clipset@anim@ingame@move_m@zombie@core"
+  local strafeClipset <const> = "clipset@anim@ingame@move_m@zombie@core"
+  local actionModeClipset <const> = "clipset@anim@ingame@move_m@zombie@strafe"
+  local weaponAnimationName <const> = `ZOMBIE`
+
+  
+  lib.requestAnimSet(movementClipset)
+  lib.requestAnimSet(strafeClipset)
+  lib.requestAnimSet(actionModeClipset)
+  
+  SetPedMovementClipset(ped, movementClipset, 0.25)
+  SetPedStrafeClipset(ped, strafeClipset)
+  SetPedUsingActionMode(ped, true, -1, actionModeClipset)
+  SetWeaponAnimationOverride(ped, weaponAnimationName)
+
+  RemoveClipSet(movementClipset)
+  RemoveClipSet(strafeClipset)
+  RemoveClipSet(actionModeClipset)
+end
+
+
+CreateThread(function()
+    while true do
+        SetPedDensityMultiplierThisFrame(1.0)
+        Wait(0)
+    end
+end)
+
+-- CreateThread(function()
+--     SetPedPopulationBudget(3)
+--     while true do
+--         local pedPool = GetGamePool('CPed')
+--         local ppos = GetEntityCoords(PlayerPedId())
+--         for i = 1, #pedPool do
+--             local ped = pedPool[i]
+--             if not IsPedAPlayer(ped) then
+--                 if not IsEntityDead( ped ) and #(GetEntityCoords(ped) - ppos) < 50.0 and not DecorGetBool(ped, '__ZUMBI__') then
+--                     SetPedCombatAbility(ped, 2)
+--                     SetPedCombatRange(ped, 3)
+--                     DecorSetBool(ped, '__ZUMBI__', true)
+--                     zombify(ped)
+--                     TaskCombatPed(ped, PlayerPedId(), 0, 16)
+--                     print('pd', ped)
+--                 end
+--             end
+--         end
+--         Wait(250)
+--     end
+-- end)

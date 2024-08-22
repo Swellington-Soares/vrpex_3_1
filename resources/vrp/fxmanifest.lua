@@ -15,6 +15,7 @@ server_scripts {
   "lib/utils.lua",
   "base.lua",
   'db_queries.lua',
+  'modules/audio.lua',
   'modules/character.lua',
   "modules/gui.lua",
   "modules/group.lua",
@@ -34,6 +35,7 @@ server_scripts {
 client_scripts {
   "lib/utils.lua",
   "client/base.lua",
+  'client/audio.lua',
   "client/gui.lua",
   "client/player_state.lua",
   "client/survival.lua",
@@ -60,8 +62,10 @@ data_file 'FIVEM_LOVES_YOU_4B38E96CC036038F' 'events.meta'
 data_file 'FIVEM_LOVES_YOU_341B23A2F0E0F131' 'popgroups.ymt'
 
 files {
+  'ui/**',
   'locales/*.json',
   'events.meta',
   'popgroups.ymt',
-  'relationships.dat'
+  'relationships.dat',
+  'sounds/**/*.ogg'
 }

@@ -3,6 +3,85 @@ local scaleform <const> = "MP_BIG_MESSAGE_FREEMODE"
 local COMA_TEXT <const> = 'Espere por ajuda...'
 local RESPAWN_TEXT <const> = 'Pressione [E] para tentar novamente, ou espere.'
 
+--#DEATH HOSPITAL SCENE ---------------------------------------------------------
+
+local HOSPITAL_COORD <const> = {
+  HOSPITAL_RH = {
+    coord = vec3(-447.2036, -342.8395, 34.5020),
+    rot = vec3(0.0000, 0.0000, 109.1352),
+    animDict = "respawn@hospital@rockford",
+    animName = "rockford",
+    camAnim = "rockford_cam",
+  }
+}
+
+local function GetNearbyHospital(pos)
+  local k
+  local min = 99999
+  for id, info in next, HOSPITAL_COORD do
+    local distance = #(pos - info.coord)
+    if min > distance then
+      min = distance
+      k = id
+    end
+  end
+  return HOSPITAL_COORD[k]
+end
+
+
+local function RunDeathScene()
+  if not IsScreenFadedOut() then DoScreenFadeOut(0) end
+  local fRESPAWN_CUTSCENE_RADIUS <const> = 15.0
+  local ped = PlayerPedId()
+  local h = GetNearbyHospital(GetEntityCoords(ped))
+  SetPlayerControl(cache.playerId, false, 0)
+  SetEntityCoords(ped, h.coord.x, h.coord.y, h.coord.z, false, true, false, true)
+  -- SetFocusPosAndVel(h.coord.x, h.coord.y, h.coord.z, 0.0, 0.0, 0.0)
+  FreezeEntityPosition(ped, true)
+  SetEntityInvincible(ped, true)
+  -- SetEntityCollision(ped, false, false)
+  RemoveParticleFxInRange(h.coord.x, h.coord.y, h.coord.z, fRESPAWN_CUTSCENE_RADIUS)
+  RemoveDecalsInRange(h.coord.x, h.coord.y, h.coord.z, fRESPAWN_CUTSCENE_RADIUS)
+  ClearArea(h.coord.x, h.coord.y, h.coord.z, 5.0, true, false, false, false)
+  Wait(1000)
+  tvRP.revivePlayer()
+  ped = PlayerPedId()
+  local dict = lib.requestAnimDict(h.animDict)
+  SetEntityHeading(ped, h.rot.z)
+  SetCurrentPedWeapon(ped, `WEAPON_UNARMED`, true)
+  ClearPedTasksImmediately(ped)
+  Wait(3000)
+
+  if not IsScreenFadedIn() or not IsScreenFadingIn() then DoScreenFadeIn(0) end
+  FreezeEntityPosition(ped, false)
+  local sceneId = CreateSynchronizedScene(h.coord.x + 0.5, h.coord.y + 0.5, h.coord.z, h.rot.x, h.rot.y, h.rot.z, 2)
+  local cam = CreateCam("DEFAULT_SCRIPTED_CAMERA", true)
+  SetSynchronizedSceneLooped(sceneId, false)
+  SetSynchronizedSceneHoldLastFrame(sceneId, false)
+  TaskSynchronizedScene(ped, sceneId, h.animDict, h.animName, 1000.0, -8.4, 0, 0x447a0000, 0)
+  SetForceFootstepUpdate(ped, true)
+  PlaySynchronizedCamAnim(cam, sceneId, h.camAnim, dict)
+  Wait(0)
+
+  while GetSynchronizedScenePhase(sceneId) < 0.99 do
+    Wait(0)
+    HideHudAndRadarThisFrame()
+  end
+
+  SetCamActive(cam, false)
+  DestroyCam(cam, true)
+  RemoveAnimDict(dict)
+  RenderScriptCams(false, false, 0, true, true)
+  SetPlayerControl(cache.playerId, true, 0)
+  SetEntityInvincible(ped, false)
+  Wait(0)
+end
+
+
+
+
+---------------------------------------------------------------------------------
+
 ---@type CKeybind
 local comaKey
 
@@ -29,7 +108,7 @@ local function DeathScreen()
           BeginScaleformMovieMethod(scale, "SHOW_SHARD_WASTED_MP_MESSAGE")
           func_92('~r~' .. GetLabelText('RESPAWN_W_MP'))
           EndScaleformMovieMethod()
-          timeout = GetGameTimer() + 12000
+          timeout = GetGameTimer() + 8000
           AnimpostfxPlay('DeathFailOut', 0, false)
           PlaySoundFrontend(-1, "Bed", "WastedSounds", true)
           ShakeGameplayCam("DEATH_FAIL_IN_EFFECT_SHAKE", 1.0)
@@ -97,7 +176,6 @@ function tvRP.setPolice(flag)
   SetDispatchCopsForPlayer(player, flag)
 end
 
-
 function tvRP.isNoclip()
   return false
 end
@@ -148,21 +226,40 @@ end)
 -- COMA SYSTEM
 
 local in_coma = false
-local coma_left = cfg.coma_duration * 60
+local COMA_MAX <const> = cfg.coma_duration * 60
+local coma_left = COMA_MAX
 
 
 function tvRP.revivePlayer()
-  in_coma = false
-  coma_left = cfg.coma_duration * 60
-  comaKey:disable(true)
-  local pos = GetEntityCoords(cache.ped)
-  FreezeEntityPosition(cache.ped, false)
-  SetPlayerControl(cache.playerId, true, 0)
-  Wait(0)
-  NetworkResurrectLocalPlayer(pos.x, pos.y, pos.z, GetEntityHeading(cache.ped), 2000, false)
-  lib.hideTextUI()
-  tvRP.setHealth(200)
-  ClearPedBloodDamage(cache.ped)
+  local ped = PlayerPedId()
+  local pos = GetEntityCoords(ped)
+  if IsEntityDead(ped) then
+    in_coma = false
+    coma_left = COMA_MAX
+    comaKey:disable(true)
+    lib.hideTextUI()
+
+    FreezeEntityPosition(ped, false)
+    SetPlayerControl(cache.playerId, true, 0)
+    NetworkResurrectLocalPlayer(pos.x, pos.y, pos.z, GetEntityHeading(ped), 0, false)
+    SetEntityHealth(ped, 200)
+    ClearPedBloodDamage(ped)
+    ResetPedMovementClipset(ped, 0.0)
+    ResetPedStrafeClipset(ped)
+    ResetPedWeaponMovementClipset(ped)
+    SetPedCanBeDraggedOut(ped, true)
+    SetPedCanBeKnockedOffVehicle(ped, 0)
+    SetPedCanSmashGlass(ped, true, true)
+    SetPedDiesInSinkingVehicle(ped, true)
+    SetPedMaxTimeUnderwater(ped, 1)
+    SetPedCanSwitchWeapon(ped, true)
+    ResetPedInVehicleContext(ped)
+    ClearPedDriveByClipsetOverride(ped)
+    SetPedInfiniteAmmoClip(ped, false)
+    SetPedCanPlayAmbientAnims(ped, true)
+    SetPedIsDrunk(ped, false)
+    SetPlayerForcedAim(ped, false)
+  end
 end
 
 function tvRP.isInComa()
@@ -194,7 +291,10 @@ end)
 
 
 local function KillPlayer()
-  coma_left = cfg.coma_duration * 60
+  lib.hideContext()
+  lib.hideRadial()
+  PauseDeathArrestRestart(true)
+  coma_left = COMA_MAX
   in_coma = true
   SetPlayerControl(PlayerId(), false, 0)
   tvRP.ejectVehicle()
@@ -205,8 +305,8 @@ local function KillPlayer()
     while in_coma do
       FreezeEntityPosition(cache.ped, true)
       local isTextOpen, text = lib.isTextUIOpen()
-      if (not isTextOpen or (isTextOpen and text ~= COMA_TEXT)) and coma_left > 0 then
-        lib.showTextUI(COMA_TEXT, {
+      if coma_left > 0 then
+        lib.showTextUI(COMA_TEXT .. ' [' .. coma_left .. ']', {
           icon = 'skull',
           position = 'bottom-center',
           style = {
@@ -214,7 +314,7 @@ local function KillPlayer()
           }
         })
       elseif (coma_left < 1) then
-        if not (isTextOpen or (isTextOpen and text ~= RESPAWN_TEXT)) then
+        if not isTextOpen or (isTextOpen and text ~= RESPAWN_TEXT) then
           lib.hideTextUI()
           lib.showTextUI(RESPAWN_TEXT, {
             icon = 'face-smile',
@@ -229,10 +329,17 @@ local function KillPlayer()
           comaKey:disable(false)
         end
       end
-      Wait(500)
+      Wait(1000)
     end
   end)
 end
+
+RegisterCommand('xrevive', function()
+  -- if in_coma and coma_left < 1 then
+  tvRP.revivePlayer()
+  RunDeathScene()
+  -- end
+end)
 
 comaKey = lib.addKeybind({
   description = 'respawn when coma limit end',
@@ -242,7 +349,10 @@ comaKey = lib.addKeybind({
   disabled = true,
   onPressed = function(self)
     if in_coma and coma_left < 1 then
-      tvRP.revivePlayer()
+      in_coma = false
+      self:disable(true)
+      lib.hideTextUI()
+      RunDeathScene()
     end
   end
 })
@@ -257,4 +367,10 @@ AddEventHandler('gameEventTriggered', function(name, data)
       KillPlayer()
     end
   end
+end)
+
+
+
+RegisterCommand("kill", function (_, args, raw)
+  SetEntityHealth(cache.ped, 0.0)
 end)
