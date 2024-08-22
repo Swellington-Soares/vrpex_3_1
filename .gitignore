@@ -7,6 +7,7 @@ keys.cfg
 .yarn.installed
 \[test\]/
 \[devtools\]/
+server.cfg
 
 # Logs
 logs
