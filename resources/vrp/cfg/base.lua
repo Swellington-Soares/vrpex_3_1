@@ -1,10 +1,7 @@
 local cfg = {
+    pause_menu_text = '~g~~h~SU\'EL~h~ ~b~VRPEX~y~ 3.1',
     save_interval = GetConvarInt('vrp:save_interval', 60),
-    enable_allowlist = GetConvarInt('vrp:enable_allowlist', 1) == 1, -- enable/disable whitelist
-    load_duration = 30,
-    load_delay = 60,
-    global_delay = 0,
-    ping_timeout = 5,
+    enable_allowlist = GetConvarInt('vrp:enable_allowlist', 1) == 1, -- enable/disable whitelist   
     lang = GetConvar('locale', 'en-US'),
     debug = GetConvarInt('vrp:debug', 0) == 1,
     debug_async_time = 2,
@@ -17,7 +14,11 @@ local cfg = {
     pvp = GetConvarInt('vrp:pvp', 1) == 1,
     phone_format = "DDD-DDD",
     registration_format = 'DDAALAAL',
-    coma_duration = 0.2,
+    coma_duration = 5,
+    load_duration = 30,
+    load_delay = 60,
+    global_delay = 0,
+    ping_timeout = 5,    
     -- illegal items (seize)
     -- specify list of "idname" or "*idname" to seize all parametric items
     money_type = {
@@ -43,6 +44,12 @@ local cfg = {
             { text = "BUTTON 2", url = "" },
         },
         updateRate = 15000 -- 15 segundos
+    },
+    disables = {
+        driverby = true,
+        idlecam = true,
+       
+
     }
 
 
