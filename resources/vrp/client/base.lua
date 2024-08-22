@@ -268,16 +268,6 @@ function tvRP.setRagdoll(flag)
   end
 end
 
-
-function tvRP.playSpatializedSound(dict, name, x, y, z, range)
-  PlaySoundFromCoord(-1, name, x + 0.0001, y + 0.0001, z + 0.0001, dict, false, range + 0.0001, false)
-end
-
--- play sound
-function tvRP.playSound(dict, name)
-  PlaySound(-1, name, dict, true, 0, false)
-end
-
 function tvRP.setMovement(dict)
   if dict then
     if not HasAnimSetLoaded(dict) then
@@ -300,6 +290,7 @@ AddEventHandler("playerSpawned", function()
   --temos que desabiltar o autospawn aqui ou vai bugar muita coisa, vamos deixar o vRP gerenciar.
   if GetResourceState('spawnmanager') == 'started' then
     exports.spawnmanager:setAutoSpawn(false)
+    TriggerEvent('vrp:client:spawned')
   end
   
   TriggerServerEvent("vRPcli:playerSpawned")
