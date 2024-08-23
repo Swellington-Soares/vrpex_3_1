@@ -1,49 +1,34 @@
-
--- Money module, wallet/bank API
--- The money is managed with direct SQL requests to prevent most potential value corruptions
--- the wallet empty itself when respawning (after death)
-
-vRP.prepare("vRP/money_init_user","INSERT IGNORE INTO vrp_user_moneys(user_id,wallet,bank) VALUES(@user_id,@wallet,@bank)")
-vRP.prepare("vRP/get_money","SELECT wallet,bank FROM vrp_user_moneys WHERE user_id = @user_id")
-vRP.prepare("vRP/set_money","UPDATE vrp_user_moneys SET wallet = @wallet, bank = @bank WHERE user_id = @user_id")
-
-
--- load config
-local cfg = module("cfg/base")
-
--- API
-
--- get money
--- cbreturn nil if error
-function vRP.getMoney(user_id)
-  local tmp = vRP.getUserTmpTable(user_id)
-  if tmp then
-    return tmp.wallet or 0
-  else
-    return 0
-  end
+function vRP.getMoney(user_id, moneytype)
+  moneytype = moneytype or 'wallet'
+  return vRP.getUserDataTable(user_id)?.money[moneytype] or 0.0
 end
 
 -- set money
-function vRP.setMoney(user_id,value)
-  local tmp = vRP.getUserTmpTable(user_id)
-  if tmp then
-    tmp.wallet = value
+function vRP.setMoney(user_id, value, moneytype, reason, notify)
+  moneytype = moneytype or 'wallet'
+  local datatable = vRP.getUserDataTable(user_id)
+  if not datatable then
+    return false
   end
 
-  -- update client display
-  local source = vRP.getUserSource(user_id)
-  if source then
-    -- vRPclient._setDivContent(source,"money",lang.money.display({value}))
+  if datatable.money[moneytype] ~= nil then
+    datatable.money[moneytype] = value
   end
+
+  if notify and reason then
+    local source = vRP.getUserSource(user_id)
+    vRPclient._Notify(source, reason, "info", 3000)
+  end
+
+  return true
 end
 
 -- try a payment
 -- return true or false (debited if true)
-function vRP.tryPayment(user_id,amount)
+function vRP.tryPayment(user_id, amount)
   local money = vRP.getMoney(user_id)
   if amount >= 0 and money >= amount then
-    vRP.setMoney(user_id,money-amount)
+    vRP.setMoney(user_id, money - amount)
     return true
   else
     return false
@@ -51,46 +36,36 @@ function vRP.tryPayment(user_id,amount)
 end
 
 -- give money
-function vRP.giveMoney(user_id,amount)
+function vRP.giveMoney(user_id, amount, moneytype, reason, notify)
   if amount > 0 then
     local money = vRP.getMoney(user_id)
-    vRP.setMoney(user_id,money+amount)
+    return vRP.setMoney(user_id, money + amount, moneytype, reason, notify)
   end
+  return false
 end
 
 -- get bank money
 function vRP.getBankMoney(user_id)
-  local tmp = vRP.getUserTmpTable(user_id)
-  if tmp then
-    return tmp.bank or 0
-  else
-    return 0
-  end
+  return vRP.getMoney(user_id, 'bank')
 end
 
 -- set bank money
-function vRP.setBankMoney(user_id,value)
-  local tmp = vRP.getUserTmpTable(user_id)
-  if tmp then
-    tmp.bank = value
-  end
+function vRP.setBankMoney(user_id, value, reason, notify)
+ return vRP.setMoney(user_id, value, 'bank', reason, notify)
 end
 
 -- give bank money
-function vRP.giveBankMoney(user_id,amount)
-  if amount > 0 then
-    local money = vRP.getBankMoney(user_id)
-    vRP.setBankMoney(user_id,money+amount)
-  end
+function vRP.giveBankMoney(user_id, amount, reason, notify)
+  return vRP.giveMoney(user_id, amount, 'bank', reason, notify)
 end
 
 -- try a withdraw
 -- return true or false (withdrawn if true)
-function vRP.tryWithdraw(user_id,amount)
-  local money = vRP.getBankMoney(user_id)
+function vRP.tryWithdraw(user_id, amount)
+  local money = vRP.getMoney(user_id, 'bank')
   if amount >= 0 and money >= amount then
-    vRP.setBankMoney(user_id,money-amount)
-    vRP.giveMoney(user_id,amount)
+    vRP.setBankMoney(user_id, money - amount)
+    vRP.giveMoney(user_id, amount)
     return true
   else
     return false
@@ -99,9 +74,9 @@ end
 
 -- try a deposit
 -- return true or false (deposited if true)
-function vRP.tryDeposit(user_id,amount)
-  if amount >= 0 and vRP.tryPayment(user_id,amount) then
-    vRP.giveBankMoney(user_id,amount)
+function vRP.tryDeposit(user_id, amount)
+  if amount >= 0 and vRP.tryPayment(user_id, amount) then
+    vRP.giveBankMoney(user_id, amount)
     return true
   else
     return false
@@ -110,55 +85,15 @@ end
 
 -- try full payment (wallet + bank to complete payment)
 -- return true or false (debited if true)
-function vRP.tryFullPayment(user_id,amount)
+function vRP.tryFullPayment(user_id, amount)
   local money = vRP.getMoney(user_id)
-  if money >= amount then -- enough, simple payment
+  if money >= amount then                          -- enough, simple payment
     return vRP.tryPayment(user_id, amount)
-  else  -- not enough, withdraw -> payment
-    if vRP.tryWithdraw(user_id, amount-money) then -- withdraw to complete amount
+  else                                             -- not enough, withdraw -> payment
+    if vRP.tryWithdraw(user_id, amount - money) then -- withdraw to complete amount
       return vRP.tryPayment(user_id, amount)
     end
   end
 
   return false
 end
-
--- -- events, init user account if doesn't exist at connection
--- AddEventHandler("vRP:playerJoin",function(user_id,source,name,last_login)
---   vRP.execute("vRP/money_init_user", {user_id = user_id, wallet = cfg.open_wallet, bank = cfg.open_bank})
---   -- load money (wallet,bank)
---   local tmp = vRP.getUserTmpTable(user_id)
---   if tmp then
---     local rows = vRP.query("vRP/get_money", {user_id = user_id})
---     if #rows > 0 then
---       tmp.bank = rows[1].bank
---       tmp.wallet = rows[1].wallet
---     end
---   end
--- end)
-
--- -- save money on leave
--- AddEventHandler("vRP:playerLeave",function(user_id,source)
---   -- (wallet,bank)
---   local tmp = vRP.getUserTmpTable(user_id)
---   if tmp and tmp.wallet and tmp.bank then
---     vRP.execute("vRP/set_money", {user_id = user_id, wallet = tmp.wallet, bank = tmp.bank})
---   end
--- end)
-
--- -- save money (at same time that save datatables)
--- AddEventHandler("vRP:save", function()
---   for k,v in pairs(vRP.user_tmp_tables) do
---     if v.wallet and v.bank then
---       vRP.execute("vRP/set_money", {user_id = k, wallet = v.wallet, bank = v.bank})
---     end
---   end
--- end)
-
--- -- money hud
--- AddEventHandler("vRP:playerSpawn",function(user_id, source, first_spawn)
---   if first_spawn then
---     -- add money display
---     -- vRPclient._setDiv(source,"money",cfg.display_css,lang.money.display({vRP.getMoney(user_id)}))
---   end
--- end)

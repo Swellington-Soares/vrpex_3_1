@@ -7,12 +7,12 @@ ui_page "gui/index.html"
 
 shared_scripts {
   '@ox_lib/init.lua',
-  'cfg/base.lua'
+  "lib/utils.lua",
+  'cfg/**/*.lua',  
 }
 -- server scripts
 server_scripts {
-  '@oxmysql/lib/MySQL.lua',
-  "lib/utils.lua",
+  '@oxmysql/lib/MySQL.lua', 
   "base.lua",
   'db_queries.lua',
   'modules/audio.lua',
@@ -33,8 +33,8 @@ server_scripts {
 
 -- client scripts
 client_scripts {
-  "lib/utils.lua",
   "client/base.lua",
+  'client/pedai.lua',
   'client/audio.lua',
   "client/gui.lua",
   "client/player_state.lua",
@@ -62,6 +62,7 @@ data_file 'FIVEM_LOVES_YOU_4B38E96CC036038F' 'events.meta'
 data_file 'FIVEM_LOVES_YOU_341B23A2F0E0F131' 'popgroups.ymt'
 
 files {
+  'cfg/**/.lua',
   'ui/**',
   'locales/*.json',
   'events.meta',

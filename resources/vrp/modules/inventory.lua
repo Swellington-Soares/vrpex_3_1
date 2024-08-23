@@ -13,27 +13,32 @@ vRP.items = {}
 --
 -- genfunction are functions returning a correct value as: function(args) return value end
 -- where args is a list of {base_idname,arg,arg,arg,...}
-function vRP.defInventoryItem(idname,name,description,choices,weight)
+function vRP.defInventoryItem(idname, name, description, choices, weight)
   if weight == nil then
     weight = 0
   end
 
-  local item = {name=name,description=description,choices=choices,weight=weight}
+  local item = { name = name, description = description, choices = choices, weight = weight }
   vRP.items[idname] = item
 end
 
-
-function vRP.computeItemName(item,args)
-  if type(item.name) == "string" then return item.name
-  else return item.name(args) end
+function vRP.computeItemName(item, args)
+  if type(item.name) == "string" then
+    return item.name
+  else
+    return item.name(args)
+  end
 end
 
-function vRP.computeItemDescription(item,args)
-  if type(item.description) == "string" then return item.description
-  else return item.description(args) end
+function vRP.computeItemDescription(item, args)
+  if type(item.description) == "string" then
+    return item.description
+  else
+    return item.description(args)
+  end
 end
 
-function vRP.computeItemChoices(item,args)
+function vRP.computeItemChoices(item, args)
   if item.choices ~= nil then
     return item.choices(args)
   else
@@ -41,14 +46,16 @@ function vRP.computeItemChoices(item,args)
   end
 end
 
-function vRP.computeItemWeight(item,args)
-  if type(item.weight) == "number" then return item.weight
-  else return item.weight(args) end
+function vRP.computeItemWeight(item, args)
+  if type(item.weight) == "number" then
+    return item.weight
+  else
+    return item.weight(args)
+  end
 end
 
-
 function vRP.parseItem(idname)
-  return splitString(idname,"|")
+  return splitString(idname, "|")
 end
 
 -- return name, description, weight
@@ -56,30 +63,30 @@ function vRP.getItemDefinition(idname)
   local args = vRP.parseItem(idname)
   local item = vRP.items[args[1]]
   if item then
-    return vRP.computeItemName(item,args), vRP.computeItemDescription(item,args), vRP.computeItemWeight(item,args)
+    return vRP.computeItemName(item, args), vRP.computeItemDescription(item, args), vRP.computeItemWeight(item, args)
   end
 
-  return nil,nil,nil
+  return nil, nil, nil
 end
 
 function vRP.getItemName(idname)
   local args = vRP.parseItem(idname)
   local item = vRP.items[args[1]]
-  if item then return vRP.computeItemName(item,args) end
+  if item then return vRP.computeItemName(item, args) end
   return args[1]
 end
 
 function vRP.getItemDescription(idname)
   local args = vRP.parseItem(idname)
   local item = vRP.items[args[1]]
-  if item then return vRP.computeItemDescription(item,args) end
+  if item then return vRP.computeItemDescription(item, args) end
   return ""
 end
 
 function vRP.getItemWeight(idname)
   local args = vRP.parseItem(idname)
   local item = vRP.items[args[1]]
-  if item then return vRP.computeItemWeight(item,args) end
+  if item then return vRP.computeItemWeight(item, args) end
   return 0
 end
 
@@ -87,25 +94,25 @@ end
 function vRP.computeItemsWeight(items)
   local weight = 0
 
-  for k,v in pairs(items) do
+  for k, v in pairs(items) do
     local iweight = vRP.getItemWeight(k)
-    weight = weight+iweight*v.amount
+    weight = weight + iweight * v.amount
   end
 
   return weight
 end
 
 -- add item to a connected user inventory
-function vRP.giveInventoryItem(user_id,idname,amount,notify)
+function vRP.giveInventoryItem(user_id, idname, amount, notify)
   if notify == nil then notify = true end -- notify by default
 
   local data = vRP.getUserDataTable(user_id)
   if data and amount > 0 then
     local entry = data.inventory[idname]
     if entry then -- add to entry
-      entry.amount = entry.amount+amount
-    else -- new entry
-      data.inventory[idname] = {amount=amount}
+      entry.amount = entry.amount + amount
+    else          -- new entry
+      data.inventory[idname] = { amount = amount }
     end
 
     -- notify
@@ -119,18 +126,18 @@ function vRP.giveInventoryItem(user_id,idname,amount,notify)
 end
 
 -- try to get item from a connected user inventory
-function vRP.tryGetInventoryItem(user_id,idname,amount,notify)
+function vRP.tryGetInventoryItem(user_id, idname, amount, notify)
   if notify == nil then notify = true end -- notify by default
 
   local data = vRP.getUserDataTable(user_id)
   if data and amount > 0 then
     local entry = data.inventory[idname]
     if entry and entry.amount >= amount then -- add to entry
-      entry.amount = entry.amount-amount
+      entry.amount = entry.amount - amount
 
       -- remove entry if <= 0
       if entry.amount <= 0 then
-        data.inventory[idname] = nil 
+        data.inventory[idname] = nil
       end
 
       -- notify
@@ -159,7 +166,7 @@ function vRP.tryGetInventoryItem(user_id,idname,amount,notify)
 end
 
 -- get item amount from a connected user inventory
-function vRP.getInventoryItemAmount(user_id,idname)
+function vRP.getInventoryItemAmount(user_id, idname)
   local data = vRP.getUserDataTable(user_id)
   if data and data.inventory then
     local entry = data.inventory[idname]
@@ -172,7 +179,7 @@ function vRP.getInventoryItemAmount(user_id,idname)
 end
 
 -- get connected user inventory
--- return map of full idname => amount or nil 
+-- return map of full idname => amount or nil
 function vRP.getInventory(user_id)
   local data = vRP.getUserDataTable(user_id)
   if data then
@@ -192,7 +199,7 @@ end
 
 -- return maximum weight of the user inventory
 function vRP.getInventoryMaxWeight(user_id)
-  return math.floor(vRP.expToLevel(vRP.getExp(user_id, "physical", "strength")))*cfg.inventory_weight_per_strength
+  return math.floor(vRP.expToLevel(vRP.getExp(user_id, "physical", "strength"))) * cfg.inventory_weight_per_strength
 end
 
 -- clear connected user inventory
@@ -203,19 +210,10 @@ function vRP.clearInventory(user_id)
   end
 end
 
--- -- init inventory
--- AddEventHandler("vRP:playerJoin", function(user_id,source,name,last_login)
---   local data = vRP.getUserDataTable(user_id)
---   if not data.inventory then
---     data.inventory = {}
---   end
--- end)
-
--- AddEventHandler("vRP:playerSpawn",function(user_id, source, first_spawn)
---   if first_spawn then
---     -- load static chests
---     -- build_client_static_chests(source)
---   end
--- end)
-
-
+AddEventHandler("vRP:playerSpawn", function(user_id, source, first_spawn)
+  if first_spawn then
+    for item, amount in next, cfg.initial_items or {} do
+      vRP.giveInventoryItem(user_id, item, amount, false)
+    end
+  end
+end)

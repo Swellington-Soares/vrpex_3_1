@@ -43,8 +43,6 @@ function vRP.request(source,text,time)
   return r:wait()
 end
 
-
-
 -- receive prompt result
 function tvRP.promptResult(text)
   if text == nil then
