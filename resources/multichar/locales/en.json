@@ -1,5 +1,13 @@
 {
     "firstname": "Firstname",
     "lastname": "Lastname",
-    "birthdate": "Birth date"
+    "birthdate": "Birth date",
+    "select_spawn": "Spawn Selector",
+    "retry_character_error": "Fail to get characters, relogin.",
+    "lastname_invalid": "Lastname is invalid.",
+    "firstname_invalid": "Firstname is invalid.",
+    "player_need_be_18_more": "Character need be a 18 old year or more.",
+    "last_location": "Last Location",
+    "new_char": "New Character",
+    "register_menu_title": "Register"
 }

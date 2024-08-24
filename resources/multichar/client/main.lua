@@ -6,8 +6,9 @@ local cam2
 local _charList
 local last_selected_char = -1
 local in_char_creator = true
-
 local started = false
+
+LocalPlayer.state.isLoggedIn = false
 
 local function CreateSpawnMenu()
     local character = _charList[last_selected_char]
@@ -68,6 +69,9 @@ local function CreateSpawnMenu()
             end
             ClearFocus()
             in_char_creator = false
+            LocalPlayer.state:set('isLoggedIn', true, true)
+            TriggerServerEvent('vrp:player:ready')
+            FreezeEntityPosition(PlayerPedId(), false)
         end)
 
         lib.showMenu('spawn_menu')
@@ -183,12 +187,23 @@ local function CreateSelectorMenu()
         _charList = charList
         local pp = config.spawn_preview
         local ped = PlayerPedId()
+        FreezeEntityPosition(ped, true)
         SetEntityCoordsNoOffset(cache.ped, pp.x, pp.y, pp.z, false, false, true)
+        print('L123', pp.x, pp.y, pp.z)
         SetEntityHeading(ped, pp.w)
-        ClearPedTasksImmediately(ped)
-        Wait(1000)
-        ClearFocus()
+        ClearPedTasksImmediately(ped)        
+        Wait(2000)
+        SetFocusPosAndVel(pp.x, pp.y, pp.z, 0.0, 0.0, 0.0)
+        RequestCollisionAtCoord(pp.x, pp.y, pp.z)
+        local timeout = GetGameTimer() + 5000
+        while not HasCollisionLoadedAroundEntity(ped) and GetGameTimer() < timeout do Wait(10) end
+        print('Aqui', GetEntityCoords(ped))
         if #_charList > 0 then
+
+            local cc1 = config.spawn_cam_forward
+            cam1 = CreateCamWithParams('DEFAULT_SCRIPTED_CAMERA', cc1.pos, cc1.rot, cc1.fov, true, 2)
+            RenderScriptCams(true, true, 1000, true, true)
+
             local options = {
                 { label = locale('new_char'), args = { id = 'NEW_CHAR' } },
             }
@@ -207,9 +222,7 @@ local function CreateSelectorMenu()
             end)
 
             --update custom
-            local cc1 = config.spawn_cam_forward
-            cam1 = CreateCamWithParams('DEFAULT_SCRIPTED_CAMERA', cc1.pos, cc1.rot, cc1.fov, true, 2)
-            RenderScriptCams(true, true, 1000, true, true)
+          
             Wait(1000)
             DoScreenFadeIn(1000)
             Wait(0)
@@ -249,7 +262,10 @@ local function CreateSelectorMenu()
                     Wait(1000)
                     NewCharMenu()
                 else
-                    CreateSpawnMenu()
+                    if lib.callback.await('multichar:server:login', false, args.id) then
+                        CreateSpawnMenu()
+                    end
+                
                 end
             end)
 
@@ -267,68 +283,23 @@ CreateThread(function()
     lib.hideContext()
     lib.hideRadial()
     lib.hideTextUI()    
-    local timeout = GetGameTimer() + 10000
+    lib.hideMenu()
     while true do
+        if NetworkIsPlayerActive(PlayerId()) then        
+            if started then break end
+        end
         Wait(0)
-        if started or GetGameTimer() > timeout then break end
     end
+    started = true
     CreateSelectorMenu()
 end)
 
 AddEventHandler('vrp:client:spawned', function()
     Wait(0)
     started = true
+    print('vrp:client:spawned')
 end)
 
-DecorRegister('__ZUMBI__', 2)
-
-local function zombify(ped)
-  local movementClipset <const> = "clipset@anim@ingame@move_m@zombie@core"
-  local strafeClipset <const> = "clipset@anim@ingame@move_m@zombie@core"
-  local actionModeClipset <const> = "clipset@anim@ingame@move_m@zombie@strafe"
-  local weaponAnimationName <const> = `ZOMBIE`
-
-  
-  lib.requestAnimSet(movementClipset)
-  lib.requestAnimSet(strafeClipset)
-  lib.requestAnimSet(actionModeClipset)
-  
-  SetPedMovementClipset(ped, movementClipset, 0.25)
-  SetPedStrafeClipset(ped, strafeClipset)
-  SetPedUsingActionMode(ped, true, -1, actionModeClipset)
-  SetWeaponAnimationOverride(ped, weaponAnimationName)
-
-  RemoveClipSet(movementClipset)
-  RemoveClipSet(strafeClipset)
-  RemoveClipSet(actionModeClipset)
-end
-
-
-CreateThread(function()
-    while true do
-        SetPedDensityMultiplierThisFrame(1.0)
-        Wait(0)
-    end
+RegisterCommand('debugc', function()
+    started = true
 end)
-
--- CreateThread(function()
---     SetPedPopulationBudget(3)
---     while true do
---         local pedPool = GetGamePool('CPed')
---         local ppos = GetEntityCoords(PlayerPedId())
---         for i = 1, #pedPool do
---             local ped = pedPool[i]
---             if not IsPedAPlayer(ped) then
---                 if not IsEntityDead( ped ) and #(GetEntityCoords(ped) - ppos) < 50.0 and not DecorGetBool(ped, '__ZUMBI__') then
---                     SetPedCombatAbility(ped, 2)
---                     SetPedCombatRange(ped, 3)
---                     DecorSetBool(ped, '__ZUMBI__', true)
---                     zombify(ped)
---                     TaskCombatPed(ped, PlayerPedId(), 0, 16)
---                     print('pd', ped)
---                 end
---             end
---         end
---         Wait(250)
---     end
--- end)

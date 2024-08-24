@@ -17,8 +17,7 @@ server_scripts {
 
 
 client_scripts {
-    'client/main.lua',
-    'client/survial_scene.lua'
+    'client/main.lua',    
 }
 
 files {
@@ -26,7 +25,7 @@ files {
 }
 
 
-depedencies {
+dependencies  {
     'ox_lib',
     'vrp',
     'fivem-appearance',
