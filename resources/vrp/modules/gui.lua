@@ -19,10 +19,9 @@ end
 local request_ids = Tools.newIDGenerator()
 local requests = {}
 
--- ask something to a player with a limited amount of time to answer (yes|no request)
--- time: request duration in seconds
--- return true (yes) or false (no)
+
 function vRP.request(source,text,time)
+  time = time or 10000
   local r = async()
 
   local id = request_ids:gen()
