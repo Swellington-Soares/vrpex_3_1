@@ -2,15 +2,15 @@
 local Tools = module("lib/Tools")
 local Debug = module("lib/Debug")
 
+local SERVER = IsDuplicityVersion()
+
 -- API used in function of the side
 local TriggerRemoteEvent = nil
-local RegisterLocalEvent = nil
+local RegisterLocalEvent = RegisterNetEvent
 if SERVER then
   TriggerRemoteEvent = TriggerClientEvent
-  RegisterLocalEvent = RegisterServerEvent
 else
-  TriggerRemoteEvent = TriggerServerEvent
-  RegisterLocalEvent = RegisterNetEvent
+  TriggerRemoteEvent = TriggerServerEvent  
 end
 
 -- this file describe a two way proxy between the server and the clients (request system)

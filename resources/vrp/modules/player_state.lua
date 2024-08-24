@@ -85,14 +85,29 @@ function vRP.login(source, user_id, char_id, firstcreation)
   vRP.user_tables[user_id].datatable['weapons'] = vRP.user_tables[user_id].datatable['weapons'] or {}
   vRP.user_tables[user_id].datatable['groups'] = vRP.user_tables[user_id].datatable['groups'] or {}
   vRP.user_tables[user_id].datatable['position'] = vRP.user_tables[user_id].datatable['position'] or cfg.fristspawn
-  Player(source).state.name = ("%s %s"):format(character.firstname, character.lastname)
-  TriggerEvent('vRP:playerSpawn', user_id, source, firstcreation)
+  local custom =  vRP.getPlayerData(character.id, 'player:custom')
+  vRP.user_tables[user_id].customization = custom and json.decode(custom)
+  Player(source).state:set('name', ("%s %s"):format(character.firstname, character.lastname), true)
+  Player(source).state:set('id', user_id)  
   TriggerEvent("vrp:login", source, user_id, char_id, firstcreation)
   return true
 end
 
-function vRP.save(user_id)
-
+function vRP.save(user_id, x)
+  if x ~= '__INTERNAL__' then return end
+  if not next(vRP.user_tables[user_id] or {}) then return end
+  local player = vRP.user_tables[user_id]
+  if player?.user_id ~= user_id then return end
+  if vRP.user_tables[user_id].isReady then
+    local char_id = player?.id
+    local src = vRP.getUserSource( user_id )
+    local ped = GetPlayerPed( src )
+    local position = GetEntityCoords( ped )
+    vRP.user_tables[user_id].datatable['position'] = position
+    vRP.updateCharacter(char_id, vRP.user_tables[user_id])
+    -- vRP.setPlayerData(char_id, 'player:custom', player.customization)
+    lib.print.info('PLAYER '.. user_id ..  ' SAVED')
+  end
 end
 
 RegisterNetEvent('vrp:server:updatePlayerAppearance', function(char_id, data)
@@ -105,4 +120,15 @@ RegisterNetEvent('vrp:server:updatePlayerAppearance', function(char_id, data)
   if xPlayer?.id == char_id and xPlayer?.user_id == user_id then
     vRP.setPlayerData(char_id, 'player:custom', data)
   end
+end)
+
+
+RegisterNetEvent('vrp:player:ready', function()
+  if GetInvokingResource() then return end
+  local source = source
+  local user_id = vRP.getUserId( source )
+  if not user_id then return end
+  vRP.user_tables[user_id].isReady = true  
+  lib.print.info('PLAYER READY TO SAVE [ ' .. user_id .. ' ]')
+  lib.print.info(json.encode(vRP.user_tables[user_id]))
 end)

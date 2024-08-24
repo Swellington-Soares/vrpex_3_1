@@ -6,6 +6,13 @@ local ALLOWED_UPDATE_CHARATER_COLUMN <const> = {
     ['birth_date'] = true,
     ['money'] = true,
     ['datatable'] = true,
+    ['inventory'] = true
+}
+
+local DATE_COLUMN = {
+    ['birth_date'] = function (data)
+        return os.date('%Y-%m-%d', data // 1000)               
+    end 
 }
 
 
@@ -40,7 +47,11 @@ function vRP.updateCharacter(char_id, data)
             elseif type(value) == "string" then
                 _data[#_data + 1] = ("`%s` = '%s'"):format(column, value)
             else
-                _data[#_data + 1] = '`' .. column .. '` = ' .. value
+                if type(value) == "number" and DATE_COLUMN[column] then                 
+                    _data[#_data + 1] = '`' .. column .. '` = ' .. ("'%s'"):format( DATE_COLUMN[column](value) )
+                else
+                    _data[#_data + 1] = '`' .. column .. '` = ' .. value
+                end
             end
         end
     end
