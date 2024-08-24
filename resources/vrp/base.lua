@@ -212,19 +212,13 @@ end
 
 -- drop vRP player/user (internal usage)
 function vRP.dropPlayer(source)
-  local user_id = vRP.getUserId(source)
-  local endpoint = vRP.getPlayerEndpoint(source)
-
-  -- remove player from connected clients
+  print(source)
   vRPclient._removePlayer(-1, source)
 
+  local user_id = vRP.getUserId(source)
   if user_id then
     TriggerEvent("vRP:playerLeave", user_id, source)
-
-    -- save user data table
-    vRP.setUData(user_id, "vRP:datatable", json.encode(vRP.getUserDataTable(user_id)))
-
-    print("[vRP] " .. endpoint .. " disconnected (user_id = " .. user_id .. ")")
+    vRP.save(user_id, '__INTERNAL__')
     vRP.users[vRP.rusers[user_id]] = nil
     vRP.rusers[user_id] = nil
     vRP.user_tables[user_id] = nil
@@ -232,6 +226,15 @@ function vRP.dropPlayer(source)
     vRP.user_sources[user_id] = nil
   end
 end
+
+CreateThread(function()
+  while true do
+    for k in next, vRP.user_tables or {} do     
+        vRP.save(k, '__INTERNAL__')      
+    end
+    Wait(60000)
+  end
+end)
 
 -- -- tasks
 

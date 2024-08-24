@@ -1,28 +1,36 @@
 -- PROMPT
-function tvRP.prompt(title,default_text)
-  SendNUIMessage({act="prompt",title=title,text=tostring(default_text)})
-  SetNuiFocus(true)
-
-  -- vRPserver._promptResult(data.result)
+function tvRP.prompt(title, default_text)
+  local input = lib.inputDialog(title,
+    {
+      { type = 'input', label = '', description = '', default = default_text, required = false, min = 0, max = 150 },
+    })
+  local result = input and input[1] or ""
+  vRPserver._promptResult(result)
 end
 
 -- REQUEST
 
-function tvRP.request(id,text,time)
-  SendNUIMessage({act="request",id=id,text=tostring(text),time = time})
-  tvRP.playSound("HUD_MINI_GAME_SOUNDSET","5_SEC_WARNING")
+function tvRP.request(id, text, time)
+  local alert = lib.alertDialog({
+    header = '',
+    content = text,
+    cancel = true,
+    centered = true,
+    size = 'md',
+  })
 
-  -- vRPserver._requestResult(data.id,data.ok)
-  
+  print(alert)
+
+  vRPserver._requestResult(id, alert == 'confirm')
 end
 
-function tvRP.announce(background,content)
-  SendNUIMessage({act="announce",background=background,content=content})
+function tvRP.announce(background, content)
+  SendNUIMessage({ act = "announce", background = background, content = content })
 end
 
 -- init
-RegisterNUICallback("init",function(data,cb) -- NUI initialized
-  SendNUIMessage({act="cfg",cfg=cfg.gui}) -- send cfg
+RegisterNUICallback("init", function(data, cb)   -- NUI initialized
+  SendNUIMessage({ act = "cfg", cfg = cfg.gui }) -- send cfg
   TriggerEvent("vRP:NUIready")
 end)
 
@@ -87,7 +95,7 @@ end)
 
 -- -- play audio source (once)
 -- --- url: valid audio HTML url (ex: .ogg/.wav/direct ogg-stream url)
--- --- volume: 0-1 
+-- --- volume: 0-1
 -- --- x,y,z: position (omit for unspatialized)
 -- --- max_dist  (omit for unspatialized)
 -- function tvRP.playAudioSource(url, volume, x, y, z, max_dist)
@@ -97,7 +105,7 @@ end)
 -- -- set named audio source (looping)
 -- --- name: source name
 -- --- url: valid audio HTML url (ex: .ogg/.wav/direct ogg-stream url)
--- --- volume: 0-1 
+-- --- volume: 0-1
 -- --- x,y,z: position (omit for unspatialized)
 -- --- max_dist  (omit for unspatialized)
 -- function tvRP.setAudioSource(name, url, volume, x, y, z, max_dist)
@@ -180,4 +188,3 @@ end)
 -- end)
 
 -- CONTROLS/GUI
-

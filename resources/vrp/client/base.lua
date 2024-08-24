@@ -4,12 +4,12 @@ local Tunnel = module("vrp", "lib/Tunnel")
 local Proxy = module("vrp", "lib/Proxy")
 local Tools = module("vrp", "lib/Tools")
 
+vRP = {}
 tvRP = {}
 local players = {} -- keep track of connected players (server id)
 
 -- bind client tunnel interface
 Tunnel.bindInterface("vRP", tvRP)
-
 -- get server interface
 vRPserver = Tunnel.getInterface("vRP")
 
@@ -170,8 +170,8 @@ local anim_ids = Tools.newIDGenerator()
 -- looping: if true, will infinitely loop the first element of the sequence until stopAnim is called
 function tvRP.playAnim(upper, seq, looping)
   local ped = PlayerPedId()
-  if seq.task then -- is a task (cf https://github.com/ImagicTheCat/vRP/pull/118)
-    tvRP.stopAnim(true)    
+  if seq.task then                                        -- is a task (cf https://github.com/ImagicTheCat/vRP/pull/118)
+    tvRP.stopAnim(true)
     if seq.task == "PROP_HUMAN_SEAT_CHAIR_MP_PLAYER" then -- special case, sit in a chair
       local pos = GetEntityCoords(ped)
       TaskStartScenarioAtPosition(ped, seq.task, pos.x, pos.y, pos.z - 1, GetEntityHeading(ped), 0, false, false)
@@ -292,7 +292,7 @@ AddEventHandler("playerSpawned", function()
     exports.spawnmanager:setAutoSpawn(false)
     TriggerEvent('vrp:client:spawned')
   end
-  
+
   TriggerServerEvent("vRPcli:playerSpawned")
 end)
 
@@ -302,4 +302,19 @@ end)
 
 AddEventHandler("onPlayerKilled", function(player, killer, reason)
   TriggerServerEvent("vRPcli:playerDied")
+end)
+
+
+function vRP.setPedFlags(value)
+  SetPedDropsWeaponsWhenDead(value, false)
+  SetPedConfigFlag(value, 422, true)
+  SetPedConfigFlag(value, 35, false)
+  SetPedConfigFlag(value, 128, false)
+  SetPedConfigFlag(value, 184, true)
+  SetPedConfigFlag(value, 229, true)
+end
+
+
+AddStateBagChangeHandler('isLoggedIn', nil, function (bagName, key, value, reserved)
+  print(bagName, key, value, reserved)  
 end)

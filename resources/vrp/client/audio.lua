@@ -51,7 +51,7 @@ Citizen.CreateThread(function()
     while true do
         Citizen.Wait(10)
 
-        if next(activeSounds) then
+        if next(activeSounds or {}) then
             local playerCoordinates = GetEntityCoords(PlayerPedId())
             local cameraDirection   = getCameraDirection()
 

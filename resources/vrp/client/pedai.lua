@@ -41,12 +41,17 @@ CreateThread(function()
 
 
     for i = 1, 15 do
-        EnableDispatchService(i, true)
+        EnableDispatchService(i, false)
     end
 
-    SetPlayerCanDoDriveBy(PlayerId(), cfg.disables.driveby and true or false)
-
+    SetWantedLevelDifficulty(cache.playerId, 0)
+    SetPlayerWantedLevel(cache.playerId, 0, false)
+    SetPlayerWantedLevelNow(cache.playerId, false)
+    ClearPlayerWantedLevel(cache.playerId)
+    SetPlayerCanDoDriveBy(cache.playerId, cfg.disables.driveby)
     NetworkSetLocalPlayerSyncLookAt(true)
+
+
     local mapText = cfg.pause_menu_text
     if mapText == '' or type(mapText) ~= 'string' then mapText = 'FiveM' end
     Citizen.InvokeNative(joaat('ADD_TEXT_ENTRY'), 'FE_THDR_GTAO', mapText)
@@ -76,15 +81,15 @@ CreateThread(function()
     end
 end)
 
-AddEventHandler('populationPedCreating', function(handle)
-    Wait(500)
-    local model = GetEntityModel(handle)
-    if block?.peds[model] then
-        SetEntityAsMissionEntity(handle, true, true)
-        DeleteEntity(handle)
+AddEventHandler('populationPedCreating', function(x, y, z, model)
+    Wait(0)    
+    if block?.peds[model] then       
         CancelEvent()
     else
-        SetPedDropsWeaponsWhenDead(handle, false)
+        local ped = lib.getClosestPed(vec3(x, y, z), 1.0)
+        if ped then
+            SetPedDropsWeaponsWhenDead(ped, false)
+        end
     end
 end)
 
@@ -307,5 +312,11 @@ local disabledPickups = {
 CreateThread(function()
     for i = 1, #disabledPickups do
         ToggleUsePickupsForPlayer(PlayerId(), disabledPickups[i], false)
+    end
+end)
+
+lib.onCache('ped', function(value)
+    if LocalPlayer.state.isLoggedIn then
+        vRP.setPedFlag(value)      
     end
 end)

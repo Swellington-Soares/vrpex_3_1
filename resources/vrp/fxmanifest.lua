@@ -29,6 +29,9 @@ server_scripts {
   "modules/aptitude.lua",
   "modules/basic_garage.lua",
   "modules/basic_items.lua",
+  "modules/logging.lua",
+
+  "lib/discord_embed.lua"
 }
 
 -- client scripts
@@ -53,7 +56,7 @@ files {
   "lib/Tools.lua",
 }
 
-depedencies {
+dependencies  {
   'ox_lib',
   'oxmysql'
 }

@@ -44,19 +44,19 @@ function tvRP.playerStateReady(state)
   state_ready = state
 end
 
-Citizen.CreateThread(function()
-  while true do
-    Citizen.Wait(30000)
+-- Citizen.CreateThread(function()
+--   while true do
+--     Citizen.Wait(30000)
 
-    if IsPlayerPlaying(PlayerId()) and state_ready then
-      local x,y,z = table.unpack(GetEntityCoords(PlayerPedId(),true))
-      vRPserver._updatePos(x,y,z)
-      vRPserver._updateHealth(tvRP.getHealth())
-      vRPserver._updateWeapons(tvRP.getWeapons())
-      vRPserver._updateCustomization(tvRP.getCustomization())
-    end
-  end
-end)
+--     if IsPlayerPlaying(PlayerId()) and state_ready then
+--       local x,y,z = table.unpack(GetEntityCoords(PlayerPedId(),true))
+--       vRPserver._updatePos(x,y,z)
+--       vRPserver._updateHealth(tvRP.getHealth())
+--       vRPserver._updateWeapons(tvRP.getWeapons())
+--       vRPserver._updateCustomization(tvRP.getCustomization())
+--     end
+--   end
+-- end)
 
 -- WEAPONS
 

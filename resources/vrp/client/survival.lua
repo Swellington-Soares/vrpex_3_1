@@ -11,8 +11,36 @@ local HOSPITAL_COORD <const> = {
     rot = vec3(0.0000, 0.0000, 109.1352),
     animDict = "respawn@hospital@rockford",
     animName = "rockford",
-    camAnim = "rockford_cam",
-  }
+    animCam = "rockford_cam",
+  },
+  HOSPITAL_SC = {
+    coord = vec3(342.7344, -1397.8510, 32.5092),
+    rot = vec3(0.0, 0.0, 62.5160),
+    animDict = 'respawn@hospital@south_central',
+    animName = 'south_central',
+    animCam = 'south_central_cam'
+  },
+  HOSPITAL_DT = {
+    coord = vec3(357.3475, -585.6215, 28.8310),
+    rot = vec3(0.0000, 0.0000, -95.0926),
+    animDict = 'respawn@hospital@downtown',
+    animName = 'downtown',
+    animCam = 'downtown_cam'
+  },
+  HOSPITAL_SS = {
+    coord = vec3(1837.655, 3673.500, 34.308),
+    rot = vec3(0,0,-146.160),
+    animDict = 'respawn@hospital@sandy_shores',
+    animName = 'sandy_shores',
+    animCam = 'sandy_shores_cam'
+  },
+  HOSPITAL_PB = {
+    coord = vec3(-244.6081, 6324.9629, 32.4260),
+    rot = vec3(0, 0, -57.7613),
+    animDict = 'respawn@hospital@paleto_bay',
+    animName = 'paleto_bay',
+    animCam = 'paleto_bay_cam'
+  },
 }
 
 local function GetNearbyHospital(pos)
@@ -25,6 +53,7 @@ local function GetNearbyHospital(pos)
       k = id
     end
   end
+  lib.print.info(k)
   return HOSPITAL_COORD[k]
 end
 
@@ -60,14 +89,14 @@ local function RunDeathScene()
   SetSynchronizedSceneHoldLastFrame(sceneId, false)
   TaskSynchronizedScene(ped, sceneId, h.animDict, h.animName, 1000.0, -8.4, 0, 0x447a0000, 0)
   SetForceFootstepUpdate(ped, true)
-  PlaySynchronizedCamAnim(cam, sceneId, h.camAnim, dict)
+  PlaySynchronizedCamAnim(cam, sceneId, h.animCam, dict)
   Wait(0)
 
   while GetSynchronizedScenePhase(sceneId) < 0.99 do
     Wait(0)
     HideHudAndRadarThisFrame()
   end
-
+  DetachSynchronizedScene(sceneId)
   SetCamActive(cam, false)
   DestroyCam(cam, true)
   RemoveAnimDict(dict)
@@ -373,4 +402,16 @@ end)
 
 RegisterCommand("kill", function (_, args, raw)
   SetEntityHealth(cache.ped, 0.0)
+end)
+
+RegisterCommand("god", function (_, args, raw)
+  tvRP.revivePlayer()
+end)
+
+RegisterCommand("tpw", function (_, args, raw)
+  local blip = GetFirstBlipInfoId(8)
+  if blip then
+    local pos = GetBlipInfoIdCoord(blip)
+    StartPlayerTeleport(cache.playerId, pos.x, pos.y, pos.z, 0.0, true, true, false)
+  end
 end)
