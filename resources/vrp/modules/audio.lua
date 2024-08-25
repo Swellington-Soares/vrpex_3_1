@@ -39,16 +39,16 @@ AddEventHandler('chHyperSound:stop', function(soundId, targetId)
 end)
 
 
-
 --vrpex
-function tvRP.playSound(id, name, looped, location, maxDistance, target)
+function vRP.playSound(id, name, looped, location, maxDistance, target)
+    print('playSound', id, name, looped, location, maxDistance, target)
     TriggerEvent('chHyperSound:play', id, name, looped, location, maxDistance, target)
 end
 
-function tvRP.stopSound(id, target)
+function vRP.stopSound(id, target)
      TriggerEvent('chHyperSound:stop', id, target)
 end
 
-function tvRP.playSoundOnEntity(entityNetId, soundId, soundName, isLooped, maxDistance, targetId)
+function vRP.playSoundOnEntity(entityNetId, soundId, soundName, isLooped, maxDistance, targetId)
     TriggerEvent('chHyperSound:stop', entityNetId, soundId, soundName, isLooped, maxDistance, targetId)
 end

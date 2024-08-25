@@ -1,5 +1,5 @@
 local cfg = module('cfg/base')
-local block = module('cfg/block')
+local block = require('@vrp.cfg.block')
 
 local relationMode = cfg?.hate_mode and 5 or 1
 
@@ -82,7 +82,7 @@ CreateThread(function()
 end)
 
 AddEventHandler('populationPedCreating', function(x, y, z, model)
-    Wait(0)    
+    Wait(5000)    
     if block?.peds[model] then       
         CancelEvent()
     else
@@ -315,8 +315,14 @@ CreateThread(function()
     end
 end)
 
+lib.onCache('weapon', function(value)
+    if value and block?.weapons[value] then
+        RemoveWeaponFromPed(PlayerPedId(), value)
+    end
+end)
+
 lib.onCache('ped', function(value)
     if LocalPlayer.state.isLoggedIn then
-        vRP.setPedFlag(value)      
+        vRP.setPedFlags(value)      
     end
 end)
