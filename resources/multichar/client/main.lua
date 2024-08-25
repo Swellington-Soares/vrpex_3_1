@@ -263,6 +263,7 @@ local function CreateSelectorMenu()
                     NewCharMenu()
                 else
                     if lib.callback.await('multichar:server:login', false, args.id) then
+                        ClearPedTasksImmediately(PlayerPedId())
                         CreateSpawnMenu()
                     end
                 
