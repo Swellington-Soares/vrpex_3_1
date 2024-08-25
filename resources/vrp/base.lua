@@ -1,3 +1,4 @@
+local blockCfg = require('@vrp.cfg.block') or {}
 local Proxy = module("lib/Proxy")
 local Tunnel = module("lib/Tunnel")
 Debug = module("lib/Debug")
@@ -229,8 +230,8 @@ end
 
 CreateThread(function()
   while true do
-    for k in next, vRP.user_tables or {} do     
-        vRP.save(k, '__INTERNAL__')      
+    for k in next, vRP.user_tables or {} do
+      vRP.save(k, '__INTERNAL__')
     end
     Wait(60000)
   end
@@ -418,4 +419,15 @@ end)
 
 RegisterCommand("addgroup", function(source, args, raw)
   local user_id = 1
+end)
+
+
+-- --onesync event
+AddEventHandler('entityCreating', function(handle)
+  local _type = GetEntityType(handle)
+  local model = GetEntityModel(handle)
+  if (_type == 1 and blockCfg.peds[model]) or
+      (_type == 2 and blockCfg.vehicles[model]) then
+    CancelEvent()
+  end
 end)
