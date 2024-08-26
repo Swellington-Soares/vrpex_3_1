@@ -38,4 +38,5 @@ vRP.prepare('vRP/getAllPlayerFromUser', 'SELECT *, (SELECT license FROM `users` 
 vRP.prepare('vRP/getAllPlayerFromUserIncludeDeleted', 'SELECT *, (SELECT license FROM `users` WHERE `users`.id = `players`.user_id) AS `license`  FROM players WHERE user_id = ?')
 vRP.prepare('vRP/getPlayersBy', 'SELECT *, (SELECT license FROM `users` WHERE `users`.id = `players`.user_id) AS `license`  FROM players WHERE ?? = ?')
 vRP.prepare('vRP/addlog', 'INSERT INTO `logs` (log_type, `data`) VALUES (?, ?)')
+
 lib.print.info('Queries register finalized.')

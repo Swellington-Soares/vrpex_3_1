@@ -57,8 +57,16 @@ RP.Expressions = { ---- MOODS ----
     ["Joyful"] = {
         "mood_dancing_low_1"
     },
+    ["Joyful2"] = {
+        "mood_dancing_low_2",
+        "Joyful 2"
+    },
     ["Mouthbreather"] = {
         "smoking_hold_1"
+    },
+    ["Mouthbreather2"] = {
+        "smoking_inhale_1",
+        "Mouthbreather 2"
     },
     ["Neverblink"] = {
         "pose_normal_1",
@@ -67,6 +75,9 @@ RP.Expressions = { ---- MOODS ----
     ["Oneeye"] = {
         "pose_aiming_1",
         "One Eye"
+    },
+    ["Scheme"] = {
+        "mood_dancing_high_2"
     },
     ["Shocked"] = {
         "shocked_1"
@@ -104,6 +115,10 @@ RP.Expressions = { ---- MOODS ----
     ["Weird2"] = {
         "effort_3",
         "Weird 2"
+    },
+    ["Weird3"] = {
+        "melee_effort_1",
+        "Weird 3"
     },
 }
 
@@ -5869,14 +5884,13 @@ RP.Emotes = {
     ["bend"] = {
         "ebrwny_pack000",
         "ebrwny_bend",
-        "Bent over",
+        "Bend over",
         AnimationOptions = {
 			StartDelay = 600,
             EmoteLoop = true,
             EmoteMoving = true,
             NotInVehicle = true
-        },
-    AdultAnimation = true
+        }
     },
     ["prone"] = {
         "missfbi3_sniping",
@@ -9814,6 +9828,15 @@ RP.Emotes = {
         "Tai chi",
         AnimationOptions = {
             EmoteLoop = true,
+            EmoteMoving = false
+        }
+    },
+    ["taichi2"] = {
+        "switch@trevor@rand_temple",
+        "tai_chi_trevor",
+        "Tai chi - Awkward",
+        AnimationOptions = {
+            EmoteLoop = false,
             EmoteMoving = false
         }
     },
@@ -17141,6 +17164,44 @@ RP.PropEmotes = {
                 -67.3315314,
                 145.0627869,
                 -4.4318885
+            },
+            EmoteLoop = true,
+            EmoteMoving = true
+        }
+    },
+    ["stire"] = {
+        "anim@heists@box_carry@",
+        "idle",
+        "Steal Tire 1",
+        AnimationOptions = {
+            Prop = "prop_wheel_01",
+            PropBone = 18905,
+            PropPlacement = {
+                0.02,
+                0.2,
+                0.31,
+                130.0,
+                -80.0,
+                0.0,
+            },
+            EmoteLoop = true,
+            EmoteMoving = true
+        }
+    },
+    ["stire2"] = {
+        "anim@heists@box_carry@",
+        "idle",
+        "Steal Tire 2",
+        AnimationOptions = {
+            Prop = "prop_wheel_02",
+            PropBone = 18905,
+            PropPlacement = {
+                0.02,
+                0.2,
+                0.31,
+                130.0,
+                -80.0,
+                0.0,
             },
             EmoteLoop = true,
             EmoteMoving = true

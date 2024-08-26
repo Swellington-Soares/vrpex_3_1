@@ -195,6 +195,7 @@ local function addKeybindEventHandlers()
     end)
 end
 
+
 -- Emote props extractor
 local function ExtractEmoteProps(format)
     local format = tonumber(format)
