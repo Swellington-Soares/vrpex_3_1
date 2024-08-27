@@ -1,2 +1,0 @@
-1. Vamos primeiro limpar o framework.
-
