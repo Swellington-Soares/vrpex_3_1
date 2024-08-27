@@ -123,12 +123,13 @@ RegisterNetEvent('vrp:server:updatePlayerAppearance', function(char_id, data)
 end)
 
 
-RegisterNetEvent('vrp:player:ready', function()
+RegisterNetEvent('vrp:player:ready', function(state)
   if GetInvokingResource() then return end
   local source = source
   local user_id = vRP.getUserId( source )
   if not user_id then return end
-  vRP.user_tables[user_id].isReady = true  
-  lib.print.info('PLAYER READY TO SAVE [ ' .. user_id .. ' ]')
-  lib.print.info(json.encode(vRP.user_tables[user_id]))
+  if vRP.user_tables[user_id] then
+    vRP.user_tables[user_id].isReady = state  
+    lib.print.info('PLAYER READY TO SAVE [ ' .. user_id .. ' ]')
+  end
 end)

@@ -22,8 +22,7 @@ server_scripts {
   'modules/gui.lua',
   'modules/group.lua',
   'modules/survival.lua',
-  'modules/player_state.lua',
-  'modules/map.lua',
+  'modules/player_state.lua',  
   'modules/money.lua',
   'modules/inventory.lua',
   'modules/identity.lua',
@@ -32,6 +31,7 @@ server_scripts {
   'modules/basic_garage.lua',
   'modules/basic_items.lua',
   'modules/logging.lua',
+   'tools/sv_*.lua'
 }
 
 -- client scripts
@@ -46,15 +46,8 @@ client_scripts {
   'client/identity.lua',
   'client/basic_garage.lua',
   'client/police.lua',
-  'client/discord_rich_presence.lua'
-}
-
--- client files
-files {
-  'lib/Tunnel.lua',
-  'lib/Proxy.lua',
-  'lib/Debug.lua',
-  'lib/Tools.lua',
+  'client/discord_rich_presence.lua',
+  'tools/cl_*.lua'
 }
 
 dependencies {
@@ -66,12 +59,17 @@ data_file 'FIVEM_LOVES_YOU_4B38E96CC036038F' 'events.meta'
 data_file 'FIVEM_LOVES_YOU_341B23A2F0E0F131' 'popgroups.ymt'
 
 files {
-  'cfg/**/.lua',
+  'cfg/**/*.lua',
   'ui/**',
   'locales/*.json',
   'events.meta',
   'popgroups.ymt',
   'relationships.dat',
-  'sounds/**/*.ogg',
-  'sounds/**/*.mp3'
+  'sounds/**/*.ogg',  
+  'lib/weapons.lua',
+  'lib/vehicles.lua',
+  'lib/Tunnel.lua',
+  'lib/Proxy.lua',
+  'lib/Debug.lua',
+  'lib/Tools.lua',
 }

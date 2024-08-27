@@ -126,7 +126,7 @@ end
 
 function vRP.getUData(user_id, key)
   if type(key) ~= "string" then error('Key need be a string', 1) end
-  return vRP.scalar('vRP/getUData', { user_id, key })
+  return vRP.scalar('vRP/getUData', { user_id, key }) or nil
 end
 
 function vRP.setSData(key, value)
@@ -137,7 +137,7 @@ end
 
 function vRP.getSData(key)
   if type(key) ~= "string" then error('Key need be a string', 1) end
-  return vRP.scalar('vRP/getServerData', { key })
+  return vRP.scalar('vRP/getServerData', { key }) or nil
 end
 
 function vRP.setPlayerData(player_id, key, value)
@@ -148,7 +148,7 @@ end
 
 function vRP.getPlayerData(player_id, key)
   if type(key) ~= "string" then error('Key need be a string', 1) end
-  return vRP.scalar('vRP/getPlayerData', { player_id, key })
+  return vRP.scalar('vRP/getPlayerData', { player_id, key }) or nil
 end
 
 -- return user data table for vRP internal persistant connected user storage

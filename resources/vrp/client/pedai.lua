@@ -312,6 +312,7 @@ local disabledPickups = {
 CreateThread(function()
     for i = 1, #disabledPickups do
         ToggleUsePickupsForPlayer(PlayerId(), disabledPickups[i], false)
+        RemoveAllPickupsOfType(disabledPickups[i])
     end
 end)
 
@@ -324,5 +325,18 @@ end)
 lib.onCache('ped', function(value)
     if LocalPlayer.state.isLoggedIn then
         vRP.setPedFlags(value)      
+    end
+end)
+
+--GUN EVENT
+local lastShootTime = 0
+AddEventHandler('CEventGunShot', function (p1,p2,p3)
+    if GetGameTimer() - lastShootTime > 250 then        
+        lastShootTime = GetGameTimer()
+        if p2 == cache.ped then
+            local weaponHash = GetSelectedPedWeapon(p2)
+            TriggerServerEvent('vrp:server:GunShotNotify', weaponHash, GetPedAmmoTypeFromWeapon(cache.ped, weaponHash))
+        end
+        CancelEvent()                
     end
 end)
