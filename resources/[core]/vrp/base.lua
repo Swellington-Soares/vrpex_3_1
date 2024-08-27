@@ -397,6 +397,12 @@ RegisterCommand('re', function(source)
   vRP.user_sources[user_id] = source
 end)
 
+RegisterCommand('tw', function (source, args, raw)
+  local user_id = vRP.getUserId( source )
+  if user_id then
+    vRP.replaceWeapons(user_id, {})
+  end
+end)
 
 RegisterCommand('vt', function(source, args, raw)
   print(json.encode(vRP.user_tables))

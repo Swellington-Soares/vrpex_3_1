@@ -9,5 +9,7 @@
     "user_created_error": "Houve um problema ao criar seu usário, entre em contato com o suporte.",
     "conn_check_allowed": "Verificando se você tá autorizado para entrar na cidade.",
     "user_as_banned": "Você foi banido por [%s], seu ID: %d.",
-    "user_already_connected": "Sua conta foi acessada por outro lugar, desconectando todas."
+    "user_already_connected": "Sua conta foi acessada por outro lugar, desconectando todas.",
+    "wait_help": "Espere por ajuda...",
+    "press_E_to_respawn": "Pressione [E] para tentar novamente, ou espere."
 }

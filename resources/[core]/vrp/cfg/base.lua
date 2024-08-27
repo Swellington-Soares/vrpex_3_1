@@ -50,6 +50,8 @@ local cfg = {
     disables = {
         driverby = true,
         idlecam = true,
+        disable_auto_swap_weapon = GetConvarInt('vrp:disable_auto_swap_weapon', 0) == 1,
+        disable_auto_reload = GetConvarInt('vrp:disable_auto_reload', 0) == 1,
     },
     initial_items = {
         ['phone'] = 1,

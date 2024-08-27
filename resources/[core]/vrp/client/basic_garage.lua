@@ -63,6 +63,14 @@ function tvRP.fixVehicle(vehicle)
     end
 end
 
+
+function tvRP.ejectVehicle()
+    local vehicle = GetVehiclePedIsIn(cache.ped, false)
+    if vehicle ~= 0 then
+        TaskLeaveVehicle(cache.ped, vehicle, 16)
+    end
+end
+
 AddStateBagChangeHandler('vehicle:property', '', function( bagName, _, value)
     local localVehicle = GetEntityFromStateBagName(bagName)
     if GetPlayerServerId(cache.playerId) ~= tonumber(Entity(localVehicle).state['vehicle:owner'] or 0) then return end        

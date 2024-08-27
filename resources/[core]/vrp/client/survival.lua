@@ -1,7 +1,11 @@
 -- api
 local scaleform <const> = "MP_BIG_MESSAGE_FREEMODE"
-local COMA_TEXT <const> = 'Espere por ajuda...'
-local RESPAWN_TEXT <const> = 'Pressione [E] para tentar novamente, ou espere.'
+local COMA_TEXT <const> = locale('wait_help')
+local RESPAWN_TEXT <const> = locale('press_E_to_respawn')
+
+
+---@type CKeybind
+local comaKey
 
 --#DEATH HOSPITAL SCENE ---------------------------------------------------------
 
@@ -107,12 +111,6 @@ local function RunDeathScene()
 end
 
 
-
-
----------------------------------------------------------------------------------
-
----@type CKeybind
-local comaKey
 
 local function func_92(sParam0)
   BeginTextCommandScaleformString('STRING')
@@ -311,12 +309,7 @@ Citizen.CreateThread(function() -- coma decrease thread
   end
 end)
 
-Citizen.CreateThread(function() -- disable health regen, conflicts with coma system
-  while true do
-    Citizen.Wait(100)
-    SetPlayerHealthRechargeMultiplier(PlayerId(), 0.0)
-  end
-end)
+
 
 
 local function KillPlayer()
@@ -363,13 +356,6 @@ local function KillPlayer()
   end)
 end
 
-RegisterCommand('xrevive', function()
-  -- if in_coma and coma_left < 1 then
-  tvRP.revivePlayer()
-  RunDeathScene()
-  -- end
-end)
-
 comaKey = lib.addKeybind({
   description = 'respawn when coma limit end',
   name = 'coma_revive',
@@ -400,18 +386,18 @@ end)
 
 
 
-RegisterCommand("kill", function (_, args, raw)
-  SetEntityHealth(cache.ped, 0.0)
-end)
+-- RegisterCommand("kill", function (_, args, raw)
+--   SetEntityHealth(cache.ped, 0.0)
+-- end)
 
-RegisterCommand("god", function (_, args, raw)
-  tvRP.revivePlayer()
-end)
+-- RegisterCommand("god", function (_, args, raw)
+--   tvRP.revivePlayer()
+-- end)
 
-RegisterCommand("tpw", function (_, args, raw)
-  local blip = GetFirstBlipInfoId(8)
-  if blip then
-    local pos = GetBlipInfoIdCoord(blip)
-    StartPlayerTeleport(cache.playerId, pos.x, pos.y, pos.z, 0.0, true, true, false)
-  end
-end)
+-- RegisterCommand("tpw", function (_, args, raw)
+--   local blip = GetFirstBlipInfoId(8)
+--   if blip then
+--     local pos = GetBlipInfoIdCoord(blip)
+--     StartPlayerTeleport(cache.playerId, pos.x, pos.y, pos.z, 0.0, true, true, false)
+--   end
+-- end)

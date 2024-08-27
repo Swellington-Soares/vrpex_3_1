@@ -4,8 +4,6 @@ local Debug = module("lib/Debug")
 local Tools = module("lib/Tools")
 
 local Proxy = {}
-
-local callbacks = setmetatable({}, { __mode = "v" })
 local rscname = GetCurrentResourceName()
 
 local function proxy_resolve(itable,key)
@@ -61,16 +59,12 @@ end
 --- Add event handler to call interface functions (can be called multiple times for the same interface name with different tables)
 function Proxy.addInterface(name, itable)
   AddEventHandler(name..":proxy", function(member,args,identifier,rid)
-    if Debug.active then
-      Debug.log("proxy_"..name..":"..identifier.."("..rid.."):"..member.." "..json.encode(Debug.safeTableCopy(args)))
-    end
 
     local f = itable[member]
 
     local rets = {}
     if type(f) == "function" then
       rets = {f(table.unpack(args, 1, table.maxn(args)))}
-      -- CancelEvent() -- cancel event doesn't seem to cancel the event for the other handlers, but if it does, uncomment this
     else
       print("error: proxy call "..name..":"..member.." not found")
     end
@@ -85,7 +79,7 @@ end
 -- name: interface name
 -- identifier: unique string to identify this proxy interface access (if nil, will be the name of the resource)
 function Proxy.getInterface(name, identifier)
-  if not identifier then identifier = GetCurrentResourceName() end
+  if not identifier then identifier = rscname end
 
   local ids = Tools.newIDGenerator()
   local callbacks = {}

@@ -3,6 +3,10 @@ local block = require('@vrp.cfg.block')
 
 local relationMode = cfg?.hate_mode and 5 or 1
 
+--custom natives
+local function DISABLE_PLAYER_HEALTH_RECHARGE(playerId) Citizen.InvokeNative(0xBCB06442F7E52666, playerId) end
+
+
 --  Relationship Types:
 --  0 = Companion
 --  1 = Respect
@@ -58,11 +62,33 @@ CreateThread(function()
 end)
 
 CreateThread(function()
+
+    if cfg.disables.disable_auto_swap_weapon then
+        SetWeaponsNoAutoswap(true)
+    end
+
+    if cfg.disables.disable_auto_reload then
+        SetWeaponsNoAutoreload(true)
+    end
+
+
     if cfg.disables.idlecam then
         while true do
             InvalidateIdleCam()
             InvalidateVehicleIdleCam()
             Wait(20000)
+        end
+    end
+end)
+
+
+Citizen.CreateThread(function()
+    if GetGameBuildNumber() >= 2802 then
+        DISABLE_PLAYER_HEALTH_RECHARGE(cache.playerId)
+    else
+        while true do
+            Citizen.Wait(100)
+            SetPlayerHealthRechargeMultiplier(PlayerId(), 0.0)
         end
     end
 end)
@@ -314,6 +340,11 @@ CreateThread(function()
         ToggleUsePickupsForPlayer(PlayerId(), disabledPickups[i], false)
         RemoveAllPickupsOfType(disabledPickups[i])
     end
+
+
+    for k in next, block?.weapons or {} do
+        SetCanPedEquipWeapon(cache.ped, k, false)
+    end
 end)
 
 lib.onCache('weapon', function(value)
@@ -333,9 +364,19 @@ lib.onCache('ped', function(value)
     end
 end)
 
+lib.onCache('vehicle', function(value)
+    if value then
+        if DoesVehicleHaveWeapons(value) then
+            for i = 0, 10 do
+                SetVehicleWeaponsDisabled(value, i)
+            end
+        end
+    end
+end)
+
 --GUN EVENT
 local lastShootTime = 0
-AddEventHandler('CEventGunShot', function(p1, p2, p3)
+AddEventHandler('CEventGunShot', function(_, p2, _)
     if GetGameTimer() - lastShootTime > 250 then
         lastShootTime = GetGameTimer()
         if p2 == cache.ped then

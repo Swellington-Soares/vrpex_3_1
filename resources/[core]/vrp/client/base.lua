@@ -1,3 +1,4 @@
+lib.locale()
 cfg = module("cfg/base")
 
 local Tunnel = module("vrp", "lib/Tunnel")
@@ -285,8 +286,7 @@ end
 AddEventHandler("playerSpawned", function()
   --temos que desabiltar o autospawn aqui ou vai bugar muita coisa, vamos deixar o vRP gerenciar.
   if GetResourceState('spawnmanager') == 'started' then
-    exports.spawnmanager:setAutoSpawn(false)
-    TriggerEvent('vrp:client:spawned')
+    exports.spawnmanager:setAutoSpawn(false)   
   end
 
   TriggerServerEvent("vRPcli:playerSpawned")
