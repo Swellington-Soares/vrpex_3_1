@@ -82,8 +82,8 @@ CreateThread(function()
 end)
 
 AddEventHandler('populationPedCreating', function(x, y, z, model)
-    Wait(5000)    
-    if block?.peds[model] then       
+    Wait(5000)
+    if block?.peds[model] then
         CancelEvent()
     else
         local ped = lib.getClosestPed(vec3(x, y, z), 1.0)
@@ -317,26 +317,31 @@ CreateThread(function()
 end)
 
 lib.onCache('weapon', function(value)
-    if value and block?.weapons[value] then
-        RemoveWeaponFromPed(PlayerPedId(), value)
+    if value then
+        if block?.weapons[value] then
+            RemoveWeaponFromPed(PlayerPedId(), value)
+        end
+        if value ~= `WEAPON_UNARMED` then
+            TriggerServerEvent('vrp:server:WeaponChangeNotify', value)
+        end
     end
 end)
 
 lib.onCache('ped', function(value)
     if LocalPlayer.state.isLoggedIn then
-        vRP.setPedFlags(value)      
+        vRP.setPedFlags(value)
     end
 end)
 
 --GUN EVENT
 local lastShootTime = 0
-AddEventHandler('CEventGunShot', function (p1,p2,p3)
-    if GetGameTimer() - lastShootTime > 250 then        
+AddEventHandler('CEventGunShot', function(p1, p2, p3)
+    if GetGameTimer() - lastShootTime > 250 then
         lastShootTime = GetGameTimer()
         if p2 == cache.ped then
             local weaponHash = GetSelectedPedWeapon(p2)
             TriggerServerEvent('vrp:server:GunShotNotify', weaponHash, GetPedAmmoTypeFromWeapon(cache.ped, weaponHash))
         end
-        CancelEvent()                
+        CancelEvent()
     end
 end)
