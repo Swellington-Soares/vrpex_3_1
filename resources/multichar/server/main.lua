@@ -7,7 +7,7 @@ local vRP = Proxy.getInterface('vRP')
 local players = {}
 local firstcreation = {}
 
-lib.callback.register('multichar:server:getCharacters', function(source)
+lib.callback.register('multichar:server:requestCharsInfo', function(source)
     local user_id = vRP.getUserId(source)
     if not user_id then
         return DropPlayer(source, locale('retry_character_error'))
@@ -31,7 +31,8 @@ lib.callback.register('multichar:server:getCharacters', function(source)
         }
     end
     vRP.setPlayerBucket(source, source + 1, false)
-    return _characters
+    local max_chars = tonumber(vRP.getUData(user_id, 'vrp:max_char') or 1) or 1
+    return  max_chars, _characters
 end)
 
 
