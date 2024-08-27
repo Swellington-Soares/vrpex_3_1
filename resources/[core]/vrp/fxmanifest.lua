@@ -31,7 +31,7 @@ server_scripts {
   'modules/basic_garage.lua',
   'modules/basic_items.lua',
   'modules/logging.lua',
-   'tools/sv_*.lua'
+  --  'tools/sv_*.lua'
 }
 
 -- client scripts
@@ -47,7 +47,7 @@ client_scripts {
   'client/basic_garage.lua',
   'client/police.lua',
   'client/discord_rich_presence.lua',
-  'tools/cl_*.lua'
+  -- 'tools/cl_*.lua'
 }
 
 dependencies {
