@@ -3,10 +3,10 @@ MulticharConfig = {
     spawn_cam_top = { pos = vec3(118.46, -1730.23, 90.21), rot = vec3(7.96, -1.00, 11.93), fov = 51.00 },
     spawn_cam_forward = { pos = vec3(115.70, -1730.83, 30.51), rot = vec3(-8.26, 0.00, -69.60), fov = 51.00 },
     spawn_coords = {
-        { title = 'Delegacia da Praça', pos = vec3(423.34, -977.84, 30.71) },
-        { title = 'Delegacia da Sandy Shore', pos = vec3(1856.68, 3681.40, 34.27) },
-        { title = 'Delegacia da Paleto', pos = vec3(-439.13, 6020.99, 31.49) },
-        { title = 'Delegacia da Vinewood', pos = vec3(-560.72, -134.09, 38.10) },
+        { title = 'Delegacia da Praça', pos = vec4(423.33, -977.89, 30.71, 86.30) },
+        { title = 'Delegacia de Sandy Shore', pos = vec4(1858.03, 3680.19, 33.77, 212.71) },
+        { title = 'Delegacia de Paleto', pos = vec4(-438.52, 6021.01, 31.49, 312.22) },
+        { title = 'Delegacia de Vinewood', pos = vec4(-555.73, -135.47, 38.26, 218.43) },
     },
     spawn_preview_anims = {
         { dict = 'anim@amb@nightclub@dancers@crowddance_facedj@hi_intensity',  name = 'hi_dance_facedj_09_v2_female^1' },

@@ -1,6 +1,5 @@
 lib.locale()
 
-local config = lib.load('config')
 local Proxy = require ('@vrp.lib.Proxy')
 local vRP = Proxy.getInterface('vRP')
 

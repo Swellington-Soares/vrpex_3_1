@@ -40,7 +40,7 @@ function vRP.execute(name, params)
   if not prepared_queries[name] then
     error('Query [' .. name .. '] not found.', 1)
   end
-  return MySQL.rawExecute.await(prepared_queries[name], params)
+  return MySQL.query.await(prepared_queries[name], params)
 end
 
 function vRP.scalar(name, params)
@@ -231,7 +231,9 @@ end
 CreateThread(function()
   while true do
     for k in next, vRP.user_tables or {} do
-      vRP.save(k, '__INTERNAL__')
+      if vRP.user_tables[k].isReady then
+        vRP.save(k, '__INTERNAL__')
+      end
     end
     Wait(60000)
   end

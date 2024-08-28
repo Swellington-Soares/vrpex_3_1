@@ -9,11 +9,11 @@
 -- end
 
 function tvRP.updateCustomization(customization)
-  local user_id = vRP.getUserId(source)
+  local user_id = vRP.getUserId(source)  
   if user_id then
-    local char_id = vRP.getPlayerTable(user_id)
-    if char_id then
-      vRP.setPlayerData(char_id, 'player:custom', customization)
+    local playerTable = vRP.getPlayerTable(user_id)
+    if playerTable?.id then
+      vRP.setPlayerData(playerTable.id, 'player:custom', customization)
     end
   end
 end
@@ -138,7 +138,7 @@ function vRP.save(user_id, x)
   if not next(vRP.user_tables[user_id] or {}) then return end
   local player = vRP.user_tables[user_id]
   if player?.user_id ~= user_id then return end
-  if vRP.user_tables[user_id].isReady then
+ -- if vRP.user_tables[user_id].isReady then
     local char_id = player?.id
     local src = vRP.getUserSource(user_id)
     local ped = GetPlayerPed(src)
@@ -147,7 +147,7 @@ function vRP.save(user_id, x)
     vRP.updateCharacter(char_id, vRP.user_tables[user_id])
     -- vRP.setPlayerData(char_id, 'player:custom', player.customization)
     lib.print.info('PLAYER ' .. user_id .. ' SAVED')
-  end
+ -- end
 end
 
 RegisterNetEvent('vrp:server:updatePlayerAppearance', function(char_id, data)

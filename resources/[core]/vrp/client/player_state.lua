@@ -83,43 +83,43 @@ function tvRP.getDrawableTextures(part, drawable)
 end
 
 function tvRP.getCustomization()
-  local ped = PlayerPedId()
+  -- local ped = PlayerPedId()
+  
+  -- local custom = {
+  --   modelhash = GetEntityModel(ped),
+  --   components = {}, --roupas
+  --   props = {},      -- props
+  --   overlay = {},    -- maquiagem e afins
+  --   face = {},       -- rosto
+  --   eye = 0,
+  --   hair = {
+  --     color1 = 0,
+  --     color2 = 0,
+  --   } -- caso especial
+  -- }
 
-  local custom = {
-    modelhash = GetEntityModel(ped),
-    components = {}, --roupas
-    props = {},      -- props
-    overlay = {},    -- maquiagem e afins
-    face = {},       -- rosto
-    eye = 0,
-    hair = {
-      color1 = 0,
-      color2 = 0,
-    } -- caso especial
-  }
+  -- for i = 1, 11 do
+  --   custom.components[i] = { GetPedDrawableVariation(ped, i), GetPedTextureVariation(ped, i), GetPedPaletteVariation(ped,
+  --     i) }
+  -- end
 
-  for i = 1, 11 do
-    custom.components[i] = { GetPedDrawableVariation(ped, i), GetPedTextureVariation(ped, i), GetPedPaletteVariation(ped,
-      i) }
-  end
+  -- for _, i in next, { 0, 1, 2, 6, 7 } do
+  --   custom.props[i] = { GetPedPropIndex(ped, i), math.max(GetPedPropTextureIndex(ped, i), 0) }
+  -- end
 
-  for _, i in next, { 0, 1, 2, 6, 7 } do
-    custom.props[i] = { GetPedPropIndex(ped, i), math.max(GetPedPropTextureIndex(ped, i), 0) }
-  end
+  -- custom.hair.color1 = GetPedHairColor(ped)
+  -- custom.hair.color2 = GetPedHairHighlightColor(ped)
 
-  custom.hair.color1 = GetPedHairColor(ped)
-  custom.hair.color2 = GetPedHairHighlightColor(ped)
+  -- custom.eye = GetPedEyeColor(ped)
 
-  custom.eye = GetPedEyeColor(ped)
+  -- for i = 0, 11 do
+  --   local _, overlayValue, colourType, firstColour, secondColour, overlayOpacity = GetPedHeadOverlayData(ped, i)
+  --   custom.overlay[i] = { overlayValue or 0, colourType or 0, firstColour or 0, secondColour or 0, overlayOpacity or 0.0 }
+  -- end
 
-  for i = 0, 11 do
-    local _, overlayValue, colourType, firstColour, secondColour, overlayOpacity = GetPedHeadOverlayData(ped, i)
-    custom.overlay[i] = { overlayValue or 0, colourType or 0, firstColour or 0, secondColour or 0, overlayOpacity or 0.0 }
-  end
+  -- custom.face = GetPedHeadBlendData(ped)
 
-  custom.face = GetPedHeadBlendData(ped)
-
-  return custom
+  return exports['fivem-appearance']:getPedAppearance(PlayerPedId())
 end
 
 function tvRP.setCustomization(custom)
