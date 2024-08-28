@@ -9,7 +9,6 @@ local cam2
 local charList
 local last_selected_char = -1
 local in_char_creator = true
-local started = false
 local max_allowed = 1
 
 CreateThread(function()
@@ -298,21 +297,10 @@ CreateThread(function()
     lib.hideContext()
     lib.hideRadial()
     lib.hideTextUI()
-    lib.hideMenu()
-    local timeout = GetGameTimer() + 30000
-    while not started do
-        if NetworkIsPlayerActive(cache.playerId) then
-            if GetGameTimer() > timeout then
-                started = true
-            end
-        end
+    lib.hideMenu()    
+    while not NetworkIsPlayerActive(cache.playerId) do
         Wait(1000)
-    end
+    end    
     if not IsScreenFadedOut() then DoScreenFadeOut(0) end
     RequestCharsInfo()
-end)
-
-
-RegisterCommand('debugc', function()
-    started = true
 end)
