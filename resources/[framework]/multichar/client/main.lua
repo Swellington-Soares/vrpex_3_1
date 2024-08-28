@@ -29,6 +29,7 @@ local function SpawnPlayer(x, y, z, heading, oldcam)
     heading = heading or 0.0
     if not IsScreenFadedIn() then DoScreenFadeIn(0) end
     local ped = PlayerPedId()
+    ClearPedTasksImmediately(ped)
     SetEntityCoordsNoOffset(ped, x, y, z, false, false, true)
     SetEntityHeading(ped, heading)
     local fw = GetEntityForwardVector(ped) * 2
@@ -58,6 +59,9 @@ local function SpawnPlayer(x, y, z, heading, oldcam)
     last_selected_char = -1
     started = false
     max_allowed = 1
+    Wait(1000)
+    ClearPedTasksImmediately(PlayerPedId())
+    FreezeEntityPosition(PlayerPedId(), false)
 end
 
 local function CreateSpawnMenu()
@@ -94,9 +98,7 @@ local function CreateSpawnMenu()
     }, function(_, _, args)        
         SpawnPlayer(args[1].x, args[1].y, args[1].z, args[1].w, camx)
     end)
-
     lib.showMenu('spawn_menu')
-
     ClearFocus()
     RenderScriptCams(true, false, 0, true, true)
 end
