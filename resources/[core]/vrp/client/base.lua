@@ -55,7 +55,6 @@ function tvRP.teleport(x, y, z)
 end
 
 ---@deprecated use onesync enable in server side
--- return x,y,z
 function tvRP.getPosition()
   local x, y, z = table.unpack(GetEntityCoords(PlayerPedId(), true))
   return x, y, z
@@ -289,17 +288,8 @@ AddEventHandler("playerSpawned", function()
     exports.spawnmanager:setAutoSpawn(false)   
   end
 
-  TriggerServerEvent("vRPcli:playerSpawned")
+  -- TriggerServerEvent("vRPcli:playerSpawned")
 end)
-
-AddEventHandler("onPlayerDied", function(player, reason)
-  TriggerServerEvent("vRPcli:playerDied")
-end)
-
-AddEventHandler("onPlayerKilled", function(player, killer, reason)
-  TriggerServerEvent("vRPcli:playerDied")
-end)
-
 
 function vRP.setPedFlags(value)
   SetPedDropsWeaponsWhenDead(value, false)

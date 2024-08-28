@@ -1,7 +1,7 @@
-function tvRP.spawnVehicle(model, pos, isserver)    
+function tvRP.spawnVehicle(model, pos, isserver, type)    
     if not IsModelInCdimage(model) then return false end
     if isserver then        
-        return lib.callback.await('vrp:server:spawnvehicle', false, model, pos)
+        return vRPserver.spawnVehicle(model, pos) --lib.callback.await('vrp:server:spawnvehicle', false, model, pos)
     else
         lib.requestModel(model, 10000)
         local vehicle = CreateVehicle(model, pos.x, pos.y, pos.z, pos?.w or 0.0, true, true)
@@ -73,6 +73,8 @@ end
 
 AddStateBagChangeHandler('vehicle:property', '', function( bagName, _, value)
     local localVehicle = GetEntityFromStateBagName(bagName)
-    if GetPlayerServerId(cache.playerId) ~= tonumber(Entity(localVehicle).state['vehicle:owner'] or 0) then return end        
-    lib.setVehicleProperties( localVehicle, value, true )
+    if DoesEntityExist(localVehicle) then
+    -- if GetPlayerServerId(cache.playerId) ~= tonumber(Entity(localVehicle).state['vehicle:owner'] or 0) then return end        
+        lib.setVehicleProperties( localVehicle, value, true )
+    end
 end)
