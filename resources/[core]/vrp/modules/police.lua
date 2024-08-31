@@ -8,3 +8,10 @@ RegisterNetEvent('vrp:server:GunShotNotify', function (w, a)
     local weaponInfo =     nil
     TriggerEvent('vrp:GunShotNotify', source, ped, pos, weaponInfo, a)
 end)
+
+
+function vRP.setPlayerHandcuffed( source, state )
+    if DoesPlayerExist( source ) then
+        Player( source ).state:set('handcuffed', state, true)
+    end
+end

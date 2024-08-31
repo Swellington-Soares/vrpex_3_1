@@ -1,6 +1,4 @@
--- this module define some police tools and functions
 local handcuffed = false
-
 -- set player as cop (true or false)
 function tvRP.setCop(flag)
   SetPedAsCop(PlayerPedId(), flag)
@@ -9,23 +7,13 @@ end
 
 -- HANDCUFF
 
-function tvRP.toggleHandcuff()
-  handcuffed = not handcuffed
-  SetEnableHandcuffs(PlayerPedId(), handcuffed)
-  if handcuffed then
-    tvRP.playAnim(true, { { "mp_arresting", "idle", 1 } }, true)
-  else
-    tvRP.stopAnim(true)
-    SetPedStealthMovement(PlayerPedId(), false, "")
-  end
-  LocalPlayer.state.handcuffed = handcuffed
-end
 
-function tvRP.setHandcuffed(flag)
-  if handcuffed ~= flag then
-    tvRP.toggleHandcuff()
-  end
-end
+
+-- function tvRP.setHandcuffed(flag)
+--   if handcuffed ~= flag then
+--     tvRP.toggleHandcuff()
+--   end
+-- end
 
 function tvRP.isHandcuffed()
   return handcuffed
@@ -129,9 +117,9 @@ local handcuffThreadStarted = false
 
 local function StartHandcuffThread()
   if not handcuffThreadStarted then
-    handcuffThreadStarted = true    
+    handcuffThreadStarted = true
     CreateThread(function()
-      lib.requestAnimDict('mp_arresting')      
+      lib.requestAnimDict('mp_arresting')
       while handcuffed do
         if not IsEntityPlayingAnim(cache.ped, "mp_arresting", "idle", 3) then
           TaskPlayAnim(cache.ped, "mp_arresting", "idle", 8.0, -8.0, -1, 0, 0.0, false, false, false)
@@ -144,16 +132,36 @@ local function StartHandcuffThread()
   end
 end
 
-
-AddStateBagChangeHandler('handcuffed', 'player:' .. GetPlayerServerId(PlayerId()), function(_, _, value)
+local beforeCuffDrawable
+AddStateBagChangeHandler('handcuffed', ('player:%s'):format(cache.serverId), function(_, _, value)
+  handcuffed = value
   SetEnableHandcuffs(cache.ped, value)
   SetEnableBoundAnkles(cache.ped, value)
   SetPedConfigFlag(cache.ped, 48, value)
+  SetPedConfigFlag(cache.ped, 120, value)
   SetPedConfigFlag(cache.ped, 156, not value)
   SetPedConfigFlag(cache.ped, 186, value)
   SetPedConfigFlag(cache.ped, 188, value)
   SetPedConfigFlag(cache.ped, 188, value)
-  if value and not handcuffThreadStarted then
-    StartHandcuffThread()
+  if value then
+    beforeCuffDrawable = { GetPedDrawableVariation(cache.ped, 7), GetPedTextureVariation(cache.ped, 7) }
+    local model = GetEntityModel(cache.ped)
+    if model == `mp_m_freemode_01` or mode == `mp_f_freemode_01` then
+      SetPedComponentVariation(cache.ped, 7, model == `mp_m_freemode_01` and 41 or 25, 0, 0)
+    end
+    
+    SetEnableHandcuffs(PlayerPedId(), value)
+    tvRP.playAnim(true, { { "mp_arresting", "idle", 1 } }, true)
+    if not handcuffThreadStarted then
+      StartHandcuffThread()
+    end
+  else
+    tvRP.stopAnim(true)
+    SetPedStealthMovement(PlayerPedId(), false, "")
+    UncuffPed(cache.ped)
+    if beforeCuffDrawable then
+      SetPedComponentVariation(cache.ped, 7, beforeCuffDrawable[1], beforeCuffDrawable[2], 0)
+      beforeCuffDrawable = nil
+    end
   end
 end)
