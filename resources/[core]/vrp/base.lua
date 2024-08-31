@@ -218,8 +218,10 @@ function vRP.dropPlayer(source)
 
   local user_id = vRP.getUserId(source)
   if user_id then
+    vRP.user_tables[user_id].isReady = false
     TriggerEvent("vRP:playerLeave", user_id, source)
-    vRP.save(user_id, '__INTERNAL__')
+    vRP.save(user_id, '__INTERNAL__')    
+    Wait(1000)
     vRP.users[vRP.rusers[user_id]] = nil
     vRP.rusers[user_id] = nil
     vRP.user_tables[user_id] = nil
@@ -239,36 +241,6 @@ CreateThread(function()
   end
 end)
 
--- -- tasks
-
--- function task_save_datatables()
---   SetTimeout(config.save_interval * 1000, task_save_datatables)
---   TriggerEvent("vRP:save")
-
---   Debug.log("save datatables")
---   for k, v in pairs(vRP.user_tables) do
---     vRP.setUData(k, "vRP:datatable", json.encode(v))
---   end
--- end
-
--- async(function()
---   task_save_datatables()
--- end)
-
--- -- ping timeout
--- function task_timeout()
---   local users = vRP.getUsers()
---   for k, v in pairs(users) do
---     if GetPlayerPing(v) <= 0 then
---       vRP.kick(v, "[vRP] Ping timeout.")
---       vRP.dropPlayer(v)
---     end
---   end
-
---   SetTimeout(30000, task_timeout)
--- end
-
--- task_timeout()
 
 -- handlers
 function vRP.getPlayerIdentifier(source, xtype)

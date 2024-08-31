@@ -1,4 +1,4 @@
-local Tools = module("lib/Tools")
+local Tools = require "lib.Tools"
 
 local SERVER = IsDuplicityVersion()
 
@@ -7,6 +7,9 @@ local TriggerRemoteEvent = nil
 local RegisterLocalEvent = RegisterNetEvent
 if SERVER then
   TriggerRemoteEvent = TriggerClientEvent
+  if not GlobalState.vrp_tunnel then
+    GlobalState.vrp_tunnel = lib.string.random('_AAAA_111_T_AAA1AA111A')
+  end
 else
   TriggerRemoteEvent = TriggerServerEvent
 end
@@ -77,9 +80,9 @@ local function tunnel_resolve(itable, key)
         end
 
         if SERVER then
-          TriggerRemoteEvent(iname .. ":tunnel_req", dest, fname, args, identifier, rid)
+          TriggerRemoteEvent(iname .. GlobalState.vrp_tunnel.. ":tunnel_req", dest, fname, args, identifier, rid)
         else
-          TriggerRemoteEvent(iname .. ":tunnel_req", fname, args, identifier, rid)
+          TriggerRemoteEvent(iname .. GlobalState.vrp_tunnel .. ":tunnel_req", fname, args, identifier, rid)
         end
       end)
     else -- no delay
@@ -91,9 +94,9 @@ local function tunnel_resolve(itable, key)
       end
 
       if SERVER then
-        TriggerRemoteEvent(iname .. ":tunnel_req", dest, fname, args, identifier, rid)
+        TriggerRemoteEvent(iname .. GlobalState.vrp_tunnel .. ":tunnel_req", dest, fname, args, identifier, rid)
       else
-        TriggerRemoteEvent(iname .. ":tunnel_req", fname, args, identifier, rid)
+        TriggerRemoteEvent(iname .. GlobalState.vrp_tunnel .. ":tunnel_req", fname, args, identifier, rid)
       end
     end
 
@@ -111,11 +114,8 @@ end
 -- interface: table containing functions
 function Tunnel.bindInterface(name, interface)
   -- receive request
-  RegisterLocalEvent(name .. ":tunnel_req")
-  AddEventHandler(name .. ":tunnel_req", function(member, args, identifier, rid)
+  RegisterLocalEvent(name .. GlobalState.vrp_tunnel .. ":tunnel_req", function(member, args, identifier, rid)
     local source = source
-
-
 
     local f = interface[member]
 
@@ -128,9 +128,9 @@ function Tunnel.bindInterface(name, interface)
     -- send response (even if the function doesn't exist)
     if rid >= 0 then
       if SERVER then
-        TriggerRemoteEvent(name .. ":" .. identifier .. ":tunnel_res", source, rid, rets)
+        TriggerRemoteEvent(name .. ":" .. identifier .. GlobalState.vrp_tunnel .. ":tunnel_res", source, rid, rets)
       else
-        TriggerRemoteEvent(name .. ":" .. identifier .. ":tunnel_res", rid, rets)
+        TriggerRemoteEvent(name .. ":" .. identifier .. GlobalState.vrp_tunnel .. ":tunnel_res", rid, rets)
       end
     end
   end)
@@ -150,8 +150,7 @@ function Tunnel.getInterface(name, identifier)
     { __index = tunnel_resolve, name = name, tunnel_ids = ids, tunnel_callbacks = callbacks, identifier = identifier })
 
   -- receive response
-  RegisterLocalEvent(name .. ":" .. identifier .. ":tunnel_res")
-  AddEventHandler(name .. ":" .. identifier .. ":tunnel_res", function(rid, args)
+  RegisterLocalEvent(name .. ":" .. identifier .. GlobalState.vrp_tunnel .. ":tunnel_res", function(rid, args)
     local callback = callbacks[rid]
     if callback then
       -- free request id

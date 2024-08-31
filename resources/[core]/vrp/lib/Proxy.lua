@@ -1,9 +1,15 @@
 -- Proxy interface system, used to add/call functions between resources
 
-local Tools = module("lib/Tools")
+local Tools = require "lib.Tools"
 
 local Proxy = {}
 local rscname = GetCurrentResourceName()
+
+if IsDuplicityVersion() then
+  if not GlobalState.vrp_proxy then
+    GlobalState.vrp_proxy = lib.string.random('_AAAA_111_P_AAA1AA111A')
+  end
+end
 
 local function proxy_resolve(itable, key)
   local mtable = getmetatable(itable)
@@ -34,7 +40,7 @@ local function proxy_resolve(itable, key)
 
     local args = { ... }
 
-    TriggerEvent(iname .. ":proxy", fname, args, identifier, rid)
+    TriggerEvent(iname .. GlobalState.vrp_proxy .. ":proxy", fname, args, identifier, rid)
 
     if not no_wait then
       return r:wait()
@@ -47,7 +53,7 @@ end
 
 --- Add event handler to call interface functions (can be called multiple times for the same interface name with different tables)
 function Proxy.addInterface(name, itable)
-  AddEventHandler(name .. ":proxy", function(member, args, identifier, rid)
+  AddEventHandler(name .. GlobalState.vrp_proxy .. ":proxy", function(member, args, identifier, rid)
     local f = itable[member]
 
     local rets = {}
@@ -58,7 +64,7 @@ function Proxy.addInterface(name, itable)
     end
 
     if rid >= 0 then
-      TriggerEvent(name .. ":" .. identifier .. ":proxy_res", rid, rets)
+      TriggerEvent(name .. ":" .. identifier .. GlobalState.vrp_proxy .. ":proxy_res", rid, rets)
     end
   end)
 end
@@ -74,7 +80,7 @@ function Proxy.getInterface(name, identifier)
   local r = setmetatable({},
     { __index = proxy_resolve, name = name, ids = ids, callbacks = callbacks, identifier = identifier })
 
-  AddEventHandler(name .. ":" .. identifier .. ":proxy_res", function(rid, rets) 
+  AddEventHandler(name .. ":" .. identifier .. GlobalState.vrp_proxy .. ":proxy_res", function(rid, rets) 
 
     local callback = callbacks[rid]
     if callback then

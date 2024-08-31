@@ -301,6 +301,12 @@ function vRP.setPedFlags(value)
 end
 
 
-AddStateBagChangeHandler('isLoggedIn', nil, function (bagName, key, value, reserved)
-  print(bagName, key, value, reserved)  
-end)
+-- AddStateBagChangeHandler('isLoggedIn', nil, function (bagName, key, value, reserved)
+--   print(bagName, key, value, reserved)  
+-- end)
+
+
+-- RegisterCommand("pped", function()
+--   lib.requestModel(-427436319)
+--   CreatePed(24, -427436319, GetEntityCoords(PlayerPedId()), false, true)
+-- end)

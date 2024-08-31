@@ -39,7 +39,7 @@ end
 
 Citizen.CreateThread(function()
   while true do
-    Citizen.Wait(30000)
+    Citizen.Wait(60000)
 
     if IsPlayerPlaying(PlayerId()) and LocalPlayer.state.isLoggedIn then
       -- local x,y,z = table.unpack(GetEntityCoords(PlayerPedId(),true))

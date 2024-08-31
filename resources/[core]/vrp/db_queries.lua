@@ -21,9 +21,15 @@ vRP.prepare('vRP/isUserAllowed', 'SELECT allowed FROM users WHERE id = ?')
 
 vRP.prepare('vRP/addPlayerVehicle', 'CALL `add_player_vehicle`(?, ?, ?)')
 vRP.prepare('vRP/removeVehicleFromPlayer', 'DELETE FROM player_vehicles WHERE vehicle = ? AND player_id = ?')
-vRP.prepare('vRP/updatePlayerVehicleProperties',
-    'UPDATE player_vehicles SET properties = ? WHERE vehicle = ? AND player_id = ?')
+vRP.prepare('vRP/updatePlayerVehicleProperties', 'UPDATE player_vehicles SET properties = ? WHERE vehicle = ? AND player_id = ?')
 vRP.prepare('vRP/transferPlayerVehicle', 'CALL `transfer_player_vehicle(?, ?, ?)`')
+vRP.prepare('vRP/getPlayerVehicleBy', 'SELECT vehicle, seized, plate, garage, created_at FROM player_vehicles WHERE ?? = ? and player_id = ?')
+vRP.prepare('vRP/isPlayerVehicleSeized', 'SELECT seized FROM player_vehicles WHERE player_id = ? and vehicle = ?')
+vRP.prepare('vRP/getPlayerVehicleByPlate', 'SELECT vehicle, seized, plate, garage, created_at FROM player_vehicles WHERE plate = ?')
+vRP.prepare('vRP/getPlayerVehicleProps', 'SELECT properties	FROM player_vehicles WHERE player_id = ? AND vehicle = ?')
+vRP.prepare('vRP/getPlayerVehiclePropsByPlate', 'SELECT properties	FROM player_vehicles WHERE plate = ?')
+vRP.prepare('vRP/removeVehicleFromPlayerByPlate', 'DELETE FROM player_vehicles WHERE plate = ?')
+
 
 vRP.prepare('vRP/addPlayer',
 [[
