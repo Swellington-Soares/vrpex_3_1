@@ -34,7 +34,9 @@ AddEventHandler('getMapDirectives', function(add)
 
                 -- add the spawnpoint
                 addSpawnPoint({
-                    x = x, y = y, z = z,
+                    x = x,
+                    y = y,
+                    z = z,
                     heading = heading,
                     model = model
                 })
@@ -122,7 +124,7 @@ function addSpawnPoint(spawn)
     spawnNum = spawnNum + 1
 
     -- all OK, add the spawn entry to the list
-    spawnPoints[#spawnPoints+1] = spawn
+    spawnPoints[#spawnPoints + 1] = spawn
 
     return spawn.idx
 end
@@ -151,7 +153,7 @@ end
 -- function as existing in original R* scripts
 local function freezePlayer(id, freeze)
     local player = id
-    SetPlayerControl(player, not freeze, false)
+    SetPlayerControl(player, not freeze, 0)
 
     local ped = GetPlayerPed(player)
 
@@ -184,19 +186,19 @@ local function freezePlayer(id, freeze)
     end
 end
 
-function loadScene(x, y, z)
-	if not NewLoadSceneStart then
-		return
-	end
+-- function loadScene(x, y, z)
+-- 	if not NewLoadSceneStart then
+-- 		return
+-- 	end
 
-    NewLoadSceneStart(x, y, z, 0.0, 0.0, 0.0, 20.0, 0)
+--     NewLoadSceneStart(x, y, z, 0.0, 0.0, 0.0, 20.0, 0)
 
-    while IsNewLoadSceneActive() do
-        networkTimer = GetNetworkTimer()
+--     while IsNewLoadSceneActive() do
+--         networkTimer = GetNetworkTimer()
 
-        NetworkUpdateLoadScene()
-    end
-end
+--         NetworkUpdateLoadScene()
+--     end
+-- end
 
 -- to prevent trying to spawn multiple times
 local spawnLock = false
@@ -209,7 +211,7 @@ function spawnPlayer(spawnIdx, cb)
 
     spawnLock = true
 
-    Citizen.CreateThread(function()
+    CreateThread(function()
         -- if the spawn isn't set, select a random one
         if not spawnIdx then
             spawnIdx = GetRandomIntInRange(1, #spawnPoints + 1)
@@ -232,10 +234,9 @@ function spawnPlayer(spawnIdx, cb)
         end
 
         if not spawn.skipFade then
-            DoScreenFadeOut(500)
+            DoScreenFadeOut(0)
 
-            while not IsScreenFadedOut() do
-                Citizen.Wait(0)
+            while not IsScreenFadedOut() do                Wait(0)
             end
         end
 
@@ -255,8 +256,9 @@ function spawnPlayer(spawnIdx, cb)
         if spawn.model then
             RequestModel(spawn.model)
 
+            local timeout = GetGameTimer() + 10000
             -- load the model for this spawn
-            while not HasModelLoaded(spawn.model) do
+            while not HasModelLoaded(spawn.model) and GetGameTimer() < timeout do
                 RequestModel(spawn.model)
 
                 Wait(0)
@@ -270,7 +272,7 @@ function spawnPlayer(spawnIdx, cb)
 
             -- RDR3 player model bits
             if N_0x283978a15512b2fe then
-				N_0x283978a15512b2fe(PlayerPedId(), true)
+                N_0x283978a15512b2fe(PlayerPedId(), true)
             end
         end
 
@@ -281,9 +283,10 @@ function spawnPlayer(spawnIdx, cb)
         local ped = PlayerPedId()
 
         -- V requires setting coords as well
-        SetEntityCoordsNoOffset(ped, spawn.x, spawn.y, spawn.z, false, false, false, true)
-
-        NetworkResurrectLocalPlayer(spawn.x, spawn.y, spawn.z, spawn.heading, true, true, false)
+        SetEntityCoordsNoOffset(ped, spawn.x, spawn.y, spawn.z, false, false, true)
+        if IsEntityDead(ped) then
+            NetworkResurrectLocalPlayer(spawn.x, spawn.y, spawn.z, spawn.heading or 0.0, 0, false)
+        end
 
         -- gamelogic-style cleanup stuff
         ClearPedTasksImmediately(ped)
@@ -292,7 +295,7 @@ function spawnPlayer(spawnIdx, cb)
         ClearPlayerWantedLevel(PlayerId())
 
         -- why is this even a flag?
-        --SetCharWillFlyThroughWindscreen(ped, false)
+        -- SetCharWillFlyThroughWindscreen(ped, false)
 
         -- set primary camera heading
         --SetGameCamHeading(spawn.heading)
@@ -306,7 +309,7 @@ function spawnPlayer(spawnIdx, cb)
         local time = GetGameTimer()
 
         while (not HasCollisionLoadedAroundEntity(ped) and (GetGameTimer() - time) < 5000) do
-            Citizen.Wait(0)
+            Wait(0)
         end
 
         ShutdownLoadingScreen()
@@ -314,9 +317,7 @@ function spawnPlayer(spawnIdx, cb)
         if IsScreenFadedOut() then
             DoScreenFadeIn(500)
 
-            while not IsScreenFadedIn() do
-                Citizen.Wait(0)
-            end
+            while not IsScreenFadedIn() do  Wait(0) end
         end
 
         -- and unfreeze the player
@@ -336,16 +337,15 @@ end
 local respawnForced
 local diedAt
 
-Citizen.CreateThread(function()
+CreateThread(function()
     -- main loop thing
     while true do
-        Citizen.Wait(250)
+        Wait(250)
+        if autoSpawnEnabled then
+            local playerPed = PlayerPedId()
 
-        local playerPed = PlayerPedId()
-
-        if playerPed and playerPed ~= -1 then
-            -- check if we want to autospawn
-            if autoSpawnEnabled then
+            if playerPed and playerPed ~= -1 then
+                -- check if we want to autospawn
                 if NetworkIsPlayerActive(PlayerId()) then
                     if (diedAt and math.abs(GetGameTimer() - diedAt) > 2000) or respawnForced then
                         if autoSpawnCallback then
@@ -357,14 +357,14 @@ Citizen.CreateThread(function()
                         respawnForced = false
                     end
                 end
-            end
 
-            if IsEntityDead(playerPed) then
-                if not diedAt then
-                    diedAt = GetGameTimer()
+                if IsEntityDead(playerPed) then
+                    if not diedAt then
+                        diedAt = GetGameTimer()
+                    end
+                else
+                    diedAt = nil
                 end
-            else
-                diedAt = nil
             end
         end
     end

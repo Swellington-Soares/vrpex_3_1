@@ -34,7 +34,8 @@ local function SpawnPlayer(x, y, z, heading, oldcam)
     -- local fw = GetEntityForwardVector(ped) * 2
     local offsetCam = GetOffsetFromEntityInWorldCoords(ped, 0.0, 5.0, 0.0)
     local rot = GetEntityHeading(ped)
-    local camx = CreateCamWithParams('DEFAULT_SCRIPTED_CAMERA', offsetCam --[[vec3(x, y, z) + fw]], vec3(0.0, 0.0, rot), 55.0, false, 2)
+    local camx = CreateCamWithParams('DEFAULT_SCRIPTED_CAMERA', offsetCam --[[vec3(x, y, z) + fw]], vec3(0.0, 0.0, rot),
+        55.0, false, 2)
     -- SetGameplayCamRelativeHeading(rot)
     -- SetFollowPedCamViewMode(1)
     SetCamActiveWithInterp(camx, oldcam, 2000, 16, 8)
@@ -63,7 +64,6 @@ local function SpawnPlayer(x, y, z, heading, oldcam)
     Wait(1000)
     ClearPedTasksImmediately(PlayerPedId())
     FreezeEntityPosition(PlayerPedId(), false)
-    
 end
 
 local function CreateSpawnMenu()
@@ -296,14 +296,6 @@ local function RequestCharsInfo()
     end)
 end
 
-
-local spawned = false
-
-AddEventHandler('playerSpawned', function()
-    print('playerSpawned')
-    spawned = true
-end)
-
 CreateThread(function()
     ClearFocus()
     DoScreenFadeOut(0)
@@ -311,20 +303,16 @@ CreateThread(function()
     lib.hideRadial()
     lib.hideTextUI()
     lib.hideMenu()
-    local timeout = GetGameTimer() + 30000
-    while true do
-        if not IsScreenFadedOut() then DoScreenFadeOut(0) end
-        if NetworkIsPlayerActive(cache.playerId) then
-            if spawned or GetGameTimer() > timeout then break end
-        end
-        Wait(50)
-    end
-    if not IsScreenFadedOut() then DoScreenFadeOut(0) end
-    Wait(2000)
-    print('OK-REQUEST INFO')
+    Wait(1000)
     RequestCharsInfo()
-end)
-
-RegisterCommand('debugc', function(source, args, raw)
-    spawned = true
+    if GetResourceState('spawnmanager') then
+        AddEventHandler('playerSpawned', RequestCharsInfo)
+    else
+        while not NetworkIsPlayerActive(PlayerId()) do
+            if not IsScreenFadedOut() then DoScreenFadeOut(0) end
+            Wait(0)
+        end
+        Wait(100)
+        RequestCharsInfo()
+    end
 end)
