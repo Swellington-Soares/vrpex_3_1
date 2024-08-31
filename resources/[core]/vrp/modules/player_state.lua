@@ -9,7 +9,7 @@
 -- end
 
 function tvRP.updateCustomization(customization)
-  local user_id = vRP.getUserId(source)  
+  local user_id = vRP.getUserId(source)
   if user_id then
     local playerTable = vRP.getPlayerTable(user_id)
     if playerTable?.id then
@@ -125,8 +125,8 @@ function vRP.login(source, user_id, char_id, firstcreation)
   vRP.user_tables[user_id].datatable['weapons'] = vRP.user_tables[user_id].datatable['weapons'] or {}
   vRP.user_tables[user_id].datatable['groups'] = vRP.user_tables[user_id].datatable['groups'] or {}
   vRP.user_tables[user_id].datatable['position'] = vRP.user_tables[user_id].datatable['position'] or cfg.fristspawn
-  local custom = vRP.getPlayerData(character.id, 'player:custom')
-  vRP.user_tables[user_id].customization = custom and json.decode(custom)
+  -- local custom = vRP.getPlayerData(character.id, 'player:custom')
+  -- vRP.user_tables[user_id].customization = custom and json.decode(custom)
   Player(source).state:set('name', ("%s %s"):format(character.firstname, character.lastname), true)
   Player(source).state:set('id', user_id)
   TriggerEvent("vrp:login", source, user_id, char_id, firstcreation)
@@ -138,16 +138,16 @@ function vRP.save(user_id, x)
   if not next(vRP.user_tables[user_id] or {}) then return end
   local player = vRP.user_tables[user_id]
   if player?.user_id ~= user_id then return end
- -- if vRP.user_tables[user_id].isReady then
-    local char_id = player?.id
-    local src = vRP.getUserSource(user_id)
-    local ped = GetPlayerPed(src)
-    local position = GetEntityCoords(ped)
-    vRP.user_tables[user_id].datatable['position'] = position
-    vRP.updateCharacter(char_id, vRP.user_tables[user_id])
-    -- vRP.setPlayerData(char_id, 'player:custom', player.customization)
-    lib.print.info('PLAYER ' .. user_id .. ' SAVED')
- -- end
+  -- if vRP.user_tables[user_id].isReady then
+  local char_id = player?.id
+  local src = vRP.getUserSource(user_id)
+  local ped = GetPlayerPed(src)
+  local position = GetEntityCoords(ped)
+  vRP.user_tables[user_id].datatable['position'] = position
+  vRP.updateCharacter(char_id, vRP.user_tables[user_id])
+  -- vRP.setPlayerData(char_id, 'player:custom', player.customization)
+  lib.print.info('PLAYER ' .. user_id .. ' SAVED')
+  -- end
 end
 
 RegisterNetEvent('vrp:server:updatePlayerAppearance', function(char_id, data)
@@ -170,25 +170,8 @@ RegisterNetEvent('vrp:player:ready', function(state)
   if not user_id then return end
   if vRP.user_tables[user_id] then
     vRP.user_tables[user_id].isReady = state
-    lib.print.info('PLAYER READY TO SAVE [ ' .. user_id .. ' ]')
+    if state then
+      lib.print.info('PLAYER READY TO SAVE [ ' .. user_id .. ' ]')
+    end
   end
 end)
-
-
--- CreateThread(function()
---   while true do
---     for _, vehicle in next, GetAllVehicles() do
---       local forDelete = true
---       for i = -1, 6 do
---         if GetPedInVehicleSeat(vehicle, i) then
---           forDelete = false
---           break
---         end
---       end
---       if forDelete then
---         DeleteEntity(vehicle)
---       end
---     end
---     Wait(120000)
---   end
--- end)

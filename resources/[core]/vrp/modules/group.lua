@@ -6,8 +6,8 @@
 -- api
 
 local cfg = module("cfg/groups")
-local groups = cfg.groups
-local users = cfg.users
+local groups = cfg.groups or {}
+local users = cfg.users or {}
 
 function vRP.getGroupGradeInfo(group, gradeNameOrRank)
   if not groups[group]?._config?.grades then return nil end
@@ -92,6 +92,10 @@ function vRP.addUserGroup(user_id, group, grade)
         gtype = ngroup._config.gtype
       end
       TriggerEvent("vRP:playerJoinGroup", user_id, group, gtype, user_groups[group].rank, user_groups[group]['duty'])
+      -- local src = vRP.getUserSource(user_id)
+      -- if src then
+      --   TriggerClientEvent('vRP:client:UpdateGroups', src, user_groups[group])
+      -- end
     end
   end
 end
@@ -152,9 +156,13 @@ function vRP.removeUserGroup(user_id, group)
   if groupdef._config then
     gtype = groupdef._config.gtype
   end
-  TriggerEvent("vRP:playerLeaveGroup", user_id, group, gtype)
-
+  --"vRP:playerJoinGroup", user_id, group, gtype, user_groups[group].rank, user_groups[group]['duty']
+  TriggerEvent("vRP:playerLeaveGroup", user_id, group, gtype, user_groups[group]?.rank or 0, user_groups[group]?.duty)
   user_groups[group] = nil -- remove reference
+  -- local src = vRP.getUserSource(user_id)
+  -- if src then
+  --   TriggerClientEvent('vRP:client:UpdateGroups', src, user_groups[group])
+  -- end
 end
 
 -- check if the user has a specific group
@@ -390,26 +398,28 @@ function vRP.userGroupDemote(user_id, group)
   return false
 end
 
-AddEventHandler("vRP:playerSpawn", function(user_id, source, first_spawn)
-  -- first spawn
-  if first_spawn then
-    -- add groups on user join
-    local user = users[user_id]
-    if user then
-      for k, v in pairs(user) do
-        vRP.addUserGroup(user_id, v)
-      end
-    end
+function vRP.isGroupGradeBoss(group, grade)
+  grade = tonumber(grade)
+  local rankInfo = groups[group]?._config?.grades[grade]
+  return rankInfo and (grade >= groups[group]?._config?.grades or rankInfo?.isboss) 
+end
 
-    -- add default group user
-    vRP.addUserGroup(user_id, "user")
+AddEventHandler('vrp:login', function(source, user_id, char_id, first_spawn)
+  if first_spawn then
+    local user = users[char_id]
+    if user then
+      for k, v in next, user do
+        vRP.addUserGroup(user_id, v.name, v.rank or 0)
+      end
+
+      vRP.addUserGroup(user_id, 'user', 0)
+    end
   end
 
-  -- call group onspawn callback at spawn
   local user_groups = vRP.getUserGroups(user_id)
-  for k, v in pairs(user_groups) do
+  for k in next, user_groups or {} do
     local group = groups[k]
-    if group and group._config and group._config.onspawn then
+    if group?._config?.onspawn then
       group._config.onspawn(source)
     end
   end

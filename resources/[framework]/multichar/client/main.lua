@@ -12,7 +12,7 @@ local in_char_creator = true
 local max_allowed = 1
 
 CreateThread(function()
-    LocalPlayer.state.isLoggedIn = false
+    LocalPlayer.state:set('isLoggedIn', false, true)
     LocalPlayer.state.canEmote = false
     TriggerServerEvent('vrp:player:ready', false)
     while in_char_creator do
@@ -31,15 +31,18 @@ local function SpawnPlayer(x, y, z, heading, oldcam)
     ClearPedTasksImmediately(ped)
     SetEntityCoordsNoOffset(ped, x, y, z, false, false, true)
     SetEntityHeading(ped, heading)
-    local fw = GetEntityForwardVector(ped) * 2
+    -- local fw = GetEntityForwardVector(ped) * 2
+    local offsetCam = GetOffsetFromEntityInWorldCoords(ped, 0.0, 5.0, 0.0)
     local rot = GetEntityHeading(ped)
-    local camx = CreateCamWithParams('DEFAULT_SCRIPTED_CAMERA', vec3(x, y, z) + fw, vec3(0.0, 0.0, rot), 55.0, false, 2)
-    SetGameplayCamRelativeHeading(rot - 90.0)
+    local camx = CreateCamWithParams('DEFAULT_SCRIPTED_CAMERA', offsetCam --[[vec3(x, y, z) + fw]], vec3(0.0, 0.0, rot), 55.0, false, 2)
+    -- SetGameplayCamRelativeHeading(rot)
+    -- SetFollowPedCamViewMode(1)
     SetCamActiveWithInterp(camx, oldcam, 2000, 16, 8)
     while IsCamInterpolating(camx) do Wait(0) end
     Wait(1000)
 
     RenderScriptCams(false, true, 1000, true, true)
+    SetGameplayCamRelativeHeading(0.0)
     if DoesCamExist(camx) then
         SetCamActive(camx, false)
         DestroyCam(camx)
@@ -56,15 +59,15 @@ local function SpawnPlayer(x, y, z, heading, oldcam)
     cam2 = nil
     charList = {}
     last_selected_char = -1
-    started = false
     max_allowed = 1
     Wait(1000)
     ClearPedTasksImmediately(PlayerPedId())
     FreezeEntityPosition(PlayerPedId(), false)
+    
 end
 
 local function CreateSpawnMenu()
-    local char = charList[last_selected_char]    
+    local char = charList[last_selected_char]
     local pos = char?.last_location
     local options = {}
     local lastOptionSelected
@@ -78,7 +81,8 @@ local function CreateSpawnMenu()
         options[#options + 1] = { label = spawntitle, args = { spawnpos } }
     end
     local spawnpos = options[1].args[1]
-    local camx = CreateCamWithParams('DEFAULT_SCRIPTED_CAMERA', spawnpos.x, spawnpos.y, spawnpos.z + 150.0, vec3(-75.0, 0.0, 0.0), 55.0, true, 2)
+    local camx = CreateCamWithParams('DEFAULT_SCRIPTED_CAMERA', spawnpos.x, spawnpos.y, spawnpos.z + 150.0,
+        vec3(-75.0, 0.0, 0.0), 55.0, true, 2)
     if IsScreenFadedOut() then DoScreenFadeIn(100) end
     lib.registerMenu({
         id = 'spawn_menu',
@@ -94,7 +98,7 @@ local function CreateSpawnMenu()
                 SetFocusPosAndVel(args[1].x, args[1].y, args[1].z, 0.0, 0.0, 0.0)
             end
         end
-    }, function(_, _, args)        
+    }, function(_, _, args)
         SpawnPlayer(args[1].x, args[1].y, args[1].z, args[1].w, camx)
     end)
     lib.showMenu('spawn_menu')
@@ -242,7 +246,7 @@ local function CreateSelectCharacterMenu()
                     SetPedDefaultComponentVariation(cache.ped)
                     SetEntityVisible(cache.ped, true, false)
                 end
-                cache.ped = PlayerPedId()                
+                cache.ped = PlayerPedId()
                 local anim = config.spawn_preview_anims[math.random(1, #config.spawn_preview_anims)]
                 lib.requestAnimDict(anim.dict)
                 TaskPlayAnim(cache.ped, anim.dict, anim.name, 4.0, -4.0, -1, 1, 0.0, false, false, false)
@@ -255,8 +259,9 @@ local function CreateSelectCharacterMenu()
             Wait(1000)
             CreateNewPlayerScreenRegister()
         else
+            ClearPedTasksImmediately(PlayerPedId())
+
             if lib.callback.await('multichar:server:login', false, args.id) then
-                ClearPedTasksImmediately(PlayerPedId())
                 CreateSpawnMenu()
             end
         end
@@ -279,17 +284,25 @@ local function RequestCharsInfo()
             SetEntityVisible(cache.ped, true)
             CreateNewPlayerScreenRegister()
         elseif #charList == 1 and #charList >= max_allowed then
-            last_selected_char = 1            
+            last_selected_char = 1
             local character = charList[last_selected_char]
             if character?.custom?.model then
-                exports['fivem-appearance']:setPlayerAppearance(character.custom) 
+                exports['fivem-appearance']:setPlayerAppearance(character.custom)
             end
             CreateSpawnMenu()
-        else          
+        else
             CreateSelectCharacterMenu()
         end
     end)
 end
+
+
+local spawned = false
+
+AddEventHandler('playerSpawned', function()
+    print('playerSpawned')
+    spawned = true
+end)
 
 CreateThread(function()
     ClearFocus()
@@ -297,10 +310,21 @@ CreateThread(function()
     lib.hideContext()
     lib.hideRadial()
     lib.hideTextUI()
-    lib.hideMenu()    
-    while not NetworkIsPlayerActive(cache.playerId) do
-        Wait(1000)
-    end    
+    lib.hideMenu()
+    local timeout = GetGameTimer() + 30000
+    while true do
+        if not IsScreenFadedOut() then DoScreenFadeOut(0) end
+        if NetworkIsPlayerActive(cache.playerId) then
+            if spawned or GetGameTimer() > timeout then break end
+        end
+        Wait(50)
+    end
     if not IsScreenFadedOut() then DoScreenFadeOut(0) end
+    Wait(2000)
+    print('OK-REQUEST INFO')
     RequestCharsInfo()
+end)
+
+RegisterCommand('debugc', function(source, args, raw)
+    spawned = true
 end)

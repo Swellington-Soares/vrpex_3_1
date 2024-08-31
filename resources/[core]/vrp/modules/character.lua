@@ -6,7 +6,7 @@ local ALLOWED_UPDATE_CHARATER_COLUMN <const> = {
     ['birth_date'] = true,
     ['money'] = true,
     ['datatable'] = true,
-    ['inventory'] = true
+    -- ['inventory'] = true
 }
 
 local DATE_COLUMN = {
@@ -74,7 +74,7 @@ function vRP.getCharacter(char_id, include_deleted)
 
     if xPlayer then
         xPlayer.datatable = json.decode(xPlayer.datatable) or {}
-        xPlayer.money = json.decode(xPlayer.money) or {}
+        xPlayer.money = json.decode(xPlayer.money) or { wallet = 0, bank = 0}
         xPlayer.inventory = json.decode(xPlayer.inventory) or {}
     end
 
