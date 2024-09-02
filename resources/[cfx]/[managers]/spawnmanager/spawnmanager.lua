@@ -205,6 +205,7 @@ local spawnLock = false
 
 -- spawns the current player at a certain spawn point index (or a random one, for that matter)
 function spawnPlayer(spawnIdx, cb)
+    print('spawnPlayer', spawnLock)
     if spawnLock then
         return
     end
@@ -236,7 +237,8 @@ function spawnPlayer(spawnIdx, cb)
         if not spawn.skipFade then
             DoScreenFadeOut(0)
 
-            while not IsScreenFadedOut() do                Wait(0)
+            while not IsScreenFadedOut() do
+                Wait(0)
             end
         end
 
@@ -258,14 +260,13 @@ function spawnPlayer(spawnIdx, cb)
 
             local timeout = GetGameTimer() + 10000
             -- load the model for this spawn
-            while not HasModelLoaded(spawn.model) and GetGameTimer() < timeout do
-                RequestModel(spawn.model)
-
+            while not HasModelLoaded(spawn.model) and GetGameTimer() < timeout do               
                 Wait(0)
             end
 
             -- change the player model
             SetPlayerModel(PlayerId(), spawn.model)
+           
 
             -- release the player model
             SetModelAsNoLongerNeeded(spawn.model)
@@ -281,6 +282,7 @@ function spawnPlayer(spawnIdx, cb)
 
         -- spawn the player
         local ped = PlayerPedId()
+        SetPedDefaultComponentVariation(PlayerPedId())
 
         -- V requires setting coords as well
         SetEntityCoordsNoOffset(ped, spawn.x, spawn.y, spawn.z, false, false, true)
@@ -293,19 +295,7 @@ function spawnPlayer(spawnIdx, cb)
         SetEntityHealth(ped, 200)
         RemoveAllPedWeapons(ped, false)
         ClearPlayerWantedLevel(PlayerId())
-
-        -- why is this even a flag?
-        -- SetCharWillFlyThroughWindscreen(ped, false)
-
-        -- set primary camera heading
-        --SetGameCamHeading(spawn.heading)
-        --CamRestoreJumpcut(GetGameCam())
-
-        -- load the scene; streaming expects us to do it
-        --ForceLoadingScreen(true)
-        --loadScene(spawn.x, spawn.y, spawn.z)
-        --ForceLoadingScreen(false)
-
+        
         local time = GetGameTimer()
 
         while (not HasCollisionLoadedAroundEntity(ped) and (GetGameTimer() - time) < 5000) do
@@ -317,7 +307,7 @@ function spawnPlayer(spawnIdx, cb)
         if IsScreenFadedOut() then
             DoScreenFadeIn(500)
 
-            while not IsScreenFadedIn() do  Wait(0) end
+            while not IsScreenFadedIn() do Wait(0) end
         end
 
         -- and unfreeze the player
@@ -340,9 +330,11 @@ local diedAt
 CreateThread(function()
     -- main loop thing
     while true do
-        Wait(250)
+        Wait(250)        
         if autoSpawnEnabled then
             local playerPed = PlayerPedId()
+
+            -- print('AUTOSPAWN', autoSpawnEnabled, playerPed, respawnForced)
 
             if playerPed and playerPed ~= -1 then
                 -- check if we want to autospawn

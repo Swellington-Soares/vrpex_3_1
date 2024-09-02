@@ -14,10 +14,9 @@ AddEventHandler('hostingSession', function()
         TriggerClientEvent('sessionHostResult', source, 'wait')
 
         -- register a callback for when the lock is freed
-        table.insert(hostReleaseCallbacks, function()
-            TriggerClientEvent('sessionHostResult', source, 'free')
-        end)
-
+        hostReleaseCallbacks[#hostReleaseCallbacks+1] = function()
+            TriggerClientEvent('sessionHostResult', source, 'free')        
+        end
         return
     end
 
