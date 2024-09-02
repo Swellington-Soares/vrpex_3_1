@@ -1,7 +1,8 @@
 lib.locale()
 
-local Proxy = require ('@vrp.lib.Proxy')
+local Proxy = require('@vrp.lib.Proxy')
 local vRP = Proxy.getInterface('vRP')
+local vRPConfig = require('@vrp.cfg.base')
 
 local players = {}
 local firstcreation = {}
@@ -9,13 +10,14 @@ local firstcreation = {}
 lib.callback.register('multichar:server:requestCharsInfo', function(source)
     local user_id = vRP.getUserId(source)
     if not user_id then
-        return DropPlayer(source, locale('retry_character_error'))
+        -- return DropPlayer(source, locale('retry_character_error'))
+        return
     end
     local characters = vRP.getAllUserCharacter(user_id, false)
     local _characters = {}
     for _, info in next, characters or {} do
         local custom = json.decode(vRP.getPlayerData(info.id, 'player:custom') or '{}') or {}
-        local tattoos = json.decode(vRP.getPlayerData(info.id, 'player:tattoo') or '{}') or {}        
+        local tattoos = json.decode(vRP.getPlayerData(info.id, 'player:tattoo') or '{}') or {}
         _characters[#_characters + 1] = {
             user_id = user_id,
             id = info.id,
@@ -31,11 +33,11 @@ lib.callback.register('multichar:server:requestCharsInfo', function(source)
     end
     vRP.setPlayerBucket(source, source + 1, false)
     local max_chars = tonumber(vRP.getUData(user_id, 'vrp:max_char') or 1) or 1
-    return  max_chars, _characters
+    return max_chars, _characters
 end)
 
 
-lib.callback.register("multichar:server:createchar", function(source, firstname, lastname, date)
+lib.callback.register("multichar:server:createchar", function(source, firstname, lastname, date, gender)
     local user_id = vRP.getUserId(source)
     if not user_id then
         return print('DROP')
@@ -43,9 +45,6 @@ lib.callback.register("multichar:server:createchar", function(source, firstname,
 
     local currentDate = os.date("*t")
     local birthDate = os.date("*t", date // 1000)
-
-
-    print(birthDate.year, currentDate.year, firstname, lastname)
 
     if currentDate.year - birthDate.year < 18 then
         return false, locale('player_need_be_18_more')
@@ -64,6 +63,7 @@ lib.callback.register("multichar:server:createchar", function(source, firstname,
         user_id,
         firstname,
         lastname,
+        gender or 'M',
         ("%d-%d-%s"):format(birthDate.year, birthDate.month,
             birthDate.day < 10 and ('0' .. birthDate.day) or tostring(birthDate.day))
     )
@@ -76,7 +76,33 @@ lib.callback.register("multichar:server:createchar", function(source, firstname,
 
     vRP.setPlayerBucket(source, 0, false)
 
-    print(user_id, char_id)
+
+    pcall(function()
+        return exports.ox_inventory:AddItem(source, 'identification', 1, {
+            label = ("%s %s"):format(firstname, lastname),
+            description = ('Data de Nascimento: %s\nSexo: %s\n'):format(os.date("%d/%m/%Y", date // 1000), gender)
+        })
+    end)
+
+    if vRPConfig?.initial_items then
+        for item, amount in next, vRPConfig?.initial_items or {} do
+            print(item, amount)
+            if item == 'phone' then
+                local phoneNumber = vRP.getPlayerTable(user_id)?.phone or "NO SIGNAL"
+                pcall(
+                    function()
+                        return exports.ox_inventory:AddItem(source, item, 1, {
+                            number = phoneNumber,
+                            description = 'Número: ' .. phoneNumber
+                        })
+                    end)
+            else
+                pcall(function()
+                    return exports.ox_inventory:AddItem(source, item, amount)
+                end)
+            end
+        end
+    end
 
     return logged, "Personagem criado com sucesso.", char_id
 end)

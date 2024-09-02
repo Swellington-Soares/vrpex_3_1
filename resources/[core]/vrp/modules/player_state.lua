@@ -28,7 +28,7 @@ function tvRP.updateHealth(health)
   end
 end
 
-function vRP.createPlayer(user_id, firstname, lastname, date)
+function vRP.createPlayer(user_id, firstname, lastname, gender, date)
   local datatable = {
     groups = { user = true },
     health = 200,
@@ -42,7 +42,7 @@ function vRP.createPlayer(user_id, firstname, lastname, date)
   local money = { wallet = 5000, bank = 15000 }
   local registration = vRP.generateRegistrationNumber()
   local phone = vRP.generateRandomPhoneNumber()
-  return vRP.createNewCharacter(user_id, firstname, lastname, registration, phone, date, money, inventory, datatable)
+  return vRP.createNewCharacter(user_id, firstname, lastname, gender, registration, phone, date, money, inventory, datatable)
 end
 
 function vRP.setPlayerBucket(player, bucketId, population)
@@ -102,6 +102,10 @@ function vRP.setArmour(user_id, armour)
   if not src then return end
   local ped = GetPlayerPed(src)
   SetPedArmour(ped, armour)
+end
+
+function vRP.getPlayerId( user_id)
+  return vRP.getPlayerTable(user_id)?.id  
 end
 
 function vRP.login(source, user_id, char_id, firstcreation)

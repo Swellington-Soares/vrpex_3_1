@@ -1,8 +1,11 @@
-function tvRP.spawnVehicle(model, pos, isserver, type)    
-    if not IsModelInCdimage(model) then return false end
+local SetVehicleManualGear = function(vehicle, bool) Citizen.InvokeNative(0x337EF33DA3DDB990, vehicle, bool) end
+
+
+function tvRP.spawnVehicle(model, pos, isserver, type)      
     if isserver then        
         return vRPserver.spawnVehicle(model, pos) --lib.callback.await('vrp:server:spawnvehicle', false, model, pos)
     else
+        if not IsModelInCdimage(model) then return false end
         lib.requestModel(model, 10000)
         local vehicle = CreateVehicle(model, pos.x, pos.y, pos.z, pos?.w or 0.0, true, true)
         SetModelAsNoLongerNeeded(model)
@@ -71,10 +74,36 @@ function tvRP.ejectVehicle()
     end
 end
 
-AddStateBagChangeHandler('vehicle:property', '', function( bagName, _, value)
-    local localVehicle = GetEntityFromStateBagName(bagName)
-    if DoesEntityExist(localVehicle) then
-    -- if GetPlayerServerId(cache.playerId) ~= tonumber(Entity(localVehicle).state['vehicle:owner'] or 0) then return end        
-        lib.setVehicleProperties( localVehicle, value, true )
-    end
+-- AddStateBagChangeHandler('vehicle:property', '', function( bagName, _, value)
+--     local localVehicle = GetEntityFromStateBagName(bagName)
+--     if DoesEntityExist(localVehicle) then
+--     -- if GetPlayerServerId(cache.playerId) ~= tonumber(Entity(localVehicle).state['vehicle:owner'] or 0) then return end        
+--         lib.setVehicleProperties( localVehicle, value, true )
+--     end
+-- end)
+
+AddStateBagChangeHandler('vrp:garages:setGearType', '', function(bagName, _, value)
+    if GetGameBuildNumber() < 3095 then return end 
+    if not value or not GetEntityFromStateBagName then return end
+
+    while NetworkIsInTutorialSession() do Wait(0) end
+
+    local entityExists, entity = pcall(lib.waitFor, function()
+        local entity = GetEntityFromStateBagName(bagName)
+        if entity > 0 then return entity end
+    end, '', 10000)
+
+    if not entityExists then return end
+
+    if GetEntityType( entity ) ~= 2 then return end
+    local model = GetEntityModel(entity)
+    
+    if IsThisModelABike(model) or IsThisModelACar(model) or IsThisModelAnAmphibiousCar(model) or IsThisModelAQuadbike(model) or IsThisModelAnAmphibiousQuadbike(model) then        
+        SetVehicleManualGear(entity, value == 'GEAR_MANUAL' or value == 1)
+        Wait(200)
+        if NetworkGetEntityOwner(entity) == cache.playerId then
+            SetVehicleManualGear(entity, value == 'GEAR_MANUAL' or value == 1)
+            Entity(entity).state:set('vrp:garages:setGearType', nil, true)
+        end
+    end    
 end)

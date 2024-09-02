@@ -111,6 +111,21 @@ function tvRP.varyThirst(variation)
   end
 end
 
+
+function tvRP.notifyDeath(data)
+
+end
+
+function tvRP.notifyAfterDeath()
+  local source = source
+  if cfg?.clear_inventory_on_death then
+    exports.ox_inventory:ClearInventory( source, {
+      'identification',
+      'mastercard'
+    })
+  end
+end
+
 -- tasks
 
 -- hunger/thirst increase

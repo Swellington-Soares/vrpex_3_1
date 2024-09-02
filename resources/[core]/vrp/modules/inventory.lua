@@ -210,10 +210,10 @@ function vRP.clearInventory(user_id)
   end
 end
 
-AddEventHandler("vRP:playerSpawn", function(user_id, source, first_spawn)
-  if first_spawn then
-    for item, amount in next, cfg.initial_items or {} do
-      vRP.giveInventoryItem(user_id, item, amount, false)
-    end
-  end
-end)
+-- AddEventHandler("vRP:playerSpawn", function(user_id, source, first_spawn)
+--   if first_spawn then
+--     for item, amount in next, cfg.initial_items or {} do
+--       vRP.giveInventoryItem(user_id, item, amount, false)
+--     end
+--   end
+-- end)

@@ -125,19 +125,35 @@ local function CreateNewPlayerScreenRegister()
         Wait(1000)
         while true do
             local input = lib.inputDialog(locale('register_menu_title'), {
-                { type = 'input', label = locale('firstname'), required = true,              min = 4,         max = 20,              default = 'Marcos' },
-                { type = 'input', label = locale('lastname'),  required = true,              min = 4,         max = 20,              default = 'Matheus' },
-                { type = 'date',  label = locale('birthdate'), icon = { 'far', 'calendar' }, required = true, format = "DD/MM/YYYY", default = '2000/02/02' }
+                { type = 'input', label = locale('firstname'), required = true, min = 4, max = 20, default = '' },
+                { type = 'input', label = locale('lastname'),  required = true, min = 4, max = 20, default = '' },
+                {
+                    type = 'select',
+                    label = locale('gender'),
+                    required = true,
+                    icon = 'transgender',
+                    options = {
+                        { value = 'M',  label = 'Masculino' },
+                        { value = 'F',  label = 'Feminino' },
+                        { value = 'TM', label = 'Transmasculino' },
+                        { value = 'TF', label = 'Transfeminino' },
+
+                    },
+                    default = 'M'
+                },
+                { type = 'date', label = locale('birthdate'), icon = { 'far', 'calendar' }, required = true, format = "DD/MM/YYYY", default = '2000/02/02' }
             }, { allowCancel = false })
 
             if input then
                 local fistname = input[1]
                 local lastname = input[2]
-                local date = input[3]
+                local gender = input[3]
+                local date = input[4]
 
                 local created, message, char_id = lib.callback.await('multichar:server:createchar', false, fistname,
                     lastname,
-                    date)
+                    date,
+                    gender)
 
                 lib.notify({
                     position = 'top',
@@ -296,6 +312,17 @@ local function RequestCharsInfo()
     end)
 end
 
+local spawned = false
+
+CreateThread(function()
+    AddEventHandler('playerSpawned', function()
+        print('spawned')
+        spawned = true
+    end)
+    Wait(0)
+end)
+
+
 CreateThread(function()
     ClearFocus()
     DoScreenFadeOut(0)
@@ -303,16 +330,19 @@ CreateThread(function()
     lib.hideRadial()
     lib.hideTextUI()
     lib.hideMenu()
-    Wait(1000)
-    RequestCharsInfo()
-    if GetResourceState('spawnmanager') then
-        AddEventHandler('playerSpawned', RequestCharsInfo)
-    else
-        while not NetworkIsPlayerActive(PlayerId()) do
-            if not IsScreenFadedOut() then DoScreenFadeOut(0) end
-            Wait(0)
+    Wait(0)
+    while not NetworkIsPlayerActive(cache.playerId) do Wait(0) end
+    local timeout = GetGameTimer() + 30000
+    while not spawned do
+        -- if not IsScreenFadedOut() then DoScreenFadeOut(0) end
+        if GetGameTimer() > timeout then
+            -- spawned = true
+            print('timeout?')
         end
         Wait(100)
-        RequestCharsInfo()
     end
+    Wait(0)
+    ShutdownLoadingScreen()
+    ShutdownLoadingScreenNui()
+    RequestCharsInfo()
 end)

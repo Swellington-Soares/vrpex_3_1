@@ -21,6 +21,7 @@ local cfg = {
     load_delay = 60,
     global_delay = 0,
     ping_timeout = 5,
+    clear_inventory_on_death = GetConvarInt('vrp:clear_inventory', 1) == 1,
     -- illegal items (seize)
     -- specify list of "idname" or "*idname" to seize all parametric items
     money_type = {
@@ -54,10 +55,10 @@ local cfg = {
         disable_auto_reload = GetConvarInt('vrp:disable_auto_reload', 0) == 1,
     },
     initial_items = {
-        ['phone'] = 1,
-        ['identity'] = 1,
+        ['phone'] = 1,        
+        ['bandage'] = 3,
+        ['burger'] = 10,
         ['water'] = 10,
-        ['donut'] = 10,
     }
 }
 

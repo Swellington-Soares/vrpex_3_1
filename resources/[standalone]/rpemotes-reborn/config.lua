@@ -1,6 +1,6 @@
 Config = {
     -- Menu Options
-    MenuLanguage = 'en', -- Change the language of the menu here!.
+    MenuLanguage = 'pt', -- Change the language of the menu here!.
     DebugDisplay = false, -- Set this to true to enable some extra prints
     EnableCancelKeybind = true,  -- Set this to false if you have something else on X, and then just use /e c to cancel emotes.
     CancelEmoteKey = 'x', -- Get the button string here https://docs.fivem.net/docs/game-references/input-mapper-parameter-ids/keyboard/
@@ -10,7 +10,7 @@ Config = {
     FavKeybind = 'capital', -- Get the button string here https://docs.fivem.net/docs/game-references/input-mapper-parameter-ids/keyboard/
     SqlKeybinding = false, -- If you have the SQL imported enable this to turn on keybinding.
     NotificationsAsChatMessage = false, -- If you don't like native GTA 5 notifications, you can disable them here to have messages in the chat.
-    Framework = 'qb-core', -- Used for few framework-dependent things. Accepted values: 'qb-core', false
+    Framework = false, -- Used for few framework-dependent things. Accepted values: 'qb-core', false
     Search = true, -- Used to enable or disable the search feature in the menu.
     CancelPreviousEmote = false,     -- If turned on, playing an emote will cancel the previous one.
     DisableControls = false, -- Disable specific controls when menu is open, can be configured in NativeUI.lua:2452 (approximately)
@@ -81,7 +81,7 @@ Config = {
     -- Preview Ped Options
     PreviewPed = true, -- Shows a preview of the emote on the player's ped next to the emote menu. Note that resmon will increase when this when emotes are being previewed.
 
-    CheckForUpdates = true
+    CheckForUpdates = false
 }
 
 Config.KeybindKeys = {

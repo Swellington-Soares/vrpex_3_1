@@ -16,7 +16,7 @@ local DATE_COLUMN = {
 }
 
 
-function vRP.createNewCharacter(user_id, firstname, lastname, registration, phone, bithdate, money, inventory, datatable)
+function vRP.createNewCharacter(user_id, firstname, lastname, gender, registration, phone, bithdate, money, inventory, datatable)
     assert(type(money) == "table", 'Money param need be a table like { cash = 0, bank = 0 }')
     assert(type(inventory) == "table",
         'inventory param need be a table like { [1] = { item = \'xxx\', amount = 1, ... } }')
@@ -27,7 +27,7 @@ function vRP.createNewCharacter(user_id, firstname, lastname, registration, phon
     datatable = json.encode(datatable)
 
     return vRP.insert('vRP/addPlayer',
-        { user_id, firstname, lastname, registration, phone, bithdate, money, inventory, datatable })
+        { user_id, firstname, lastname, gender, registration, phone, bithdate, money, inventory, datatable })
 end
 
 function vRP.deleteCharacter(char_id)

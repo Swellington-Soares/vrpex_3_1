@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading Screen</title>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <style>
+        body {
+            padding: 0 !important;
+            margin: 0 !important;
+            background-image: url('1.png');
+            background-size: 1920px 1080px;
+            background-repeat: no-repeat;
+            background-position: top;
+            overflow: hidden;
+        }
+
+        .logo {
+            position: absolute;
+            right: -5em;
+            top: 1em;
+            transform: translateX(-50%);
+        }
+
+        .logo>img {
+            max-width: 10em;
+            border-radius: 50%;
+            filter: drop-shadow(0 0 1em white);
+            border: 0.5em solid black;
+        }
+
+        .progress-container {
+            position: absolute;
+            bottom: 0;
+            font-weight: bold;
+            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+            font-size: 1.5em;
+            background-color: rgba(0, 0, 0, 0.938);
+            width: 100vw;
+            height: 1em;
+            padding-top: 0.3em;
+            padding-bottom: 0.3em;
+            color: white;
+        }
+
+        .progress {
+            height: 100%;
+            width: 50%;
+            background-color: yellow;
+        }
+
+        .carrinho {
+            width: 4em;
+            height: 2em;
+            position: absolute;
+            transform: translate(-100%, -100%);
+            left: 50%;
+            background-image: url("car.png");
+            background-size: cover;
+        }
+
+        #app {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            padding: 0;
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        {{ progress }}
+        <div class="logo"><img src="logo.jpg" alt="" srcset=""></div>
+        <div class="progress-container">
+            <span
+                style="z-index: 100; padding-left: 0.5em; position: absolute; bottom: 0.2em; text-shadow: 0 0 0.5em black;">{{
+                message }}</span>
+            <div class="carrinho" :style="{left: `${progress}%`}"></div>
+            <div class="progress" :style="{width: `${progress}%`}">
+            </div>
+        </div>
+    </div>
+    <script>
+        const { createApp, ref, onMounted, computed } = Vue
+        createApp({
+            setup() {
+                const message = ref("Iniciando...")
+                const progress = ref(0)
+                let count = 1;  // Total de funções a serem carregadas
+                let count2 = 0; // Contador para funções específicas (ex: mapa)
+                let totalProgress = 0; // Progresso acumulado
+
+                const handlers = {
+                    startInitFunctionOrder(data) {
+                        count = data.count;
+                    },
+                    initFunctionInvoking(data) {
+                        const currentProgress = (data.idx / count);
+                        totalProgress += currentProgress / count;
+                        message.value = `Carregando: ${data.name ? data.name : '...'}`
+                        progress.value = totalProgress / 100.0;
+                    },
+                    startDataFileEntries(data) {
+                        count = data.count;
+                    },
+                    performMapLoadFunction(data) {
+                        ++count2;
+                        const currentProgress = ((count + count2) / count);
+                        totalProgress += currentProgress / (count + count2);
+                        message.value = `Carregando: ${data.name ? data.name : '...'}`
+                        progress.value = totalProgress / 100.0;
+                    },
+                    onLogLine(data) {
+                        message.value = `Criando ambiente: ${data.message} ...`
+                        progress.value = 100
+                    }
+                }
+
+
+                onMounted(() => {
+                    window.addEventListener('message', ({ data }) => {                        
+                        (handlers[data.eventName] || function () { })(data);
+                        console.log(JSON.stringify(data));
+                    })
+                    const audio = new Audio('music.mp3')
+                    audio.volume = 0.2
+                    audio.play()
+                })
+
+                return {
+                    message,
+                    progress
+                }
+            }
+        }).mount('#app')
+    </script>
+</body>
+
+</html>

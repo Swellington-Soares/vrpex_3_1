@@ -3489,8 +3489,7 @@ local WeaponList = {
                 name = `WCT_CLIP1`,
                 text = 'Carregador padrão'
             }
-        }
-        ,
+        },
             {
                 name = `COMPONENT_CERAMICPISTOL_CLIP_02`,
                 label = {

@@ -283,12 +283,9 @@ end
 -- events
 
 AddEventHandler("playerSpawned", function()
-  --temos que desabiltar o autospawn aqui ou vai bugar muita coisa, vamos deixar o vRP gerenciar.
-  if GetResourceState('spawnmanager') == 'started' then
-    exports.spawnmanager:setAutoSpawn(false)   
-  end
-
-  -- TriggerServerEvent("vRPcli:playerSpawned")
+  lib.print.info('playerSpawned')
+  exports.spawnmanager:setAutoSpawn(false)   
+  TriggerServerEvent("vRPcli:playerSpawned")
 end)
 
 function vRP.setPedFlags(value)
@@ -300,13 +297,8 @@ function vRP.setPedFlags(value)
   SetPedConfigFlag(value, 229, true)
 end
 
-
--- AddStateBagChangeHandler('isLoggedIn', nil, function (bagName, key, value, reserved)
---   print(bagName, key, value, reserved)  
--- end)
-
-
--- RegisterCommand("pped", function()
---   lib.requestModel(-427436319)
---   CreatePed(24, -427436319, GetEntityCoords(PlayerPedId()), false, true)
+-- AddEventHandler('onClientResourceStart', function()
+--   print('onClientMapStart')
+--   exports.spawnmanager:setAutoSpawn(true)
+--   exports.spawnmanager:forceRespawn()  
 -- end)

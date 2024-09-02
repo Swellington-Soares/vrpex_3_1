@@ -15959,7 +15959,7 @@ local Vehicles = {
 local vehmeta = {}
 
 function vehmeta:GetVehicleInfoByModel(model)
-    if type(model) == "string" then model = joaat(model) end
+    if type(model) == "string" then model = joaat(model:lower()) end
     return self[model]
 end
 

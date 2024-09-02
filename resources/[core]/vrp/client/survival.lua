@@ -364,10 +364,11 @@ comaKey = lib.addKeybind({
   disabled = true,
   onPressed = function(self)
     if in_coma and coma_left < 1 then
-      in_coma = false
+      in_coma = false            
       self:disable(true)
       lib.hideTextUI()
-      RunDeathScene()
+      vRPserver._notifyAfterDeath()
+      RunDeathScene()      
     end
   end
 })
@@ -378,8 +379,9 @@ AddEventHandler('gameEventTriggered', function(name, data)
     local vict = data[1]
     -- local attacker = data[2]
     local isFatal = data[6] == 1
-    if vict == ped and isFatal and not in_coma then
+    if vict == ped and isFatal and not in_coma then    
       KillPlayer()
+      vRPserver._notifyDeath( data )
     end
   end
 end)

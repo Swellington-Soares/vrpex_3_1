@@ -58,6 +58,10 @@ dependencies {
 data_file 'FIVEM_LOVES_YOU_4B38E96CC036038F' 'events.meta'
 data_file 'FIVEM_LOVES_YOU_341B23A2F0E0F131' 'popgroups.ymt'
 
+
+-- loadscreen 'loading/index.html'
+-- loadscreen_manual_shutdown 'yes'
+
 files {
   'cfg/**/*.lua',
   'ui/**',
@@ -72,4 +76,5 @@ files {
   'lib/Proxy.lua',
   'lib/Debug.lua',
   'lib/Tools.lua',
+  'loading/**'
 }

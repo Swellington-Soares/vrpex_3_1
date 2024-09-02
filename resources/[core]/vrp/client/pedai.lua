@@ -53,11 +53,7 @@ CreateThread(function()
     Citizen.InvokeNative(joaat('ADD_TEXT_ENTRY'), 'FE_THDR_GTAO', mapText)
 
     while true do 
-        SetMaxWantedLevel(0)
-        SetWantedLevelDifficulty(cache.playerId, 0)
-        SetPlayerWantedLevel(cache.playerId, 0, false)
-        SetPlayerWantedLevelNow(cache.playerId, false)
-        ClearPlayerWantedLevel(cache.playerId)
+        SetMaxWantedLevel(0)       
         SetPlayerCanDoDriveBy(cache.playerId, cfg.disables.driveby)
         NetworkSetLocalPlayerSyncLookAt(true)        
         Wait(3000)

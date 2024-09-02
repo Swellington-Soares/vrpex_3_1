@@ -143,7 +143,9 @@ AddStateBagChangeHandler('handcuffed', ('player:%s'):format(cache.serverId), fun
   SetPedConfigFlag(cache.ped, 186, value)
   SetPedConfigFlag(cache.ped, 188, value)
   SetPedConfigFlag(cache.ped, 188, value)
+  LocalPlayer.state.canEmote = not value
   if value then
+    
     beforeCuffDrawable = { GetPedDrawableVariation(cache.ped, 7), GetPedTextureVariation(cache.ped, 7) }
     local model = GetEntityModel(cache.ped)
     if model == `mp_m_freemode_01` or mode == `mp_f_freemode_01` then
@@ -155,7 +157,7 @@ AddStateBagChangeHandler('handcuffed', ('player:%s'):format(cache.serverId), fun
     if not handcuffThreadStarted then
       StartHandcuffThread()
     end
-  else
+  else    
     tvRP.stopAnim(true)
     SetPedStealthMovement(PlayerPedId(), false, "")
     UncuffPed(cache.ped)

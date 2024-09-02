@@ -23,7 +23,7 @@ vRP.prepare('vRP/addPlayerVehicle', 'CALL `add_player_vehicle`(?, ?, ?)')
 vRP.prepare('vRP/removeVehicleFromPlayer', 'DELETE FROM player_vehicles WHERE vehicle = ? AND player_id = ?')
 vRP.prepare('vRP/updatePlayerVehicleProperties', 'UPDATE player_vehicles SET properties = ? WHERE vehicle = ? AND player_id = ?')
 vRP.prepare('vRP/transferPlayerVehicle', 'CALL `transfer_player_vehicle(?, ?, ?)`')
-vRP.prepare('vRP/getPlayerVehicleBy', 'SELECT vehicle, seized, plate, garage, created_at FROM player_vehicles WHERE ?? = ? and player_id = ?')
+vRP.prepare('vRP/getPlayerVehicleBy', 'SELECT vehicle, seized, plate, garage, created_at FROM player_vehicles WHERE ?? = ?')
 vRP.prepare('vRP/isPlayerVehicleSeized', 'SELECT seized FROM player_vehicles WHERE player_id = ? and vehicle = ?')
 vRP.prepare('vRP/getPlayerVehicleByPlate', 'SELECT vehicle, seized, plate, garage, created_at FROM player_vehicles WHERE plate = ?')
 vRP.prepare('vRP/getPlayerVehicleProps', 'SELECT properties	FROM player_vehicles WHERE player_id = ? AND vehicle = ?')
@@ -33,8 +33,8 @@ vRP.prepare('vRP/removeVehicleFromPlayerByPlate', 'DELETE FROM player_vehicles W
 
 vRP.prepare('vRP/addPlayer',
 [[
-INSERT INTO players (user_id, firstname, lastname, `registration`, phone, birth_date, money, inventory, datatable)
-VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+INSERT INTO players (user_id, firstname, lastname, gender, `registration`, phone, birth_date, money, inventory, datatable)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 ]])
 
 vRP.prepare('vRP/deletePlayer', 'UPDATE players SET deleted_at = CURRENT_TIMESTAMP() WHERE id = ?')

@@ -10,7 +10,6 @@ shared_scripts {
     'config.lua'
 }
 
-
 server_scripts {
     'server/main.lua'
 }
