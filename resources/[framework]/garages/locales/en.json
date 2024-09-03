@@ -1,11 +1,12 @@
 {
     "error": {
+      "no_user": "Problema na verificação de identidade",
       "no_vehicles": "There are no vehicles in this location!",
       "not_depot": "Your vehicle is not in depot",
       "not_owned": "This vehicle can't be stored",
       "not_correct_type": "You can't store this type of vehicle here",
       "not_enough": "Not enough money",
-      "no_garage": "None",
+      "no_garage": "Garage unavailable",
       "vehicle_occupied": "You can't store this vehicle as it is not empty",
       "vehicle_not_tracked": "Could not track vehicle",
       "no_spawn": "Area too crowded"
@@ -22,6 +23,7 @@
       "house": "House"
     },
     "info": {
+      "title": "Garage",
       "car_e": "E - Garage",
       "sea_e": "E - Boathouse",
       "air_e": "E - Hangar",

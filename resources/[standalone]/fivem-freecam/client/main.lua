@@ -64,15 +64,19 @@ local function UpdateCamera()
   TriggerEvent('freecam:onTick')
 end
 
+local function FreeUpdateTick()
+  Citizen.CreateThread(function ()
+    while IsFreecamActive() do
+      Wait(0)
+      UpdateCamera()
+    end
+  end)
+end
+
 -------------------------------------------------------------------------------
-
-Citizen.CreateThread(function ()
-  while true do
-    Citizen.Wait(0)
-    UpdateCamera()
-  end
+AddEventHandler('freecam:onEnter', function()
+  FreeUpdateTick()
 end)
-
 --------------------------------------------------------------------------------
 
 -- When the resource is stopped, make sure to return the camera to the player.

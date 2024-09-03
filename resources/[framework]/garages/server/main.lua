@@ -7,6 +7,7 @@ local GarageConfig = Config
 
 --#region VARIABLES
 local OutsideVehicles = {}
+local command_lock = {}
 
 --#endregion
 
@@ -24,15 +25,70 @@ lib.callback.register('garages:server:isSpawnOk', function (_, plate)
     return not ( OutsideVehicles[plate] and DoesEntityExist( OutsideVehicles[plate].entity ))
 end)
 
+
+lib.callback.register('garages:server:depotVehicle', function (source, vehNet, plate, class, garageId, props)
+    if command_lock[ source ] then return false end
+    command_lock[ source ] = true
+    local user_id = vRP.getUserId( source )
+    local char_id = vRP.getPlayerTable( user_id )?.id
+    if not ( user_id and char_id ) then return false, locale('error.no_user') end
+    local vehicle = NetworkGetEntityFromNetworkId(vehNet)
+
+
+    if Entity(vehicle).state?.is_service then
+
+        if OutsideVehicles[plate] then
+            OutsideVehicles[plate] = nil        
+        end
+
+        SetTimeout(2000, function ()
+            DeleteEntity( vehicle )
+        end)
+
+        return true
+    end
+
+    
+    local garageInfo = GarageConfig.Garages[garageId]
+    if garageInfo?.category and not table.contains(garageInfo?.category, class) then
+        return false, locale('error.not_correct_type')
+    end
+
+    local ownerId = Entity(vehicle).state?.owner
+    if ownerId and ownerId ~= source then return false, locale('error.not_owned') end
+
+    if OutsideVehicles[plate] then
+        OutsideVehicles[plate] = nil        
+    end
+
+    MySQL.update.await('UPDATE player_vehicles SET properties=?, garage=? WHERE plate = ?', { json.encode(props or {}), garageId, plate })
+
+    SetTimeout(2000, function ()
+        DeleteEntity(vehicle)
+    end)
+
+    command_lock[ source ] = nil
+
+    return true
+end)
+
+
 lib.callback.register('garages:server:getVehicles', function(source, garageId)
     local user_id = vRP.getUserId(source)
-    if not user_id then return false end
+    if not user_id then 
+        return false,  locale('error.no_user')
+    end
     local charId = vRP.getPlayerId(user_id)
+
+    if not charId then
+        return false,  locale('error.no_user')
+    end
+
     local vehicles
 
     local garageInfo = GarageConfig.Garages[garageId]
     
-    if not garageInfo then return false, locale('garage_closed') end
+    if not garageInfo then return false, locale('error.no_garage') end
     if garageInfo?.type ~= 'service' then
         if garageInfo?.type ~= 'depot' then
             if not GarageConfig.SharedGarages  then
@@ -67,7 +123,7 @@ lib.callback.register('garages:server:getVehicles', function(source, garageId)
         end
     end
 
-    if not vehicles or #vehicles == 0 then return false, locale('no_vehicle') end
+    if not vehicles or #vehicles == 0 then return false, locale('error.no_vehicles') end
 
     for k, data in next, vehicles do
         local vehicleInfo = VehicleListAPI:GetVehicleInfoByModel(data.vehicle)

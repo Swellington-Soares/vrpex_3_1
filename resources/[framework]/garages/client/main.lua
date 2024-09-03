@@ -48,9 +48,11 @@ end
 -- end)
 
 local function OpenGarageMenu(garageId)
-    lib.callback('garages:server:getVehicles', false, function(vehicles)
+    lib.print.info(garageId)
+    lib.callback('garages:server:getVehicles', false, function(vehicles, errorMessage)
+        lib.print.info(vehicles, errorMessage)
         local garageInfo = GarageConfig.Garages[garageId]
-        if #vehicles > 0 then
+        if vehicles and type(vehicles) == "table" and #vehicles > 0 then
             SetNuiFocus(true, true)
             lib.print.info(vehicles)
             SendNUIMessage({
@@ -58,6 +60,15 @@ local function OpenGarageMenu(garageId)
                 garageLabel = garageInfo.label,
                 vehicles = vehicles,
                 baseUrl = GarageConfig.BaseImageUrl
+            })
+        else
+            lib.notify({
+                position = 'top-right',
+                title = locale('info.title'),
+                description = errorMessage,
+                type = 'error',
+                duration = 5000,
+                showDuration = true
             })
         end
     end, garageId)
@@ -79,9 +90,22 @@ end
 local function onZoneInside(self)
     if IsControlJustPressed(0, 38) then
         local garage = self.garageId
-        local vehicle = GetVehiclePedIsUsing(cache.ped, false)
+        local vehicle = GetVehiclePedIsIn(cache.ped, false)
         if vehicle ~= 0 then
-            lib.print.info("Hello")
+            lib.callback('garages:server:depotVehicle', false, function(result, errorMessage)
+                if result then
+                    CheckPlayers(vehicle)
+                elseif errorMessage then
+                    lib.notify({
+                        title = GarageConfig.Garages[self.garageId]?.label or locale('info.title'),
+                        description = errorMessage,
+                        type = 'error',
+                        duration = 3000,
+                        showDuration = true,
+                        position = 'top-right'
+                    })
+                end
+            end, VehToNet(vehicle), GetVehicleNumberPlateText(vehicle), GetVehicleClass(vehicle), self.garageId, Entity(vehicle).state?.owner and lib.getVehicleProperties(vehicle) or false)
         else
             OpenGarageMenu(garage)
         end
@@ -106,7 +130,7 @@ local function CreateZone(garageId, garageInfo, gtype)
     local zone = lib.zones.sphere({
         coords = garageInfo.takeVehicle,
         radius = garageInfo.radius or 5.0,
-        debug = true,
+        debug = false,
         garageId = garageId,
         gtype = garageInfo?.type or gtype,
         inside = onZoneInside,
@@ -338,11 +362,11 @@ AddEventHandler('playerSpawned', function()
     CreateGarages()
 end)
 
--- AddEventHandler('onResourceStart', function(res)
---     if res ~= GetCurrentResourceName() then return end
---     Wait(1000)
---     CreateGarages()
--- end)
+AddEventHandler('onResourceStart', function(res)
+    if res ~= GetCurrentResourceName() then return end
+    Wait(1000)
+    CreateGarages()
+end)
 
 AddEventHandler('onResourceStop', function(resourceName)
     if resourceName == GetCurrentResourceName() then
