@@ -1,5 +1,3 @@
-local cfg = module("cfg/base")
-
 -- api
 
 function vRP.generateStringNumber(format) -- (ex: DDDLLL, D => digit, L => letter)
@@ -21,8 +19,27 @@ function vRP.generateStringNumber(format) -- (ex: DDDLLL, D => digit, L => lette
   return number
 end
 
-function vRP.getPlayerIdentity(user_id)
-  if not next(vRP.user_tables[user_id] or {}) then return end
+function vRP.getPlayerIdentity(user_id, offline)
+  if not next(vRP.user_tables[user_id] or {}) then
+    if offline then
+      local character = vRP.getCharacter(user_id, false)
+      if character then
+        local birth_date = os.date("%d-%m-%Y", character.birth_date // 1000)
+        return {
+          user_id = character.user_id,
+          char_id = character.id,
+          phone = character.phone,
+          registration = character.registration,
+          firstname = character.firstname,
+          birth_date = birth_date,
+          lastname = character.lastname,
+          license = character.license,
+          gender = character.gender
+        }
+      end
+    end
+    return nil
+  end
   local xPlayer = vRP.user_tables[user_id]
   local birth_date = os.date("%d-%m-%Y", xPlayer.birth_date // 1000)
   return {
@@ -33,8 +50,12 @@ function vRP.getPlayerIdentity(user_id)
     firstname = xPlayer.firstname,
     birth_date = birth_date,
     lastname = xPlayer.lastname,
-    license = xPlayer.license
+    license = xPlayer.license,
+    gender = xPlayer.gender
   }
-
 end
 
+
+function vRP.getUserIdentity(user_id)
+  return vRP.getPlayerIdentity(user_id, false)
+end

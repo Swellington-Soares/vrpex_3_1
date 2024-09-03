@@ -92,10 +92,16 @@ function vRP.addUserGroup(user_id, group, grade)
         gtype = ngroup._config.gtype
       end
       TriggerEvent("vRP:playerJoinGroup", user_id, group, gtype, user_groups[group].rank, user_groups[group]['duty'])
-      -- local src = vRP.getUserSource(user_id)
-      -- if src then
-      --   TriggerClientEvent('vRP:client:UpdateGroups', src, user_groups[group])
-      -- end
+      local src = vRP.getUserSource(user_id)
+      if src then
+        TriggerClientEvent("vRP:updateGroupInfo", src, {
+          group = group,
+          type = gtype,
+          rank = user_groups[group]?.rank or 0,
+          duty = user_groups[group]['duty'],
+          action = 'enter'
+        })
+      end
     end
   end
 end
@@ -108,12 +114,12 @@ function vRP.getUserGroupByType(user_id, gtype)
     local kgroup = groups[k]
     if kgroup then
       if kgroup._config and kgroup._config.gtype and kgroup._config.gtype == gtype then
-        return k
+        return k, v
       end
     end
   end
 
-  return ""
+  return nil
 end
 
 -- return list of connected users by group
@@ -158,11 +164,19 @@ function vRP.removeUserGroup(user_id, group)
   end
   --"vRP:playerJoinGroup", user_id, group, gtype, user_groups[group].rank, user_groups[group]['duty']
   TriggerEvent("vRP:playerLeaveGroup", user_id, group, gtype, user_groups[group]?.rank or 0, user_groups[group]?.duty)
-  user_groups[group] = nil -- remove reference
-  -- local src = vRP.getUserSource(user_id)
-  -- if src then
-  --   TriggerClientEvent('vRP:client:UpdateGroups', src, user_groups[group])
-  -- end
+  -- remove reference
+  local src = vRP.getUserSource(user_id)
+  if src then
+    TriggerClientEvent("vRP:updateGroupInfo", src, {
+      group = group,
+      type = gtype,
+      rank = user_groups[group]?.rank or 0,
+      duty = user_groups[group]['duty'],
+      action = 'leave'
+    })
+  end
+
+  user_groups[group] = nil
 end
 
 -- check if the user has a specific group
@@ -381,6 +395,10 @@ function vRP.userGroupPromote(user_id, group)
   local user_groups = vRP.getUserGroups(user_id)
   if user_groups?[group]?.rank < max then
     user_groups[group].rank = user_groups[group].rank + 1
+    local src = vRP.getUserSource(user_id)
+    if src then
+      TriggerClientEvent("vRP:updateGroupRank", src, { group = group, rank = user_groups[group].rank })
+    end
     return true
   end
 
@@ -392,6 +410,10 @@ function vRP.userGroupDemote(user_id, group)
   local user_groups = vRP.getUserGroups(user_id)
   if user_groups?[group]?.rank > 1 then
     user_groups[group].rank = user_groups[group].rank - 1
+    local src = vRP.getUserSource(user_id)
+    if src then
+      TriggerClientEvent("vRP:updateGroupRank", src, { group = group, rank = user_groups[group].rank })
+    end
     return true
   end
 
@@ -401,7 +423,7 @@ end
 function vRP.isGroupGradeBoss(group, grade)
   grade = tonumber(grade)
   local rankInfo = groups[group]?._config?.grades[grade]
-  return rankInfo and (grade >= groups[group]?._config?.grades or rankInfo?.isboss) 
+  return rankInfo and (grade >= groups[group]?._config?.grades or rankInfo?.isboss)
 end
 
 AddEventHandler('vrp:login', function(source, user_id, char_id, first_spawn)
