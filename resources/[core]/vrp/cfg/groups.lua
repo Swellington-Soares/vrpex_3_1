@@ -1,4 +1,3 @@
-
 local cfg = {}
 
 --vamos mudar depois para coloca cargos
@@ -14,7 +13,7 @@ local cfg = {}
 
 cfg.groups = {
   ["superadmin"] = {
-    _config = {onspawn = function(player) vRPclient._notify(player,"You are superadmin.") end},
+    _config = { onspawn = function(player) vRPclient._notify(player, "You are superadmin.") end },
     "player.group.add",
     "player.group.remove",
     "player.givemoney",
@@ -52,9 +51,9 @@ cfg.groups = {
     _config = {
       title = "Police",
       gtype = "job",
-      onjoin = function(player) vRPclient._setCop(player,true) end,
-      onspawn = function(player) vRPclient._setCop(player,true) end,
-      onleave = function(player) vRPclient._setCop(player,false) end,
+      onjoin = function(player) vRPclient._setCop(player, true) end,
+      onspawn = function(player) vRPclient._setCop(player, true) end,
+      onleave = function(player) vRPclient._setCop(player, false) end,
       grades = {
         [1] = { name = 'Recruta', },
         [2] = { name = 'Capitão', },
@@ -98,6 +97,19 @@ cfg.groups = {
     "vehicle.replace",
     "repair.service"
   },
+  ['realestate'] = {
+    _config = {
+      title = 'Imobiliária',
+      gtype = 'job',
+      grades = {
+        [1] = { name = 'Junior', salary = 100 },
+        [2] = { name = 'Vendedor I', salary = 150 },
+        [3] = { name = 'Vendedor II', salary = 200 },
+        [4] = { name = 'Gerente', salary = 250 },
+        [5] = { name = 'Diretor', salary = 300, isboss = true },
+      }
+    }
+  },
   ["taxi"] = {
     _config = {
       title = "Taxi",
@@ -105,12 +117,6 @@ cfg.groups = {
     },
     "taxi.service"
   },
-  ["citizen"] = {
-    _config = {
-      title = "Citizen",
-      gtype = "job"
-    }
-  }
 }
 
 -- groups are added dynamically using the API or the menu, but you can add group when an user join here
@@ -122,4 +128,3 @@ cfg.users = {
 }
 
 return cfg
-
