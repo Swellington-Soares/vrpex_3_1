@@ -7,6 +7,31 @@ local vRPConfig = require('@vrp.cfg.base')
 local players = {}
 local firstcreation = {}
 
+local function GiveInitialItems(source)
+    if vRPConfig?.initial_items then
+        local user_id = vRP.getUserId( source )
+        for item, amount in next, vRPConfig?.initial_items or {} do
+            print(item, amount)
+            if item == 'phone' then
+                local phoneNumber = vRP.getPlayerTable(user_id)?.phone
+                if phoneNumber then
+                    pcall(
+                        function()
+                            return exports.ox_inventory:AddItem(source, item, 1, {
+                                number = phoneNumber,
+                                description = 'Número: ' .. phoneNumber
+                            })
+                        end)
+                end
+            else
+                pcall(function()
+                    return exports.ox_inventory:AddItem(source, item, amount)
+                end)
+            end
+        end
+    end
+end
+
 lib.callback.register('multichar:server:requestCharsInfo', function(source)
     local user_id = vRP.getUserId(source)
     if not user_id then
@@ -83,27 +108,7 @@ lib.callback.register("multichar:server:createchar", function(source, firstname,
             description = ('Data de Nascimento: %s\nSexo: %s\n'):format(os.date("%d/%m/%Y", date // 1000), gender)
         })
     end)
-
-    if vRPConfig?.initial_items then
-        for item, amount in next, vRPConfig?.initial_items or {} do
-            print(item, amount)
-            if item == 'phone' then
-                local phoneNumber = vRP.getPlayerTable(user_id)?.phone or "NO SIGNAL"
-                pcall(
-                    function()
-                        return exports.ox_inventory:AddItem(source, item, 1, {
-                            number = phoneNumber,
-                            description = 'Número: ' .. phoneNumber
-                        })
-                    end)
-            else
-                pcall(function()
-                    return exports.ox_inventory:AddItem(source, item, amount)
-                end)
-            end
-        end
-    end
-
+    GiveInitialItems(source)    
     return logged, "Personagem criado com sucesso.", char_id
 end)
 
