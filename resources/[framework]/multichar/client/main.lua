@@ -16,6 +16,7 @@ CreateThread(function()
     LocalPlayer.state.canEmote = false
     TriggerServerEvent('vrp:player:ready', false)
     while in_char_creator do
+        SetFrontendActive(false)
         HideHudAndRadarThisFrame()
         DisableAllControlActions(0)
         DisableAllControlActions(1)
@@ -53,6 +54,7 @@ local function SpawnPlayer(x, y, z, heading, oldcam)
     ClearFocus()
     LocalPlayer.state:set('isLoggedIn', true, true)
     TriggerServerEvent('vrp:player:ready', true)
+    TriggerEvent('playerSpawned')
     FreezeEntityPosition(ped, false)
     ClearPedTasksImmediately(ped)
     LocalPlayer.state.canEmote = true
@@ -312,17 +314,6 @@ local function RequestCharsInfo()
     end)
 end
 
-local spawned = false
-
-CreateThread(function()
-    AddEventHandler('playerSpawned', function()
-        print('spawned')
-        spawned = true
-    end)
-    Wait(0)
-end)
-
-
 CreateThread(function()
     ClearFocus()
     DoScreenFadeOut(0)
@@ -331,16 +322,7 @@ CreateThread(function()
     lib.hideTextUI()
     lib.hideMenu()
     Wait(0)
-    while not NetworkIsPlayerActive(cache.playerId) do Wait(0) end
-    local timeout = GetGameTimer() + 30000
-    while not spawned do
-        -- if not IsScreenFadedOut() then DoScreenFadeOut(0) end
-        if GetGameTimer() > timeout then
-            -- spawned = true
-            print('timeout?')
-        end
-        Wait(100)
-    end
+    while not NetworkIsPlayerActive(cache.playerId) do Wait(100) end
     Wait(0)
     ShutdownLoadingScreen()
     ShutdownLoadingScreenNui()

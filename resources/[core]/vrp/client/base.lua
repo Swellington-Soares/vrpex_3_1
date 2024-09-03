@@ -281,10 +281,7 @@ function tvRP.setMovement(dict)
 end
 
 -- events
-
 AddEventHandler("playerSpawned", function()
-  lib.print.info('playerSpawned')
-  exports.spawnmanager:setAutoSpawn(false)   
   TriggerServerEvent("vRPcli:playerSpawned")
 end)
 

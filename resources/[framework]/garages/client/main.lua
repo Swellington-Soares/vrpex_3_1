@@ -24,7 +24,7 @@ local function CheckPlayers(vehicle)
         if seat then
             TaskLeaveVehicle(seat, vehicle, 0)
         end
-    end        
+    end
 end
 
 local function IsVehicleAllowed(classList, vehicle)
@@ -47,7 +47,7 @@ end
 --     cb('ok')
 -- end)
 
-local function OpenGarageMenu(garageId)    
+local function OpenGarageMenu(garageId)
     lib.callback('garages:server:getVehicles', false, function(vehicles)
         local garageInfo = GarageConfig.Garages[garageId]
         if #vehicles > 0 then
@@ -117,12 +117,11 @@ local function CreateZone(garageId, garageInfo, gtype)
     if gtype ~= 'house' then
         garageZones[#garageZones + 1] = zone
     else
-        houseGarageZones[#houseGarageZones+1] = zone
+        houseGarageZones[#houseGarageZones + 1] = zone
     end
 end
 
 local function DestrouAllZone()
-    
     for _, zone in next, garageZones or {} do
         zone:remove()
     end
@@ -146,10 +145,15 @@ local function RemoveHouseZone(zoneName)
 end
 
 local function CreateGarages()
-    for id, info in next, GarageConfig.Garages or {} do
-        CreateZone(id, info)
-        CreateGarageBlip(info)
-    end
+    CreateThread(function()
+        if #garageZones ~= 0 then return end
+        for id, info in next, GarageConfig.Garages or {} do
+            CreateZone(id, info)
+            CreateGarageBlip(info)
+        end
+        
+        Wait(0)
+    end)
 end
 
 
@@ -157,7 +161,7 @@ function GetSpawnPoint(garage)
     local location = nil
     if #garage.spawnPoint > 1 then
         local maxTries = #garage.spawnPoint
-        for i = 1, maxTries do                        
+        for i = 1, maxTries do
             local chosenSpawnPoint = garage.spawnPoint[i]
             local isOccupied = IsPositionOccupied(
                 chosenSpawnPoint.x,
@@ -182,16 +186,15 @@ function GetSpawnPoint(garage)
     end
     if not location then
         lib.notify({
-           title = garage.label,
-           description = locale('error.vehicle_occupied'),
-           duratin = 5000,
-           position = 'top-right',
-           type = 'error'
-       })        
+            title = garage.label,
+            description = locale('error.vehicle_occupied'),
+            duratin = 5000,
+            position = 'top-right',
+            type = 'error'
+        })
     end
     return location
 end
-
 
 local function TrySpawnVehicle(vehicleData)
     lib.print.info(vehicleData)
@@ -202,7 +205,7 @@ local function TrySpawnVehicle(vehicleData)
     if not spawnPoint then return end
     --verifica se já foi spawnado
     lib.callback('garages:server:isSpawnOk', false, function(isOk)
-        if not isOk then 
+        if not isOk then
             return lib.notify({
                 title = garage.label,
                 description = locale('error.vehicle_occupied'),
@@ -213,7 +216,6 @@ local function TrySpawnVehicle(vehicleData)
         end
 
         lib.callback("garages:server:spawnVehicle", false, function(result, message)
-            
             if not result then
                 return lib.notify({
                     title = garage.label,
@@ -232,11 +234,10 @@ local function TrySpawnVehicle(vehicleData)
                 type = 'success'
             })
 
-            local vehicle = NetToVeh( result )
+            local vehicle = NetToVeh(result)
 
             SetVehicleRadioEnabled(vehicle, false)
             SetVehRadioStation(vehicle, 'OFF')
-
         end, vehicleData.vehicle, vehicleData.plate, garage, spawnPoint)
     end, vehicleData.plate)
 end
@@ -250,19 +251,19 @@ local function CloseGarage()
 end
 
 
-RegisterNUICallback('close', function (_, cb)
+RegisterNUICallback('close', function(_, cb)
     cb('ok')
     CloseGarage()
 end)
 
-RegisterNUICallback('spawn', function (body, cb)
+RegisterNUICallback('spawn', function(body, cb)
     cb('ok')
     CloseGarage()
     TrySpawnVehicle(body)
 end)
 
 
-RegisterNetEvent('garages:client:setHouseGarage', function(house, hasKey) 
+RegisterNetEvent('garages:client:setHouseGarage', function(house, hasKey)
     if not house then return end
     local formattedHouseName = string.gsub(string.lower(house), ' ', '')
     local zoneName = 'house_' .. formattedHouseName
@@ -273,7 +274,7 @@ RegisterNetEvent('garages:client:setHouseGarage', function(house, hasKey)
             RemoveHouseZone(zoneName)
         end
     else
-       lib.callback('garages:server:getHouseGarage', false, function(garageInfo) -- create garage if not exist
+        lib.callback('garages:server:getHouseGarage', false, function(garageInfo) -- create garage if not exist
             local garageCoords = garageInfo.garage
             Config.Garages[formattedHouseName] = {
                 houseName = house,
@@ -299,7 +300,8 @@ RegisterNetEvent('garages:client:houseGarageConfig', function(houseGarages)
                 houseName = garageConfig.name,
                 takeVehicle = vector3(garageConfig.takeVehicle.x, garageConfig.takeVehicle.y, garageConfig.takeVehicle.z),
                 spawnPoint = {
-                    vector4(garageConfig.takeVehicle.x, garageConfig.takeVehicle.y, garageConfig.takeVehicle.z, garageConfig.takeVehicle.w)
+                    vector4(garageConfig.takeVehicle.x, garageConfig.takeVehicle.y, garageConfig.takeVehicle.z,
+                        garageConfig.takeVehicle.w)
                 },
                 label = garageConfig.label,
                 type = 'house',
@@ -316,7 +318,8 @@ RegisterNetEvent('garages:client:addHouseGarage', function(house, garageInfo) --
         houseName = house,
         takeVehicle = vector3(garageInfo.takeVehicle.x, garageInfo.takeVehicle.y, garageInfo.takeVehicle.z),
         spawnPoint = {
-            vector4(garageInfo.takeVehicle.x, garageInfo.takeVehicle.y, garageInfo.takeVehicle.z, garageInfo.takeVehicle.w)
+            vector4(garageInfo.takeVehicle.x, garageInfo.takeVehicle.y, garageInfo.takeVehicle.z,
+                garageInfo.takeVehicle.w)
         },
         label = garageInfo.label,
         type = 'house',
@@ -329,44 +332,17 @@ RegisterNetEvent('garages:client:removeHouseGarage', function(house)
     Config.Garages[house] = nil
 end)
 
-
-local garageInfo = {
-    id = 'pillboxgarage',
-    label = 'Pillbox Garage Parking',
-    takeVehicle = vector3(213.2, -796.05, 30.86),
-    spawnPoint = {
-        vector4(222.02, -804.19, 30.26, 248.19),
-        vector4(223.93, -799.11, 30.25, 248.53),
-        vector4(226.46, -794.33, 30.24, 248.29),
-        vector4(232.33, -807.97, 30.02, 69.17),
-        vector4(234.42, -802.76, 30.04, 67.2)
-    },
-    showBlip = true,
-    blipName = 'Public Parking',
-    blipNumber = 357,
-    blipColor = 3,
-    type = 'public',
-    category = Config.VehicleClass['car']
-}
-
-
-RegisterCommand('tg', function(source, args, raw)
-    lib.callback('garages:server:getVehicles', false, function(vehicles)
-        lib.print.info(vehicles)
-    end, garageInfo.id)
-end)
-
-
-RegisterCommand('sv', function(source, args, raw)
-    lib.callback("garages:server:spawnVehicle", false, function(result, message)
-        lib.print.info(result)
-    end, 'brioso', '000AAA11', garageInfo, 1)
-end)
-
-AddEventHandler('onResourceStart', function(res)
-    if res ~= GetCurrentResourceName() then return end
+AddEventHandler('playerSpawned', function()
+    print(GetInvokingResource())
+    if GetInvokingResource() and GetInvokingResource() ~= 'multichar' then return end
     CreateGarages()
 end)
+
+-- AddEventHandler('onResourceStart', function(res)
+--     if res ~= GetCurrentResourceName() then return end
+--     Wait(1000)
+--     CreateGarages()
+-- end)
 
 AddEventHandler('onResourceStop', function(resourceName)
     if resourceName == GetCurrentResourceName() then
