@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<!--
+    WARNING! Make sure that you match all Quasar related
+    tags to the same version! (Below it's "@2.16.9")
+  -->
+
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet"
+        type="text/css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/all.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/sharp-duotone-solid.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/sharp-thin.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/sharp-solid.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/sharp-regular.css">
+    <link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/sharp-light.css">
+    <link href="https://cdn.jsdelivr.net/npm/animate.css@^4.0.0/animate.min.css" rel="stylesheet" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/quasar@2.16.9/dist/quasar.prod.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- example of injection point where you write your app template -->
+    <div id="q-app">
+        <div class="garage" v-if="show">
+            <div class="title-container"><span>{{ garageLabel }}</span></div>
+            <div class="vehicle-list">
+                <div class="vehicle-item bg-grey-1" v-for="vehicle in vehicleList">
+                    <template v-if="!vehicle.info">
+                        <q-img :src="`${imageUrl}/${vehicle.vehicle}.png`" fit="cover" spinner-color="red"
+                            error-src="images.jpg"></q-img>
+                        <span
+                            class="text-bold text-uppercase text-h5 text-amber-13 absolute-top-left q-ml-sm vehicle-name">{{
+                            vehicle.displayName }}</span>
+                        <span
+                            class="absolute-bottom-left q-ma-md text-bold text-uppercase bg-red text-white q-pa-sm rounded-borders"
+                            v-if="vehicle.seized">Retido</span>
+                        <div class="btn-action absolute-bottom-right q-ma-sm flex column">
+                            <q-btn color="primary" @click.stop="vehicle.info = true">Informação</q-btn>
+                            <q-btn color="secondary" class="q-mt-sm" :disabled="vehicle.seized"
+                                @click.stop="tryGetVehicle(vehicle)">Retirar</q-btn>
+                        </div>
+                    </template>
+                    <template v-else>
+                        <div style="background-color: rgba(21, 20, 20, 0.911); height: 100%;">
+                            <div class="flex column justify-between">
+                                <div class="info-item flex row justify-between items-center no-wrap q-pa-xs">
+                                    <i class="fa-regular fa-id-card"></i>
+                                    <span class="full-width text-white text-bold">Placa: {{ vehicle.plate }}</span>
+                                </div>
+                                <div class="info-item flex row justify-between items-center no-wrap q-pa-xs">
+                                    <i class="fa-solid fa-engine"></i>
+                                    <q-linear-progress :value="vehicle.engine / 1000.0" :color="vehicle.engineColor" />
+                                </div>
+                                <div class="info-item flex row justify-between items-center no-wrap q-pa-xs">
+                                    <i class="fa-solid fa-car"></i>
+                                    <q-linear-progress :value="vehicle.body / 1000.0" :color="vehicle.bodyColor" />
+                                </div>
+                                <div class="info-item flex row justify-between items-center no-wrap q-pa-xs">
+                                    <i class="fa-solid fa-gas-pump-slash"></i>
+                                    <q-linear-progress :value="vehicle.fuel / 100.0" :color="vehicle.fuelColor" />
+                                </div>
+                            </div>
+                            <div class="btn-action absolute-bottom-right q-ma-sm flex column">
+
+                                <q-btn color="primary" flat @click.stop="vehicle.info = false">Voltar</q-btn>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add the following at the end of your body tag -->
+    <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/quasar@2.16.9/dist/quasar.umd.prod.js"></script>
+
+    <script>
+        const { ref, onMounted, computed, createApp } = Vue;
+        const app = createApp({
+            setup() {
+                const show = ref(false)
+                const errorImage = ref('images.jpg')
+                const imageUrl = ref('https://cfx-nui-garages/vehicles/')
+                const garageLabel = ref('Garagem')
+                const vehicleList = ref([])
+
+                async function sendNui(enpoint, data) {
+                    const request = await fetch(`https://garages/${enpoint}`, { body: JSON.stringify(data), method: 'POST' })
+                    return await request.json()
+                }
+
+                function getStatusColor(v) {
+                    if (v >= 900) return 'positive';
+                    if (v >= 500) return 'warning'
+                    return 'negative'
+                }
+
+                async function tryGetVehicle(data) {
+                    await sendNui('spawn', data)
+                }
+
+                const onKeyPress = ({ key }) => {
+                    if (key === 'Escape') {
+                        sendNui('close', {})
+                    }
+                }
+
+                const onMessage = ({ data }) => {
+                    if (data.action == 'VehicleList') {
+                        garageLabel.value = data.garageLabel;
+                        imageUrl.value = data.baseUrl
+                        vehicleList.value = data.vehicles.map(veh => {
+                            return {
+                                ...veh,
+                                engineColor: getStatusColor(veh.engine),
+                                bodyColor: getStatusColor(veh.body),
+                                fuelColor: getStatusColor(veh.fuel),
+                            }
+                        })
+                        show.value = true
+                    } else if (data.action === 'close') {
+                        show.value = false
+                    }
+                }
+
+                onMounted(() => {
+                    window.addEventListener('message', onMessage)
+                    window.addEventListener('keypress', onKeyPress)
+                })
+
+                return {
+                    imageUrl,
+                    garageLabel,
+                    vehicleList,
+                    errorImage,
+                    show,
+                    tryGetVehicle
+
+                }
+            }
+        })
+
+        app.use(Quasar)
+        app.mount('#q-app')
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,100 @@
+* {
+    user-select: none !important;
+}
+
+body {
+    width: 100vw !important;
+    height: 100vw !important;
+    overflow: hidden;
+    padding: 0;
+    margin: 0;
+}
+
+#q-app {
+    padding: 0;
+    margin: 0;
+    height: 100vh !important;
+    width: 100vw !important;
+    overflow: hidden;
+    /* Mantido, pois não afeta a rolagem interna */
+}
+
+#q-app {
+    flex-direction: column;
+}
+
+.garage {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    box-shadow: 0 0 6px 2px rgb(52, 49, 49);
+    max-width: 20vw;
+    overflow-y: hidden;
+    height: 100vh;
+    background-color: rgba(9, 8, 8, 0.496);
+}
+
+.garage>.title-container {
+    font-size: 2em;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    letter-spacing: 0.1em;
+    background-color: rgba(6, 218, 237, 0.478);
+    padding: 0.4em;
+}
+
+.garage>.title-container>span {
+    color: #fff;
+    text-shadow:
+        2px 2px 0px black,
+        -2px 2px 0px black,
+        2px -2px 0px black,
+        -2px -2px 0px black;
+}
+
+.vehicle-list {    
+    flex: 1;
+    overflow-y: auto;
+    /* Habilita rolagem vertical */
+    padding: 0.5em;
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    min-height: 0;
+    /* Garante que a lista não cresça mais que o container */
+    scroll-behavior: smooth;
+}
+
+.vehicle-item {    
+    min-height: 10em;
+    position: relative;
+}
+
+
+@media screen and (min-width: 1920px) {
+    .garage {
+        max-width: 25vw;
+    }
+
+
+    .vehicle-item {
+        min-height: 15em;
+    }
+
+    .garage>.title-container {
+        font-size: 3em;
+    }
+
+    .vehicle-name {
+        font-size: 2em !important;
+    }
+}
+
+.info-item {
+    gap: 0.5em;        
+    &>i {
+        font-size: 1em;
+        color: #fff;
+    }
+}
