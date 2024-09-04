@@ -43,7 +43,7 @@ function updateVolume(soundId) {
 
     _.forEach(activeSounds[soundId].coordinates, (coordinate, key) => {
         if (coordinate === 'self') {
-            activeSounds[soundId].howlerSound.volume((sfxVolume * 0.1 * 0.15), activeSounds[soundId].howlerIds[key]);
+            activeSounds[soundId].howlerSound.volume((sfxVolume * 0.1 * 0.85), activeSounds[soundId].howlerIds[key]);
         } else {
             let distance = Math.hypot((playerCoordinates.x - coordinate.x), (playerCoordinates.y - coordinate.y), (playerCoordinates.z - coordinate.z));
             let volume = ((sfxVolume * 0.1) - (distance * volumeMultiplier));
@@ -96,7 +96,7 @@ async function addSound(eventData) {
         howlerIds[key] = howlerSound.play();
 
         if (coordinate === 'self') {
-            howlerSound.volume((sfxVolume * 0.1 * 0.15), howlerIds[key]);
+            howlerSound.volume((sfxVolume * 0.1 * 0.85), howlerIds[key]);
         } else {
             howlerSound.pannerAttr({
                 panningModel: 'HRTF',
