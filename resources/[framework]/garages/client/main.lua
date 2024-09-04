@@ -10,7 +10,7 @@ local houseGarageZones = {}
 
 
 local function ZoneExists(zoneName)
-    for _, zone in next, houseGarageZones do
+    for _, zone in next, houseGarageZones do        
         if zone?.garageId == zoneName then
             return true
         end
@@ -48,13 +48,13 @@ end
 -- end)
 
 local function OpenGarageMenu(garageId)
-    lib.print.info(garageId)
+    
     lib.callback('garages:server:getVehicles', false, function(vehicles, errorMessage)
-        lib.print.info(vehicles, errorMessage)
+     
         local garageInfo = GarageConfig.Garages[garageId]
         if vehicles and type(vehicles) == "table" and #vehicles > 0 then
             SetNuiFocus(true, true)
-            lib.print.info(vehicles)
+    
             SendNUIMessage({
                 action = 'VehicleList',
                 garageLabel = garageInfo.label,
@@ -76,7 +76,7 @@ end
 
 
 local function onZoneEnter(self)
-    lib.print.info('entered zone', self.id)
+    
     lib.showTextUI(locale('info.car_e'), {
         position = 'bottom-center',
 
@@ -105,7 +105,8 @@ local function onZoneInside(self)
                         position = 'top-right'
                     })
                 end
-            end, VehToNet(vehicle), GetVehicleNumberPlateText(vehicle), GetVehicleClass(vehicle), self.garageId, Entity(vehicle).state?.owner and lib.getVehicleProperties(vehicle) or false)
+            end, VehToNet(vehicle), GetVehicleNumberPlateText(vehicle), GetVehicleClass(vehicle), self.garageId,
+                Entity(vehicle).state?.owner and lib.getVehicleProperties(vehicle) or false)
         else
             OpenGarageMenu(garage)
         end
@@ -127,6 +128,8 @@ local function CreateGarageBlip(data)
 end
 
 local function CreateZone(garageId, garageInfo, gtype)
+    
+
     local zone = lib.zones.sphere({
         coords = garageInfo.takeVehicle,
         radius = garageInfo.radius or 5.0,
@@ -175,7 +178,7 @@ local function CreateGarages()
             CreateZone(id, info)
             CreateGarageBlip(info)
         end
-        
+
         Wait(0)
     end)
 end
@@ -221,9 +224,9 @@ function GetSpawnPoint(garage)
 end
 
 local function TrySpawnVehicle(vehicleData)
-    lib.print.info(vehicleData)
+    
     local garage = GarageConfig.Garages[vehicleData.garage]
-    lib.print.info(garage)
+    
     --verificar se tem vaga
     local spawnPoint = GetSpawnPoint(garage)
     if not spawnPoint then return end
@@ -257,11 +260,15 @@ local function TrySpawnVehicle(vehicleData)
                 position = 'top-right',
                 type = 'success'
             })
-
+            while not NetworkDoesEntityExistWithNetworkId(result) do Wait(0) end
             local vehicle = NetToVeh(result)
 
             SetVehicleRadioEnabled(vehicle, false)
             SetVehRadioStation(vehicle, 'OFF')
+            if GarageConfig.Warp then
+                SetPedIntoVehicle(PlayerPedId(), vehicle, -1)
+            end
+
         end, vehicleData.vehicle, vehicleData.plate, garage, spawnPoint)
     end, vehicleData.plate)
 end
@@ -291,17 +298,16 @@ RegisterNetEvent('garages:client:setHouseGarage', function(house, hasKey)
     if not house then return end
     local formattedHouseName = string.gsub(string.lower(house), ' ', '')
     local zoneName = 'house_' .. formattedHouseName
-    if Config.Garages[formattedHouseName] then
+    if Config.Garages[zoneName] then
         if hasKey and not ZoneExists(zoneName) then
-            CreateZone(formattedHouseName, Config.Garages[formattedHouseName], 'house')
+            CreateZone(zoneName, Config.Garages[zoneName], 'house')
         elseif not hasKey and ZoneExists(zoneName) then
             RemoveHouseZone(zoneName)
         end
     else
         lib.callback('garages:server:getHouseGarage', false, function(garageInfo) -- create garage if not exist
             local garageCoords = garageInfo.garage
-            Config.Garages[formattedHouseName] = {
-                houseName = house,
+            Config.Garages[zoneName] = {
                 takeVehicle = vector3(garageCoords.x, garageCoords.y, garageCoords.z),
                 spawnPoint = {
                     vector4(garageCoords.x, garageCoords.y, garageCoords.z, garageCoords.w or garageCoords.h)
@@ -315,45 +321,50 @@ RegisterNetEvent('garages:client:setHouseGarage', function(house, hasKey)
     end
 end)
 
-
-RegisterNetEvent('garages:client:houseGarageConfig', function(houseGarages)
-    for _, garageConfig in pairs(houseGarages) do
-        local formattedHouseName = string.gsub(string.lower(garageConfig.label), ' ', '')
-        if garageConfig.takeVehicle and garageConfig.takeVehicle.x and garageConfig.takeVehicle.y and garageConfig.takeVehicle.z and garageConfig.takeVehicle.w then
-            Config.Garages[formattedHouseName] = {
-                houseName = garageConfig.name,
-                takeVehicle = vector3(garageConfig.takeVehicle.x, garageConfig.takeVehicle.y, garageConfig.takeVehicle.z),
-                spawnPoint = {
-                    vector4(garageConfig.takeVehicle.x, garageConfig.takeVehicle.y, garageConfig.takeVehicle.z,
-                        garageConfig.takeVehicle.w)
-                },
-                label = garageConfig.label,
-                type = 'house',
-                category = Config.VehicleClass['all']
-            }
-        end
-    end
-    TriggerServerEvent('qb-garages:server:syncGarage', Config.Garages)
-end)
+-- RegisterNetEvent('garages:client:houseGarageConfig', function(houseGarages)
+--     for _, garageConfig in pairs(houseGarages) do
+--         local formattedHouseName = string.gsub(string.lower(garageConfig.label), ' ', '')
+--         if garageConfig.takeVehicle and garageConfig.takeVehicle.x and garageConfig.takeVehicle.y and garageConfig.takeVehicle.z and garageConfig.takeVehicle.w then
+--             Config.Garages[formattedHouseName] = {
+--                 houseName = garageConfig.name,
+--                 takeVehicle = vector3(garageConfig.takeVehicle.x, garageConfig.takeVehicle.y, garageConfig.takeVehicle.z),
+--                 spawnPoint = {
+--                     vector4(garageConfig.takeVehicle.x, garageConfig.takeVehicle.y, garageConfig.takeVehicle.z,
+--                         garageConfig.takeVehicle.w)
+--                 },
+--                 label = garageConfig.label,
+--                 type = 'house',
+--                 category = Config.VehicleClass['all']
+--             }
+--         end
+--     end
+--     TriggerServerEvent('garages:server:syncGarage', Config.Garages)
+-- end)
 
 RegisterNetEvent('garages:client:addHouseGarage', function(house, garageInfo) -- event from housing on garage creation
     local formattedHouseName = string.gsub(string.lower(house), ' ', '')
-    Config.Garages[formattedHouseName] = {
-        houseName = house,
+
+    lib.print.info('garages:client:addHouseGarage', house, formattedHouseName, garageInfo)
+
+    Config.Garages['house_' .. formattedHouseName] = {
         takeVehicle = vector3(garageInfo.takeVehicle.x, garageInfo.takeVehicle.y, garageInfo.takeVehicle.z),
         spawnPoint = {
-            vector4(garageInfo.takeVehicle.x, garageInfo.takeVehicle.y, garageInfo.takeVehicle.z,
-                garageInfo.takeVehicle.w)
+            vector4(
+                garageInfo.takeVehicle.x,
+                garageInfo.takeVehicle.y,
+                garageInfo.takeVehicle.z,
+                garageInfo.takeVehicle.w
+            )
         },
         label = garageInfo.label,
         type = 'house',
         category = Config.VehicleClass['all']
     }
-    TriggerServerEvent('qb-garages:server:syncGarage', Config.Garages)
+    TriggerServerEvent('garages:server:syncGarage', Config.Garages)
 end)
 
 RegisterNetEvent('garages:client:removeHouseGarage', function(house)
-    Config.Garages[house] = nil
+    Config.Garages['house_' .. house] = nil
 end)
 
 AddEventHandler('playerSpawned', function()

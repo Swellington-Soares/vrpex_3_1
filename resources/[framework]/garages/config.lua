@@ -518,9 +518,9 @@ Config.Garages = {
 }
 
 
-Config.ServiceGarages = {
-    ['pillboxgarage'] = {
-        akuma = { props = {} },
-        brioso = { props = {} },
-    }
-}
+-- Config.ServiceGarages = {
+--     ['pillboxgarage'] = {
+--         akuma = { props = {} },
+--         brioso = { props = {} },
+--     }
+-- }

@@ -56,8 +56,7 @@ local function GetNearbyHospital(pos)
       min = distance
       k = id
     end
-  end
-  lib.print.info(k)
+  end  
   return HOSPITAL_COORD[k]
 end
 

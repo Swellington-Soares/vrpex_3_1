@@ -176,7 +176,8 @@ function Property:RegisterGarageZone()
     }
 
     TriggerEvent("garages:client:addHouseGarage", self.property_id, data)
-
+    -- TriggerEvent('garages:client:setHouseGarage', self.property_id, true)
+    -- self.garageZone = { remove = function () end }    
     self.garageZone = lib.zones.box({
         coords = vec3(garageData.x, garageData.y, garageData.z),
         size = vector3(garageData.length + 5.0, garageData.width + 5.0, 3.5),
@@ -538,7 +539,7 @@ end
 
 function Property:RemoveProperty()
     if Config.Target == "ox" then
-        lib.print.info('RemoveProperty', self.entranceTarget)
+        
         Framework[Config.Target].RemoveTargetZone(self.entranceTarget)    
     end
 

@@ -57,6 +57,15 @@ lib.callback.register('garages:server:depotVehicle', function (source, vehNet, p
     local ownerId = Entity(vehicle).state?.owner
     if ownerId and ownerId ~= source then return false, locale('error.not_owned') end
 
+    
+    
+    if GarageConfig.Garages[garageId]?.type == 'house' then 
+        local houseId = string.gsub(garageId, 'house_', '')
+        if not exports['ps-housing']:IsOwner(source, houseId) then
+            return false, locale('error.not_correct_type')
+        end
+    end
+
     if OutsideVehicles[plate] then
         OutsideVehicles[plate] = nil        
     end
@@ -194,39 +203,8 @@ lib.callback.register('garages:server:spawnVehicle', function(source, vehicleNam
     local netId = NetworkGetNetworkIdFromEntity(vehicleEntity)
     OutsideVehicles[plate] = { netId = netId, entity = vehicleEntity, owner = source, model = vehicleName }
 
-    if GarageConfig?.Warp then
-        SetPedIntoVehicle(GetPlayerPed( source ), vehicleEntity, -1)
-    end
-
     return netId
 end)
-
--- -- Callbacks
-
--- -- QBCore.Functions.CreateCallback('qb-garages:server:getHouseGarage', function(_, cb, house)
--- --     local houseInfo = MySQL.single.await('SELECT * FROM houselocations WHERE name = ?', { house })
--- --     cb(houseInfo)
--- -- end)
-
--- -- QBCore.Functions.CreateCallback('qb-garages:server:canDeposit', function(source, cb, plate, type, garage, state)
--- --     local Player = QBCore.Functions.GetPlayer(source)
--- --     local isOwned = MySQL.scalar.await('SELECT citizenid FROM player_vehicles WHERE plate = ? LIMIT 1', { plate })
--- --     if isOwned ~= Player.PlayerData.citizenid then
--- --         cb(false)
--- --         return
--- --     end
--- --     -- if type == 'house' and not exports['qb-houses']:hasKey(Player.PlayerData.license, Player.PlayerData.citizenid, Config.Garages[garage].houseName) then
--- --     if type == 'house' and not exports['ps-housing']:IsOwner(source, garage) then
--- --         cb(false)
--- --         return
--- --     end
--- --     if state == 1 then
--- --         MySQL.update('UPDATE player_vehicles SET state = ?, garage = ? WHERE plate = ?', { state, garage, plate })
--- --         cb(true)
--- --     else
--- --         cb(false)
--- --     end
--- -- end)
 
 RegisterNetEvent('garages:server:UpdateOutsideVehicle', function(plate, vehicleNetID)
     OutsideVehicles[plate] = {

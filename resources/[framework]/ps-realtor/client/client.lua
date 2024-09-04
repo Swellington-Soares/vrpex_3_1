@@ -69,8 +69,7 @@ local function setRealtor(jobInfo)
 		SendNUIMessage({
 			action = "setRealtorGrade",
 			data = jobInfo.rank
-		})
-		lib.print.info('SETTED', jobInfo)
+		})		
 	else 
 		SendNUIMessage({
 			action = "setRealtorGrade",

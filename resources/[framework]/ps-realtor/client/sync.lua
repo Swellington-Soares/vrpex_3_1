@@ -15,10 +15,7 @@ function InitialiseData()
 
 	for _, apartment in pairs(apartments) do
 		ApartmentsTable[#ApartmentsTable+1] = apartment
-	end
-
-
-	lib.print.info('SET SHEELS')
+	end	
 
 	SendNUIMessage({
 		action = "setShells",

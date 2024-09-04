@@ -155,10 +155,7 @@ function vRP.save(user_id, x)
   local ped = GetPlayerPed(src)
   local position = GetEntityCoords(ped)
   vRP.user_tables[user_id].datatable['position'] = position
-  vRP.updateCharacter(char_id, vRP.user_tables[user_id])
-  -- vRP.setPlayerData(char_id, 'player:custom', player.customization)
-  lib.print.info('PLAYER ' .. user_id .. ' SAVED')
-  -- end
+  vRP.updateCharacter(char_id, vRP.user_tables[user_id])  
 end
 
 RegisterNetEvent('vrp:server:updatePlayerAppearance', function(char_id, data)

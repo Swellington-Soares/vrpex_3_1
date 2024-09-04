@@ -264,13 +264,14 @@ local function deffer_uppdate(d, m)
 end
 
 AddEventHandler("playerConnecting", function(name, setMessage, deferrals)
-  local source = source
-  lib.print.info(source)
+  local source = source  
   local license = vRP.getPlayerIdentifier(source, 'license')
 
   deferrals.defer()
 
   Wait(0)
+
+  lib.print.info('Player trying to login', GetPlayerName(source), source)
 
   if not license then
     return deferrals.done(locale('license_not_found'))
@@ -353,8 +354,7 @@ AddEventHandler('playerJoining', function(_)
     end
     vRPclient._addPlayer(-1, source)
     TriggerEvent("vRP:playerJoin", source, user_id, first_spawn)
-  end
-  lib.print.info('playerJoining', source)
+  end  
 end)
 
 
@@ -362,6 +362,9 @@ lib.callback.register('vrp:server:getPlayerData', function(source)
   local playerTable = vRP.getPlayerTable(vRP.getUserId(source))
   if playerTable then
     local job = vRP.getUserGroupByType(playerTable.user_id, "job")
+
+    local group = playerTable?.datatable?.groups[job]
+
     return {
       birth_date = os.date('%d/%m/%Y', playerTable.birth_date // 1000),
       datatable = playerTable.datatable,
@@ -375,9 +378,7 @@ lib.callback.register('vrp:server:getPlayerData', function(source)
       user_id = playerTable.user_id,
       license = playerTable.license,
       server_id = source,
-      job = playerTable.groups[job] and
-          { name = job, rank = playerTable.groups[job].rank, onduty = playerTable.groups[job].duty }
-          or { name = '', rank = 0, onduty = false }
+      job = group and { name = job, rank = group.rank, onduty = group.duty } or { name = '', rank = 0, onduty = false }
     }
   end
   return false

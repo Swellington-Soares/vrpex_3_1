@@ -27,7 +27,7 @@ local function setCharacterInventory(source, character)
 		source = source
 	}
 	server.setPlayerInventory(player)
-	lib.print.info(character?.money)
+	
 	Inventory.SetItem(source, "money", character?.money?.wallet or 0)
 end
 

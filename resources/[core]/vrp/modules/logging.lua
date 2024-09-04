@@ -14,8 +14,7 @@ local function WriteToDiscord(name, data)
         p:reject('Webhook not found to ' .. name)
     else
         if type(data) == "string" then
-            PerformHttpRequest(webhooks[name], function(status, _, _, err)
-                lib.print.info(err)
+            PerformHttpRequest(webhooks[name], function(status, _, _, err)                
                 p:resolve(status == 200 or status == 204)
             end, 'POST', json.encode({ content = data }), { ["Content-Type"] = "application/json" })
         elseif type(data) == "table" and type(data?.build) == "function" then

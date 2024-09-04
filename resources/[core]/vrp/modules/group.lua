@@ -445,7 +445,7 @@ AddEventHandler('vrp:login', function(source, user_id, char_id, first_spawn)
       group = group,
       type = groups[k]?._config?.gtype,
       rank = user_groups[group]?.rank or 0,
-      duty = user_groups[group]['duty'],
+      duty = user_groups[group]?.duty or false,
       action = 'enter'
     })
     if group?._config?.onspawn then

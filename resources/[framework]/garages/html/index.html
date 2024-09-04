@@ -102,6 +102,7 @@
                 }
 
                 const onKeyPress = ({ key }) => {
+                console.log(key)
                     if (key === 'Escape') {
                         sendNui('close', {})
                     }
@@ -127,7 +128,7 @@
 
                 onMounted(() => {
                     window.addEventListener('message', onMessage)
-                    window.addEventListener('keypress', onKeyPress)
+                    window.addEventListener('keydown', onKeyPress)
                 })
 
                 return {
