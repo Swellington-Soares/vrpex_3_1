@@ -24,48 +24,67 @@ CreateThread(function()
     end
 end)
 
-local function SpawnPlayer(x, y, z, heading, oldcam)
-    in_char_creator = false
+local function SpawnPlayer(x, y, z, heading, oldcam, home)        
+    in_char_creator = false    
     heading = heading or 0.0
-    if not IsScreenFadedIn() then DoScreenFadeIn(0) end
-    local ped = PlayerPedId()
-    ClearPedTasksImmediately(ped)
-    SetEntityCoordsNoOffset(ped, x, y, z, false, false, true)
-    SetEntityHeading(ped, heading)
-    -- local fw = GetEntityForwardVector(ped) * 2
-    local offsetCam = GetOffsetFromEntityInWorldCoords(ped, 0.0, 5.0, 0.0)
-    local rot = GetEntityHeading(ped)
-    local camx = CreateCamWithParams('DEFAULT_SCRIPTED_CAMERA', offsetCam --[[vec3(x, y, z) + fw]], vec3(0.0, 0.0, rot),
-        55.0, false, 2)
-    -- SetGameplayCamRelativeHeading(rot)
-    -- SetFollowPedCamViewMode(1)
-    SetCamActiveWithInterp(camx, oldcam, 2000, 16, 8)
-    while IsCamInterpolating(camx) do Wait(0) end
-    Wait(1000)
+    if not home then
+        if not IsScreenFadedIn() then DoScreenFadeIn(0) end
+        local ped = PlayerPedId()
+        ClearPedTasksImmediately(ped)
+        SetEntityCoordsNoOffset(ped, x, y, z, false, false, true)
+        SetEntityHeading(ped, heading)
+        -- local fw = GetEntityForwardVector(ped) * 2
+        local offsetCam = GetOffsetFromEntityInWorldCoords(ped, 0.0, 5.0, 0.0)
+        local rot = GetEntityHeading(ped)
+        local camx = CreateCamWithParams('DEFAULT_SCRIPTED_CAMERA', offsetCam --[[vec3(x, y, z) + fw]], vec3(0.0, 0.0, rot),
+            55.0, false, 2)
+        -- SetGameplayCamRelativeHeading(rot)
+        -- SetFollowPedCamViewMode(1)
+        SetCamActiveWithInterp(camx, oldcam, 2000, 16, 8)
+        while IsCamInterpolating(camx) do Wait(0) end
+        Wait(1000)
 
-    RenderScriptCams(false, true, 1000, true, true)
-    SetGameplayCamRelativeHeading(0.0)
-    if DoesCamExist(camx) then
-        SetCamActive(camx, false)
-        DestroyCam(camx)
+        RenderScriptCams(false, true, 1000, true, true)
+        SetGameplayCamRelativeHeading(0.0)
+        if DoesCamExist(camx) then
+            SetCamActive(camx, false)
+            DestroyCam(camx)
+        end
+
+        if DoesCamExist(oldcam) then DestroyCam(oldcam) end
+        ClearFocus()     
+        TriggerServerEvent('vrp:player:ready', true)     
+        FreezeEntityPosition(ped, false)
+        ClearPedTasksImmediately(ped)
+        LocalPlayer.state.canEmote = true
+        cam1 = nil
+        cam2 = nil
+        charList = {}
+        last_selected_char = -1
+        max_allowed = 1
+        Wait(1000)
+        ClearPedTasksImmediately(PlayerPedId())
+        FreezeEntityPosition(PlayerPedId(), false)
+    else
+        local ped = PlayerPedId()
+        DoScreenFadeOut(0)
+        RenderScriptCams(false, true, 1000, true, true)
+        if DoesCamExist(oldcam) then DestroyCam(oldcam) end        
+        ClearFocus()
+        TriggerServerEvent('vrp:player:ready', true) 
+        FreezeEntityPosition(ped, false)
+        ClearPedTasksImmediately(ped)
+        LocalPlayer.state.canEmote = true
+        cam1 = nil
+        cam2 = nil
+        charList = {}
+        last_selected_char = -1
+        max_allowed = 1
+        TriggerServerEvent('ps-housing:server:enterProperty', tostring(home.property_id))
+        Wait(1000)
+        ClearPedTasksImmediately(PlayerPedId())
+        FreezeEntityPosition(PlayerPedId(), false)
     end
-
-    if DoesCamExist(oldcam) then DestroyCam(oldcam) end
-    ClearFocus()
-    LocalPlayer.state:set('isLoggedIn', true, true)
-    TriggerServerEvent('vrp:player:ready', true)
-    TriggerEvent('playerSpawned')
-    FreezeEntityPosition(ped, false)
-    ClearPedTasksImmediately(ped)
-    LocalPlayer.state.canEmote = true
-    cam1 = nil
-    cam2 = nil
-    charList = {}
-    last_selected_char = -1
-    max_allowed = 1
-    Wait(1000)
-    ClearPedTasksImmediately(PlayerPedId())
-    FreezeEntityPosition(PlayerPedId(), false)
 end
 
 local function CreateSpawnMenu()
@@ -73,8 +92,8 @@ local function CreateSpawnMenu()
     local pos = char?.last_location
     local options = {}
     local lastOptionSelected
-    if pos then
-        options[#options + 1] = { label = locale('last_location'), args = { vec4(pos.x, pos.y, pos.z, 0.0) } }
+    if pos or char?.inside then
+        options[#options + 1] = { label = locale('last_location'), args = { vec4(pos.x, pos.y, pos.z, 0.0), home = char?.inside } }
     end
 
     for _, info in next, config.spawn_coords or {} do
@@ -96,12 +115,14 @@ local function CreateSpawnMenu()
         onSelected = function(selected, _, args, _)
             if lastOptionSelected ~= selected then
                 lastOptionSelected = selected
-                SetCamCoord(camx, args[1].x, args[1].y, args[1].z + 150.0)
-                SetFocusPosAndVel(args[1].x, args[1].y, args[1].z, 0.0, 0.0, 0.0)
+                if not args?.home then
+                    SetCamCoord(camx, args[1].x, args[1].y, args[1].z + 150.0)
+                    SetFocusPosAndVel(args[1].x, args[1].y, args[1].z, 0.0, 0.0, 0.0)
+                end
             end
         end
     }, function(_, _, args)
-        SpawnPlayer(args[1].x, args[1].y, args[1].z, args[1].w, camx)
+        SpawnPlayer(args[1].x, args[1].y, args[1].z, args[1].w, camx, args?.home)
     end)
     lib.showMenu('spawn_menu')
     ClearFocus()
@@ -249,7 +270,7 @@ local function CreateSelectCharacterMenu()
         position = 'top-left',
         disableInput = true,
         options = options,
-        canClose = false,
+        canClose = false,    
         onSelected = function(_, _, args, _)
             if args.id == 'NEW_CHAR' then return end
             local currentChar = charList[args.index]
@@ -280,12 +301,14 @@ local function CreateSelectCharacterMenu()
             ClearPedTasksImmediately(PlayerPedId())
 
             if lib.callback.await('multichar:server:login', false, args.id) then
+                LocalPlayer.state:set('isLoggedIn', true, true)                
+                TriggerEvent('playerSpawned')
                 CreateSpawnMenu()
             end
         end
     end)
 
-    lib.showMenu('selector_menu')
+    lib.showMenu('selector_menu', 2)
 end
 
 

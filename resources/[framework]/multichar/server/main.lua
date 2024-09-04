@@ -42,7 +42,7 @@ lib.callback.register('multichar:server:requestCharsInfo', function(source)
     local _characters = {}
     for _, info in next, characters or {} do
         local custom = json.decode(vRP.getPlayerData(info.id, 'player:custom') or '{}') or {}
-        local tattoos = json.decode(vRP.getPlayerData(info.id, 'player:tattoo') or '{}') or {}
+        -- local tattoos = json.decode(vRP.getPlayerData(info.id, 'player:tattoo') or '{}') or {}
         _characters[#_characters + 1] = {
             user_id = user_id,
             id = info.id,
@@ -52,8 +52,9 @@ lib.callback.register('multichar:server:requestCharsInfo', function(source)
             phone = info.phone,
             birth_date = info.birth_date,
             custom = custom,
-            tattoos = tattoos,
-            last_location = info?.datatable?.position or nil
+            -- tattoos = tattoos,
+            last_location = info?.datatable?.position or nil,
+            inside = info?.datatable?.inside or nil
         }
     end
     vRP.setPlayerBucket(source, source + 1, false)
