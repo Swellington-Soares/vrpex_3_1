@@ -40,3 +40,6 @@ function vRP.log(name, _type, data)
         lib.print.info('LOG', json.encode(data))
     end
 end
+
+
+exports('CreateLog', vRP.log)
