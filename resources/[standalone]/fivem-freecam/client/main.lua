@@ -65,7 +65,7 @@ local function UpdateCamera()
 end
 
 local function FreeUpdateTick()
-  Citizen.CreateThread(function ()
+  CreateThread(function ()
     while IsFreecamActive() do
       Wait(0)
       UpdateCamera()

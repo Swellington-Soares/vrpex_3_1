@@ -127,6 +127,8 @@ function SetFreecamActive(active)
     SetFreecamRotation(rot.x, rot.y, rot.z)
     TriggerEvent('freecam:onEnter')
   else
+    SetCamCoord(_internal_camera, GetGameplayCamCoord())
+    SetCamRot(_internal_camera, GetGameplayCamRot(2), 2)
     DestroyCam(_internal_camera)
     ClearFocus()
     UnlockMinimapPosition()
@@ -134,6 +136,6 @@ function SetFreecamActive(active)
     TriggerEvent('freecam:onExit')
   end
 
-  SetPlayerControl(PlayerId(), not active)
-  RenderScriptCams(active, enableEasing, easingDuration)
+  SetPlayerControl(PlayerId(), not active, 0)  
+  RenderScriptCams(active, enableEasing, easingDuration, false, false)
 end
