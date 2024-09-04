@@ -161,6 +161,17 @@ function vRP.getUserDataTable(user_id)
   return vRP.user_tables[user_id]?.datatable
 end
 
+function vRP.setUserMetadata(user_id, key, value)
+  if type(key) ~= 'string' then return end
+  if vRP.user_tables[user_id]?.datatable then
+    vRP.user_tables[user_id].datatable[key] = value
+  end
+end
+
+function vRP.getUserMetadata(user_id, key)
+  return vRP.user_tables[user_id]?.datatable?[key]
+end
+
 function vRP.getUserTmpTable(user_id)
   return vRP.user_tmp_tables[user_id]
 end
@@ -220,7 +231,7 @@ function vRP.dropPlayer(source)
   if user_id then
     vRP.user_tables[user_id].isReady = false
     TriggerEvent("vRP:playerLeave", user_id, source)
-    vRP.save(user_id, '__INTERNAL__')    
+    vRP.save(user_id, '__INTERNAL__')
     Wait(1000)
     vRP.users[vRP.rusers[user_id]] = nil
     vRP.rusers[user_id] = nil
@@ -347,6 +358,15 @@ AddEventHandler('playerJoining', function(_)
 end)
 
 
+lib.callback.register('vrp:server:getPlayerData', function(source)
+  local playerTable = vRP.getPlayerTable(vRP.getUserId(source))
+  if playerTable then
+    lib.print.info(playerTable)
+  end
+  return false
+end)
+
+
 RegisterCommand('testfw', function()
   local license = 'license:89f2de13f3dc0b2a5bf991021d7fa5c8370f4afe'
   local user_id = 1
@@ -371,8 +391,8 @@ RegisterCommand('re', function(source)
   vRP.user_sources[user_id] = source
 end)
 
-RegisterCommand('tw', function (source, args, raw)
-  local user_id = vRP.getUserId( source )
+RegisterCommand('tw', function(source, args, raw)
+  local user_id = vRP.getUserId(source)
   if user_id then
     vRP.replaceWeapons(user_id, {})
   end
