@@ -5,18 +5,13 @@ end
 
 -- set money
 function vRP.setMoney(user_id, value, moneytype, reason, notify)
-  atype = atype or 'set'
   moneytype = moneytype or 'wallet'
   local player = vRP.getPlayerTable(user_id)
   if not player then
     return false
   end
-  local oldMoney = 0
-  if player.money[moneytype] ~= nil then
-    oldMoney = player.money[moneytype]
-    player.money[moneytype] = value
-  end
 
+  player.money[moneytype] = value >= 0 and value or 0
   if notify and reason then
     local source = vRP.getUserSource(user_id)
     vRPclient._Notify(source, reason, "info", 3000)
@@ -39,7 +34,13 @@ function vRP.tryPayment(user_id, amount, reason, notify)
 end
 
 
-vRP.removeMoney = vRP.tryPayment
+function vRP.removeMoney(user_id, amount, moneytype, reason, notify)
+  local money = vRP.getMoney(user_id, moneytype)
+  if money > 0 and amount > 0 and money >= amount then
+      vRP.setMoney(user_id, money - amount, moneytype, reason, notify)
+  end
+  return false
+end
 
 -- give money
 function vRP.giveMoney(user_id, amount, moneytype, reason, notify)
