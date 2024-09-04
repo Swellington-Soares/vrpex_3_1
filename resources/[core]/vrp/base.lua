@@ -361,7 +361,24 @@ end)
 lib.callback.register('vrp:server:getPlayerData', function(source)
   local playerTable = vRP.getPlayerTable(vRP.getUserId(source))
   if playerTable then
-    lib.print.info(playerTable)
+    local job = vRP.getUserGroupByType(playerTable.user_id, "job")
+    return {
+      birth_date = os.date('%d/%m/%Y', playerTable.birth_date // 1000),
+      datatable = playerTable.datatable,
+      lastname = playerTable.lastname,
+      firstname = playerTable.firstname,
+      gender = playerTable.gender,
+      char_id = playerTable.id,
+      money = playerTable.money,
+      phone = playerTable.phone,
+      registration = playerTable.registration,
+      user_id = playerTable.user_id,
+      license = playerTable.license,
+      server_id = source,
+      job = playerTable.groups[job] and
+          { name = job, rank = playerTable.groups[job].rank, onduty = playerTable.groups[job].duty }
+          or { name = '', rank = 0, onduty = false }
+    }
   end
   return false
 end)
