@@ -441,6 +441,13 @@ AddEventHandler('vrp:login', function(source, user_id, char_id, first_spawn)
   local user_groups = vRP.getUserGroups(user_id)
   for k in next, user_groups or {} do
     local group = groups[k]
+    TriggerClientEvent("vRP:updateGroupInfo", source, {
+      group = group,
+      type = groups[k]?._config?.gtype,
+      rank = user_groups[group]?.rank or 0,
+      duty = user_groups[group]['duty'],
+      action = 'enter'
+    })
     if group?._config?.onspawn then
       group._config.onspawn(source)
     end
