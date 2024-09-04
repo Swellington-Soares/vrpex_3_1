@@ -34,7 +34,8 @@ function vRP.getPlayerIdentity(user_id, offline)
           birth_date = birth_date,
           lastname = character.lastname,
           license = character.license,
-          gender = character.gender
+          gender = character.gender,
+          job = {}
         }
       end
     end
@@ -42,6 +43,7 @@ function vRP.getPlayerIdentity(user_id, offline)
   end
   local xPlayer = vRP.user_tables[user_id]
   local birth_date = os.date("%d-%m-%Y", xPlayer.birth_date // 1000)
+  local jobName, jobData = vRP.getUserGroupByType(xPlayer.user_id, 'job')
   return {
     user_id = xPlayer.user_id,
     char_id = xPlayer.id,
@@ -51,10 +53,10 @@ function vRP.getPlayerIdentity(user_id, offline)
     birth_date = birth_date,
     lastname = xPlayer.lastname,
     license = xPlayer.license,
-    gender = xPlayer.gender
+    gender = xPlayer.gender,
+    job = jobName and { name = jobName, rank = jobData.rank, onduty = jobData.duty } or {}
   }
 end
-
 
 function vRP.getUserIdentity(user_id)
   return vRP.getPlayerIdentity(user_id, false)
