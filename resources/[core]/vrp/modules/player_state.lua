@@ -108,6 +108,12 @@ function vRP.getPlayerId( user_id)
   return vRP.getPlayerTable(user_id)?.id  
 end
 
+function vRP.getsUserIdByPlayerId( char_id )
+  local id = MySQL.scalar.await('SELECT user_id	FROM players WHERE id = ?', {char_id})
+  if vRP.user_tables[id] then return tonumber(id) end
+  return nil
+end
+
 function vRP.login(source, user_id, char_id, firstcreation)
   if vRP.getUserId(source) ~= user_id then
     DropPlayer(source, locale('identity_check_fail'))
@@ -133,6 +139,7 @@ function vRP.login(source, user_id, char_id, firstcreation)
   -- vRP.user_tables[user_id].customization = custom and json.decode(custom)
   Player(source).state:set('name', ("%s %s"):format(character.firstname, character.lastname), true)
   Player(source).state:set('id', user_id)
+  Player(source).state:set('char_id', character.id, true)
   TriggerEvent("vrp:login", source, user_id, char_id, firstcreation)
   return true
 end
