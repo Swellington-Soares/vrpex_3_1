@@ -135,10 +135,10 @@ RegisterNetEvent("ps-housing:server:createNewApartment", function(aptLabel)
     local apartment = Config.Apartments[aptLabel]
     if not apartment or not PlayerData then return end
 
+    lib.print.info("PlayerData", PlayerData)
     local propertyData = {
         owner = PlayerData.char_id,
-        description = string.format("This is %s's apartment in %s", PlayerData.firstname .. " " .. PlayerData.lastname,
-            apartment.label),
+        description = string.format("This is %s's apartment in %s", PlayerData.firstname .. " " .. PlayerData.lastname,  apartment.label),
         for_sale = 0,
         shell = apartment.shell,
         apartment = apartment.label,
@@ -187,11 +187,16 @@ AddEventHandler("ps-housing:server:addTenantToApartment", function(data)
 
         local citizenid = GetCitizenid(targetSrc, realtorSrc)
         if not citizenid then return end
-        local targetToAdd = GetPlayerData(targetSrc) --QBCore.Functions.GetPlayerByCitizenId(citizenid).PlayerData
+
+
+        local targetToAdd = GetPlayerData(targetSrc) 
+
+        lib.print.info(targetToAdd)
+
+
         local propertyData = {
             owner = targetToAdd.char_id,
-            description = string.format("This is %s's apartment in %s",
-                targetToAdd.firstname .. " " .. targetToAdd.lastname, apartment.label),
+            description = string.format("This is %s's apartment in %s", targetToAdd.firstname .. " " .. targetToAdd.lastname, newApartment.label),
             for_sale = 0,
             shell = newApartment.shell,
             apartment = newApartment.label,
@@ -199,13 +204,10 @@ AddEventHandler("ps-housing:server:addTenantToApartment", function(data)
 
         Debug("Creating new apartment for " .. GetPlayerName(targetSrc) .. " in " .. newApartment.label)
 
-        Framework[Config.Logs].SendLog("Creating new apartment for " ..
-            GetPlayerName(targetSrc) .. " in " .. newApartment.label)
+        Framework[Config.Logs].SendLog("Creating new apartment for " .. GetPlayerName(targetSrc) .. " in " .. newApartment.label)
 
         Framework[Config.Notify].Notify(targetSrc, "Your apartment is now at " .. apartment, "success")
-        Framework[Config.Notify].Notify(realtorSrc,
-            "You have added " .. targetToAdd.firstname .. " " .. targetToAdd.lastname .. " to apartment " .. apartment,
-            "success")
+        Framework[Config.Notify].Notify(realtorSrc, "You have added " .. targetToAdd.firstname .. " " .. targetToAdd.lastname .. " to apartment " .. apartment, "success")
 
         TriggerEvent("ps-housing:server:registerProperty", propertyData, true)
 

@@ -26,10 +26,17 @@ RegisterNetEvent("bl-realtor:server:addTenantToApartment", function(data)
     -- Job check
     local src = source
     local user_id = vRP.getUserId( src )
+
+    lib.print.info('bl-realtor:server:addTenantToApartment', src, user_id, vRP.getUserGroupByType(user_id, 'job'), RealtorJobs[group])
+
     if not user_id then return false end
     local group = vRP.getUserGroupByType(user_id, 'job')
     if not RealtorJobs[group] then return false end
     data.realtorSrc = src   
+
+    lib.print.info('bl-realtor:server:addTenantToApartment', data)
+
+
     TriggerEvent("ps-housing:server:addTenantToApartment", data)
 end)
 

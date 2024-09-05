@@ -39,7 +39,7 @@ if IsDuplicityVersion() then
     end
 
     function GetPlayerData(src)
-        return vRP.getUserIdentity( vRP.getUserId( src ) )
+        return vRP.getPlayerDataInfo(src) --vRP.getUserIdentity( vRP.getUserId( src ) )
     end
     
     

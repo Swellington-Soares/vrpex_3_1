@@ -8,10 +8,10 @@ Config.Inventory = "ox"
 Config.Logs = "vrpex" 
 
 -- Anyone provided with keys to a property has the ability to modify its furnishings.
-Config.AccessCanEditFurniture = true
+Config.AccessCanEditFurniture = false
 
 -- Draw the poly for the property
-Config.DebugMode = true
+Config.DebugMode = false
 
 function Debug(...)
     if Config.DebugMode then
@@ -23,7 +23,7 @@ end
 Config.EnableLogs = true
 
 -- Enables Dynamic Doors
-Config.DynamicDoors = false
+Config.DynamicDoors = true
 
 Config.PoliceJobNames = {  -- add multiple police jobs that are allowed to raid properties!
     "police",
@@ -53,11 +53,11 @@ Config.QBManagement = false
 
 -- Realtor Commisions based on job grade, the rest goes to the owner, if any.
 Config.Commissions = {
-    [0] = 0.05, -- 5% commision for each sale
-    [1] = 0.10,
-    [2] = 0.15,
-    [3] = 0.20,
-    [4] = 0.25,
+    [1] = 0.05, -- 5% commision for each sale
+    [2] = 0.10,
+    [3] = 0.15,
+    [4] = 0.20,
+    [5] = 0.25,
 }
 
 -- Set this value to false if you don't want to assign a starting apartment.

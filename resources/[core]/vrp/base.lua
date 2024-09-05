@@ -357,8 +357,7 @@ AddEventHandler('playerJoining', function(_)
   end  
 end)
 
-
-lib.callback.register('vrp:server:getPlayerData', function(source)
+function vRP.getPlayerDataInfo( source )
   local playerTable = vRP.getPlayerTable(vRP.getUserId(source))
   if playerTable then
     local job = vRP.getUserGroupByType(playerTable.user_id, "job")
@@ -381,7 +380,12 @@ lib.callback.register('vrp:server:getPlayerData', function(source)
       job = group and { name = job, rank = group.rank, onduty = group.duty } or { name = '', rank = 0, onduty = false }
     }
   end
-  return false
+
+  return nil
+end
+
+lib.callback.register('vrp:server:getPlayerData', function(source)
+  return vRP.getPlayerDataInfo( source )
 end)
 
 
@@ -409,36 +413,30 @@ RegisterCommand('re', function(source)
   vRP.user_sources[user_id] = source
 end)
 
-RegisterCommand('tw', function(source, args, raw)
-  local user_id = vRP.getUserId(source)
-  if user_id then
-    vRP.replaceWeapons(user_id, {})
-  end
-end)
+-- RegisterCommand('tw', function(source, args, raw)
+--   local user_id = vRP.getUserId(source)
+--   if user_id then
+--     vRP.replaceWeapons(user_id, {})
+--   end
+-- end)
 
-RegisterCommand('vt', function(source, args, raw)
-  print(json.encode(vRP.user_tables))
-  print(json.encode(vRP.rusers))
-  print(json.encode(vRP.user_sources))
-end)
+-- RegisterCommand('vt', function(source, args, raw)
+--   print(json.encode(vRP.user_tables))
+--   print(json.encode(vRP.rusers))
+--   print(json.encode(vRP.user_sources))
+-- end)
 
-RegisterCommand('ex', function(source, args, raw)
-  local code = raw
-  local x, err = load("return " .. code:sub(3), '', "bt", _G)
-  if not x then
-    print('ERROR', err)
-    return
-  end
+-- RegisterCommand('ex', function(source, args, raw)
+--   local code = raw
+--   local x, err = load("return " .. code:sub(3), '', "bt", _G)
+--   if not x then
+--     print('ERROR', err)
+--     return
+--   end
 
-  local _, result = pcall(x)
-  print('RESULT', result)
-end)
-
-
-RegisterCommand("addgroup", function(source, args, raw)
-  local user_id = 1
-end)
-
+--   local _, result = pcall(x)
+--   print('RESULT', result)
+-- end)
 
 -- --onesync event
 AddEventHandler('entityCreating', function(handle)

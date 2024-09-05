@@ -63,7 +63,7 @@ end
 
 local function RunDeathScene()
   if not IsScreenFadedOut() then DoScreenFadeOut(0) end
-  local fRESPAWN_CUTSCENE_RADIUS <const> = 15.0
+  local FRESPAWN_CUTSCENE_RADIUS <const> = 15.0
   local ped = PlayerPedId()
   local h = GetNearbyHospital(GetEntityCoords(ped))
   SetPlayerControl(cache.playerId, false, 0)
@@ -72,8 +72,8 @@ local function RunDeathScene()
   FreezeEntityPosition(ped, true)
   SetEntityInvincible(ped, true)
   -- SetEntityCollision(ped, false, false)
-  RemoveParticleFxInRange(h.coord.x, h.coord.y, h.coord.z, fRESPAWN_CUTSCENE_RADIUS)
-  RemoveDecalsInRange(h.coord.x, h.coord.y, h.coord.z, fRESPAWN_CUTSCENE_RADIUS)
+  RemoveParticleFxInRange(h.coord.x, h.coord.y, h.coord.z, FRESPAWN_CUTSCENE_RADIUS)
+  RemoveDecalsInRange(h.coord.x, h.coord.y, h.coord.z, FRESPAWN_CUTSCENE_RADIUS)
   ClearArea(h.coord.x, h.coord.y, h.coord.z, 5.0, true, false, false, false)
   Wait(1000)
   tvRP.revivePlayer()

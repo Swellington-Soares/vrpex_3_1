@@ -18,8 +18,7 @@ function tvRP.request(id, text, time)
     centered = true,
     size = 'md',
   })
-
-  print(alert)
+  
 
   vRPserver._requestResult(id, alert == 'confirm')
 end

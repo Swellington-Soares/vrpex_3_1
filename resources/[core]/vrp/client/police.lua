@@ -5,16 +5,6 @@ function tvRP.setCop(flag)
   LocalPlayer.state.cop = flag
 end
 
--- HANDCUFF
-
-
-
--- function tvRP.setHandcuffed(flag)
---   if handcuffed ~= flag then
---     tvRP.toggleHandcuff()
---   end
--- end
-
 function tvRP.isHandcuffed()
   return handcuffed
 end
@@ -148,7 +138,7 @@ AddStateBagChangeHandler('handcuffed', ('player:%s'):format(cache.serverId), fun
     
     beforeCuffDrawable = { GetPedDrawableVariation(cache.ped, 7), GetPedTextureVariation(cache.ped, 7) }
     local model = GetEntityModel(cache.ped)
-    if model == `mp_m_freemode_01` or mode == `mp_f_freemode_01` then
+    if model == `mp_m_freemode_01` or model == `mp_f_freemode_01` then
       SetPedComponentVariation(cache.ped, 7, model == `mp_m_freemode_01` and 41 or 25, 0, 0)
     end
     
