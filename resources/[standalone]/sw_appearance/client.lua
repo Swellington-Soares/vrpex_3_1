@@ -11,7 +11,7 @@ local DEFAULT_CONFIG <const> = {
 
 local cam
 local in_editor = false
-local tattoo_cache = {}
+local tattoo_cache = nil
 local tattoo_player = {}
 local isReversedCam = false
 local lastCamPage = 'body'
@@ -448,10 +448,9 @@ local function getMaxPropTexture(ped, component, propId)
 end
 
 local function getTattooList(ped)
-    if not isMpPed(ped) then return nil end
-    local gender = GetEntityModel(ped) == `mp_m_freemode_01` and 'm' or 'f'
-    if not tattoo_cache[gender] then
-        local j = LoadResourceFile(GetCurrentResourceName(), 'data/t_' .. gender .. '.json')
+    if not isMpPed(ped) then return nil end    
+    if not tattoo_cache then
+        local j = LoadResourceFile(GetCurrentResourceName(), 'data/tattoo.json')
         if j then
             local tattoos = json.decode(j)
             for i = 1, #tattoos do
@@ -459,11 +458,11 @@ local function getTattooList(ped)
                 tattoos[i].hash = ("%d_%d"):format(joaat(tattoos[i].collection) & 0xffffffff,
                     joaat(tattoos[i].overlay) & 0xffffffff)
             end
-            tattoo_cache[gender] = tattoos
+            tattoo_cache = tattoos
         end
     end
 
-    return tattoo_cache[gender]
+    return tattoo_cache
 end
 
 local function getPedHairs(ped)

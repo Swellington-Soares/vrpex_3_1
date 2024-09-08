@@ -64,7 +64,7 @@ onMounted(() => {
 })
 
 useNuiEvent('updatePed', () => {
-    updateTattooList()
+    addedTattoos.value.clear()
 })
 
 </script>

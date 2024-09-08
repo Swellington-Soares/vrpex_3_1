@@ -1,0 +1,5666 @@
+[
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 6720,
+        "label": "TAT_BI_000",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_MP_Biker_Tat_000_M",
+        "overlayFemale": "MP_MP_Biker_Tat_000_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 10800,
+        "label": "TAT_BI_001",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_MP_Biker_Tat_001_M",
+        "overlayFemale": "MP_MP_Biker_Tat_001_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 16820,
+        "label": "TAT_BI_002",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "MP_MP_Biker_Tat_002_M",
+        "overlayFemale": "MP_MP_Biker_Tat_002_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 10850,
+        "label": "TAT_BI_003",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_MP_Biker_Tat_003_M",
+        "overlayFemale": "MP_MP_Biker_Tat_003_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 17950,
+        "label": "TAT_BI_004",
+        "zone": "ZONE_RIGHT_LEG",
+        "overlayMale": "MP_MP_Biker_Tat_004_M",
+        "overlayFemale": "MP_MP_Biker_Tat_004_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 9230,
+        "label": "TAT_BI_005",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_MP_Biker_Tat_005_M",
+        "overlayFemale": "MP_MP_Biker_Tat_005_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 10400,
+        "label": "TAT_BI_006",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_MP_Biker_Tat_006_M",
+        "overlayFemale": "MP_MP_Biker_Tat_006_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 5100,
+        "label": "TAT_BI_007",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_MP_Biker_Tat_007_M",
+        "overlayFemale": "MP_MP_Biker_Tat_007_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 8785,
+        "label": "TAT_BI_008",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_MP_Biker_Tat_008_M",
+        "overlayFemale": "MP_MP_Biker_Tat_008_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 6350,
+        "label": "TAT_BI_009",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "MP_MP_Biker_Tat_009_M",
+        "overlayFemale": "MP_MP_Biker_Tat_009_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 11350,
+        "label": "TAT_BI_010",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_MP_Biker_Tat_010_M",
+        "overlayFemale": "MP_MP_Biker_Tat_010_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 12350,
+        "label": "TAT_BI_011",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_MP_Biker_Tat_011_M",
+        "overlayFemale": "MP_MP_Biker_Tat_011_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 4985,
+        "label": "TAT_BI_012",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_MP_Biker_Tat_012_M",
+        "overlayFemale": "MP_MP_Biker_Tat_012_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 11140,
+        "label": "TAT_BI_013",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_MP_Biker_Tat_013_M",
+        "overlayFemale": "MP_MP_Biker_Tat_013_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 8300,
+        "label": "TAT_BI_014",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_MP_Biker_Tat_014_M",
+        "overlayFemale": "MP_MP_Biker_Tat_014_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 8975,
+        "label": "TAT_BI_015",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "MP_MP_Biker_Tat_015_M",
+        "overlayFemale": "MP_MP_Biker_Tat_015_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 9000,
+        "label": "TAT_BI_016",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_MP_Biker_Tat_016_M",
+        "overlayFemale": "MP_MP_Biker_Tat_016_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 15650,
+        "label": "TAT_BI_017",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_MP_Biker_Tat_017_M",
+        "overlayFemale": "MP_MP_Biker_Tat_017_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 7650,
+        "label": "TAT_BI_018",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_MP_Biker_Tat_018_M",
+        "overlayFemale": "MP_MP_Biker_Tat_018_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 9900,
+        "label": "TAT_BI_019",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_MP_Biker_Tat_019_M",
+        "overlayFemale": "MP_MP_Biker_Tat_019_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 9745,
+        "label": "TAT_BI_020",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_MP_Biker_Tat_020_M",
+        "overlayFemale": "MP_MP_Biker_Tat_020_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 13700,
+        "label": "TAT_BI_021",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_MP_Biker_Tat_021_M",
+        "overlayFemale": "MP_MP_Biker_Tat_021_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 9385,
+        "label": "TAT_BI_022",
+        "zone": "ZONE_RIGHT_LEG",
+        "overlayMale": "MP_MP_Biker_Tat_022_M",
+        "overlayFemale": "MP_MP_Biker_Tat_022_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 10000,
+        "label": "TAT_BI_023",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_MP_Biker_Tat_023_M",
+        "overlayFemale": "MP_MP_Biker_Tat_023_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 15320,
+        "label": "TAT_BI_024",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_MP_Biker_Tat_024_M",
+        "overlayFemale": "MP_MP_Biker_Tat_024_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 12950,
+        "label": "TAT_BI_025",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_MP_Biker_Tat_025_M",
+        "overlayFemale": "MP_MP_Biker_Tat_025_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 11000,
+        "label": "TAT_BI_026",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_MP_Biker_Tat_026_M",
+        "overlayFemale": "MP_MP_Biker_Tat_026_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 6960,
+        "label": "TAT_BI_027",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "MP_MP_Biker_Tat_027_M",
+        "overlayFemale": "MP_MP_Biker_Tat_027_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 14520,
+        "label": "TAT_BI_028",
+        "zone": "ZONE_RIGHT_LEG",
+        "overlayMale": "MP_MP_Biker_Tat_028_M",
+        "overlayFemale": "MP_MP_Biker_Tat_028_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 9630,
+        "label": "TAT_BI_029",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_MP_Biker_Tat_029_M",
+        "overlayFemale": "MP_MP_Biker_Tat_029_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 9810,
+        "label": "TAT_BI_030",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_MP_Biker_Tat_030_M",
+        "overlayFemale": "MP_MP_Biker_Tat_030_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 8600,
+        "label": "TAT_BI_031",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_MP_Biker_Tat_031_M",
+        "overlayFemale": "MP_MP_Biker_Tat_031_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 7655,
+        "label": "TAT_BI_032",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_MP_Biker_Tat_032_M",
+        "overlayFemale": "MP_MP_Biker_Tat_032_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 4385,
+        "label": "TAT_BI_033",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_MP_Biker_Tat_033_M",
+        "overlayFemale": "MP_MP_Biker_Tat_033_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 9975,
+        "label": "TAT_BI_034",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_MP_Biker_Tat_034_M",
+        "overlayFemale": "MP_MP_Biker_Tat_034_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 5780,
+        "label": "TAT_BI_035",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_MP_Biker_Tat_035_M",
+        "overlayFemale": "MP_MP_Biker_Tat_035_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 9300,
+        "label": "TAT_BI_036",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "MP_MP_Biker_Tat_036_M",
+        "overlayFemale": "MP_MP_Biker_Tat_036_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 12495,
+        "label": "TAT_BI_037",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "MP_MP_Biker_Tat_037_M",
+        "overlayFemale": "MP_MP_Biker_Tat_037_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 3900,
+        "label": "TAT_BI_038",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "MP_MP_Biker_Tat_038_M",
+        "overlayFemale": "MP_MP_Biker_Tat_038_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 10950,
+        "label": "TAT_BI_039",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_MP_Biker_Tat_039_M",
+        "overlayFemale": "MP_MP_Biker_Tat_039_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 13620,
+        "label": "TAT_BI_040",
+        "zone": "ZONE_RIGHT_LEG",
+        "overlayMale": "MP_MP_Biker_Tat_040_M",
+        "overlayFemale": "MP_MP_Biker_Tat_040_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 8320,
+        "label": "TAT_BI_041",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_MP_Biker_Tat_041_M",
+        "overlayFemale": "MP_MP_Biker_Tat_041_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 7865,
+        "label": "TAT_BI_042",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_MP_Biker_Tat_042_M",
+        "overlayFemale": "MP_MP_Biker_Tat_042_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 6850,
+        "label": "TAT_BI_043",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_MP_Biker_Tat_043_M",
+        "overlayFemale": "MP_MP_Biker_Tat_043_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 11900,
+        "label": "TAT_BI_044",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "MP_MP_Biker_Tat_044_M",
+        "overlayFemale": "MP_MP_Biker_Tat_044_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 6320,
+        "label": "TAT_BI_045",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_MP_Biker_Tat_045_M",
+        "overlayFemale": "MP_MP_Biker_Tat_045_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 4985,
+        "label": "TAT_BI_046",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_MP_Biker_Tat_046_M",
+        "overlayFemale": "MP_MP_Biker_Tat_046_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 13500,
+        "label": "TAT_BI_047",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_MP_Biker_Tat_047_M",
+        "overlayFemale": "MP_MP_Biker_Tat_047_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 8930,
+        "label": "TAT_BI_048",
+        "zone": "ZONE_RIGHT_LEG",
+        "overlayMale": "MP_MP_Biker_Tat_048_M",
+        "overlayFemale": "MP_MP_Biker_Tat_048_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 8790,
+        "label": "TAT_BI_049",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_MP_Biker_Tat_049_M",
+        "overlayFemale": "MP_MP_Biker_Tat_049_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 8720,
+        "label": "TAT_BI_050",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_MP_Biker_Tat_050_M",
+        "overlayFemale": "MP_MP_Biker_Tat_050_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 4125,
+        "label": "TAT_BI_051",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "MP_MP_Biker_Tat_051_M",
+        "overlayFemale": "MP_MP_Biker_Tat_051_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 9135,
+        "label": "TAT_BI_052",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_MP_Biker_Tat_052_M",
+        "overlayFemale": "MP_MP_Biker_Tat_052_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 8400,
+        "label": "TAT_BI_053",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_MP_Biker_Tat_053_M",
+        "overlayFemale": "MP_MP_Biker_Tat_053_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 10450,
+        "label": "TAT_BI_054",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_MP_Biker_Tat_054_M",
+        "overlayFemale": "MP_MP_Biker_Tat_054_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 10995,
+        "label": "TAT_BI_055",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_MP_Biker_Tat_055_M",
+        "overlayFemale": "MP_MP_Biker_Tat_055_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 14960,
+        "label": "TAT_BI_056",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "MP_MP_Biker_Tat_056_M",
+        "overlayFemale": "MP_MP_Biker_Tat_056_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 13865,
+        "label": "TAT_BI_057",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "MP_MP_Biker_Tat_057_M",
+        "overlayFemale": "MP_MP_Biker_Tat_057_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 7985,
+        "label": "TAT_BI_058",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_MP_Biker_Tat_058_M",
+        "overlayFemale": "MP_MP_Biker_Tat_058_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 6395,
+        "label": "TAT_BI_059",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_MP_Biker_Tat_059_M",
+        "overlayFemale": "MP_MP_Biker_Tat_059_F"
+    },
+    {
+        "collection": "mpBiker_overlays",
+        "cost": 7105,
+        "label": "TAT_BI_060",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_MP_Biker_Tat_060_M",
+        "overlayFemale": "MP_MP_Biker_Tat_060_F"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 5950,
+        "label": "TAT_X2_000",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Xmas2_M_Tat_000",
+        "overlayFemale": "MP_Xmas2_F_Tat_000"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 4650,
+        "label": "TAT_X2_001",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "MP_Xmas2_M_Tat_001",
+        "overlayFemale": "MP_Xmas2_F_Tat_001"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 6350,
+        "label": "TAT_X2_002",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "MP_Xmas2_M_Tat_002",
+        "overlayFemale": "MP_Xmas2_F_Tat_002"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 8450,
+        "label": "TAT_X2_003",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Xmas2_M_Tat_003",
+        "overlayFemale": "MP_Xmas2_F_Tat_003"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 13250,
+        "label": "TAT_X2_004",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Xmas2_M_Tat_004",
+        "overlayFemale": "MP_Xmas2_F_Tat_004"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 8750,
+        "label": "TAT_X2_005",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Xmas2_M_Tat_005",
+        "overlayFemale": "MP_Xmas2_F_Tat_005"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 14500,
+        "label": "TAT_X2_006",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Xmas2_M_Tat_006",
+        "overlayFemale": "MP_Xmas2_F_Tat_006"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 3950,
+        "label": "TAT_X2_007",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "MP_Xmas2_M_Tat_007",
+        "overlayFemale": "MP_Xmas2_F_Tat_007"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 4300,
+        "label": "TAT_X2_008",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Xmas2_M_Tat_008",
+        "overlayFemale": "MP_Xmas2_F_Tat_008"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 7800,
+        "label": "TAT_X2_009",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Xmas2_M_Tat_009",
+        "overlayFemale": "MP_Xmas2_F_Tat_009"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 6200,
+        "label": "TAT_X2_010",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Xmas2_M_Tat_010",
+        "overlayFemale": "MP_Xmas2_F_Tat_010"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 6850,
+        "label": "TAT_X2_011",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Xmas2_M_Tat_011",
+        "overlayFemale": "MP_Xmas2_F_Tat_011"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 8250,
+        "label": "TAT_X2_012",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Xmas2_M_Tat_012",
+        "overlayFemale": "MP_Xmas2_F_Tat_012"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 7900,
+        "label": "TAT_X2_013",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Xmas2_M_Tat_013",
+        "overlayFemale": "MP_Xmas2_F_Tat_013"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 10500,
+        "label": "TAT_X2_014",
+        "zone": "ZONE_RIGHT_LEG",
+        "overlayMale": "MP_Xmas2_M_Tat_014",
+        "overlayFemale": "MP_Xmas2_F_Tat_014"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 11000,
+        "label": "TAT_X2_015",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Xmas2_M_Tat_015",
+        "overlayFemale": "MP_Xmas2_F_Tat_015"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 3150,
+        "label": "TAT_X2_016",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Xmas2_M_Tat_016",
+        "overlayFemale": "MP_Xmas2_F_Tat_016"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 6350,
+        "label": "TAT_X2_017",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Xmas2_M_Tat_017",
+        "overlayFemale": "MP_Xmas2_F_Tat_017"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 4300,
+        "label": "TAT_X2_018",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Xmas2_M_Tat_018",
+        "overlayFemale": "MP_Xmas2_F_Tat_018"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 7500,
+        "label": "TAT_X2_019",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Xmas2_M_Tat_019",
+        "overlayFemale": "MP_Xmas2_F_Tat_019"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 2500,
+        "label": "TAT_X2_020",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Xmas2_M_Tat_020",
+        "overlayFemale": "MP_Xmas2_F_Tat_020"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 3750,
+        "label": "TAT_X2_021",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Xmas2_M_Tat_021",
+        "overlayFemale": "MP_Xmas2_F_Tat_021"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 3800,
+        "label": "TAT_X2_022",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Xmas2_M_Tat_022",
+        "overlayFemale": "MP_Xmas2_F_Tat_022"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 5100,
+        "label": "TAT_X2_023",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Xmas2_M_Tat_023",
+        "overlayFemale": "MP_Xmas2_F_Tat_023"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 2100,
+        "label": "TAT_X2_024",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "MP_Xmas2_M_Tat_024",
+        "overlayFemale": "MP_Xmas2_F_Tat_024"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 4600,
+        "label": "TAT_X2_025",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "MP_Xmas2_M_Tat_025",
+        "overlayFemale": "MP_Xmas2_F_Tat_025"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 1300,
+        "label": "TAT_X2_026",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Xmas2_M_Tat_026",
+        "overlayFemale": "MP_Xmas2_F_Tat_026"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 2200,
+        "label": "TAT_X2_027",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Xmas2_M_Tat_027",
+        "overlayFemale": "MP_Xmas2_F_Tat_027"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 5700,
+        "label": "TAT_X2_028",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Xmas2_M_Tat_028",
+        "overlayFemale": "MP_Xmas2_F_Tat_028"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 3150,
+        "label": "TAT_X2_029",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "MP_Xmas2_M_Tat_029",
+        "overlayFemale": "MP_Xmas2_F_Tat_029"
+    },
+    {
+        "collection": "mpChristmas2017_overlays",
+        "cost": 696900,
+        "label": "TAT_H27_000",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Christmas2017_Tattoo_000_M",
+        "overlayFemale": "MP_Christmas2017_Tattoo_000_F"
+    },
+    {
+        "collection": "mpChristmas2017_overlays",
+        "cost": 696901,
+        "label": "TAT_H27_001",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Christmas2017_Tattoo_001_M",
+        "overlayFemale": "MP_Christmas2017_Tattoo_001_F"
+    },
+    {
+        "collection": "mpChristmas2017_overlays",
+        "cost": 696902,
+        "label": "TAT_H27_002",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Christmas2017_Tattoo_002_M",
+        "overlayFemale": "MP_Christmas2017_Tattoo_002_F"
+    },
+    {
+        "collection": "mpChristmas2017_overlays",
+        "cost": 696903,
+        "label": "TAT_H27_003",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Christmas2017_Tattoo_003_M",
+        "overlayFemale": "MP_Christmas2017_Tattoo_003_F"
+    },
+    {
+        "collection": "mpChristmas2017_overlays",
+        "cost": 696904,
+        "label": "TAT_H27_004",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Christmas2017_Tattoo_004_M",
+        "overlayFemale": "MP_Christmas2017_Tattoo_004_F"
+    },
+    {
+        "collection": "mpChristmas2017_overlays",
+        "cost": 696905,
+        "label": "TAT_H27_005",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Christmas2017_Tattoo_005_M",
+        "overlayFemale": "MP_Christmas2017_Tattoo_005_F"
+    },
+    {
+        "collection": "mpChristmas2017_overlays",
+        "cost": 696906,
+        "label": "TAT_H27_006",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Christmas2017_Tattoo_006_M",
+        "overlayFemale": "MP_Christmas2017_Tattoo_006_F"
+    },
+    {
+        "collection": "mpChristmas2017_overlays",
+        "cost": 696907,
+        "label": "TAT_H27_007",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Christmas2017_Tattoo_007_M",
+        "overlayFemale": "MP_Christmas2017_Tattoo_007_F"
+    },
+    {
+        "collection": "mpChristmas2017_overlays",
+        "cost": 696908,
+        "label": "TAT_H27_008",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Christmas2017_Tattoo_008_M",
+        "overlayFemale": "MP_Christmas2017_Tattoo_008_F"
+    },
+    {
+        "collection": "mpChristmas2017_overlays",
+        "cost": 696909,
+        "label": "TAT_H27_009",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Christmas2017_Tattoo_009_M",
+        "overlayFemale": "MP_Christmas2017_Tattoo_009_F"
+    },
+    {
+        "collection": "mpChristmas2017_overlays",
+        "cost": 696910,
+        "label": "TAT_H27_010",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Christmas2017_Tattoo_010_M",
+        "overlayFemale": "MP_Christmas2017_Tattoo_010_F"
+    },
+    {
+        "collection": "mpChristmas2017_overlays",
+        "cost": 696911,
+        "label": "TAT_H27_011",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Christmas2017_Tattoo_011_M",
+        "overlayFemale": "MP_Christmas2017_Tattoo_011_F"
+    },
+    {
+        "collection": "mpChristmas2017_overlays",
+        "cost": 696912,
+        "label": "TAT_H27_012",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Christmas2017_Tattoo_012_M",
+        "overlayFemale": "MP_Christmas2017_Tattoo_012_F"
+    },
+    {
+        "collection": "mpChristmas2017_overlays",
+        "cost": 696913,
+        "label": "TAT_H27_013",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Christmas2017_Tattoo_013_M",
+        "overlayFemale": "MP_Christmas2017_Tattoo_013_F"
+    },
+    {
+        "collection": "mpChristmas2017_overlays",
+        "cost": 696914,
+        "label": "TAT_H27_014",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Christmas2017_Tattoo_014_M",
+        "overlayFemale": "MP_Christmas2017_Tattoo_014_F"
+    },
+    {
+        "collection": "mpChristmas2017_overlays",
+        "cost": 696915,
+        "label": "TAT_H27_015",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Christmas2017_Tattoo_015_M",
+        "overlayFemale": "MP_Christmas2017_Tattoo_015_F"
+    },
+    {
+        "collection": "mpChristmas2017_overlays",
+        "cost": 696916,
+        "label": "TAT_H27_016",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Christmas2017_Tattoo_016_M",
+        "overlayFemale": "MP_Christmas2017_Tattoo_016_F"
+    },
+    {
+        "collection": "mpChristmas2017_overlays",
+        "cost": 696917,
+        "label": "TAT_H27_017",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Christmas2017_Tattoo_017_M",
+        "overlayFemale": "MP_Christmas2017_Tattoo_017_F"
+    },
+    {
+        "collection": "mpChristmas2017_overlays",
+        "cost": 696918,
+        "label": "TAT_H27_018",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Christmas2017_Tattoo_018_M",
+        "overlayFemale": "MP_Christmas2017_Tattoo_018_F"
+    },
+    {
+        "collection": "mpChristmas2017_overlays",
+        "cost": 696919,
+        "label": "TAT_H27_019",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Christmas2017_Tattoo_019_M",
+        "overlayFemale": "MP_Christmas2017_Tattoo_019_F"
+    },
+    {
+        "collection": "mpChristmas2017_overlays",
+        "cost": 696920,
+        "label": "TAT_H27_020",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Christmas2017_Tattoo_020_M",
+        "overlayFemale": "MP_Christmas2017_Tattoo_020_F"
+    },
+    {
+        "collection": "mpChristmas2017_overlays",
+        "cost": 696921,
+        "label": "TAT_H27_021",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Christmas2017_Tattoo_021_M",
+        "overlayFemale": "MP_Christmas2017_Tattoo_021_F"
+    },
+    {
+        "collection": "mpChristmas2017_overlays",
+        "cost": 696922,
+        "label": "TAT_H27_022",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Christmas2017_Tattoo_022_M",
+        "overlayFemale": "MP_Christmas2017_Tattoo_022_F"
+    },
+    {
+        "collection": "mpChristmas2017_overlays",
+        "cost": 696923,
+        "label": "TAT_H27_023",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Christmas2017_Tattoo_023_M",
+        "overlayFemale": "MP_Christmas2017_Tattoo_023_F"
+    },
+    {
+        "collection": "mpChristmas2017_overlays",
+        "cost": 696924,
+        "label": "TAT_H27_024",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Christmas2017_Tattoo_024_M",
+        "overlayFemale": "MP_Christmas2017_Tattoo_024_F"
+    },
+    {
+        "collection": "mpChristmas2017_overlays",
+        "cost": 696925,
+        "label": "TAT_H27_025",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Christmas2017_Tattoo_025_M",
+        "overlayFemale": "MP_Christmas2017_Tattoo_025_F"
+    },
+    {
+        "collection": "mpChristmas2017_overlays",
+        "cost": 696926,
+        "label": "TAT_H27_026",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Christmas2017_Tattoo_026_M",
+        "overlayFemale": "MP_Christmas2017_Tattoo_026_F"
+    },
+    {
+        "collection": "mpChristmas2017_overlays",
+        "cost": 696927,
+        "label": "TAT_H27_027",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Christmas2017_Tattoo_027_M",
+        "overlayFemale": "MP_Christmas2017_Tattoo_027_F"
+    },
+    {
+        "collection": "mpChristmas2017_overlays",
+        "cost": 696928,
+        "label": "TAT_H27_028",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Christmas2017_Tattoo_028_M",
+        "overlayFemale": "MP_Christmas2017_Tattoo_028_F"
+    },
+    {
+        "collection": "mpChristmas2017_overlays",
+        "cost": 696929,
+        "label": "TAT_H27_029",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Christmas2017_Tattoo_029_M",
+        "overlayFemale": "MP_Christmas2017_Tattoo_029_F"
+    },
+    {
+        "collection": "mpChristmas2018_overlays",
+        "cost": 100,
+        "label": "TAT_AW_000",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Christmas2018_Tat_000_M",
+        "overlayFemale": "MP_Christmas2018_Tat_000_F"
+    },
+    {
+        "collection": "mpChristmas3_overlays",
+        "cost": 0,
+        "label": "TAT_X6_000",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Christmas3_Tat_000_M",
+        "overlayFemale": "MP_Christmas3_Tat_000_F"
+    },
+    {
+        "collection": "mpChristmas3_overlays",
+        "cost": 0,
+        "label": "TAT_X6_001",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Christmas3_Tat_001_M",
+        "overlayFemale": "MP_Christmas3_Tat_001_F"
+    },
+    {
+        "collection": "mpChristmas3_overlays",
+        "cost": 0,
+        "label": "TAT_X6_002",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Christmas3_Tat_002_M",
+        "overlayFemale": "MP_Christmas3_Tat_002_F"
+    },
+    {
+        "collection": "mpChristmas3_overlays",
+        "cost": 0,
+        "label": "TAT_X6_003",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Christmas3_Tat_003_M",
+        "overlayFemale": "MP_Christmas3_Tat_003_F"
+    },
+    {
+        "collection": "mpChristmas3_overlays",
+        "cost": 0,
+        "label": "TAT_X6_004",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Christmas3_Tat_004_M",
+        "overlayFemale": "MP_Christmas3_Tat_004_F"
+    },
+    {
+        "collection": "mpChristmas3_overlays",
+        "cost": 0,
+        "label": "TAT_X6_005",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Christmas3_Tat_005_M",
+        "overlayFemale": "MP_Christmas3_Tat_005_F"
+    },
+    {
+        "collection": "mpChristmas3_overlays",
+        "cost": 0,
+        "label": "TAT_X6_006",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Christmas3_Tat_006_M",
+        "overlayFemale": "MP_Christmas3_Tat_006_F"
+    },
+    {
+        "collection": "mpChristmas3_overlays",
+        "cost": 0,
+        "label": "TAT_X6_007",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Christmas3_Tat_007_M",
+        "overlayFemale": "MP_Christmas3_Tat_007_F"
+    },
+    {
+        "collection": "mpChristmas3_overlays",
+        "cost": 0,
+        "label": "TAT_X6_008",
+        "zone": "ZONE_RIGHT_LEG",
+        "overlayMale": "MP_Christmas3_Tat_008_M",
+        "overlayFemale": "MP_Christmas3_Tat_008_F"
+    },
+    {
+        "collection": "mpChristmas3_overlays",
+        "cost": 0,
+        "label": "TAT_X6_009",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "MP_Christmas3_Tat_009_M",
+        "overlayFemale": "MP_Christmas3_Tat_009_F"
+    },
+    {
+        "collection": "mpChristmas3_overlays",
+        "cost": 0,
+        "label": "TAT_X6_010",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "MP_Christmas3_Tat_010_M",
+        "overlayFemale": "MP_Christmas3_Tat_010_F"
+    },
+    {
+        "collection": "mpChristmas3_overlays",
+        "cost": 0,
+        "label": "TAT_X6_011",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "MP_Christmas3_Tat_011_M",
+        "overlayFemale": "MP_Christmas3_Tat_011_F"
+    },
+    {
+        "collection": "mpChristmas3_overlays",
+        "cost": 0,
+        "label": "TAT_X6_012",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "MP_Christmas3_Tat_012_M",
+        "overlayFemale": "MP_Christmas3_Tat_012_F"
+    },
+    {
+        "collection": "mpChristmas3_overlays",
+        "cost": 0,
+        "label": "TAT_X6_013",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "MP_Christmas3_Tat_013_M",
+        "overlayFemale": "MP_Christmas3_Tat_013_F"
+    },
+    {
+        "collection": "mpChristmas3_overlays",
+        "cost": 0,
+        "label": "TAT_X6_014",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Christmas3_Tat_014_M",
+        "overlayFemale": "MP_Christmas3_Tat_014_F"
+    },
+    {
+        "collection": "mpChristmas3_overlays",
+        "cost": 0,
+        "label": "TAT_X6_015",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Christmas3_Tat_015_M",
+        "overlayFemale": "MP_Christmas3_Tat_015_F"
+    },
+    {
+        "collection": "mpChristmas3_overlays",
+        "cost": 0,
+        "label": "TAT_X6_016",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Christmas3_Tat_016_M",
+        "overlayFemale": "MP_Christmas3_Tat_016_F"
+    },
+    {
+        "collection": "mpChristmas3_overlays",
+        "cost": 0,
+        "label": "TAT_X6_017",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Christmas3_Tat_017_M",
+        "overlayFemale": "MP_Christmas3_Tat_017_F"
+    },
+    {
+        "collection": "mpChristmas3_overlays",
+        "cost": 0,
+        "label": "TAT_X6_018",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Christmas3_Tat_018_M",
+        "overlayFemale": "MP_Christmas3_Tat_018_F"
+    },
+    {
+        "collection": "mpChristmas3_overlays",
+        "cost": 0,
+        "label": "TAT_X6_019",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Christmas3_Tat_019_M",
+        "overlayFemale": "MP_Christmas3_Tat_019_F"
+    },
+    {
+        "collection": "mpChristmas3_overlays",
+        "cost": 0,
+        "label": "TAT_X6_020",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Christmas3_Tat_020_M",
+        "overlayFemale": "MP_Christmas3_Tat_020_F"
+    },
+    {
+        "collection": "mpChristmas3_overlays",
+        "cost": 0,
+        "label": "TAT_X6_021",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Christmas3_Tat_021_M",
+        "overlayFemale": "MP_Christmas3_Tat_021_F"
+    },
+    {
+        "collection": "mpChristmas3_overlays",
+        "cost": 0,
+        "label": "TAT_X6_022",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Christmas3_Tat_022_M",
+        "overlayFemale": "MP_Christmas3_Tat_022_F"
+    },
+    {
+        "collection": "mpChristmas3_overlays",
+        "cost": 0,
+        "label": "TAT_X6_023",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Christmas3_Tat_023_M",
+        "overlayFemale": "MP_Christmas3_Tat_023_F"
+    },
+    {
+        "collection": "mpChristmas3_overlays",
+        "cost": 0,
+        "label": "TAT_X6_024",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Christmas3_Tat_024_M",
+        "overlayFemale": "MP_Christmas3_Tat_024_F"
+    },
+    {
+        "collection": "mpChristmas3_overlays",
+        "cost": 0,
+        "label": "TAT_X6_025",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Christmas3_Tat_025_M",
+        "overlayFemale": "MP_Christmas3_Tat_025_F"
+    },
+    {
+        "collection": "mpChristmas3_overlays",
+        "cost": 0,
+        "label": "TAT_X6_026",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Christmas3_Tat_026_M",
+        "overlayFemale": "MP_Christmas3_Tat_026_F"
+    },
+    {
+        "collection": "mpChristmas3_overlays",
+        "cost": 0,
+        "label": "TAT_X6_027",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Christmas3_Tat_027_M",
+        "overlayFemale": "MP_Christmas3_Tat_027_F"
+    },
+    {
+        "collection": "mpChristmas3_overlays",
+        "cost": 0,
+        "label": "TAT_X6_028",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Christmas3_Tat_028_M",
+        "overlayFemale": "MP_Christmas3_Tat_028_F"
+    },
+    {
+        "collection": "mpChristmas3_overlays",
+        "cost": 0,
+        "label": "TAT_X6_029",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Christmas3_Tat_029_M",
+        "overlayFemale": "MP_Christmas3_Tat_029_F"
+    },
+    {
+        "collection": "mpChristmas3_overlays",
+        "cost": 0,
+        "label": "TAT_X6_030",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Christmas3_Tat_030_M",
+        "overlayFemale": "MP_Christmas3_Tat_030_F"
+    },
+    {
+        "collection": "mpChristmas3_overlays",
+        "cost": 0,
+        "label": "TAT_X6_031",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Christmas3_Tat_031_M",
+        "overlayFemale": "MP_Christmas3_Tat_031_F"
+    },
+    {
+        "collection": "mpChristmas3_overlays",
+        "cost": 0,
+        "label": "TAT_X6_032",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Christmas3_Tat_032_M",
+        "overlayFemale": "MP_Christmas3_Tat_032_F"
+    },
+    {
+        "collection": "mpChristmas3_overlays",
+        "cost": 0,
+        "label": "TAT_X6_033",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Christmas3_Tat_033_M",
+        "overlayFemale": "MP_Christmas3_Tat_033_F"
+    },
+    {
+        "collection": "mpChristmas3_overlays",
+        "cost": 0,
+        "label": "TAT_X6_034",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "MP_Christmas3_Tat_034_M",
+        "overlayFemale": "MP_Christmas3_Tat_034_F"
+    },
+    {
+        "collection": "mpChristmas3_overlays",
+        "cost": 0,
+        "label": "TAT_X6_035",
+        "zone": "ZONE_RIGHT_LEG",
+        "overlayMale": "MP_Christmas3_Tat_035_M",
+        "overlayFemale": "MP_Christmas3_Tat_035_F"
+    },
+    {
+        "collection": "mpChristmas3_overlays",
+        "cost": 0,
+        "label": "TAT_X6_036",
+        "zone": "ZONE_RIGHT_LEG",
+        "overlayMale": "MP_Christmas3_Tat_036_M",
+        "overlayFemale": "MP_Christmas3_Tat_036_F"
+    },
+    {
+        "collection": "mpChristmas3_overlays",
+        "cost": 0,
+        "label": "TAT_X6_037",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "MP_Christmas3_Tat_037_M",
+        "overlayFemale": "MP_Christmas3_Tat_037_F"
+    },
+    {
+        "collection": "mpChristmas3_overlays",
+        "cost": 0,
+        "label": "TAT_X6_038",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "MP_Christmas3_Tat_038_M",
+        "overlayFemale": "MP_Christmas3_Tat_038_F"
+    },
+    {
+        "collection": "mpChristmas3_overlays",
+        "cost": 0,
+        "label": "TAT_X6_039",
+        "zone": "ZONE_RIGHT_LEG",
+        "overlayMale": "MP_Christmas3_Tat_039_M",
+        "overlayFemale": "MP_Christmas3_Tat_039_F"
+    },
+    {
+        "collection": "mpChristmas3_overlays",
+        "cost": 0,
+        "label": "TAT_X6_040",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Christmas3_Tat_040_M",
+        "overlayFemale": "MP_Christmas3_Tat_040_F"
+    },
+    {
+        "collection": "mpChristmas3_overlays",
+        "cost": 0,
+        "label": "TAT_X6_041",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Christmas3_Tat_041_M",
+        "overlayFemale": "MP_Christmas3_Tat_041_F"
+    },
+    {
+        "collection": "mpChristmas3_overlays",
+        "cost": 0,
+        "label": "TAT_X6_042",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Christmas3_Tat_042_M",
+        "overlayFemale": "MP_Christmas3_Tat_042_F"
+    },
+    {
+        "collection": "mpChristmas3_overlays",
+        "cost": 0,
+        "label": "TAT_X6_043",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Christmas3_Tat_043_M",
+        "overlayFemale": "MP_Christmas3_Tat_043_F"
+    },
+    {
+        "collection": "mpChristmas3_overlays",
+        "cost": 0,
+        "label": "TAT_X6_044",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Christmas3_Tat_044_M",
+        "overlayFemale": "MP_Christmas3_Tat_044_F"
+    },
+    {
+        "collection": "mpChristmas3_overlays",
+        "cost": 0,
+        "label": "TAT_X6_045",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Christmas3_Tat_045_M",
+        "overlayFemale": "MP_Christmas3_Tat_045_F"
+    },
+    {
+        "collection": "mpChristmas3_overlays",
+        "cost": 0,
+        "label": "TAT_X6_046",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Christmas3_Tat_046_M",
+        "overlayFemale": "MP_Christmas3_Tat_046_F"
+    },
+    {
+        "collection": "mpChristmas3_overlays",
+        "cost": 0,
+        "label": "TAT_X6_047",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Christmas3_Tat_047_M",
+        "overlayFemale": "MP_Christmas3_Tat_047_F"
+    },
+    {
+        "collection": "mpChristmas3_overlays",
+        "cost": 0,
+        "label": "TAT_X6_048",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Christmas3_Tat_048_M",
+        "overlayFemale": "MP_Christmas3_Tat_048_F"
+    },
+    {
+        "collection": "mpChristmas3_overlays",
+        "cost": 0,
+        "label": "TAT_X6_049",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Christmas3_Tat_049_M",
+        "overlayFemale": "MP_Christmas3_Tat_049_F"
+    },
+    {
+        "collection": "mpChristmas3_overlays",
+        "cost": 0,
+        "label": "TAT_X6_050",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Christmas3_Tat_050_M",
+        "overlayFemale": "MP_Christmas3_Tat_050_F"
+    },
+    {
+        "collection": "mpChristmas3_overlays",
+        "cost": 0,
+        "label": "TAT_X6_051",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Christmas3_Tat_051_M",
+        "overlayFemale": "MP_Christmas3_Tat_051_F"
+    },
+    {
+        "collection": "mpGunrunning_overlays",
+        "cost": 16985,
+        "label": "TAT_GR_000",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Gunrunning_Tattoo_000_M",
+        "overlayFemale": "MP_Gunrunning_Tattoo_000_F"
+    },
+    {
+        "collection": "mpGunrunning_overlays",
+        "cost": 19355,
+        "label": "TAT_GR_001",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Gunrunning_Tattoo_001_M",
+        "overlayFemale": "MP_Gunrunning_Tattoo_001_F"
+    },
+    {
+        "collection": "mpGunrunning_overlays",
+        "cost": 14650,
+        "label": "TAT_GR_002",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Gunrunning_Tattoo_002_M",
+        "overlayFemale": "MP_Gunrunning_Tattoo_002_F"
+    },
+    {
+        "collection": "mpGunrunning_overlays",
+        "cost": 8750,
+        "label": "TAT_GR_003",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "MP_Gunrunning_Tattoo_003_M",
+        "overlayFemale": "MP_Gunrunning_Tattoo_003_F"
+    },
+    {
+        "collection": "mpGunrunning_overlays",
+        "cost": 11285,
+        "label": "TAT_GR_004",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Gunrunning_Tattoo_004_M",
+        "overlayFemale": "MP_Gunrunning_Tattoo_004_F"
+    },
+    {
+        "collection": "mpGunrunning_overlays",
+        "cost": 9120,
+        "label": "TAT_GR_005",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "MP_Gunrunning_Tattoo_005_M",
+        "overlayFemale": "MP_Gunrunning_Tattoo_005_F"
+    },
+    {
+        "collection": "mpGunrunning_overlays",
+        "cost": 10670,
+        "label": "TAT_GR_006",
+        "zone": "ZONE_RIGHT_LEG",
+        "overlayMale": "MP_Gunrunning_Tattoo_006_M",
+        "overlayFemale": "MP_Gunrunning_Tattoo_006_F"
+    },
+    {
+        "collection": "mpGunrunning_overlays",
+        "cost": 9660,
+        "label": "TAT_GR_007",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "MP_Gunrunning_Tattoo_007_M",
+        "overlayFemale": "MP_Gunrunning_Tattoo_007_F"
+    },
+    {
+        "collection": "mpGunrunning_overlays",
+        "cost": 13445,
+        "label": "TAT_GR_008",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Gunrunning_Tattoo_008_M",
+        "overlayFemale": "MP_Gunrunning_Tattoo_008_F"
+    },
+    {
+        "collection": "mpGunrunning_overlays",
+        "cost": 14650,
+        "label": "TAT_GR_009",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Gunrunning_Tattoo_009_M",
+        "overlayFemale": "MP_Gunrunning_Tattoo_009_F"
+    },
+    {
+        "collection": "mpGunrunning_overlays",
+        "cost": 19050,
+        "label": "TAT_GR_010",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Gunrunning_Tattoo_010_M",
+        "overlayFemale": "MP_Gunrunning_Tattoo_010_F"
+    },
+    {
+        "collection": "mpGunrunning_overlays",
+        "cost": 9785,
+        "label": "TAT_GR_011",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "MP_Gunrunning_Tattoo_011_M",
+        "overlayFemale": "MP_Gunrunning_Tattoo_011_F"
+    },
+    {
+        "collection": "mpGunrunning_overlays",
+        "cost": 15060,
+        "label": "TAT_GR_012",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Gunrunning_Tattoo_012_M",
+        "overlayFemale": "MP_Gunrunning_Tattoo_012_F"
+    },
+    {
+        "collection": "mpGunrunning_overlays",
+        "cost": 16115,
+        "label": "TAT_GR_013",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Gunrunning_Tattoo_013_M",
+        "overlayFemale": "MP_Gunrunning_Tattoo_013_F"
+    },
+    {
+        "collection": "mpGunrunning_overlays",
+        "cost": 17200,
+        "label": "TAT_GR_014",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Gunrunning_Tattoo_014_M",
+        "overlayFemale": "MP_Gunrunning_Tattoo_014_F"
+    },
+    {
+        "collection": "mpGunrunning_overlays",
+        "cost": 10425,
+        "label": "TAT_GR_015",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Gunrunning_Tattoo_015_M",
+        "overlayFemale": "MP_Gunrunning_Tattoo_015_F"
+    },
+    {
+        "collection": "mpGunrunning_overlays",
+        "cost": 10360,
+        "label": "TAT_GR_016",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Gunrunning_Tattoo_016_M",
+        "overlayFemale": "MP_Gunrunning_Tattoo_016_F"
+    },
+    {
+        "collection": "mpGunrunning_overlays",
+        "cost": 8980,
+        "label": "TAT_GR_017",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Gunrunning_Tattoo_017_M",
+        "overlayFemale": "MP_Gunrunning_Tattoo_017_F"
+    },
+    {
+        "collection": "mpGunrunning_overlays",
+        "cost": 17755,
+        "label": "TAT_GR_018",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Gunrunning_Tattoo_018_M",
+        "overlayFemale": "MP_Gunrunning_Tattoo_018_F"
+    },
+    {
+        "collection": "mpGunrunning_overlays",
+        "cost": 18025,
+        "label": "TAT_GR_019",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Gunrunning_Tattoo_019_M",
+        "overlayFemale": "MP_Gunrunning_Tattoo_019_F"
+    },
+    {
+        "collection": "mpGunrunning_overlays",
+        "cost": 19875,
+        "label": "TAT_GR_020",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Gunrunning_Tattoo_020_M",
+        "overlayFemale": "MP_Gunrunning_Tattoo_020_F"
+    },
+    {
+        "collection": "mpGunrunning_overlays",
+        "cost": 9460,
+        "label": "TAT_GR_021",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Gunrunning_Tattoo_021_M",
+        "overlayFemale": "MP_Gunrunning_Tattoo_021_F"
+    },
+    {
+        "collection": "mpGunrunning_overlays",
+        "cost": 10825,
+        "label": "TAT_GR_022",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Gunrunning_Tattoo_022_M",
+        "overlayFemale": "MP_Gunrunning_Tattoo_022_F"
+    },
+    {
+        "collection": "mpGunrunning_overlays",
+        "cost": 8880,
+        "label": "TAT_GR_023",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "MP_Gunrunning_Tattoo_023_M",
+        "overlayFemale": "MP_Gunrunning_Tattoo_023_F"
+    },
+    {
+        "collection": "mpGunrunning_overlays",
+        "cost": 10340,
+        "label": "TAT_GR_024",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Gunrunning_Tattoo_024_M",
+        "overlayFemale": "MP_Gunrunning_Tattoo_024_F"
+    },
+    {
+        "collection": "mpGunrunning_overlays",
+        "cost": 12150,
+        "label": "TAT_GR_025",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Gunrunning_Tattoo_025_M",
+        "overlayFemale": "MP_Gunrunning_Tattoo_025_F"
+    },
+    {
+        "collection": "mpGunrunning_overlays",
+        "cost": 11510,
+        "label": "TAT_GR_026",
+        "zone": "ZONE_RIGHT_LEG",
+        "overlayMale": "MP_Gunrunning_Tattoo_026_M",
+        "overlayFemale": "MP_Gunrunning_Tattoo_026_F"
+    },
+    {
+        "collection": "mpGunrunning_overlays",
+        "cost": 8420,
+        "label": "TAT_GR_027",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Gunrunning_Tattoo_027_M",
+        "overlayFemale": "MP_Gunrunning_Tattoo_027_F"
+    },
+    {
+        "collection": "mpGunrunning_overlays",
+        "cost": 9960,
+        "label": "TAT_GR_028",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Gunrunning_Tattoo_028_M",
+        "overlayFemale": "MP_Gunrunning_Tattoo_028_F"
+    },
+    {
+        "collection": "mpGunrunning_overlays",
+        "cost": 14090,
+        "label": "TAT_GR_029",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Gunrunning_Tattoo_029_M",
+        "overlayFemale": "MP_Gunrunning_Tattoo_029_F"
+    },
+    {
+        "collection": "mpGunrunning_overlays",
+        "cost": 11050,
+        "label": "TAT_GR_030",
+        "zone": "ZONE_RIGHT_LEG",
+        "overlayMale": "MP_Gunrunning_Tattoo_030_M",
+        "overlayFemale": "MP_Gunrunning_Tattoo_030_F"
+    },
+    {
+        "collection": "mpHeist3_overlays",
+        "cost": 0,
+        "label": "TAT_H3_000",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "mpHeist3_Tat_000_M",
+        "overlayFemale": "mpHeist3_Tat_000_F"
+    },
+    {
+        "collection": "mpHeist3_overlays",
+        "cost": 0,
+        "label": "TAT_H3_001",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "mpHeist3_Tat_001_M",
+        "overlayFemale": "mpHeist3_Tat_001_F"
+    },
+    {
+        "collection": "mpHeist3_overlays",
+        "cost": 0,
+        "label": "TAT_H3_002",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "mpHeist3_Tat_002_M",
+        "overlayFemale": "mpHeist3_Tat_002_F"
+    },
+    {
+        "collection": "mpHeist3_overlays",
+        "cost": 0,
+        "label": "TAT_H3_003",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "mpHeist3_Tat_003_M",
+        "overlayFemale": "mpHeist3_Tat_003_F"
+    },
+    {
+        "collection": "mpHeist3_overlays",
+        "cost": 0,
+        "label": "TAT_H3_004",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "mpHeist3_Tat_004_M",
+        "overlayFemale": "mpHeist3_Tat_004_F"
+    },
+    {
+        "collection": "mpHeist3_overlays",
+        "cost": 0,
+        "label": "TAT_H3_005",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "mpHeist3_Tat_005_M",
+        "overlayFemale": "mpHeist3_Tat_005_F"
+    },
+    {
+        "collection": "mpHeist3_overlays",
+        "cost": 0,
+        "label": "TAT_H3_006",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "mpHeist3_Tat_006_M",
+        "overlayFemale": "mpHeist3_Tat_006_F"
+    },
+    {
+        "collection": "mpHeist3_overlays",
+        "cost": 0,
+        "label": "TAT_H3_007",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "mpHeist3_Tat_007_M",
+        "overlayFemale": "mpHeist3_Tat_007_F"
+    },
+    {
+        "collection": "mpHeist3_overlays",
+        "cost": 0,
+        "label": "TAT_H3_008",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "mpHeist3_Tat_008_M",
+        "overlayFemale": "mpHeist3_Tat_008_F"
+    },
+    {
+        "collection": "mpHeist3_overlays",
+        "cost": 0,
+        "label": "TAT_H3_009",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "mpHeist3_Tat_009_M",
+        "overlayFemale": "mpHeist3_Tat_009_F"
+    },
+    {
+        "collection": "mpHeist3_overlays",
+        "cost": 0,
+        "label": "TAT_H3_010",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "mpHeist3_Tat_010_M",
+        "overlayFemale": "mpHeist3_Tat_010_F"
+    },
+    {
+        "collection": "mpHeist3_overlays",
+        "cost": 0,
+        "label": "TAT_H3_011",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "mpHeist3_Tat_011_M",
+        "overlayFemale": "mpHeist3_Tat_011_F"
+    },
+    {
+        "collection": "mpHeist3_overlays",
+        "cost": 0,
+        "label": "TAT_H3_012",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "mpHeist3_Tat_012_M",
+        "overlayFemale": "mpHeist3_Tat_012_F"
+    },
+    {
+        "collection": "mpHeist3_overlays",
+        "cost": 0,
+        "label": "TAT_H3_013",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "mpHeist3_Tat_013_M",
+        "overlayFemale": "mpHeist3_Tat_013_F"
+    },
+    {
+        "collection": "mpHeist3_overlays",
+        "cost": 0,
+        "label": "TAT_H3_014",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "mpHeist3_Tat_014_M",
+        "overlayFemale": "mpHeist3_Tat_014_F"
+    },
+    {
+        "collection": "mpHeist3_overlays",
+        "cost": 0,
+        "label": "TAT_H3_015",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "mpHeist3_Tat_015_M",
+        "overlayFemale": "mpHeist3_Tat_015_F"
+    },
+    {
+        "collection": "mpHeist3_overlays",
+        "cost": 0,
+        "label": "TAT_H3_016",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "mpHeist3_Tat_016_M",
+        "overlayFemale": "mpHeist3_Tat_016_F"
+    },
+    {
+        "collection": "mpHeist3_overlays",
+        "cost": 0,
+        "label": "TAT_H3_017",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "mpHeist3_Tat_017_M",
+        "overlayFemale": "mpHeist3_Tat_017_F"
+    },
+    {
+        "collection": "mpHeist3_overlays",
+        "cost": 0,
+        "label": "TAT_H3_018",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "mpHeist3_Tat_018_M",
+        "overlayFemale": "mpHeist3_Tat_018_F"
+    },
+    {
+        "collection": "mpHeist3_overlays",
+        "cost": 0,
+        "label": "TAT_H3_019",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "mpHeist3_Tat_019_M",
+        "overlayFemale": "mpHeist3_Tat_019_F"
+    },
+    {
+        "collection": "mpHeist3_overlays",
+        "cost": 0,
+        "label": "TAT_H3_020",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "mpHeist3_Tat_020_M",
+        "overlayFemale": "mpHeist3_Tat_020_F"
+    },
+    {
+        "collection": "mpHeist3_overlays",
+        "cost": 0,
+        "label": "TAT_H3_021",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "mpHeist3_Tat_021_M",
+        "overlayFemale": "mpHeist3_Tat_021_F"
+    },
+    {
+        "collection": "mpHeist3_overlays",
+        "cost": 0,
+        "label": "TAT_H3_022",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "mpHeist3_Tat_022_M",
+        "overlayFemale": "mpHeist3_Tat_022_F"
+    },
+    {
+        "collection": "mpHeist3_overlays",
+        "cost": 0,
+        "label": "TAT_H3_023",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "mpHeist3_Tat_023_M",
+        "overlayFemale": "mpHeist3_Tat_023_F"
+    },
+    {
+        "collection": "mpHeist3_overlays",
+        "cost": 0,
+        "label": "TAT_H3_024",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "mpHeist3_Tat_024_M",
+        "overlayFemale": "mpHeist3_Tat_024_F"
+    },
+    {
+        "collection": "mpHeist3_overlays",
+        "cost": 0,
+        "label": "TAT_H3_025",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "mpHeist3_Tat_025_M",
+        "overlayFemale": "mpHeist3_Tat_025_F"
+    },
+    {
+        "collection": "mpHeist3_overlays",
+        "cost": 0,
+        "label": "TAT_H3_026",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "mpHeist3_Tat_026_M",
+        "overlayFemale": "mpHeist3_Tat_026_F"
+    },
+    {
+        "collection": "mpHeist3_overlays",
+        "cost": 0,
+        "label": "TAT_H3_027",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "mpHeist3_Tat_027_M",
+        "overlayFemale": "mpHeist3_Tat_027_F"
+    },
+    {
+        "collection": "mpHeist3_overlays",
+        "cost": 0,
+        "label": "TAT_H3_028",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "mpHeist3_Tat_028_M",
+        "overlayFemale": "mpHeist3_Tat_028_F"
+    },
+    {
+        "collection": "mpHeist3_overlays",
+        "cost": 0,
+        "label": "TAT_H3_029",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "mpHeist3_Tat_029_M",
+        "overlayFemale": "mpHeist3_Tat_029_F"
+    },
+    {
+        "collection": "mpHeist3_overlays",
+        "cost": 0,
+        "label": "TAT_H3_030",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "mpHeist3_Tat_030_M",
+        "overlayFemale": "mpHeist3_Tat_030_F"
+    },
+    {
+        "collection": "mpHeist3_overlays",
+        "cost": 0,
+        "label": "TAT_H3_031",
+        "zone": "ZONE_RIGHT_LEG",
+        "overlayMale": "mpHeist3_Tat_031_M",
+        "overlayFemale": "mpHeist3_Tat_031_F"
+    },
+    {
+        "collection": "mpHeist3_overlays",
+        "cost": 0,
+        "label": "TAT_H3_032",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "mpHeist3_Tat_032_M",
+        "overlayFemale": "mpHeist3_Tat_032_F"
+    },
+    {
+        "collection": "mpHeist3_overlays",
+        "cost": 0,
+        "label": "TAT_H3_033",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "mpHeist3_Tat_033_M",
+        "overlayFemale": "mpHeist3_Tat_033_F"
+    },
+    {
+        "collection": "mpHeist3_overlays",
+        "cost": 0,
+        "label": "TAT_H3_034",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "mpHeist3_Tat_034_M",
+        "overlayFemale": "mpHeist3_Tat_034_F"
+    },
+    {
+        "collection": "mpHeist3_overlays",
+        "cost": 0,
+        "label": "TAT_H3_035",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "mpHeist3_Tat_035_M",
+        "overlayFemale": "mpHeist3_Tat_035_F"
+    },
+    {
+        "collection": "mpHeist3_overlays",
+        "cost": 0,
+        "label": "TAT_H3_036",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "mpHeist3_Tat_036_M",
+        "overlayFemale": "mpHeist3_Tat_036_F"
+    },
+    {
+        "collection": "mpHeist3_overlays",
+        "cost": 0,
+        "label": "TAT_H3_037",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "mpHeist3_Tat_037_M",
+        "overlayFemale": "mpHeist3_Tat_037_F"
+    },
+    {
+        "collection": "mpHeist3_overlays",
+        "cost": 0,
+        "label": "TAT_H3_038",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "mpHeist3_Tat_038_M",
+        "overlayFemale": "mpHeist3_Tat_038_F"
+    },
+    {
+        "collection": "mpHeist3_overlays",
+        "cost": 0,
+        "label": "TAT_H3_039",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "mpHeist3_Tat_039_M",
+        "overlayFemale": "mpHeist3_Tat_039_F"
+    },
+    {
+        "collection": "mpHeist3_overlays",
+        "cost": 0,
+        "label": "TAT_H3_040",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "mpHeist3_Tat_040_M",
+        "overlayFemale": "mpHeist3_Tat_040_F"
+    },
+    {
+        "collection": "mpHeist3_overlays",
+        "cost": 0,
+        "label": "TAT_H3_041",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "mpHeist3_Tat_041_M",
+        "overlayFemale": "mpHeist3_Tat_041_F"
+    },
+    {
+        "collection": "mpHeist4_overlays",
+        "cost": 0,
+        "label": "TAT_H4_000",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Heist4_Tat_000_M",
+        "overlayFemale": "MP_Heist4_Tat_000_F"
+    },
+    {
+        "collection": "mpHeist4_overlays",
+        "cost": 0,
+        "label": "TAT_H4_001",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Heist4_Tat_001_M",
+        "overlayFemale": "MP_Heist4_Tat_001_F"
+    },
+    {
+        "collection": "mpHeist4_overlays",
+        "cost": 0,
+        "label": "TAT_H4_002",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Heist4_Tat_002_M",
+        "overlayFemale": "MP_Heist4_Tat_002_F"
+    },
+    {
+        "collection": "mpHeist4_overlays",
+        "cost": 0,
+        "label": "TAT_H4_003",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Heist4_Tat_003_M",
+        "overlayFemale": "MP_Heist4_Tat_003_F"
+    },
+    {
+        "collection": "mpHeist4_overlays",
+        "cost": 0,
+        "label": "TAT_H4_004",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Heist4_Tat_004_M",
+        "overlayFemale": "MP_Heist4_Tat_004_F"
+    },
+    {
+        "collection": "mpHeist4_overlays",
+        "cost": 0,
+        "label": "TAT_H4_005",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Heist4_Tat_005_M",
+        "overlayFemale": "MP_Heist4_Tat_005_F"
+    },
+    {
+        "collection": "mpHeist4_overlays",
+        "cost": 0,
+        "label": "TAT_H4_006",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Heist4_Tat_006_M",
+        "overlayFemale": "MP_Heist4_Tat_006_F"
+    },
+    {
+        "collection": "mpHeist4_overlays",
+        "cost": 0,
+        "label": "TAT_H4_007",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Heist4_Tat_007_M",
+        "overlayFemale": "MP_Heist4_Tat_007_F"
+    },
+    {
+        "collection": "mpHeist4_overlays",
+        "cost": 0,
+        "label": "TAT_H4_008",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Heist4_Tat_008_M",
+        "overlayFemale": "MP_Heist4_Tat_008_F"
+    },
+    {
+        "collection": "mpHeist4_overlays",
+        "cost": 0,
+        "label": "TAT_H4_009",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Heist4_Tat_009_M",
+        "overlayFemale": "MP_Heist4_Tat_009_F"
+    },
+    {
+        "collection": "mpHeist4_overlays",
+        "cost": 0,
+        "label": "TAT_H4_010",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "MP_Heist4_Tat_010_M",
+        "overlayFemale": "MP_Heist4_Tat_010_F"
+    },
+    {
+        "collection": "mpHeist4_overlays",
+        "cost": 0,
+        "label": "TAT_H4_011",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Heist4_Tat_011_M",
+        "overlayFemale": "MP_Heist4_Tat_011_F"
+    },
+    {
+        "collection": "mpHeist4_overlays",
+        "cost": 0,
+        "label": "TAT_H4_012",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Heist4_Tat_012_M",
+        "overlayFemale": "MP_Heist4_Tat_012_F"
+    },
+    {
+        "collection": "mpHeist4_overlays",
+        "cost": 0,
+        "label": "TAT_H4_013",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Heist4_Tat_013_M",
+        "overlayFemale": "MP_Heist4_Tat_013_F"
+    },
+    {
+        "collection": "mpHeist4_overlays",
+        "cost": 0,
+        "label": "TAT_H4_014",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Heist4_Tat_014_M",
+        "overlayFemale": "MP_Heist4_Tat_014_F"
+    },
+    {
+        "collection": "mpHeist4_overlays",
+        "cost": 0,
+        "label": "TAT_H4_015",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Heist4_Tat_015_M",
+        "overlayFemale": "MP_Heist4_Tat_015_F"
+    },
+    {
+        "collection": "mpHeist4_overlays",
+        "cost": 0,
+        "label": "TAT_H4_016",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Heist4_Tat_016_M",
+        "overlayFemale": "MP_Heist4_Tat_016_F"
+    },
+    {
+        "collection": "mpHeist4_overlays",
+        "cost": 0,
+        "label": "TAT_H4_017",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Heist4_Tat_017_M",
+        "overlayFemale": "MP_Heist4_Tat_017_F"
+    },
+    {
+        "collection": "mpHeist4_overlays",
+        "cost": 0,
+        "label": "TAT_H4_018",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Heist4_Tat_018_M",
+        "overlayFemale": "MP_Heist4_Tat_018_F"
+    },
+    {
+        "collection": "mpHeist4_overlays",
+        "cost": 0,
+        "label": "TAT_H4_019",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Heist4_Tat_019_M",
+        "overlayFemale": "MP_Heist4_Tat_019_F"
+    },
+    {
+        "collection": "mpHeist4_overlays",
+        "cost": 0,
+        "label": "TAT_H4_020",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Heist4_Tat_020_M",
+        "overlayFemale": "MP_Heist4_Tat_020_F"
+    },
+    {
+        "collection": "mpHeist4_overlays",
+        "cost": 0,
+        "label": "TAT_H4_021",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Heist4_Tat_021_M",
+        "overlayFemale": "MP_Heist4_Tat_021_F"
+    },
+    {
+        "collection": "mpHeist4_overlays",
+        "cost": 0,
+        "label": "TAT_H4_022",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Heist4_Tat_022_M",
+        "overlayFemale": "MP_Heist4_Tat_022_F"
+    },
+    {
+        "collection": "mpHeist4_overlays",
+        "cost": 0,
+        "label": "TAT_H4_023",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Heist4_Tat_023_M",
+        "overlayFemale": "MP_Heist4_Tat_023_F"
+    },
+    {
+        "collection": "mpHeist4_overlays",
+        "cost": 0,
+        "label": "TAT_H4_024",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "MP_Heist4_Tat_024_M",
+        "overlayFemale": "MP_Heist4_Tat_024_F"
+    },
+    {
+        "collection": "mpHeist4_overlays",
+        "cost": 0,
+        "label": "TAT_H4_025",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "MP_Heist4_Tat_025_M",
+        "overlayFemale": "MP_Heist4_Tat_025_F"
+    },
+    {
+        "collection": "mpHeist4_overlays",
+        "cost": 0,
+        "label": "TAT_H4_026",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Heist4_Tat_026_M",
+        "overlayFemale": "MP_Heist4_Tat_026_F"
+    },
+    {
+        "collection": "mpHeist4_overlays",
+        "cost": 0,
+        "label": "TAT_H4_027",
+        "zone": "ZONE_RIGHT_LEG",
+        "overlayMale": "MP_Heist4_Tat_027_M",
+        "overlayFemale": "MP_Heist4_Tat_027_F"
+    },
+    {
+        "collection": "mpHeist4_overlays",
+        "cost": 0,
+        "label": "TAT_H4_028",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "MP_Heist4_Tat_028_M",
+        "overlayFemale": "MP_Heist4_Tat_028_F"
+    },
+    {
+        "collection": "mpHeist4_overlays",
+        "cost": 0,
+        "label": "TAT_H4_029",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "MP_Heist4_Tat_029_M",
+        "overlayFemale": "MP_Heist4_Tat_029_F"
+    },
+    {
+        "collection": "mpHeist4_overlays",
+        "cost": 0,
+        "label": "TAT_H4_030",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Heist4_Tat_030_M",
+        "overlayFemale": "MP_Heist4_Tat_030_F"
+    },
+    {
+        "collection": "mpHeist4_overlays",
+        "cost": 0,
+        "label": "TAT_H4_031",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Heist4_Tat_031_M",
+        "overlayFemale": "MP_Heist4_Tat_031_F"
+    },
+    {
+        "collection": "mpHeist4_overlays",
+        "cost": 0,
+        "label": "TAT_H4_032",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Heist4_Tat_032_M",
+        "overlayFemale": "MP_Heist4_Tat_032_F"
+    },
+    {
+        "collection": "mpLowrider_overlays",
+        "cost": 6100,
+        "label": "TAT_S1_001",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_LR_Tat_001_M",
+        "overlayFemale": "MP_LR_Tat_001_F"
+    },
+    {
+        "collection": "mpLowrider_overlays",
+        "cost": 10250,
+        "label": "TAT_S1_002",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_LR_Tat_002_M",
+        "overlayFemale": "MP_LR_Tat_002_F"
+    },
+    {
+        "collection": "mpLowrider_overlays",
+        "cost": 3500,
+        "label": "TAT_S1_004",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_LR_Tat_004_M",
+        "overlayFemale": "MP_LR_Tat_004_F"
+    },
+    {
+        "collection": "mpLowrider_overlays",
+        "cost": 5900,
+        "label": "TAT_S1_005",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_LR_Tat_005_M",
+        "overlayFemale": "MP_LR_Tat_005_F"
+    },
+    {
+        "collection": "mpLowrider_overlays",
+        "cost": 5500,
+        "label": "TAT_S1_007",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "MP_LR_Tat_007_M",
+        "overlayFemale": "MP_LR_Tat_007_F"
+    },
+    {
+        "collection": "mpLowrider_overlays",
+        "cost": 9500,
+        "label": "TAT_S1_009",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_LR_Tat_009_M",
+        "overlayFemale": "MP_LR_Tat_009_F"
+    },
+    {
+        "collection": "mpLowrider_overlays",
+        "cost": 16500,
+        "label": "TAT_S1_010",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_LR_Tat_010_M",
+        "overlayFemale": "MP_LR_Tat_010_F"
+    },
+    {
+        "collection": "mpLowrider_overlays",
+        "cost": 8300,
+        "label": "TAT_S1_013",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_LR_Tat_013_M",
+        "overlayFemale": "MP_LR_Tat_013_F"
+    },
+    {
+        "collection": "mpLowrider_overlays",
+        "cost": 17750,
+        "label": "TAT_S1_014",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_LR_Tat_014_M",
+        "overlayFemale": "MP_LR_Tat_014_F"
+    },
+    {
+        "collection": "mpLowrider_overlays",
+        "cost": 6150,
+        "label": "TAT_S1_015",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_LR_Tat_015_M",
+        "overlayFemale": "MP_LR_Tat_015_F"
+    },
+    {
+        "collection": "mpLowrider_overlays",
+        "cost": 7700,
+        "label": "TAT_S1_017",
+        "zone": "ZONE_RIGHT_LEG",
+        "overlayMale": "MP_LR_Tat_017_M",
+        "overlayFemale": "MP_LR_Tat_017_F"
+    },
+    {
+        "collection": "mpLowrider_overlays",
+        "cost": 6850,
+        "label": "TAT_S1_020",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_LR_Tat_020_M",
+        "overlayFemale": "MP_LR_Tat_020_F"
+    },
+    {
+        "collection": "mpLowrider_overlays",
+        "cost": 15000,
+        "label": "TAT_S1_021",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_LR_Tat_021_M",
+        "overlayFemale": "MP_LR_Tat_021_F"
+    },
+    {
+        "collection": "mpLowrider_overlays",
+        "cost": 6500,
+        "label": "TAT_S1_023",
+        "zone": "ZONE_RIGHT_LEG",
+        "overlayMale": "MP_LR_Tat_023_M",
+        "overlayFemale": "MP_LR_Tat_023_F"
+    },
+    {
+        "collection": "mpLowrider_overlays",
+        "cost": 7400,
+        "label": "TAT_S1_026",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_LR_Tat_026_M",
+        "overlayFemale": "MP_LR_Tat_026_F"
+    },
+    {
+        "collection": "mpLowrider_overlays",
+        "cost": 7800,
+        "label": "TAT_S1_027",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_LR_Tat_027_M",
+        "overlayFemale": "MP_LR_Tat_027_F"
+    },
+    {
+        "collection": "mpLowrider_overlays",
+        "cost": 10000,
+        "label": "TAT_S1_033",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_LR_Tat_033_M",
+        "overlayFemale": "MP_LR_Tat_033_F"
+    },
+    {
+        "collection": "mpImportExport_overlays",
+        "cost": 13780,
+        "label": "TAT_IE_000",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_MP_ImportExport_Tat_000_M",
+        "overlayFemale": "MP_MP_ImportExport_Tat_000_F"
+    },
+    {
+        "collection": "mpImportExport_overlays",
+        "cost": 12900,
+        "label": "TAT_IE_001",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_MP_ImportExport_Tat_001_M",
+        "overlayFemale": "MP_MP_ImportExport_Tat_001_F"
+    },
+    {
+        "collection": "mpImportExport_overlays",
+        "cost": 12120,
+        "label": "TAT_IE_002",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_MP_ImportExport_Tat_002_M",
+        "overlayFemale": "MP_MP_ImportExport_Tat_002_F"
+    },
+    {
+        "collection": "mpImportExport_overlays",
+        "cost": 17200,
+        "label": "TAT_IE_003",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_MP_ImportExport_Tat_003_M",
+        "overlayFemale": "MP_MP_ImportExport_Tat_003_F"
+    },
+    {
+        "collection": "mpImportExport_overlays",
+        "cost": 16350,
+        "label": "TAT_IE_004",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_MP_ImportExport_Tat_004_M",
+        "overlayFemale": "MP_MP_ImportExport_Tat_004_F"
+    },
+    {
+        "collection": "mpImportExport_overlays",
+        "cost": 18615,
+        "label": "TAT_IE_005",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_MP_ImportExport_Tat_005_M",
+        "overlayFemale": "MP_MP_ImportExport_Tat_005_F"
+    },
+    {
+        "collection": "mpImportExport_overlays",
+        "cost": 15720,
+        "label": "TAT_IE_006",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_MP_ImportExport_Tat_006_M",
+        "overlayFemale": "MP_MP_ImportExport_Tat_006_F"
+    },
+    {
+        "collection": "mpImportExport_overlays",
+        "cost": 16685,
+        "label": "TAT_IE_007",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_MP_ImportExport_Tat_007_M",
+        "overlayFemale": "MP_MP_ImportExport_Tat_007_F"
+    },
+    {
+        "collection": "mpImportExport_overlays",
+        "cost": 19900,
+        "label": "TAT_IE_008",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_MP_ImportExport_Tat_008_M",
+        "overlayFemale": "MP_MP_ImportExport_Tat_008_F"
+    },
+    {
+        "collection": "mpImportExport_overlays",
+        "cost": 16500,
+        "label": "TAT_IE_009",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_MP_ImportExport_Tat_009_M",
+        "overlayFemale": "MP_MP_ImportExport_Tat_009_F"
+    },
+    {
+        "collection": "mpImportExport_overlays",
+        "cost": 14235,
+        "label": "TAT_IE_010",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_MP_ImportExport_Tat_010_M",
+        "overlayFemale": "MP_MP_ImportExport_Tat_010_F"
+    },
+    {
+        "collection": "mpImportExport_overlays",
+        "cost": 15985,
+        "label": "TAT_IE_011",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_MP_ImportExport_Tat_011_M",
+        "overlayFemale": "MP_MP_ImportExport_Tat_011_F"
+    },
+    {
+        "collection": "mpLowrider_overlays",
+        "cost": 6100,
+        "label": "TAT_S1_001",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_LR_Tat_001_M",
+        "overlayFemale": "MP_LR_Tat_001_F"
+    },
+    {
+        "collection": "mpLowrider_overlays",
+        "cost": 10250,
+        "label": "TAT_S1_002",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_LR_Tat_002_M",
+        "overlayFemale": "MP_LR_Tat_002_F"
+    },
+    {
+        "collection": "mpLowrider_overlays",
+        "cost": 3500,
+        "label": "TAT_S1_004",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_LR_Tat_004_M",
+        "overlayFemale": "MP_LR_Tat_004_F"
+    },
+    {
+        "collection": "mpLowrider_overlays",
+        "cost": 5900,
+        "label": "TAT_S1_005",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_LR_Tat_005_M",
+        "overlayFemale": "MP_LR_Tat_005_F"
+    },
+    {
+        "collection": "mpLowrider_overlays",
+        "cost": 5500,
+        "label": "TAT_S1_007",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "MP_LR_Tat_007_M",
+        "overlayFemale": "MP_LR_Tat_007_F"
+    },
+    {
+        "collection": "mpLowrider_overlays",
+        "cost": 9500,
+        "label": "TAT_S1_009",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_LR_Tat_009_M",
+        "overlayFemale": "MP_LR_Tat_009_F"
+    },
+    {
+        "collection": "mpLowrider_overlays",
+        "cost": 16500,
+        "label": "TAT_S1_010",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_LR_Tat_010_M",
+        "overlayFemale": "MP_LR_Tat_010_F"
+    },
+    {
+        "collection": "mpLowrider_overlays",
+        "cost": 8300,
+        "label": "TAT_S1_013",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_LR_Tat_013_M",
+        "overlayFemale": "MP_LR_Tat_013_F"
+    },
+    {
+        "collection": "mpLowrider_overlays",
+        "cost": 17750,
+        "label": "TAT_S1_014",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_LR_Tat_014_M",
+        "overlayFemale": "MP_LR_Tat_014_F"
+    },
+    {
+        "collection": "mpLowrider_overlays",
+        "cost": 6150,
+        "label": "TAT_S1_015",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_LR_Tat_015_M",
+        "overlayFemale": "MP_LR_Tat_015_F"
+    },
+    {
+        "collection": "mpLowrider_overlays",
+        "cost": 7700,
+        "label": "TAT_S1_017",
+        "zone": "ZONE_RIGHT_LEG",
+        "overlayMale": "MP_LR_Tat_017_M",
+        "overlayFemale": "MP_LR_Tat_017_F"
+    },
+    {
+        "collection": "mpLowrider_overlays",
+        "cost": 6850,
+        "label": "TAT_S1_020",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_LR_Tat_020_M",
+        "overlayFemale": "MP_LR_Tat_020_F"
+    },
+    {
+        "collection": "mpLowrider_overlays",
+        "cost": 15000,
+        "label": "TAT_S1_021",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_LR_Tat_021_M",
+        "overlayFemale": "MP_LR_Tat_021_F"
+    },
+    {
+        "collection": "mpLowrider_overlays",
+        "cost": 6500,
+        "label": "TAT_S1_023",
+        "zone": "ZONE_RIGHT_LEG",
+        "overlayMale": "MP_LR_Tat_023_M",
+        "overlayFemale": "MP_LR_Tat_023_F"
+    },
+    {
+        "collection": "mpLowrider_overlays",
+        "cost": 7400,
+        "label": "TAT_S1_026",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_LR_Tat_026_M",
+        "overlayFemale": "MP_LR_Tat_026_F"
+    },
+    {
+        "collection": "mpLowrider_overlays",
+        "cost": 7800,
+        "label": "TAT_S1_027",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_LR_Tat_027_M",
+        "overlayFemale": "MP_LR_Tat_027_F"
+    },
+    {
+        "collection": "mpLowrider_overlays",
+        "cost": 10000,
+        "label": "TAT_S1_033",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_LR_Tat_033_M",
+        "overlayFemale": "MP_LR_Tat_033_F"
+    },
+    {
+        "collection": "mpLowrider2_overlays",
+        "cost": 19000,
+        "label": "TAT_S2_000",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_LR_Tat_000_M",
+        "overlayFemale": "MP_LR_Tat_000_F"
+    },
+    {
+        "collection": "mpLowrider2_overlays",
+        "cost": 5950,
+        "label": "TAT_S2_003",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_LR_Tat_003_M",
+        "overlayFemale": "MP_LR_Tat_003_F"
+    },
+    {
+        "collection": "mpLowrider2_overlays",
+        "cost": 7450,
+        "label": "TAT_S2_006",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_LR_Tat_006_M",
+        "overlayFemale": "MP_LR_Tat_006_F"
+    },
+    {
+        "collection": "mpLowrider2_overlays",
+        "cost": 18750,
+        "label": "TAT_S2_008",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_LR_Tat_008_M",
+        "overlayFemale": "MP_LR_Tat_008_F"
+    },
+    {
+        "collection": "mpLowrider2_overlays",
+        "cost": 8000,
+        "label": "TAT_S2_011",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_LR_Tat_011_M",
+        "overlayFemale": "MP_LR_Tat_011_F"
+    },
+    {
+        "collection": "mpLowrider2_overlays",
+        "cost": 7650,
+        "label": "TAT_S2_012",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_LR_Tat_012_M",
+        "overlayFemale": "MP_LR_Tat_012_F"
+    },
+    {
+        "collection": "mpLowrider2_overlays",
+        "cost": 6400,
+        "label": "TAT_S2_016",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_LR_Tat_016_M",
+        "overlayFemale": "MP_LR_Tat_016_F"
+    },
+    {
+        "collection": "mpLowrider2_overlays",
+        "cost": 11000,
+        "label": "TAT_S2_018",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_LR_Tat_018_M",
+        "overlayFemale": "MP_LR_Tat_018_F"
+    },
+    {
+        "collection": "mpLowrider2_overlays",
+        "cost": 9750,
+        "label": "TAT_S2_019",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_LR_Tat_019_M",
+        "overlayFemale": "MP_LR_Tat_019_F"
+    },
+    {
+        "collection": "mpLowrider2_overlays",
+        "cost": 7350,
+        "label": "TAT_S2_022",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_LR_Tat_022_M",
+        "overlayFemale": "MP_LR_Tat_022_F"
+    },
+    {
+        "collection": "mpLowrider2_overlays",
+        "cost": 8800,
+        "label": "TAT_S2_028",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_LR_Tat_028_M",
+        "overlayFemale": "MP_LR_Tat_028_F"
+    },
+    {
+        "collection": "mpLowrider2_overlays",
+        "cost": 6250,
+        "label": "TAT_S2_029",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "MP_LR_Tat_029_M",
+        "overlayFemale": "MP_LR_Tat_029_F"
+    },
+    {
+        "collection": "mpLowrider2_overlays",
+        "cost": 8150,
+        "label": "TAT_S2_030",
+        "zone": "ZONE_RIGHT_LEG",
+        "overlayMale": "MP_LR_Tat_030_M",
+        "overlayFemale": "MP_LR_Tat_030_F"
+    },
+    {
+        "collection": "mpLowrider2_overlays",
+        "cost": 16500,
+        "label": "TAT_S2_031",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_LR_Tat_031_M",
+        "overlayFemale": "MP_LR_Tat_031_F"
+    },
+    {
+        "collection": "mpLowrider2_overlays",
+        "cost": 18500,
+        "label": "TAT_S2_032",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_LR_Tat_032_M",
+        "overlayFemale": "MP_LR_Tat_032_F"
+    },
+    {
+        "collection": "mpLowrider2_overlays",
+        "cost": 8250,
+        "label": "TAT_S2_035",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_LR_Tat_035_M",
+        "overlayFemale": "MP_LR_Tat_035_F"
+    },
+    {
+        "collection": "mpLuxe_overlays",
+        "cost": 11900,
+        "label": "TAT_LX_000",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "MP_Luxe_Tat_000_M",
+        "overlayFemale": "MP_Luxe_Tat_000_F"
+    },
+    {
+        "collection": "mpLuxe_overlays",
+        "cost": 14350,
+        "label": "TAT_LX_001",
+        "zone": "ZONE_RIGHT_LEG",
+        "overlayMale": "MP_Luxe_Tat_001_M",
+        "overlayFemale": "MP_Luxe_Tat_001_F"
+    },
+    {
+        "collection": "mpLuxe_overlays",
+        "cost": 8350,
+        "label": "TAT_LX_003",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Luxe_Tat_003_M",
+        "overlayFemale": "MP_Luxe_Tat_003_F"
+    },
+    {
+        "collection": "mpLuxe_overlays",
+        "cost": 12200,
+        "label": "TAT_LX_004",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Luxe_Tat_004_M",
+        "overlayFemale": "MP_Luxe_Tat_004_F"
+    },
+    {
+        "collection": "mpLuxe_overlays",
+        "cost": 25000,
+        "label": "TAT_LX_006",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Luxe_Tat_006_M",
+        "overlayFemale": "MP_Luxe_Tat_006_F"
+    },
+    {
+        "collection": "mpLuxe_overlays",
+        "cost": 12450,
+        "label": "TAT_LX_007",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Luxe_Tat_007_M",
+        "overlayFemale": "MP_Luxe_Tat_007_F"
+    },
+    {
+        "collection": "mpLuxe_overlays",
+        "cost": 18000,
+        "label": "TAT_LX_008",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Luxe_Tat_008_M",
+        "overlayFemale": "MP_Luxe_Tat_008_F"
+    },
+    {
+        "collection": "mpLuxe_overlays",
+        "cost": 19150,
+        "label": "TAT_LX_009",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Luxe_Tat_009_M",
+        "overlayFemale": "MP_Luxe_Tat_009_F"
+    },
+    {
+        "collection": "mpLuxe_overlays",
+        "cost": 16900,
+        "label": "TAT_LX_013",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Luxe_Tat_013_M",
+        "overlayFemale": "MP_Luxe_Tat_013_F"
+    },
+    {
+        "collection": "mpLuxe_overlays",
+        "cost": 18200,
+        "label": "TAT_LX_014",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Luxe_Tat_014_M",
+        "overlayFemale": "MP_Luxe_Tat_014_F"
+    },
+    {
+        "collection": "mpLuxe_overlays",
+        "cost": 16250,
+        "label": "TAT_LX_015",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Luxe_Tat_015_M",
+        "overlayFemale": "MP_Luxe_Tat_015_F"
+    },
+    {
+        "collection": "mpLuxe_overlays",
+        "cost": 16850,
+        "label": "TAT_LX_019",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Luxe_Tat_019_M",
+        "overlayFemale": "MP_Luxe_Tat_019_F"
+    },
+    {
+        "collection": "mpLuxe_overlays",
+        "cost": 22500,
+        "label": "TAT_LX_020",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Luxe_Tat_020_M",
+        "overlayFemale": "MP_Luxe_Tat_020_F"
+    },
+    {
+        "collection": "mpLuxe_overlays",
+        "cost": 12850,
+        "label": "TAT_LX_021",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Luxe_Tat_021_M",
+        "overlayFemale": "MP_Luxe_Tat_021_F"
+    },
+    {
+        "collection": "mpLuxe_overlays",
+        "cost": 27250,
+        "label": "TAT_LX_024",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Luxe_Tat_024_M",
+        "overlayFemale": "MP_Luxe_Tat_024_F"
+    },
+    {
+        "collection": "mpLuxe2_overlays",
+        "cost": 11000,
+        "label": "TAT_L2_002",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Luxe_Tat_002_M",
+        "overlayFemale": "MP_Luxe_Tat_002_F"
+    },
+    {
+        "collection": "mpLuxe2_overlays",
+        "cost": 10250,
+        "label": "TAT_L2_005",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Luxe_Tat_005_M",
+        "overlayFemale": "MP_Luxe_Tat_005_F"
+    },
+    {
+        "collection": "mpLuxe2_overlays",
+        "cost": 14650,
+        "label": "TAT_L2_010",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Luxe_Tat_010_M",
+        "overlayFemale": "MP_Luxe_Tat_010_F"
+    },
+    {
+        "collection": "mpLuxe2_overlays",
+        "cost": 13250,
+        "label": "TAT_L2_011",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "MP_Luxe_Tat_011_M",
+        "overlayFemale": "MP_Luxe_Tat_011_F"
+    },
+    {
+        "collection": "mpLuxe2_overlays",
+        "cost": 26500,
+        "label": "TAT_L2_012",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Luxe_Tat_012_M",
+        "overlayFemale": "MP_Luxe_Tat_012_F"
+    },
+    {
+        "collection": "mpLuxe2_overlays",
+        "cost": 18600,
+        "label": "TAT_L2_016",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Luxe_Tat_016_M",
+        "overlayFemale": "MP_Luxe_Tat_016_F"
+    },
+    {
+        "collection": "mpLuxe2_overlays",
+        "cost": 21550,
+        "label": "TAT_L2_017",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Luxe_Tat_017_M",
+        "overlayFemale": "MP_Luxe_Tat_017_F"
+    },
+    {
+        "collection": "mpLuxe2_overlays",
+        "cost": 23400,
+        "label": "TAT_L2_018",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Luxe_Tat_018_M",
+        "overlayFemale": "MP_Luxe_Tat_018_F"
+    },
+    {
+        "collection": "mpLuxe2_overlays",
+        "cost": 28500,
+        "label": "TAT_L2_022",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Luxe_Tat_022_M",
+        "overlayFemale": "MP_Luxe_Tat_022_F"
+    },
+    {
+        "collection": "mpLuxe2_overlays",
+        "cost": 15600,
+        "label": "TAT_L2_023",
+        "zone": "ZONE_RIGHT_LEG",
+        "overlayMale": "MP_Luxe_Tat_023_M",
+        "overlayFemale": "MP_Luxe_Tat_023_F"
+    },
+    {
+        "collection": "mpLuxe2_overlays",
+        "cost": 11500,
+        "label": "TAT_L2_025",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Luxe_Tat_025_M",
+        "overlayFemale": "MP_Luxe_Tat_025_F"
+    },
+    {
+        "collection": "mpLuxe2_overlays",
+        "cost": 14700,
+        "label": "TAT_L2_026",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Luxe_Tat_026_M",
+        "overlayFemale": "MP_Luxe_Tat_026_F"
+    },
+    {
+        "collection": "mpLuxe2_overlays",
+        "cost": 12750,
+        "label": "TAT_L2_027",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Luxe_Tat_027_M",
+        "overlayFemale": "MP_Luxe_Tat_027_F"
+    },
+    {
+        "collection": "mpLuxe2_overlays",
+        "cost": 11300,
+        "label": "TAT_L2_028",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Luxe_Tat_028_M",
+        "overlayFemale": "MP_Luxe_Tat_028_F"
+    },
+    {
+        "collection": "mpLuxe2_overlays",
+        "cost": 30000,
+        "label": "TAT_L2_029",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Luxe_Tat_029_M",
+        "overlayFemale": "MP_Luxe_Tat_029_F"
+    },
+    {
+        "collection": "mpLuxe2_overlays",
+        "cost": -2,
+        "label": "TAT_L2_030",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Luxe_Tat_030_M",
+        "overlayFemale": "MP_Luxe_Tat_030_F"
+    },
+    {
+        "collection": "mpLuxe2_overlays",
+        "cost": -2,
+        "label": "TAT_L2_031",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Luxe_Tat_031_M",
+        "overlayFemale": "MP_Luxe_Tat_031_F"
+    },
+    {
+        "collection": "mpSecurity_overlays",
+        "cost": 0,
+        "label": "TAT_FX_000",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Security_Tat_000_M",
+        "overlayFemale": "MP_Security_Tat_000_F"
+    },
+    {
+        "collection": "mpSecurity_overlays",
+        "cost": 0,
+        "label": "TAT_FX_001",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "MP_Security_Tat_001_M",
+        "overlayFemale": "MP_Security_Tat_001_F"
+    },
+    {
+        "collection": "mpSecurity_overlays",
+        "cost": 0,
+        "label": "TAT_FX_002",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "MP_Security_Tat_002_M",
+        "overlayFemale": "MP_Security_Tat_002_F"
+    },
+    {
+        "collection": "mpSecurity_overlays",
+        "cost": 0,
+        "label": "TAT_FX_003",
+        "zone": "ZONE_RIGHT_LEG",
+        "overlayMale": "MP_Security_Tat_003_M",
+        "overlayFemale": "MP_Security_Tat_003_F"
+    },
+    {
+        "collection": "mpSecurity_overlays",
+        "cost": 0,
+        "label": "TAT_FX_004",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Security_Tat_004_M",
+        "overlayFemale": "MP_Security_Tat_004_F"
+    },
+    {
+        "collection": "mpSecurity_overlays",
+        "cost": 0,
+        "label": "TAT_FX_005",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Security_Tat_005_M",
+        "overlayFemale": "MP_Security_Tat_005_F"
+    },
+    {
+        "collection": "mpSecurity_overlays",
+        "cost": 0,
+        "label": "TAT_FX_006",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Security_Tat_006_M",
+        "overlayFemale": "MP_Security_Tat_006_F"
+    },
+    {
+        "collection": "mpSecurity_overlays",
+        "cost": 0,
+        "label": "TAT_FX_007",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Security_Tat_007_M",
+        "overlayFemale": "MP_Security_Tat_007_F"
+    },
+    {
+        "collection": "mpSecurity_overlays",
+        "cost": 0,
+        "label": "TAT_FX_008",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Security_Tat_008_M",
+        "overlayFemale": "MP_Security_Tat_008_F"
+    },
+    {
+        "collection": "mpSecurity_overlays",
+        "cost": 0,
+        "label": "TAT_FX_009",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Security_Tat_009_M",
+        "overlayFemale": "MP_Security_Tat_009_F"
+    },
+    {
+        "collection": "mpSecurity_overlays",
+        "cost": 0,
+        "label": "TAT_FX_010",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Security_Tat_010_M",
+        "overlayFemale": "MP_Security_Tat_010_F"
+    },
+    {
+        "collection": "mpSecurity_overlays",
+        "cost": 0,
+        "label": "TAT_FX_011",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Security_Tat_011_M",
+        "overlayFemale": "MP_Security_Tat_011_F"
+    },
+    {
+        "collection": "mpSecurity_overlays",
+        "cost": 0,
+        "label": "TAT_FX_012",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Security_Tat_012_M",
+        "overlayFemale": "MP_Security_Tat_012_F"
+    },
+    {
+        "collection": "mpSecurity_overlays",
+        "cost": 0,
+        "label": "TAT_FX_013",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Security_Tat_013_M",
+        "overlayFemale": "MP_Security_Tat_013_F"
+    },
+    {
+        "collection": "mpSecurity_overlays",
+        "cost": 0,
+        "label": "TAT_FX_014",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Security_Tat_014_M",
+        "overlayFemale": "MP_Security_Tat_014_F"
+    },
+    {
+        "collection": "mpSecurity_overlays",
+        "cost": 0,
+        "label": "TAT_FX_015",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Security_Tat_015_M",
+        "overlayFemale": "MP_Security_Tat_015_F"
+    },
+    {
+        "collection": "mpSecurity_overlays",
+        "cost": 0,
+        "label": "TAT_FX_016",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Security_Tat_016_M",
+        "overlayFemale": "MP_Security_Tat_016_F"
+    },
+    {
+        "collection": "mpSecurity_overlays",
+        "cost": 0,
+        "label": "TAT_FX_017",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Security_Tat_017_M",
+        "overlayFemale": "MP_Security_Tat_017_F"
+    },
+    {
+        "collection": "mpSecurity_overlays",
+        "cost": 0,
+        "label": "TAT_FX_018",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Security_Tat_018_M",
+        "overlayFemale": "MP_Security_Tat_018_F"
+    },
+    {
+        "collection": "mpSecurity_overlays",
+        "cost": 0,
+        "label": "TAT_FX_019",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Security_Tat_019_M",
+        "overlayFemale": "MP_Security_Tat_019_F"
+    },
+    {
+        "collection": "mpSecurity_overlays",
+        "cost": 0,
+        "label": "TAT_FX_020",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Security_Tat_020_M",
+        "overlayFemale": "MP_Security_Tat_020_F"
+    },
+    {
+        "collection": "mpSecurity_overlays",
+        "cost": 0,
+        "label": "TAT_FX_021",
+        "zone": "ZONE_RIGHT_LEG",
+        "overlayMale": "MP_Security_Tat_021_M",
+        "overlayFemale": "MP_Security_Tat_021_F"
+    },
+    {
+        "collection": "mpSecurity_overlays",
+        "cost": 0,
+        "label": "TAT_FX_022",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "MP_Security_Tat_022_M",
+        "overlayFemale": "MP_Security_Tat_022_F"
+    },
+    {
+        "collection": "mpSecurity_overlays",
+        "cost": 0,
+        "label": "TAT_FX_023",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "MP_Security_Tat_023_M",
+        "overlayFemale": "MP_Security_Tat_023_F"
+    },
+    {
+        "collection": "mpSecurity_overlays",
+        "cost": 0,
+        "label": "TAT_FX_024",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Security_Tat_024_M",
+        "overlayFemale": "MP_Security_Tat_024_F"
+    },
+    {
+        "collection": "mpSecurity_overlays",
+        "cost": 0,
+        "label": "TAT_FX_025",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Security_Tat_025_M",
+        "overlayFemale": "MP_Security_Tat_025_F"
+    },
+    {
+        "collection": "mpSecurity_overlays",
+        "cost": 0,
+        "label": "TAT_FX_026",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Security_Tat_026_M",
+        "overlayFemale": "MP_Security_Tat_026_F"
+    },
+    {
+        "collection": "mpSecurity_overlays",
+        "cost": 0,
+        "label": "TAT_FX_027",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "MP_Security_Tat_027_M",
+        "overlayFemale": "MP_Security_Tat_027_F"
+    },
+    {
+        "collection": "mpSmuggler_overlays",
+        "cost": 11270,
+        "label": "TAT_SM_000",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Smuggler_Tattoo_000_M",
+        "overlayFemale": "MP_Smuggler_Tattoo_000_F"
+    },
+    {
+        "collection": "mpSmuggler_overlays",
+        "cost": 10825,
+        "label": "TAT_SM_001",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Smuggler_Tattoo_001_M",
+        "overlayFemale": "MP_Smuggler_Tattoo_001_F"
+    },
+    {
+        "collection": "mpSmuggler_overlays",
+        "cost": 12430,
+        "label": "TAT_SM_002",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Smuggler_Tattoo_002_M",
+        "overlayFemale": "MP_Smuggler_Tattoo_002_F"
+    },
+    {
+        "collection": "mpSmuggler_overlays",
+        "cost": 13090,
+        "label": "TAT_SM_003",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Smuggler_Tattoo_003_M",
+        "overlayFemale": "MP_Smuggler_Tattoo_003_F"
+    },
+    {
+        "collection": "mpSmuggler_overlays",
+        "cost": 8150,
+        "label": "TAT_SM_004",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Smuggler_Tattoo_004_M",
+        "overlayFemale": "MP_Smuggler_Tattoo_004_F"
+    },
+    {
+        "collection": "mpSmuggler_overlays",
+        "cost": 7920,
+        "label": "TAT_SM_005",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Smuggler_Tattoo_005_M",
+        "overlayFemale": "MP_Smuggler_Tattoo_005_F"
+    },
+    {
+        "collection": "mpSmuggler_overlays",
+        "cost": 9475,
+        "label": "TAT_SM_006",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Smuggler_Tattoo_006_M",
+        "overlayFemale": "MP_Smuggler_Tattoo_006_F"
+    },
+    {
+        "collection": "mpSmuggler_overlays",
+        "cost": 8525,
+        "label": "TAT_SM_007",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Smuggler_Tattoo_007_M",
+        "overlayFemale": "MP_Smuggler_Tattoo_007_F"
+    },
+    {
+        "collection": "mpSmuggler_overlays",
+        "cost": 11045,
+        "label": "TAT_SM_008",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Smuggler_Tattoo_008_M",
+        "overlayFemale": "MP_Smuggler_Tattoo_008_F"
+    },
+    {
+        "collection": "mpSmuggler_overlays",
+        "cost": 16625,
+        "label": "TAT_SM_009",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Smuggler_Tattoo_009_M",
+        "overlayFemale": "MP_Smuggler_Tattoo_009_F"
+    },
+    {
+        "collection": "mpSmuggler_overlays",
+        "cost": 12815,
+        "label": "TAT_SM_010",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Smuggler_Tattoo_010_M",
+        "overlayFemale": "MP_Smuggler_Tattoo_010_F"
+    },
+    {
+        "collection": "mpSmuggler_overlays",
+        "cost": 8110,
+        "label": "TAT_SM_011",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "MP_Smuggler_Tattoo_011_M",
+        "overlayFemale": "MP_Smuggler_Tattoo_011_F"
+    },
+    {
+        "collection": "mpSmuggler_overlays",
+        "cost": 10720,
+        "label": "TAT_SM_012",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "MP_Smuggler_Tattoo_012_M",
+        "overlayFemale": "MP_Smuggler_Tattoo_012_F"
+    },
+    {
+        "collection": "mpSmuggler_overlays",
+        "cost": 10540,
+        "label": "TAT_SM_013",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Smuggler_Tattoo_013_M",
+        "overlayFemale": "MP_Smuggler_Tattoo_013_F"
+    },
+    {
+        "collection": "mpSmuggler_overlays",
+        "cost": 8825,
+        "label": "TAT_SM_014",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Smuggler_Tattoo_014_M",
+        "overlayFemale": "MP_Smuggler_Tattoo_014_F"
+    },
+    {
+        "collection": "mpSmuggler_overlays",
+        "cost": 9765,
+        "label": "TAT_SM_015",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Smuggler_Tattoo_015_M",
+        "overlayFemale": "MP_Smuggler_Tattoo_015_F"
+    },
+    {
+        "collection": "mpSmuggler_overlays",
+        "cost": 13790,
+        "label": "TAT_SM_016",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Smuggler_Tattoo_016_M",
+        "overlayFemale": "MP_Smuggler_Tattoo_016_F"
+    },
+    {
+        "collection": "mpSmuggler_overlays",
+        "cost": 18850,
+        "label": "TAT_SM_017",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Smuggler_Tattoo_017_M",
+        "overlayFemale": "MP_Smuggler_Tattoo_017_F"
+    },
+    {
+        "collection": "mpSmuggler_overlays",
+        "cost": 16990,
+        "label": "TAT_SM_018",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Smuggler_Tattoo_018_M",
+        "overlayFemale": "MP_Smuggler_Tattoo_018_F"
+    },
+    {
+        "collection": "mpSmuggler_overlays",
+        "cost": 11105,
+        "label": "TAT_SM_019",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Smuggler_Tattoo_019_M",
+        "overlayFemale": "MP_Smuggler_Tattoo_019_F"
+    },
+    {
+        "collection": "mpSmuggler_overlays",
+        "cost": 9155,
+        "label": "TAT_SM_020",
+        "zone": "ZONE_RIGHT_LEG",
+        "overlayMale": "MP_Smuggler_Tattoo_020_M",
+        "overlayFemale": "MP_Smuggler_Tattoo_020_F"
+    },
+    {
+        "collection": "mpSmuggler_overlays",
+        "cost": 14860,
+        "label": "TAT_SM_021",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Smuggler_Tattoo_021_M",
+        "overlayFemale": "MP_Smuggler_Tattoo_021_F"
+    },
+    {
+        "collection": "mpSmuggler_overlays",
+        "cost": 16710,
+        "label": "TAT_SM_022",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Smuggler_Tattoo_022_M",
+        "overlayFemale": "MP_Smuggler_Tattoo_022_F"
+    },
+    {
+        "collection": "mpSmuggler_overlays",
+        "cost": 14400,
+        "label": "TAT_SM_023",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Smuggler_Tattoo_023_M",
+        "overlayFemale": "MP_Smuggler_Tattoo_023_F"
+    },
+    {
+        "collection": "mpSmuggler_overlays",
+        "cost": 18210,
+        "label": "TAT_SM_024",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Smuggler_Tattoo_024_M",
+        "overlayFemale": "MP_Smuggler_Tattoo_024_F"
+    },
+    {
+        "collection": "mpSmuggler_overlays",
+        "cost": 17450,
+        "label": "TAT_SM_025",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Smuggler_Tattoo_025_M",
+        "overlayFemale": "MP_Smuggler_Tattoo_025_F"
+    },
+    {
+        "collection": "mpStunt_overlays",
+        "cost": 4850,
+        "label": "TAT_ST_000",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "MP_MP_Stunt_Tat_000_M",
+        "overlayFemale": "MP_MP_Stunt_Tat_000_F"
+    },
+    {
+        "collection": "mpStunt_overlays",
+        "cost": 11600,
+        "label": "TAT_ST_001",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_MP_Stunt_Tat_001_M",
+        "overlayFemale": "MP_MP_Stunt_Tat_001_F"
+    },
+    {
+        "collection": "mpStunt_overlays",
+        "cost": 8850,
+        "label": "TAT_ST_002",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_MP_Stunt_Tat_002_M",
+        "overlayFemale": "MP_MP_Stunt_Tat_002_F"
+    },
+    {
+        "collection": "mpStunt_overlays",
+        "cost": 4300,
+        "label": "TAT_ST_003",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_MP_Stunt_Tat_003_M",
+        "overlayFemale": "MP_MP_Stunt_Tat_003_F"
+    },
+    {
+        "collection": "mpStunt_overlays",
+        "cost": 6350,
+        "label": "TAT_ST_004",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "MP_MP_Stunt_Tat_004_M",
+        "overlayFemale": "MP_MP_Stunt_Tat_004_F"
+    },
+    {
+        "collection": "mpStunt_overlays",
+        "cost": 8850,
+        "label": "TAT_ST_005",
+        "zone": "ZONE_RIGHT_LEG",
+        "overlayMale": "MP_MP_Stunt_Tat_005_M",
+        "overlayFemale": "MP_MP_Stunt_Tat_005_F"
+    },
+    {
+        "collection": "mpStunt_overlays",
+        "cost": 5900,
+        "label": "TAT_ST_006",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "MP_MP_Stunt_Tat_006_M",
+        "overlayFemale": "MP_MP_Stunt_Tat_006_F"
+    },
+    {
+        "collection": "mpStunt_overlays",
+        "cost": 8150,
+        "label": "TAT_ST_007",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "MP_MP_Stunt_Tat_007_M",
+        "overlayFemale": "MP_MP_Stunt_Tat_007_F"
+    },
+    {
+        "collection": "mpStunt_overlays",
+        "cost": 14750,
+        "label": "TAT_ST_008",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_MP_Stunt_Tat_008_M",
+        "overlayFemale": "MP_MP_Stunt_Tat_008_F"
+    },
+    {
+        "collection": "mpStunt_overlays",
+        "cost": 10800,
+        "label": "TAT_ST_009",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_MP_Stunt_Tat_009_M",
+        "overlayFemale": "MP_MP_Stunt_Tat_009_F"
+    },
+    {
+        "collection": "mpStunt_overlays",
+        "cost": 11000,
+        "label": "TAT_ST_010",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_MP_Stunt_Tat_010_M",
+        "overlayFemale": "MP_MP_Stunt_Tat_010_F"
+    },
+    {
+        "collection": "mpStunt_overlays",
+        "cost": 10750,
+        "label": "TAT_ST_011",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_MP_Stunt_Tat_011_M",
+        "overlayFemale": "MP_MP_Stunt_Tat_011_F"
+    },
+    {
+        "collection": "mpStunt_overlays",
+        "cost": 11950,
+        "label": "TAT_ST_012",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_MP_Stunt_Tat_012_M",
+        "overlayFemale": "MP_MP_Stunt_Tat_012_F"
+    },
+    {
+        "collection": "mpStunt_overlays",
+        "cost": 15500,
+        "label": "TAT_ST_013",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "MP_MP_Stunt_Tat_013_M",
+        "overlayFemale": "MP_MP_Stunt_Tat_013_F"
+    },
+    {
+        "collection": "mpStunt_overlays",
+        "cost": 8300,
+        "label": "TAT_ST_014",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_MP_Stunt_Tat_014_M",
+        "overlayFemale": "MP_MP_Stunt_Tat_014_F"
+    },
+    {
+        "collection": "mpStunt_overlays",
+        "cost": 13400,
+        "label": "TAT_ST_015",
+        "zone": "ZONE_RIGHT_LEG",
+        "overlayMale": "MP_MP_Stunt_Tat_015_M",
+        "overlayFemale": "MP_MP_Stunt_Tat_015_F"
+    },
+    {
+        "collection": "mpStunt_overlays",
+        "cost": 12950,
+        "label": "TAT_ST_016",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_MP_Stunt_Tat_016_M",
+        "overlayFemale": "MP_MP_Stunt_Tat_016_F"
+    },
+    {
+        "collection": "mpStunt_overlays",
+        "cost": 3800,
+        "label": "TAT_ST_017",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "MP_MP_Stunt_Tat_017_M",
+        "overlayFemale": "MP_MP_Stunt_Tat_017_F"
+    },
+    {
+        "collection": "mpStunt_overlays",
+        "cost": 5400,
+        "label": "TAT_ST_018",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_MP_Stunt_Tat_018_M",
+        "overlayFemale": "MP_MP_Stunt_Tat_018_F"
+    },
+    {
+        "collection": "mpStunt_overlays",
+        "cost": 8900,
+        "label": "TAT_ST_019",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_MP_Stunt_Tat_019_M",
+        "overlayFemale": "MP_MP_Stunt_Tat_019_F"
+    },
+    {
+        "collection": "mpStunt_overlays",
+        "cost": 6950,
+        "label": "TAT_ST_020",
+        "zone": "ZONE_RIGHT_LEG",
+        "overlayMale": "MP_MP_Stunt_Tat_020_M",
+        "overlayFemale": "MP_MP_Stunt_Tat_020_F"
+    },
+    {
+        "collection": "mpStunt_overlays",
+        "cost": 21200,
+        "label": "TAT_ST_021",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "MP_MP_Stunt_Tat_021_M",
+        "overlayFemale": "MP_MP_Stunt_Tat_021_F"
+    },
+    {
+        "collection": "mpStunt_overlays",
+        "cost": 16850,
+        "label": "TAT_ST_022",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_MP_Stunt_Tat_022_M",
+        "overlayFemale": "MP_MP_Stunt_Tat_022_F"
+    },
+    {
+        "collection": "mpStunt_overlays",
+        "cost": 18500,
+        "label": "TAT_ST_023",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_MP_Stunt_Tat_023_M",
+        "overlayFemale": "MP_MP_Stunt_Tat_023_F"
+    },
+    {
+        "collection": "mpStunt_overlays",
+        "cost": 8650,
+        "label": "TAT_ST_024",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_MP_Stunt_Tat_024_M",
+        "overlayFemale": "MP_MP_Stunt_Tat_024_F"
+    },
+    {
+        "collection": "mpStunt_overlays",
+        "cost": 7200,
+        "label": "TAT_ST_025",
+        "zone": "ZONE_RIGHT_LEG",
+        "overlayMale": "MP_MP_Stunt_Tat_025_M",
+        "overlayFemale": "MP_MP_Stunt_Tat_025_F"
+    },
+    {
+        "collection": "mpStunt_overlays",
+        "cost": 12300,
+        "label": "TAT_ST_026",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_MP_Stunt_Tat_026_M",
+        "overlayFemale": "MP_MP_Stunt_Tat_026_F"
+    },
+    {
+        "collection": "mpStunt_overlays",
+        "cost": 8950,
+        "label": "TAT_ST_027",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_MP_Stunt_Tat_027_M",
+        "overlayFemale": "MP_MP_Stunt_Tat_027_F"
+    },
+    {
+        "collection": "mpStunt_overlays",
+        "cost": 9850,
+        "label": "TAT_ST_028",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "MP_MP_Stunt_Tat_028_M",
+        "overlayFemale": "MP_MP_Stunt_Tat_028_F"
+    },
+    {
+        "collection": "mpStunt_overlays",
+        "cost": 17350,
+        "label": "TAT_ST_029",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_MP_Stunt_Tat_029_M",
+        "overlayFemale": "MP_MP_Stunt_Tat_029_F"
+    },
+    {
+        "collection": "mpStunt_overlays",
+        "cost": 8150,
+        "label": "TAT_ST_030",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_MP_Stunt_Tat_030_M",
+        "overlayFemale": "MP_MP_Stunt_Tat_030_F"
+    },
+    {
+        "collection": "mpStunt_overlays",
+        "cost": 11000,
+        "label": "TAT_ST_031",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "MP_MP_Stunt_Tat_031_M",
+        "overlayFemale": "MP_MP_Stunt_Tat_031_F"
+    },
+    {
+        "collection": "mpStunt_overlays",
+        "cost": 10350,
+        "label": "TAT_ST_032",
+        "zone": "ZONE_RIGHT_LEG",
+        "overlayMale": "MP_MP_Stunt_Tat_032_M",
+        "overlayFemale": "MP_MP_Stunt_Tat_032_F"
+    },
+    {
+        "collection": "mpStunt_overlays",
+        "cost": 10400,
+        "label": "TAT_ST_033",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_MP_Stunt_Tat_033_M",
+        "overlayFemale": "MP_MP_Stunt_Tat_033_F"
+    },
+    {
+        "collection": "mpStunt_overlays",
+        "cost": 9900,
+        "label": "TAT_ST_034",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_MP_Stunt_Tat_034_M",
+        "overlayFemale": "MP_MP_Stunt_Tat_034_F"
+    },
+    {
+        "collection": "mpStunt_overlays",
+        "cost": 12700,
+        "label": "TAT_ST_035",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_MP_Stunt_Tat_035_M",
+        "overlayFemale": "MP_MP_Stunt_Tat_035_F"
+    },
+    {
+        "collection": "mpStunt_overlays",
+        "cost": 2350,
+        "label": "TAT_ST_036",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_MP_Stunt_Tat_036_M",
+        "overlayFemale": "MP_MP_Stunt_Tat_036_F"
+    },
+    {
+        "collection": "mpStunt_overlays",
+        "cost": 6850,
+        "label": "TAT_ST_037",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_MP_Stunt_Tat_037_M",
+        "overlayFemale": "MP_MP_Stunt_Tat_037_F"
+    },
+    {
+        "collection": "mpStunt_overlays",
+        "cost": 5750,
+        "label": "TAT_ST_038",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_MP_Stunt_Tat_038_M",
+        "overlayFemale": "MP_MP_Stunt_Tat_038_F"
+    },
+    {
+        "collection": "mpStunt_overlays",
+        "cost": 9350,
+        "label": "TAT_ST_039",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_MP_Stunt_Tat_039_M",
+        "overlayFemale": "MP_MP_Stunt_Tat_039_F"
+    },
+    {
+        "collection": "mpStunt_overlays",
+        "cost": 15950,
+        "label": "TAT_ST_040",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_MP_Stunt_Tat_040_M",
+        "overlayFemale": "MP_MP_Stunt_Tat_040_F"
+    },
+    {
+        "collection": "mpStunt_overlays",
+        "cost": 10100,
+        "label": "TAT_ST_041",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_MP_Stunt_Tat_041_M",
+        "overlayFemale": "MP_MP_Stunt_Tat_041_F"
+    },
+    {
+        "collection": "mpStunt_overlays",
+        "cost": 4150,
+        "label": "TAT_ST_042",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "MP_MP_Stunt_Tat_042_M",
+        "overlayFemale": "MP_MP_Stunt_Tat_042_F"
+    },
+    {
+        "collection": "mpStunt_overlays",
+        "cost": 10300,
+        "label": "TAT_ST_043",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_MP_Stunt_Tat_043_M",
+        "overlayFemale": "MP_MP_Stunt_Tat_043_F"
+    },
+    {
+        "collection": "mpStunt_overlays",
+        "cost": 13900,
+        "label": "TAT_ST_044",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_MP_Stunt_Tat_044_M",
+        "overlayFemale": "MP_MP_Stunt_Tat_044_F"
+    },
+    {
+        "collection": "mpStunt_overlays",
+        "cost": 19650,
+        "label": "TAT_ST_045",
+        "zone": "ZONE_RIGHT_LEG",
+        "overlayMale": "MP_MP_Stunt_Tat_045_M",
+        "overlayFemale": "MP_MP_Stunt_Tat_045_F"
+    },
+    {
+        "collection": "mpStunt_overlays",
+        "cost": 12750,
+        "label": "TAT_ST_046",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_MP_Stunt_Tat_046_M",
+        "overlayFemale": "MP_MP_Stunt_Tat_046_F"
+    },
+    {
+        "collection": "mpStunt_overlays",
+        "cost": 9200,
+        "label": "TAT_ST_047",
+        "zone": "ZONE_RIGHT_LEG",
+        "overlayMale": "MP_MP_Stunt_Tat_047_M",
+        "overlayFemale": "MP_MP_Stunt_Tat_047_F"
+    },
+    {
+        "collection": "mpStunt_overlays",
+        "cost": 11300,
+        "label": "TAT_ST_048",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_MP_Stunt_Tat_048_M",
+        "overlayFemale": "MP_MP_Stunt_Tat_048_F"
+    },
+    {
+        "collection": "mpStunt_overlays",
+        "cost": 23000,
+        "label": "TAT_ST_049",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_MP_Stunt_Tat_049_M",
+        "overlayFemale": "MP_MP_Stunt_Tat_049_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_000",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "MP_Sum2_Tat_000_M",
+        "overlayFemale": "MP_Sum2_Tat_000_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_001",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "MP_Sum2_Tat_001_M",
+        "overlayFemale": "MP_Sum2_Tat_001_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_002",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "MP_Sum2_Tat_002_M",
+        "overlayFemale": "MP_Sum2_Tat_002_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_003",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Sum2_Tat_003_M",
+        "overlayFemale": "MP_Sum2_Tat_003_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_004",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Sum2_Tat_004_M",
+        "overlayFemale": "MP_Sum2_Tat_004_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_005",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Sum2_Tat_005_M",
+        "overlayFemale": "MP_Sum2_Tat_005_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_006",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Sum2_Tat_006_M",
+        "overlayFemale": "MP_Sum2_Tat_006_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_007",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Sum2_Tat_007_M",
+        "overlayFemale": "MP_Sum2_Tat_007_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_008",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Sum2_Tat_008_M",
+        "overlayFemale": "MP_Sum2_Tat_008_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_009",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Sum2_Tat_009_M",
+        "overlayFemale": "MP_Sum2_Tat_009_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_010",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Sum2_Tat_010_M",
+        "overlayFemale": "MP_Sum2_Tat_010_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_011",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Sum2_Tat_011_M",
+        "overlayFemale": "MP_Sum2_Tat_011_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_012",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Sum2_Tat_012_M",
+        "overlayFemale": "MP_Sum2_Tat_012_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_013",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Sum2_Tat_013_M",
+        "overlayFemale": "MP_Sum2_Tat_013_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_014",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "MP_Sum2_Tat_014_M",
+        "overlayFemale": "MP_Sum2_Tat_014_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_015",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "MP_Sum2_Tat_015_M",
+        "overlayFemale": "MP_Sum2_Tat_015_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_016",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "MP_Sum2_Tat_016_M",
+        "overlayFemale": "MP_Sum2_Tat_016_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_017",
+        "zone": "ZONE_RIGHT_LEG",
+        "overlayMale": "MP_Sum2_Tat_017_M",
+        "overlayFemale": "MP_Sum2_Tat_017_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_018",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "MP_Sum2_Tat_018_M",
+        "overlayFemale": "MP_Sum2_Tat_018_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_019",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "MP_Sum2_Tat_019_M",
+        "overlayFemale": "MP_Sum2_Tat_019_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_020",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "MP_Sum2_Tat_020_M",
+        "overlayFemale": "MP_Sum2_Tat_020_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_021",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "MP_Sum2_Tat_021_M",
+        "overlayFemale": "MP_Sum2_Tat_021_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_022",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "MP_Sum2_Tat_022_M",
+        "overlayFemale": "MP_Sum2_Tat_022_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_023",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "MP_Sum2_Tat_023_M",
+        "overlayFemale": "MP_Sum2_Tat_023_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_024",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "MP_Sum2_Tat_024_M",
+        "overlayFemale": "MP_Sum2_Tat_024_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_025",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "MP_Sum2_Tat_025_M",
+        "overlayFemale": "MP_Sum2_Tat_025_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_026",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "MP_Sum2_Tat_026_M",
+        "overlayFemale": "MP_Sum2_Tat_026_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_027",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "MP_Sum2_Tat_027_M",
+        "overlayFemale": "MP_Sum2_Tat_027_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_028",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Sum2_Tat_028_M",
+        "overlayFemale": "MP_Sum2_Tat_028_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_029",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Sum2_Tat_029_M",
+        "overlayFemale": "MP_Sum2_Tat_029_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_030",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Sum2_Tat_030_M",
+        "overlayFemale": "MP_Sum2_Tat_030_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_031",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Sum2_Tat_031_M",
+        "overlayFemale": "MP_Sum2_Tat_031_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_032",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "MP_Sum2_Tat_032_M",
+        "overlayFemale": "MP_Sum2_Tat_032_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_033",
+        "zone": "ZONE_RIGHT_LEG",
+        "overlayMale": "MP_Sum2_Tat_033_M",
+        "overlayFemale": "MP_Sum2_Tat_033_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_034",
+        "zone": "ZONE_RIGHT_LEG",
+        "overlayMale": "MP_Sum2_Tat_034_M",
+        "overlayFemale": "MP_Sum2_Tat_034_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_035",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Sum2_Tat_035_M",
+        "overlayFemale": "MP_Sum2_Tat_035_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_036",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Sum2_Tat_036_M",
+        "overlayFemale": "MP_Sum2_Tat_036_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_037",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Sum2_Tat_037_M",
+        "overlayFemale": "MP_Sum2_Tat_037_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_038",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Sum2_Tat_038_M",
+        "overlayFemale": "MP_Sum2_Tat_038_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_039",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Sum2_Tat_039_M",
+        "overlayFemale": "MP_Sum2_Tat_039_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_040",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Sum2_Tat_040_M",
+        "overlayFemale": "MP_Sum2_Tat_040_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_041",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Sum2_Tat_041_M",
+        "overlayFemale": "MP_Sum2_Tat_041_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_042",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Sum2_Tat_042_M",
+        "overlayFemale": "MP_Sum2_Tat_042_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_043",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Sum2_Tat_043_M",
+        "overlayFemale": "MP_Sum2_Tat_043_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_044",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Sum2_Tat_044_M",
+        "overlayFemale": "MP_Sum2_Tat_044_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_045",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Sum2_Tat_045_M",
+        "overlayFemale": "MP_Sum2_Tat_045_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_046",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Sum2_Tat_046_M",
+        "overlayFemale": "MP_Sum2_Tat_046_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_047",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Sum2_Tat_047_M",
+        "overlayFemale": "MP_Sum2_Tat_047_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_048",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Sum2_Tat_048_M",
+        "overlayFemale": "MP_Sum2_Tat_048_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_049",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Sum2_Tat_049_M",
+        "overlayFemale": "MP_Sum2_Tat_049_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_050",
+        "zone": "ZONE_RIGHT_LEG",
+        "overlayMale": "MP_Sum2_Tat_050_M",
+        "overlayFemale": "MP_Sum2_Tat_050_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_051",
+        "zone": "ZONE_RIGHT_LEG",
+        "overlayMale": "MP_Sum2_Tat_051_M",
+        "overlayFemale": "MP_Sum2_Tat_051_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_052",
+        "zone": "ZONE_RIGHT_LEG",
+        "overlayMale": "MP_Sum2_Tat_052_M",
+        "overlayFemale": "MP_Sum2_Tat_052_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_053",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "MP_Sum2_Tat_053_M",
+        "overlayFemale": "MP_Sum2_Tat_053_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_054",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "MP_Sum2_Tat_054_M",
+        "overlayFemale": "MP_Sum2_Tat_054_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_055",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "MP_Sum2_Tat_055_M",
+        "overlayFemale": "MP_Sum2_Tat_055_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_056",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "MP_Sum2_Tat_056_M",
+        "overlayFemale": "MP_Sum2_Tat_056_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_057",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Sum2_Tat_057_M",
+        "overlayFemale": "MP_Sum2_Tat_057_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_058",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Sum2_Tat_058_M",
+        "overlayFemale": "MP_Sum2_Tat_058_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_059",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Sum2_Tat_059_M",
+        "overlayFemale": "MP_Sum2_Tat_059_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_060",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Sum2_Tat_060_M",
+        "overlayFemale": "MP_Sum2_Tat_060_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_061",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Sum2_Tat_061_M",
+        "overlayFemale": "MP_Sum2_Tat_061_F"
+    },
+    {
+        "collection": "mpSum2_overlays",
+        "cost": 0,
+        "label": "TAT_SB_062",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Sum2_Tat_062_M",
+        "overlayFemale": "MP_Sum2_Tat_062_F"
+    },
+    {
+        "collection": "mpVinewood_overlays",
+        "cost": 696969,
+        "label": "TAT_VW_000",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Vinewood_Tat_000_M",
+        "overlayFemale": "MP_Vinewood_Tat_000_F"
+    },
+    {
+        "collection": "mpVinewood_overlays",
+        "cost": 696969,
+        "label": "TAT_VW_001",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Vinewood_Tat_001_M",
+        "overlayFemale": "MP_Vinewood_Tat_001_F"
+    },
+    {
+        "collection": "mpVinewood_overlays",
+        "cost": 696969,
+        "label": "TAT_VW_002",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Vinewood_Tat_002_M",
+        "overlayFemale": "MP_Vinewood_Tat_002_F"
+    },
+    {
+        "collection": "mpVinewood_overlays",
+        "cost": 696969,
+        "label": "TAT_VW_003",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Vinewood_Tat_003_M",
+        "overlayFemale": "MP_Vinewood_Tat_003_F"
+    },
+    {
+        "collection": "mpVinewood_overlays",
+        "cost": 696969,
+        "label": "TAT_VW_004",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Vinewood_Tat_004_M",
+        "overlayFemale": "MP_Vinewood_Tat_004_F"
+    },
+    {
+        "collection": "mpVinewood_overlays",
+        "cost": 696969,
+        "label": "TAT_VW_005",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Vinewood_Tat_005_M",
+        "overlayFemale": "MP_Vinewood_Tat_005_F"
+    },
+    {
+        "collection": "mpVinewood_overlays",
+        "cost": 696969,
+        "label": "TAT_VW_006",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Vinewood_Tat_006_M",
+        "overlayFemale": "MP_Vinewood_Tat_006_F"
+    },
+    {
+        "collection": "mpVinewood_overlays",
+        "cost": 696969,
+        "label": "TAT_VW_007",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Vinewood_Tat_007_M",
+        "overlayFemale": "MP_Vinewood_Tat_007_F"
+    },
+    {
+        "collection": "mpVinewood_overlays",
+        "cost": 696969,
+        "label": "TAT_VW_008",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Vinewood_Tat_008_M",
+        "overlayFemale": "MP_Vinewood_Tat_008_F"
+    },
+    {
+        "collection": "mpVinewood_overlays",
+        "cost": 696969,
+        "label": "TAT_VW_009",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Vinewood_Tat_009_M",
+        "overlayFemale": "MP_Vinewood_Tat_009_F"
+    },
+    {
+        "collection": "mpVinewood_overlays",
+        "cost": 696969,
+        "label": "TAT_VW_010",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Vinewood_Tat_010_M",
+        "overlayFemale": "MP_Vinewood_Tat_010_F"
+    },
+    {
+        "collection": "mpVinewood_overlays",
+        "cost": 696969,
+        "label": "TAT_VW_011",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Vinewood_Tat_011_M",
+        "overlayFemale": "MP_Vinewood_Tat_011_F"
+    },
+    {
+        "collection": "mpVinewood_overlays",
+        "cost": 696969,
+        "label": "TAT_VW_012",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Vinewood_Tat_012_M",
+        "overlayFemale": "MP_Vinewood_Tat_012_F"
+    },
+    {
+        "collection": "mpVinewood_overlays",
+        "cost": 696969,
+        "label": "TAT_VW_013",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "MP_Vinewood_Tat_013_M",
+        "overlayFemale": "MP_Vinewood_Tat_013_F"
+    },
+    {
+        "collection": "mpVinewood_overlays",
+        "cost": 696969,
+        "label": "TAT_VW_014",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Vinewood_Tat_014_M",
+        "overlayFemale": "MP_Vinewood_Tat_014_F"
+    },
+    {
+        "collection": "mpVinewood_overlays",
+        "cost": 696969,
+        "label": "TAT_VW_015",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Vinewood_Tat_015_M",
+        "overlayFemale": "MP_Vinewood_Tat_015_F"
+    },
+    {
+        "collection": "mpVinewood_overlays",
+        "cost": 696969,
+        "label": "TAT_VW_016",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Vinewood_Tat_016_M",
+        "overlayFemale": "MP_Vinewood_Tat_016_F"
+    },
+    {
+        "collection": "mpVinewood_overlays",
+        "cost": 696969,
+        "label": "TAT_VW_017",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Vinewood_Tat_017_M",
+        "overlayFemale": "MP_Vinewood_Tat_017_F"
+    },
+    {
+        "collection": "mpVinewood_overlays",
+        "cost": 696969,
+        "label": "TAT_VW_018",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Vinewood_Tat_018_M",
+        "overlayFemale": "MP_Vinewood_Tat_018_F"
+    },
+    {
+        "collection": "mpVinewood_overlays",
+        "cost": 696969,
+        "label": "TAT_VW_019",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Vinewood_Tat_019_M",
+        "overlayFemale": "MP_Vinewood_Tat_019_F"
+    },
+    {
+        "collection": "mpVinewood_overlays",
+        "cost": 696969,
+        "label": "TAT_VW_020",
+        "zone": "ZONE_RIGHT_LEG",
+        "overlayMale": "MP_Vinewood_Tat_020_M",
+        "overlayFemale": "MP_Vinewood_Tat_020_F"
+    },
+    {
+        "collection": "mpVinewood_overlays",
+        "cost": 696969,
+        "label": "TAT_VW_021",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Vinewood_Tat_021_M",
+        "overlayFemale": "MP_Vinewood_Tat_021_F"
+    },
+    {
+        "collection": "mpVinewood_overlays",
+        "cost": 696969,
+        "label": "TAT_VW_022",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Vinewood_Tat_022_M",
+        "overlayFemale": "MP_Vinewood_Tat_022_F"
+    },
+    {
+        "collection": "mpVinewood_overlays",
+        "cost": 696969,
+        "label": "TAT_VW_023",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Vinewood_Tat_023_M",
+        "overlayFemale": "MP_Vinewood_Tat_023_F"
+    },
+    {
+        "collection": "mpVinewood_overlays",
+        "cost": 696969,
+        "label": "TAT_VW_024",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Vinewood_Tat_024_M",
+        "overlayFemale": "MP_Vinewood_Tat_024_F"
+    },
+    {
+        "collection": "mpVinewood_overlays",
+        "cost": 696969,
+        "label": "TAT_VW_025",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Vinewood_Tat_025_M",
+        "overlayFemale": "MP_Vinewood_Tat_025_F"
+    },
+    {
+        "collection": "mpVinewood_overlays",
+        "cost": 696969,
+        "label": "TAT_VW_026",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Vinewood_Tat_026_M",
+        "overlayFemale": "MP_Vinewood_Tat_026_F"
+    },
+    {
+        "collection": "mpVinewood_overlays",
+        "cost": 696969,
+        "label": "TAT_VW_027",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "MP_Vinewood_Tat_027_M",
+        "overlayFemale": "MP_Vinewood_Tat_027_F"
+    },
+    {
+        "collection": "mpVinewood_overlays",
+        "cost": 696969,
+        "label": "TAT_VW_028",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Vinewood_Tat_028_M",
+        "overlayFemale": "MP_Vinewood_Tat_028_F"
+    },
+    {
+        "collection": "mpVinewood_overlays",
+        "cost": 696969,
+        "label": "TAT_VW_029",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Vinewood_Tat_029_M",
+        "overlayFemale": "MP_Vinewood_Tat_029_F"
+    },
+    {
+        "collection": "mpVinewood_overlays",
+        "cost": 696969,
+        "label": "TAT_VW_030",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Vinewood_Tat_030_M",
+        "overlayFemale": "MP_Vinewood_Tat_030_F"
+    },
+    {
+        "collection": "mpVinewood_overlays",
+        "cost": 696969,
+        "label": "TAT_VW_031",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Vinewood_Tat_031_M",
+        "overlayFemale": "MP_Vinewood_Tat_031_F"
+    },
+    {
+        "collection": "mpVinewood_overlays",
+        "cost": 696969,
+        "label": "TAT_VW_032",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Vinewood_Tat_032_M",
+        "overlayFemale": "MP_Vinewood_Tat_032_F"
+    },
+    {
+        "collection": "mpHipster_overlays",
+        "cost": 6750,
+        "label": "TAT_HP_000",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "FM_Hip_M_Tat_000",
+        "overlayFemale": "FM_Hip_F_Tat_000"
+    },
+    {
+        "collection": "mpHipster_overlays",
+        "cost": 2000,
+        "label": "TAT_HP_001",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "FM_Hip_M_Tat_001",
+        "overlayFemale": "FM_Hip_F_Tat_001"
+    },
+    {
+        "collection": "mpHipster_overlays",
+        "cost": 2900,
+        "label": "TAT_HP_002",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "FM_Hip_M_Tat_002",
+        "overlayFemale": "FM_Hip_F_Tat_002"
+    },
+    {
+        "collection": "mpHipster_overlays",
+        "cost": 2100,
+        "label": "TAT_HP_003",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "FM_Hip_M_Tat_003",
+        "overlayFemale": "FM_Hip_F_Tat_003"
+    },
+    {
+        "collection": "mpHipster_overlays",
+        "cost": 2900,
+        "label": "TAT_HP_004",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "FM_Hip_M_Tat_004",
+        "overlayFemale": "FM_Hip_F_Tat_004"
+    },
+    {
+        "collection": "mpHipster_overlays",
+        "cost": 7450,
+        "label": "TAT_HP_005",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "FM_Hip_M_Tat_005",
+        "overlayFemale": "FM_Hip_F_Tat_005"
+    },
+    {
+        "collection": "mpHipster_overlays",
+        "cost": 4550,
+        "label": "TAT_HP_006",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "FM_Hip_M_Tat_006",
+        "overlayFemale": "FM_Hip_F_Tat_006"
+    },
+    {
+        "collection": "mpHipster_overlays",
+        "cost": 6000,
+        "label": "TAT_HP_007",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "FM_Hip_M_Tat_007",
+        "overlayFemale": "FM_Hip_F_Tat_007"
+    },
+    {
+        "collection": "mpHipster_overlays",
+        "cost": 4850,
+        "label": "TAT_HP_008",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "FM_Hip_M_Tat_008",
+        "overlayFemale": "FM_Hip_F_Tat_008"
+    },
+    {
+        "collection": "mpHipster_overlays",
+        "cost": 4000,
+        "label": "TAT_HP_009",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "FM_Hip_M_Tat_009",
+        "overlayFemale": "FM_Hip_F_Tat_009"
+    },
+    {
+        "collection": "mpHipster_overlays",
+        "cost": 3150,
+        "label": "TAT_HP_010",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "FM_Hip_M_Tat_010",
+        "overlayFemale": "FM_Hip_F_Tat_010"
+    },
+    {
+        "collection": "mpHipster_overlays",
+        "cost": 3000,
+        "label": "TAT_HP_011",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "FM_Hip_M_Tat_011",
+        "overlayFemale": "FM_Hip_F_Tat_011"
+    },
+    {
+        "collection": "mpHipster_overlays",
+        "cost": 6500,
+        "label": "TAT_HP_012",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "FM_Hip_M_Tat_012",
+        "overlayFemale": "FM_Hip_F_Tat_012"
+    },
+    {
+        "collection": "mpHipster_overlays",
+        "cost": 6950,
+        "label": "TAT_HP_013",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "FM_Hip_M_Tat_013",
+        "overlayFemale": "FM_Hip_F_Tat_013"
+    },
+    {
+        "collection": "mpHipster_overlays",
+        "cost": 4300,
+        "label": "TAT_HP_014",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "FM_Hip_M_Tat_014",
+        "overlayFemale": "FM_Hip_F_Tat_014"
+    },
+    {
+        "collection": "mpHipster_overlays",
+        "cost": 3400,
+        "label": "TAT_HP_015",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "FM_Hip_M_Tat_015",
+        "overlayFemale": "FM_Hip_F_Tat_015"
+    },
+    {
+        "collection": "mpHipster_overlays",
+        "cost": 3700,
+        "label": "TAT_HP_016",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "FM_Hip_M_Tat_016",
+        "overlayFemale": "FM_Hip_F_Tat_016"
+    },
+    {
+        "collection": "mpHipster_overlays",
+        "cost": 2650,
+        "label": "TAT_HP_017",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "FM_Hip_M_Tat_017",
+        "overlayFemale": "FM_Hip_F_Tat_017"
+    },
+    {
+        "collection": "mpHipster_overlays",
+        "cost": 1800,
+        "label": "TAT_HP_018",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "FM_Hip_M_Tat_018",
+        "overlayFemale": "FM_Hip_F_Tat_018"
+    },
+    {
+        "collection": "mpHipster_overlays",
+        "cost": 3400,
+        "label": "TAT_HP_019",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "FM_Hip_M_Tat_019",
+        "overlayFemale": "FM_Hip_F_Tat_019"
+    },
+    {
+        "collection": "mpHipster_overlays",
+        "cost": 7350,
+        "label": "TAT_HP_020",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "FM_Hip_M_Tat_020",
+        "overlayFemale": "FM_Hip_F_Tat_020"
+    },
+    {
+        "collection": "mpHipster_overlays",
+        "cost": 7850,
+        "label": "TAT_HP_021",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "FM_Hip_M_Tat_021",
+        "overlayFemale": "FM_Hip_F_Tat_021"
+    },
+    {
+        "collection": "mpHipster_overlays",
+        "cost": 2250,
+        "label": "TAT_HP_022",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "FM_Hip_M_Tat_022",
+        "overlayFemale": "FM_Hip_F_Tat_022"
+    },
+    {
+        "collection": "mpHipster_overlays",
+        "cost": 7000,
+        "label": "TAT_HP_023",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "FM_Hip_M_Tat_023",
+        "overlayFemale": "FM_Hip_F_Tat_023"
+    },
+    {
+        "collection": "mpHipster_overlays",
+        "cost": 2950,
+        "label": "TAT_HP_024",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "FM_Hip_M_Tat_024",
+        "overlayFemale": "FM_Hip_F_Tat_024"
+    },
+    {
+        "collection": "mpHipster_overlays",
+        "cost": 3500,
+        "label": "TAT_HP_025",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "FM_Hip_M_Tat_025",
+        "overlayFemale": "FM_Hip_F_Tat_025"
+    },
+    {
+        "collection": "mpHipster_overlays",
+        "cost": 2400,
+        "label": "TAT_HP_026",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "FM_Hip_M_Tat_026",
+        "overlayFemale": "FM_Hip_F_Tat_026"
+    },
+    {
+        "collection": "mpHipster_overlays",
+        "cost": 5750,
+        "label": "TAT_HP_027",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "FM_Hip_M_Tat_027",
+        "overlayFemale": "FM_Hip_F_Tat_027"
+    },
+    {
+        "collection": "mpHipster_overlays",
+        "cost": 4800,
+        "label": "TAT_HP_028",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "FM_Hip_M_Tat_028",
+        "overlayFemale": "FM_Hip_F_Tat_028"
+    },
+    {
+        "collection": "mpHipster_overlays",
+        "cost": 1850,
+        "label": "TAT_HP_029",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "FM_Hip_M_Tat_029",
+        "overlayFemale": "FM_Hip_F_Tat_029"
+    },
+    {
+        "collection": "mpHipster_overlays",
+        "cost": 2250,
+        "label": "TAT_HP_030",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "FM_Hip_M_Tat_030",
+        "overlayFemale": "FM_Hip_F_Tat_030"
+    },
+    {
+        "collection": "mpHipster_overlays",
+        "cost": 4950,
+        "label": "TAT_HP_031",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "FM_Hip_M_Tat_031",
+        "overlayFemale": "FM_Hip_F_Tat_031"
+    },
+    {
+        "collection": "mpHipster_overlays",
+        "cost": 4350,
+        "label": "TAT_HP_032",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "FM_Hip_M_Tat_032",
+        "overlayFemale": "FM_Hip_F_Tat_032"
+    },
+    {
+        "collection": "mpHipster_overlays",
+        "cost": 6950,
+        "label": "TAT_HP_033",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "FM_Hip_M_Tat_033",
+        "overlayFemale": "FM_Hip_F_Tat_033"
+    },
+    {
+        "collection": "mpHipster_overlays",
+        "cost": 9500,
+        "label": "TAT_HP_034",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "FM_Hip_M_Tat_034",
+        "overlayFemale": "FM_Hip_F_Tat_034"
+    },
+    {
+        "collection": "mpHipster_overlays",
+        "cost": 7500,
+        "label": "TAT_HP_035",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "FM_Hip_M_Tat_035",
+        "overlayFemale": "FM_Hip_F_Tat_035"
+    },
+    {
+        "collection": "mpHipster_overlays",
+        "cost": 5150,
+        "label": "TAT_HP_036",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "FM_Hip_M_Tat_036",
+        "overlayFemale": "FM_Hip_F_Tat_036"
+    },
+    {
+        "collection": "mpHipster_overlays",
+        "cost": 3750,
+        "label": "TAT_HP_037",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "FM_Hip_M_Tat_037",
+        "overlayFemale": "FM_Hip_F_Tat_037"
+    },
+    {
+        "collection": "mpHipster_overlays",
+        "cost": 3500,
+        "label": "TAT_HP_038",
+        "zone": "ZONE_RIGHT_LEG",
+        "overlayMale": "FM_Hip_M_Tat_038",
+        "overlayFemale": "FM_Hip_F_Tat_038"
+    },
+    {
+        "collection": "mpHipster_overlays",
+        "cost": 10000,
+        "label": "TAT_HP_039",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "FM_Hip_M_Tat_039",
+        "overlayFemale": "FM_Hip_F_Tat_039"
+    },
+    {
+        "collection": "mpHipster_overlays",
+        "cost": 2950,
+        "label": "TAT_HP_040",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "FM_Hip_M_Tat_040",
+        "overlayFemale": "FM_Hip_F_Tat_040"
+    },
+    {
+        "collection": "mpHipster_overlays",
+        "cost": 2575,
+        "label": "TAT_HP_041",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "FM_Hip_M_Tat_041",
+        "overlayFemale": "FM_Hip_F_Tat_041"
+    },
+    {
+        "collection": "mpHipster_overlays",
+        "cost": 4300,
+        "label": "TAT_HP_042",
+        "zone": "ZONE_RIGHT_LEG",
+        "overlayMale": "FM_Hip_M_Tat_042",
+        "overlayFemale": "FM_Hip_F_Tat_042"
+    },
+    {
+        "collection": "mpHipster_overlays",
+        "cost": 5500,
+        "label": "TAT_HP_043",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "FM_Hip_M_Tat_043",
+        "overlayFemale": "FM_Hip_F_Tat_043"
+    },
+    {
+        "collection": "mpHipster_overlays",
+        "cost": 5500,
+        "label": "TAT_HP_044",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "FM_Hip_M_Tat_044",
+        "overlayFemale": "FM_Hip_F_Tat_044"
+    },
+    {
+        "collection": "mpHipster_overlays",
+        "cost": 4000,
+        "label": "TAT_HP_045",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "FM_Hip_M_Tat_045",
+        "overlayFemale": "FM_Hip_F_Tat_045"
+    },
+    {
+        "collection": "mpHipster_overlays",
+        "cost": 3750,
+        "label": "TAT_HP_046",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "FM_Hip_M_Tat_046",
+        "overlayFemale": "FM_Hip_F_Tat_046"
+    },
+    {
+        "collection": "mpHipster_overlays",
+        "cost": 1900,
+        "label": "TAT_HP_047",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "FM_Hip_M_Tat_047",
+        "overlayFemale": "FM_Hip_F_Tat_047"
+    },
+    {
+        "collection": "mpHipster_overlays",
+        "cost": 7850,
+        "label": "TAT_HP_048",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "FM_Hip_M_Tat_048",
+        "overlayFemale": "FM_Hip_F_Tat_048"
+    },
+    {
+        "collection": "mpLuxe_overlays",
+        "cost": 11900,
+        "label": "TAT_LX_000",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "MP_Luxe_Tat_000_M",
+        "overlayFemale": "MP_Luxe_Tat_000_F"
+    },
+    {
+        "collection": "mpLuxe_overlays",
+        "cost": 14350,
+        "label": "TAT_LX_001",
+        "zone": "ZONE_RIGHT_LEG",
+        "overlayMale": "MP_Luxe_Tat_001_M",
+        "overlayFemale": "MP_Luxe_Tat_001_F"
+    },
+    {
+        "collection": "mpLuxe_overlays",
+        "cost": 8350,
+        "label": "TAT_LX_003",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Luxe_Tat_003_M",
+        "overlayFemale": "MP_Luxe_Tat_003_F"
+    },
+    {
+        "collection": "mpLuxe_overlays",
+        "cost": 12200,
+        "label": "TAT_LX_004",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Luxe_Tat_004_M",
+        "overlayFemale": "MP_Luxe_Tat_004_F"
+    },
+    {
+        "collection": "mpLuxe_overlays",
+        "cost": 25000,
+        "label": "TAT_LX_006",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Luxe_Tat_006_M",
+        "overlayFemale": "MP_Luxe_Tat_006_F"
+    },
+    {
+        "collection": "mpLuxe_overlays",
+        "cost": 12450,
+        "label": "TAT_LX_007",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Luxe_Tat_007_M",
+        "overlayFemale": "MP_Luxe_Tat_007_F"
+    },
+    {
+        "collection": "mpLuxe_overlays",
+        "cost": 18000,
+        "label": "TAT_LX_008",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Luxe_Tat_008_M",
+        "overlayFemale": "MP_Luxe_Tat_008_F"
+    },
+    {
+        "collection": "mpLuxe_overlays",
+        "cost": 19150,
+        "label": "TAT_LX_009",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Luxe_Tat_009_M",
+        "overlayFemale": "MP_Luxe_Tat_009_F"
+    },
+    {
+        "collection": "mpLuxe_overlays",
+        "cost": 16900,
+        "label": "TAT_LX_013",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Luxe_Tat_013_M",
+        "overlayFemale": "MP_Luxe_Tat_013_F"
+    },
+    {
+        "collection": "mpLuxe_overlays",
+        "cost": 18200,
+        "label": "TAT_LX_014",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Luxe_Tat_014_M",
+        "overlayFemale": "MP_Luxe_Tat_014_F"
+    },
+    {
+        "collection": "mpLuxe_overlays",
+        "cost": 16250,
+        "label": "TAT_LX_015",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Luxe_Tat_015_M",
+        "overlayFemale": "MP_Luxe_Tat_015_F"
+    },
+    {
+        "collection": "mpLuxe_overlays",
+        "cost": 16850,
+        "label": "TAT_LX_019",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Luxe_Tat_019_M",
+        "overlayFemale": "MP_Luxe_Tat_019_F"
+    },
+    {
+        "collection": "mpLuxe_overlays",
+        "cost": 22500,
+        "label": "TAT_LX_020",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Luxe_Tat_020_M",
+        "overlayFemale": "MP_Luxe_Tat_020_F"
+    },
+    {
+        "collection": "mpLuxe_overlays",
+        "cost": 12850,
+        "label": "TAT_LX_021",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Luxe_Tat_021_M",
+        "overlayFemale": "MP_Luxe_Tat_021_F"
+    },
+    {
+        "collection": "mpLuxe_overlays",
+        "cost": 27250,
+        "label": "TAT_LX_024",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Luxe_Tat_024_M",
+        "overlayFemale": "MP_Luxe_Tat_024_F"
+    },
+    {
+        "collection": "mp2023_02_overlays",
+        "cost": 0,
+        "label": "TAT_X7_000",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_2023_02_Tat_000_M",
+        "overlayFemale": "MP_2023_02_Tat_000_F"
+    },
+    {
+        "collection": "mp2023_02_overlays",
+        "cost": 0,
+        "label": "TAT_X7_001",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_2023_02_Tat_001_M",
+        "overlayFemale": "MP_2023_02_Tat_001_F"
+    },
+    {
+        "collection": "mp2023_02_overlays",
+        "cost": 0,
+        "label": "TAT_X7_002",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_2023_02_Tat_002_M",
+        "overlayFemale": "MP_2023_02_Tat_002_F"
+    },
+    {
+        "collection": "mp2023_02_overlays",
+        "cost": 0,
+        "label": "TAT_X7_003",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_2023_02_Tat_003_M",
+        "overlayFemale": "MP_2023_02_Tat_003_F"
+    },
+    {
+        "collection": "mp2023_02_overlays",
+        "cost": 0,
+        "label": "TAT_X7_004",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_2023_02_Tat_004_M",
+        "overlayFemale": "MP_2023_02_Tat_004_F"
+    },
+    {
+        "collection": "mp2023_02_overlays",
+        "cost": 0,
+        "label": "TAT_X7_005",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_2023_02_Tat_005_M",
+        "overlayFemale": "MP_2023_02_Tat_005_F"
+    },
+    {
+        "collection": "mp2023_02_overlays",
+        "cost": 0,
+        "label": "TAT_X7_006",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_2023_02_Tat_006_M",
+        "overlayFemale": "MP_2023_02_Tat_006_F"
+    },
+    {
+        "collection": "mp2023_02_overlays",
+        "cost": 0,
+        "label": "TAT_X7_007",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_2023_02_Tat_007_M",
+        "overlayFemale": "MP_2023_02_Tat_007_F"
+    },
+    {
+        "collection": "mp2023_02_overlays",
+        "cost": 0,
+        "label": "TAT_X7_008",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "MP_2023_02_Tat_008_M",
+        "overlayFemale": "MP_2023_02_Tat_008_F"
+    },
+    {
+        "collection": "mp2023_02_overlays",
+        "cost": 0,
+        "label": "TAT_X7_009",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "MP_2023_02_Tat_009_M",
+        "overlayFemale": "MP_2023_02_Tat_009_F"
+    },
+    {
+        "collection": "mp2023_02_overlays",
+        "cost": 0,
+        "label": "TAT_X7_010",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "MP_2023_02_Tat_010_M",
+        "overlayFemale": "MP_2023_02_Tat_010_F"
+    },
+    {
+        "collection": "mp2023_02_overlays",
+        "cost": 0,
+        "label": "TAT_X7_011",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "MP_2023_02_Tat_011_M",
+        "overlayFemale": "MP_2023_02_Tat_011_F"
+    },
+    {
+        "collection": "mp2023_02_overlays",
+        "cost": 0,
+        "label": "TAT_X7_012",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_2023_02_Tat_012_M",
+        "overlayFemale": "MP_2023_02_Tat_012_F"
+    },
+    {
+        "collection": "mp2023_02_overlays",
+        "cost": 0,
+        "label": "TAT_X7_013",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "MP_2023_02_Tat_013_M",
+        "overlayFemale": "MP_2023_02_Tat_013_F"
+    },
+    {
+        "collection": "mp2023_02_overlays",
+        "cost": 0,
+        "label": "TAT_X7_014",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "MP_2023_02_Tat_014_M",
+        "overlayFemale": "MP_2023_02_Tat_014_F"
+    },
+    {
+        "collection": "mp2023_02_overlays",
+        "cost": 0,
+        "label": "TAT_X7_015",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "MP_2023_02_Tat_015_M",
+        "overlayFemale": "MP_2023_02_Tat_015_F"
+    },
+    {
+        "collection": "mp2023_02_overlays",
+        "cost": 0,
+        "label": "TAT_X7_016",
+        "zone": "ZONE_RIGHT_LEG",
+        "overlayMale": "MP_2023_02_Tat_016_M",
+        "overlayFemale": "MP_2023_02_Tat_016_F"
+    },
+    {
+        "collection": "mp2023_02_overlays",
+        "cost": 0,
+        "label": "TAT_X7_017",
+        "zone": "ZONE_RIGHT_LEG",
+        "overlayMale": "MP_2023_02_Tat_017_M",
+        "overlayFemale": "MP_2023_02_Tat_017_F"
+    },
+    {
+        "collection": "mp2023_02_overlays",
+        "cost": 0,
+        "label": "TAT_X7_018",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_2023_02_Tat_018_M",
+        "overlayFemale": "MP_2023_02_Tat_018_F"
+    },
+    {
+        "collection": "mp2023_02_overlays",
+        "cost": 0,
+        "label": "TAT_X7_019",
+        "zone": "ZONE_RIGHT_LEG",
+        "overlayMale": "MP_2023_02_Tat_019_M",
+        "overlayFemale": "MP_2023_02_Tat_019_F"
+    },
+    {
+        "collection": "mp2023_02_overlays",
+        "cost": 0,
+        "label": "TAT_X7_020",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_2023_02_Tat_020_M",
+        "overlayFemale": "MP_2023_02_Tat_020_F"
+    },
+    {
+        "collection": "mp2023_02_overlays",
+        "cost": 0,
+        "label": "TAT_X7_021",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_2023_02_Tat_021_M",
+        "overlayFemale": "MP_2023_02_Tat_021_F"
+    },
+    {
+        "collection": "mp2023_02_overlays",
+        "cost": 0,
+        "label": "TAT_X7_022",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_2023_02_Tat_022_M",
+        "overlayFemale": "MP_2023_02_Tat_022_F"
+    },
+    {
+        "collection": "mp2023_02_overlays",
+        "cost": 0,
+        "label": "TAT_X7_023",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_2023_02_Tat_023_M",
+        "overlayFemale": "MP_2023_02_Tat_023_F"
+    },
+    {
+        "collection": "mp2023_02_overlays",
+        "cost": 0,
+        "label": "TAT_X7_024",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_2023_02_Tat_024_M",
+        "overlayFemale": "MP_2023_02_Tat_024_F"
+    },
+    {
+        "collection": "mp2023_02_overlays",
+        "cost": 0,
+        "label": "TAT_X7_025",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_2023_02_Tat_025_M",
+        "overlayFemale": "MP_2023_02_Tat_025_F"
+    },
+    {
+        "collection": "mp2023_02_overlays",
+        "cost": 0,
+        "label": "TAT_X7_026",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_2023_02_Tat_026_M",
+        "overlayFemale": "MP_2023_02_Tat_026_F"
+    },
+    {
+        "collection": "mp2023_02_overlays",
+        "cost": 0,
+        "label": "TAT_X7_027",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_2023_02_Tat_027_M",
+        "overlayFemale": "MP_2023_02_Tat_027_F"
+    },
+    {
+        "collection": "mp2023_02_overlays",
+        "cost": 0,
+        "label": "TAT_X7_028",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_2023_02_Tat_028_M",
+        "overlayFemale": "MP_2023_02_Tat_028_F"
+    },
+    {
+        "collection": "mp2023_02_overlays",
+        "cost": 0,
+        "label": "TAT_X7_029",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_2023_02_Tat_029_M",
+        "overlayFemale": "MP_2023_02_Tat_029_F"
+    },
+    {
+        "collection": "mp2023_02_overlays",
+        "cost": 0,
+        "label": "TAT_X7_030",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_2023_02_Tat_030_M",
+        "overlayFemale": "MP_2023_02_Tat_030_F"
+    },
+    {
+        "collection": "mp2023_02_overlays",
+        "cost": 0,
+        "label": "TAT_X7_031",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_2023_02_Tat_031_M",
+        "overlayFemale": "MP_2023_02_Tat_031_F"
+    },
+    {
+        "collection": "mpAirRaces_overlays",
+        "cost": 13205,
+        "label": "TAT_AR_000",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_AirRaces_Tattoo_000_M",
+        "overlayFemale": "MP_AirRaces_Tattoo_000_F"
+    },
+    {
+        "collection": "mpAirRaces_overlays",
+        "cost": 18105,
+        "label": "TAT_AR_001",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_AirRaces_Tattoo_001_M",
+        "overlayFemale": "MP_AirRaces_Tattoo_001_F"
+    },
+    {
+        "collection": "mpAirRaces_overlays",
+        "cost": 16485,
+        "label": "TAT_AR_002",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_AirRaces_Tattoo_002_M",
+        "overlayFemale": "MP_AirRaces_Tattoo_002_F"
+    },
+    {
+        "collection": "mpAirRaces_overlays",
+        "cost": 11985,
+        "label": "TAT_AR_003",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_AirRaces_Tattoo_003_M",
+        "overlayFemale": "MP_AirRaces_Tattoo_003_F"
+    },
+    {
+        "collection": "mpAirRaces_overlays",
+        "cost": 10390,
+        "label": "TAT_AR_004",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_AirRaces_Tattoo_004_M",
+        "overlayFemale": "MP_AirRaces_Tattoo_004_F"
+    },
+    {
+        "collection": "mpAirRaces_overlays",
+        "cost": 15270,
+        "label": "TAT_AR_005",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_AirRaces_Tattoo_005_M",
+        "overlayFemale": "MP_AirRaces_Tattoo_005_F"
+    },
+    {
+        "collection": "mpAirRaces_overlays",
+        "cost": 12520,
+        "label": "TAT_AR_006",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_AirRaces_Tattoo_006_M",
+        "overlayFemale": "MP_AirRaces_Tattoo_006_F"
+    },
+    {
+        "collection": "mpAirRaces_overlays",
+        "cost": 13925,
+        "label": "TAT_AR_007",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_AirRaces_Tattoo_007_M",
+        "overlayFemale": "MP_AirRaces_Tattoo_007_F"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 5950,
+        "label": "TAT_X2_000",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Xmas2_M_Tat_000",
+        "overlayFemale": "MP_Xmas2_F_Tat_000"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 4650,
+        "label": "TAT_X2_001",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "MP_Xmas2_M_Tat_001",
+        "overlayFemale": "MP_Xmas2_F_Tat_001"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 6350,
+        "label": "TAT_X2_002",
+        "zone": "ZONE_LEFT_LEG",
+        "overlayMale": "MP_Xmas2_M_Tat_002",
+        "overlayFemale": "MP_Xmas2_F_Tat_002"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 8450,
+        "label": "TAT_X2_003",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Xmas2_M_Tat_003",
+        "overlayFemale": "MP_Xmas2_F_Tat_003"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 13250,
+        "label": "TAT_X2_004",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Xmas2_M_Tat_004",
+        "overlayFemale": "MP_Xmas2_F_Tat_004"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 8750,
+        "label": "TAT_X2_005",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Xmas2_M_Tat_005",
+        "overlayFemale": "MP_Xmas2_F_Tat_005"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 14500,
+        "label": "TAT_X2_006",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Xmas2_M_Tat_006",
+        "overlayFemale": "MP_Xmas2_F_Tat_006"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 3950,
+        "label": "TAT_X2_007",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "MP_Xmas2_M_Tat_007",
+        "overlayFemale": "MP_Xmas2_F_Tat_007"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 4300,
+        "label": "TAT_X2_008",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Xmas2_M_Tat_008",
+        "overlayFemale": "MP_Xmas2_F_Tat_008"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 7800,
+        "label": "TAT_X2_009",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Xmas2_M_Tat_009",
+        "overlayFemale": "MP_Xmas2_F_Tat_009"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 6200,
+        "label": "TAT_X2_010",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Xmas2_M_Tat_010",
+        "overlayFemale": "MP_Xmas2_F_Tat_010"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 6850,
+        "label": "TAT_X2_011",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Xmas2_M_Tat_011",
+        "overlayFemale": "MP_Xmas2_F_Tat_011"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 8250,
+        "label": "TAT_X2_012",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Xmas2_M_Tat_012",
+        "overlayFemale": "MP_Xmas2_F_Tat_012"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 7900,
+        "label": "TAT_X2_013",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Xmas2_M_Tat_013",
+        "overlayFemale": "MP_Xmas2_F_Tat_013"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 10500,
+        "label": "TAT_X2_014",
+        "zone": "ZONE_RIGHT_LEG",
+        "overlayMale": "MP_Xmas2_M_Tat_014",
+        "overlayFemale": "MP_Xmas2_F_Tat_014"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 11000,
+        "label": "TAT_X2_015",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Xmas2_M_Tat_015",
+        "overlayFemale": "MP_Xmas2_F_Tat_015"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 3150,
+        "label": "TAT_X2_016",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Xmas2_M_Tat_016",
+        "overlayFemale": "MP_Xmas2_F_Tat_016"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 6350,
+        "label": "TAT_X2_017",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Xmas2_M_Tat_017",
+        "overlayFemale": "MP_Xmas2_F_Tat_017"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 4300,
+        "label": "TAT_X2_018",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Xmas2_M_Tat_018",
+        "overlayFemale": "MP_Xmas2_F_Tat_018"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 7500,
+        "label": "TAT_X2_019",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Xmas2_M_Tat_019",
+        "overlayFemale": "MP_Xmas2_F_Tat_019"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 2500,
+        "label": "TAT_X2_020",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Xmas2_M_Tat_020",
+        "overlayFemale": "MP_Xmas2_F_Tat_020"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 3750,
+        "label": "TAT_X2_021",
+        "zone": "ZONE_LEFT_ARM",
+        "overlayMale": "MP_Xmas2_M_Tat_021",
+        "overlayFemale": "MP_Xmas2_F_Tat_021"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 3800,
+        "label": "TAT_X2_022",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Xmas2_M_Tat_022",
+        "overlayFemale": "MP_Xmas2_F_Tat_022"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 5100,
+        "label": "TAT_X2_023",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Xmas2_M_Tat_023",
+        "overlayFemale": "MP_Xmas2_F_Tat_023"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 2100,
+        "label": "TAT_X2_024",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "MP_Xmas2_M_Tat_024",
+        "overlayFemale": "MP_Xmas2_F_Tat_024"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 4600,
+        "label": "TAT_X2_025",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "MP_Xmas2_M_Tat_025",
+        "overlayFemale": "MP_Xmas2_F_Tat_025"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 1300,
+        "label": "TAT_X2_026",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Xmas2_M_Tat_026",
+        "overlayFemale": "MP_Xmas2_F_Tat_026"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 2200,
+        "label": "TAT_X2_027",
+        "zone": "ZONE_RIGHT_ARM",
+        "overlayMale": "MP_Xmas2_M_Tat_027",
+        "overlayFemale": "MP_Xmas2_F_Tat_027"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 5700,
+        "label": "TAT_X2_028",
+        "zone": "ZONE_TORSO",
+        "overlayMale": "MP_Xmas2_M_Tat_028",
+        "overlayFemale": "MP_Xmas2_F_Tat_028"
+    },
+    {
+        "collection": "mpChristmas2_overlays",
+        "cost": 3150,
+        "label": "TAT_X2_029",
+        "zone": "ZONE_HEAD",
+        "overlayMale": "MP_Xmas2_M_Tat_029",
+        "overlayFemale": "MP_Xmas2_F_Tat_029"
+    }
+]
