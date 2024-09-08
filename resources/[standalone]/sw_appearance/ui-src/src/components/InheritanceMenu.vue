@@ -2,16 +2,14 @@
     <q-expansion-item icon="fa-solid fa-family" label="Inhritance" group="main-menu" class="q-pt-md">
         <div class="q-pl-md q-pr-md flex column">
             <div class="title flex justify-center q-mt-sm bg-grey-9 text-uppercase text-bold">Mãe</div>
-            <div class="flex row no-wrap items-center">
-                <span>0</span>
+            <div class="flex row no-wrap items-center">                
                 <q-slider class="q-mr-md q-ml-md" v-model="motherIndex" :min="0" :max="getTotalMothers"
                     @update:model-value="setHeadBlend()" />
                 <span>{{ getMotherId }}</span>
             </div>
 
             <div class="title flex justify-center q-mt-sm bg-grey-9 text-uppercase text-bold">Pai</div>
-            <div class="flex row no-wrap items-center">
-                <span>0</span>
+            <div class="flex row no-wrap items-center">                
                 <q-slider class="q-mr-md q-ml-md" v-model="fatherIndex" :min="0" :max="getTotalFathers"
                     @update:model-value="setHeadBlend()" />
                 <span>{{ getFatherId }}</span>
@@ -19,7 +17,7 @@
 
             <div class="title flex justify-center q-mt-sm bg-grey-9 text-uppercase text-bold">Tom da Pele Mãe</div>
             <div class="flex row no-wrap items-center">
-                <span>0</span>
+             
                 <q-slider class="q-mr-md q-ml-md" v-model="motherSkin" :min="0" :max="getTotalMothers"
                     @update:model-value="setHeadBlend()" />
                 <span>{{ getMotherSkinId }}</span>
@@ -27,7 +25,7 @@
 
             <div class="title flex justify-center q-mt-sm bg-grey-9 text-uppercase text-bold">Tom da Pele Pai</div>
             <div class="flex row no-wrap items-center">
-                <span>0</span>
+              
                 <q-slider class="q-mr-md q-ml-md" v-model="fatherSkin" :min="0" :max="getTotalFathers"
                     @update:model-value="setHeadBlend()" />
                 <span>{{ getFatherSkinId }}</span>

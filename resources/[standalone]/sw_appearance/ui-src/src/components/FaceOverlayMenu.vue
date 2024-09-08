@@ -12,12 +12,12 @@
             </div>
            
             <div class="color-panel flex column">
-                <div class="d1 flex justify-center items-center ">Primeira Cor {{ pedHair.color1 }}</div>
+                <div class="d1 flex justify-center items-center ">Primeira Cor</div>
                 <ColorPanel @update:model-value="setHair" color-type="hair" v-model.number="pedHair.color1" />
             </div>
 
             <div class="color-panel flex column q-mt-sm q-mb-sm">
-                <div class="d1 flex justify-center items-center ">Segunda Cor {{ pedHair.color2 }}</div>
+                <div class="d1 flex justify-center items-center ">Segunda Cor</div>
                 <ColorPanel @update:model-value="setHair" color-type="hair" v-model.number="pedHair.color2" />
             </div>
 
@@ -36,7 +36,7 @@
                     {{ overlay.label }}</div>
                 <div class="flex row no-wrap items-center q-mt-sm q-mb-sm">
                     <span class="d1">Modelo:</span>
-                    <q-slider class="q-ml-md q-mr-md" v-model.number="overlay.current" :min="0" :max="overlay.max"
+                    <q-slider class="q-ml-md q-mr-md" v-model.number="overlay.current" :min="-1" :max="overlay.max"
                         @update:model-value="setOverlay(overlay)" />
                     <span class="d1">{{ overlay.current }}</span>
                 </div>

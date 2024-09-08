@@ -5,7 +5,7 @@ local DEFAULT_CONFIG <const> = {
     headOverlays = true,
     components = true,
     props = true,
-    allowExit = false,
+    allowExit = true,
     tattoos = true
 }
 
@@ -134,6 +134,11 @@ local function isMpPed(ped)
     return model == `mp_m_freemode_01` or model == `mp_f_freemode_01`
 end
 
+local function isPlayerMpMale()
+    return GetEntityModel(PlayerPedId()) == `mp_m_freemode_01`
+end
+
+
 local function isPedUnsignHighHels(ped)
     return GetPedConfigFlag(ped, 322, true)
 end
@@ -200,7 +205,7 @@ end
 local function getPedHeadOverlays(ped)
     local o = {}
     for index, name in ipairs(HEAD_OVERLAYS) do
-        local success, ov, ctype, firstColor, secondColor, opacity = GetPedHeadOverlayData(ped, index - 1)        
+        local success, ov, ctype, firstColor, secondColor, opacity = GetPedHeadOverlayData(ped, index - 1)
         if success then
             o[name] = {
                 d = ov ~= 255 and ov or 0,
@@ -239,7 +244,7 @@ local function getPedAppearance(ped)
         props = getPedProps(ped),
         hair = getPedHair(ped),
         eyeColor = eyeColor < 32 and eyeColor or 0,
-        tattoos = getPedTattoos(),
+        tattoos = getPedTattoos(ped),
     }
 end
 
@@ -265,7 +270,7 @@ local function setPlayerModel(playerId, model)
                     SetModelAsNoLongerNeeded(model)
                     ped = PlayerPedId()
                     if isMpPed(ped) then
-                        SetPedHeadBlendData(ped, 0, 0, 0, 0, 0, 0, 0.0, 0.0, 0.0, false)
+                        SetPedHeadBlendData(ped, 21, 0, 0, 0, 0, 0, 0.0, 0.0, 0.0, false)
                         SetPedDefaultComponentVariation(ped)
                     end
                     setPedStats(ped, h, m, a)
@@ -294,7 +299,7 @@ end
 
 local function setPedComponents(ped, components)
     if not components then return end
-    for _, item in next, components do        
+    for _, item in next, components do
         setPedComponent(ped, item)
     end
 end
@@ -330,7 +335,7 @@ local function _setPedHeadOverlay(ped, index, overlay)
     local index = index or overlay.index
     local d = overlay.d
     local color1 = overlay.color1
-    local color2 = overlay.color1
+    local color2 = overlay.color2
     local opacity = round(overlay.opacity + 0.001, 2)
 
 
@@ -448,15 +453,17 @@ local function getMaxPropTexture(ped, component, propId)
 end
 
 local function getTattooList(ped)
-    if not isMpPed(ped) then return nil end    
+    if not isMpPed(ped) then return nil end
     if not tattoo_cache then
         local j = LoadResourceFile(GetCurrentResourceName(), 'data/tattoo.json')
         if j then
             local tattoos = json.decode(j)
             for i = 1, #tattoos do
                 tattoos[i].label = GetLabelText(tattoos[i].label)
-                tattoos[i].hash = ("%d_%d"):format(joaat(tattoos[i].collection) & 0xffffffff,
-                    joaat(tattoos[i].overlay) & 0xffffffff)
+                tattoos[i].hashMale = ("%d_%d"):format(joaat(tattoos[i].collection) & 0xffffffff,
+                    joaat(tattoos[i].overlayMale) & 0xffffffff)
+                tattoos[i].hashFemale = ("%d_%d"):format(joaat(tattoos[i].collection) & 0xffffffff,
+                    joaat(tattoos[i].overlayFemale) & 0xffffffff)
             end
             tattoo_cache = tattoos
         end
@@ -496,13 +503,23 @@ local function changeCam(offsetId)
     local ox, oy, oz = table.unpack(o.a)
 
     if lastSide == 'right' then
-        cx = -1.0
+        if lastCamPage == 'head' then
+            cx = -0.5
+        else
+            cx = -1.0
+        end
         cy = 0.0
         ox = 0.0
+        oy = 0.0
     elseif lastSide == 'left' then
-        cx = 1.0
+        if lastCamPage == 'head' then
+            cx = 0.5
+        else
+            cx = 1.0
+        end
         cy = 0.0
         ox = 0.0
+        oy = 0.0
     end
 
     if isReversedCam then
@@ -518,11 +535,13 @@ local function changeCam(offsetId)
     local pos = GetOffsetFromEntityInWorldCoords(ped, cx, cy, cz)
     local camx = CreateCamWithParams('DEFAULT_SCRIPTED_CAMERA', pos.x, pos.y, pos.z, 0.0, 0.0, 0.0, o.v, false, 2)
     PointCamAtEntity(camx, ped, ox, oy, oz, true)
+
     if cam then
         while IsCamInterpolating(cam) do Wait(0) end
         SetCamActiveWithInterp(camx, cam, 1000, 1, 1)
         Wait(1001)
         SetCamActive(cam, false)
+        SetCamActive(camx, true)
         DestroyCam(cam, true)
         cam = camx
     else
@@ -538,9 +557,9 @@ local function exitPlayerCustomization(appearance)
     SendNUIMessage({ action = 'CLOSE', data = {} })
     SetNuiFocus(false, false)
     RenderScriptCams(false, false, 250, true, true)
-    Wait(250)    
+    Wait(250)
     DestroyCam(cam, true)
-    local ped = PlayerPedId()   
+    local ped = PlayerPedId()
     ClearPedTasksImmediately(ped)
     SetEntityInvincible(ped, false)
     if not appearance then
@@ -561,7 +580,7 @@ local function exitPlayerCustomization(appearance)
 
     callback = nil
     old_player_app = nil
-    cam = nil    
+    cam = nil
     tattoo_cache = {}
     tattoo_player = {}
     isReversedCam = false
@@ -593,12 +612,6 @@ local function startPlayerCustomization(fn, config, disableControls, oldcam)
     local model = getPedModel(PlayerPedId())
     if model ~= `mp_m_freemode_01` and model ~= `mp_f_freemode_01` then
         setPlayerModel(PlayerId(), `mp_m_freemode_01`)
-    else
-        setPedHeadBlend(PlayerPedId(), {
-            shapeFirst = 21,
-            shapeSecond = 0,
-        })
-        SetPedDefaultComponentVariation(PlayerPedId())
     end
 
     changeCam(lastCamPage)
@@ -719,13 +732,13 @@ RegisterNUICallback('setEye', function(data, cb)
     setPedEyeColor(PlayerPedId(), data.index)
 end)
 
-RegisterNUICallback('getGender', function(data, cb)
-    local gender = GetEntityModel(PlayerPedId()) == `mp_m_freemode_01` and 'Masculino' or 'Feminino'
+RegisterNUICallback('getGender', function(_, cb)
+    local gender = isPlayerMpMale() and 'Masculino' or 'Feminino'
     cb({ gender = gender })
 end)
 
 RegisterNUICallback('setGender', function(data, cb)
-    local gender = GetEntityModel(PlayerPedId()) == `mp_m_freemode_01` and 'Masculino' or 'Feminino'
+    local gender = isPlayerMpMale() and 'Masculino' or 'Feminino'
     if data.gender ~= gender then
         CreateThread(function()
             setPlayerModel(PlayerId(), data.gender == 'Masculino' and `mp_m_freemode_01` or `mp_f_freemode_01`)
@@ -740,9 +753,10 @@ end)
 
 
 RegisterNUICallback("setTattoo", function(data, cb)
-    cb({ status = 'ok' })
+    cb({ status = 'ok' })    
     local ped = PlayerPedId()
     ClearPedDecorations(ped)
+    -- local hash = isPlayerMpMale() and data.hashMale or data.hashFemale
     if data.action == 'remove' then
         tattoo_player[data.hash] = nil
     else
@@ -798,8 +812,17 @@ exports('startPlayerCustomization', startPlayerCustomization)
 
 
 
--- RegisterCommand('tttt', function()
---     setPlayerAppearance(pp)
+-- RegisterCommand('tcam', function(_, args)
+--     for i = 1, 6 do
+--         args[i] = tonumber(args[i])
+--     end
+
+--     CAM_OFFSET.head.p = vec3(args[1], args[2], args[3])
+--     CAM_OFFSET.head.a = vec3(args[4], args[5], args[6])
+
+--     -- lastSide = 'left'
+
+--     changeCam('head')
 -- end)
 
 

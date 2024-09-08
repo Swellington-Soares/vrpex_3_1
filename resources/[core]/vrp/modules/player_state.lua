@@ -184,6 +184,9 @@ RegisterNetEvent('vrp:player:ready', function(state)
   if vRP.user_tables[user_id] then
     vRP.user_tables[user_id].isReady = state
     if state then
+      if GetPlayerRoutingBucket( source ) ~= 0 then
+        SetPlayerRoutingBucket( source, 0)
+      end
       lib.print.info('PLAYER READY TO SAVE [ ' .. user_id .. ' ]')
     end
   end

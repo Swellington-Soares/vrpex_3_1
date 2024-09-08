@@ -11,7 +11,10 @@ import '@quasar/extras/roboto-font/roboto-font.css'
 // Import Quasar css
 import 'quasar/src/css/index.sass'
 
+import 'animate.css'
+
 import './style.scss'
+
 
 // Assumes your root component is App.vue
 // and placed in same folder as main.js
