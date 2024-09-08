@@ -24,8 +24,8 @@ CreateThread(function()
     end
 end)
 
-local function SpawnPlayer(x, y, z, heading, oldcam, home)        
-    in_char_creator = false    
+local function SpawnPlayer(x, y, z, heading, oldcam, home)
+    in_char_creator = false
     heading = heading or 0.0
     if not home then
         if not IsScreenFadedIn() then DoScreenFadeIn(0) end
@@ -36,7 +36,8 @@ local function SpawnPlayer(x, y, z, heading, oldcam, home)
         -- local fw = GetEntityForwardVector(ped) * 2
         local offsetCam = GetOffsetFromEntityInWorldCoords(ped, 0.0, 5.0, 0.0)
         local rot = GetEntityHeading(ped)
-        local camx = CreateCamWithParams('DEFAULT_SCRIPTED_CAMERA', offsetCam --[[vec3(x, y, z) + fw]], vec3(0.0, 0.0, rot),
+        local camx = CreateCamWithParams('DEFAULT_SCRIPTED_CAMERA', offsetCam --[[vec3(x, y, z) + fw]],
+            vec3(0.0, 0.0, rot),
             55.0, false, 2)
         -- SetGameplayCamRelativeHeading(rot)
         -- SetFollowPedCamViewMode(1)
@@ -52,8 +53,8 @@ local function SpawnPlayer(x, y, z, heading, oldcam, home)
         end
 
         if DoesCamExist(oldcam) then DestroyCam(oldcam) end
-        ClearFocus()     
-        TriggerServerEvent('vrp:player:ready', true)     
+        ClearFocus()
+        TriggerServerEvent('vrp:player:ready', true)
         FreezeEntityPosition(ped, false)
         ClearPedTasksImmediately(ped)
         LocalPlayer.state.canEmote = true
@@ -69,9 +70,9 @@ local function SpawnPlayer(x, y, z, heading, oldcam, home)
         local ped = PlayerPedId()
         DoScreenFadeOut(0)
         RenderScriptCams(false, true, 1000, true, true)
-        if DoesCamExist(oldcam) then DestroyCam(oldcam) end        
+        if DoesCamExist(oldcam) then DestroyCam(oldcam) end
         ClearFocus()
-        TriggerServerEvent('vrp:player:ready', true) 
+        TriggerServerEvent('vrp:player:ready', true)
         FreezeEntityPosition(ped, false)
         ClearPedTasksImmediately(ped)
         LocalPlayer.state.canEmote = true
@@ -205,10 +206,10 @@ local function CreateNewPlayerScreenRegister()
     cam1 = cam2
     cam2 = nil
     Wait(500)
-    RenderScriptCams(false, false, 0, true, true)
-    SetCamActive(cam1, false)
-    DestroyCam(cam1, true)
-    cam1 = nil
+    -- RenderScriptCams(false, false, 0, true, true)
+    -- SetCamActive(cam1, false)
+    -- DestroyCam(cam1, true)
+    -- cam1 = nil
     local config = {
         ped = true,
         headBlend = true,
@@ -219,18 +220,22 @@ local function CreateNewPlayerScreenRegister()
         allowExit = false,
         tattoos = true
     }
-    exports['fivem-appearance']:startPlayerCustomization(function(appearance)
-        if (appearance) then
+    FreezeEntityPosition(cache.ped, false)
+    exports.sw_appearance:startPlayerCustomization(function(appearance)
+        if (appearance) then            
             TriggerServerEvent('vrp:server:updatePlayerAppearance', xchar_id, appearance)
             Wait(0)
-            ClearFocus()
-            in_char_creator = false
+            ClearFocus()            
+            LocalPlayer.state.canEmote = true
             LocalPlayer.state:set('isLoggedIn', true, true)
             TriggerServerEvent('vrp:player:ready', true)
-            LocalPlayer.state.canEmote = true
+            TriggerEvent('playerReady')
             FreezeEntityPosition(PlayerPedId(), false)
+            ClearPedTasksImmediately(PlayerPedId())
+            last_selected_char = -1
+            CreateSpawnMenu()          
         end
-    end, config)
+    end, config, false, cam1)
 end
 
 --@#MENU DE SELEÇÃO DO PERSONAGEM
@@ -270,14 +275,14 @@ local function CreateSelectCharacterMenu()
         position = 'top-left',
         disableInput = true,
         options = options,
-        canClose = false,    
+        canClose = false,
         onSelected = function(_, _, args, _)
             if args.id == 'NEW_CHAR' then return end
             local currentChar = charList[args.index]
             if last_selected_char ~= args.index then
                 last_selected_char = args.index
                 if currentChar?.custom?.model then
-                    exports['fivem-appearance']:setPlayerAppearance(currentChar.custom)
+                    exports.sw_appearance:setPlayerAppearance(currentChar.custom)
                 else
                     local model = lib.requestModel(`mp_m_freemode_01`, 10000)
                     SetPlayerModel(cache.playerId, model)
@@ -301,8 +306,8 @@ local function CreateSelectCharacterMenu()
             ClearPedTasksImmediately(PlayerPedId())
 
             if lib.callback.await('multichar:server:login', false, args.id) then
-                LocalPlayer.state:set('isLoggedIn', true, true)                
-                TriggerEvent('playerSpawned')
+                LocalPlayer.state:set('isLoggedIn', true, true)
+                TriggerEvent('playerReady')
                 CreateSpawnMenu()
             end
         end
@@ -317,10 +322,12 @@ local function RequestCharsInfo()
         max_allowed = max_allowed_chars
         charList = chars
         if #chars == 0 then
-            local model = lib.requestModel(`mp_m_freemode_01`, 10000)
-            SetPlayerModel(cache.playerId, model)
-            Wait(100) -- mandatory wait
-            cache.ped = PlayerPedId()
+            if GetEntityModel(cache.ped) ~= `mp_m_freemode_01` then
+                local model = lib.requestModel(`mp_m_freemode_01`, 10000)
+                SetPlayerModel(cache.playerId, model)
+                Wait(100) -- mandatory wait
+                cache.ped = PlayerPedId()
+            end
             SetPedDefaultComponentVariation(cache.ped)
             SetEntityVisible(cache.ped, true)
             CreateNewPlayerScreenRegister()
@@ -328,7 +335,7 @@ local function RequestCharsInfo()
             last_selected_char = 1
             local character = charList[last_selected_char]
             if character?.custom?.model then
-                exports['fivem-appearance']:setPlayerAppearance(character.custom)
+                exports.sw_appearance:setPlayerAppearance(character.custom)
             end
             CreateSpawnMenu()
         else
@@ -344,10 +351,20 @@ CreateThread(function()
     lib.hideRadial()
     lib.hideTextUI()
     lib.hideMenu()
+    lib.closeAlertDialog()
     Wait(0)
     while not NetworkIsPlayerActive(cache.playerId) do Wait(100) end
     Wait(0)
-    ShutdownLoadingScreen()
-    ShutdownLoadingScreenNui()
-    RequestCharsInfo()
+    exports.spawnmanager:spawnPlayer({
+        x = MulticharConfig.spawn_preview.x,
+        y = MulticharConfig.spawn_preview.y,
+        z = MulticharConfig.spawn_preview.z,
+        heading = MulticharConfig.spawn_preview.w,
+        model = 'mp_m_freemode_01',
+        skipFade = true
+    }, function()
+        ShutdownLoadingScreen()
+        ShutdownLoadingScreenNui()
+        RequestCharsInfo()
+    end)
 end)

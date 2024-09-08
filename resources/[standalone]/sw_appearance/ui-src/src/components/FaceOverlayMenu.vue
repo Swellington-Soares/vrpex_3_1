@@ -88,7 +88,7 @@ async function updateOverlay() {
     nuiRequest('getOverlays', {}).then((response) => {        
         const { max, current, hair, eyeIndex } = response;
         pedHair.value.color1 = hair.current.color1
-        pedHair.value.color1 = hair.current.color2
+        pedHair.value.color2 = hair.current.color2
         pedHair.value.current = hair.current.style
         pedHair.value.maxTexture = hair.maxtexture
         pedHair.value.max = hair.max
@@ -98,10 +98,10 @@ async function updateOverlay() {
         Object.keys(faceOverlay).forEach(k => {
             faceOverlay[k].name = k
             faceOverlay[k].max = max[k]
-            faceOverlay[k].color1Value = current[k].color1
-            faceOverlay[k].color2Value = current[k].color2
-            faceOverlay[k].current = current[k].d
-            faceOverlay[k].opacity = current[k].opacity
+            faceOverlay[k].color1Value = current[k]?.color1 || 0
+            faceOverlay[k].color2Value = current[k]?.color2 || 0            
+            faceOverlay[k].current = current[k]?.d || 0
+            faceOverlay[k].opacity = current[k]?.opacity || 1.0
         })
 
     })

@@ -119,7 +119,7 @@ function tvRP.getCustomization()
 
   -- custom.face = GetPedHeadBlendData(ped)
 
-  return exports['fivem-appearance']:getPedAppearance(PlayerPedId())
+  return exports.sw_appearance:getPedAppearance(PlayerPedId())
 end
 
 function tvRP.setCustomization(custom)

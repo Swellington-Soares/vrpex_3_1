@@ -31,7 +31,7 @@ function InitialiseProperties(properties)
         properties = lib.callback.await('ps-housing:server:requestProperties')
     end
 
-    for k, v in pairs(properties) do
+    for k, v in pairs(properties) do        
         createProperty(v.propertyData)
     end
 
@@ -40,7 +40,7 @@ function InitialiseProperties(properties)
     Debug("Initialised properties")
 end
 
-AddEventHandler("playerSpawned", InitialiseProperties)
+AddEventHandler("playerReady", InitialiseProperties)
 
 RegisterNetEvent('ps-housing:client:initialiseProperties', InitialiseProperties)
 

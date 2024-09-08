@@ -367,8 +367,7 @@ RegisterNetEvent('garages:client:removeHouseGarage', function(house)
     Config.Garages['house_' .. house] = nil
 end)
 
-AddEventHandler('playerSpawned', function()
-    print(GetInvokingResource())
+AddEventHandler('playerReady', function()    
     if GetInvokingResource() and GetInvokingResource() ~= 'multichar' then return end
     CreateGarages()
 end)

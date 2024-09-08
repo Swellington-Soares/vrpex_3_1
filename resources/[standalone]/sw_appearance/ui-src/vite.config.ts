@@ -11,6 +11,14 @@ export default defineConfig({
     cssMinify: true,
     emptyOutDir: true,
     outDir: '../ui',
+    sourcemap: false,
+    rollupOptions: {
+      output:{
+        entryFileNames: 'assets/[name].js',  // Remove o hash
+        chunkFileNames: 'assets/[name].js',  // Remove o hash de chunks
+        assetFileNames: 'assets/[name][extname]'  // Para outros arquivos como imagens ou CSS
+      }
+    }
   },
   plugins: [
     vue({

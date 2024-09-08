@@ -317,6 +317,14 @@ AddEventHandler("playerConnecting", function(name, setMessage, deferrals)
 
   if vRP.rusers[user.id] then
     DropPlayer(vRP.user_tables[user.id], locale('user_already_connected'))
+    Wait(1000)
+    if not next(vRP.user_tables[user.id] or {}) then
+      vRP.users[license] = nil
+      vRP.rusers[user.id] = nil
+      vRP.user_tables[user.id] = nil
+      vRP.user_sources[user.id] = nil
+      vRP.user_tmp_tables[user.id] = nil
+    end
     return deferrals.done(locale('user_already_connected'))
   end
 

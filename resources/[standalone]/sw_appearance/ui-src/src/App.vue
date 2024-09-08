@@ -22,12 +22,12 @@
     </div>
     <q-list style="height: 100vh; overflow-y: auto;">
       <PedMenu v-if="configComponents.ped" />
-      <InheritanceMenu v-if="configComponents.inherirance" />
-      <FaceFeatureMenu v-if="configComponents.faceFeature" />
-      <FaceOverlayMenu v-if="configComponents.appearance" />
-      <ClotheMenu v-if="configComponents.clothes" />
+      <InheritanceMenu v-if="configComponents.headBlend" />
+      <FaceFeatureMenu v-if="configComponents.faceFeatures" />
+      <FaceOverlayMenu v-if="configComponents.headOverlays" />
+      <ClotheMenu v-if="configComponents.components" />
       <PropMenu v-if="configComponents.props" />
-      <TattooMenu v-if="configComponents.tattoo" />
+      <TattooMenu v-if="configComponents.tattoos" />
     </q-list>
   </q-card>
 </template>
@@ -52,12 +52,12 @@ const $q = useQuasar()
 
 const configComponents = reactive({
   ped: false,
-  inherirance: false,
-  faceFeature: false,
-  appearance: false,
-  clothes: false,
+  headBlend: false,
+  faceFeatures: false,
+  headOverlays: false,
+  components: false,
   props: false,
-  tattoo: false,
+  tattoos: false,
   allowExit: false,
   gender: 'Masculino'
 })
@@ -68,12 +68,13 @@ const show = ref(false)
 useNuiEvent('OPEN', (data: any) => {
   const { config } = data
   configComponents.ped = config.ped
-  configComponents.inherirance = config.headBlend
-  configComponents.faceFeature = config.faceFeatures
-  configComponents.appearance = config.headOverlays
-  configComponents.clothes = config.components
+  configComponents.headBlend = config.headBlend
+  configComponents.faceFeatures = config.faceFeatures
+  configComponents.headOverlays = config.headOverlays
+  configComponents.components = config.components
   configComponents.props = config.props
   configComponents.allowExit = config.allowExit
+  configComponents.tattoos = config.tattoos
   show.value = true
 })
 
@@ -81,12 +82,12 @@ useNuiEvent('CLOSE', () => {
   side.value = ''
   show.value = false;
   configComponents.ped = false,
-  configComponents.inherirance = false,
-  configComponents.faceFeature = false,
-  configComponents.appearance = false,
-  configComponents.clothes = false,
+  configComponents.headBlend = false,
+  configComponents.faceFeatures = false,
+  configComponents.headOverlays = false,
+  configComponents.components = false,
   configComponents.props = false,
-  configComponents.tattoo = false,
+  configComponents.tattoos = false,
   configComponents.allowExit = false,
   configComponents.gender = 'Masculino'
 })

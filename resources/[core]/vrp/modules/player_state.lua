@@ -134,7 +134,12 @@ function vRP.login(source, user_id, char_id, firstcreation)
   vRP.user_tables[user_id].datatable['health'] = vRP.user_tables[user_id].datatable['health'] or 200
   vRP.user_tables[user_id].datatable['weapons'] = vRP.user_tables[user_id].datatable['weapons'] or {}
   vRP.user_tables[user_id].datatable['groups'] = vRP.user_tables[user_id].datatable['groups'] or {}
-  vRP.user_tables[user_id].datatable['position'] = vRP.user_tables[user_id].datatable['position'] or cfg.fristspawn
+  if not firstcreation then
+    vRP.user_tables[user_id].datatable['position'] = vRP.user_tables[user_id].datatable['position'] or cfg.fristspawn
+  else
+    vRP.user_tables[user_id].datatable['position'] = nil
+  end
+
   -- local custom = vRP.getPlayerData(character.id, 'player:custom')
   -- vRP.user_tables[user_id].customization = custom and json.decode(custom)
   Player(source).state:set('name', ("%s %s"):format(character.firstname, character.lastname), true)

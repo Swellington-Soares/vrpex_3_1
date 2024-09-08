@@ -13,5 +13,6 @@ ui_page 'ui/index.html'
 
 files {
     'data/*.json',
-    'ui/**'
+    'ui/**',
+    'ui/**/*.map',    
 }

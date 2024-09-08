@@ -27,5 +27,5 @@ files {
 dependencies  {
     'ox_lib',
     'vrp',
-    'fivem-appearance',
+    'sw_appearance',
   }

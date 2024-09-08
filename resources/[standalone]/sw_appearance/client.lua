@@ -5,11 +5,10 @@ local DEFAULT_CONFIG <const> = {
     headOverlays = true,
     components = true,
     props = true,
-    allowExit = true,
+    allowExit = false,
     tattoos = true
 }
 
-local playerCam = nil
 local cam
 local in_editor = false
 local tattoo_cache = {}
@@ -147,6 +146,7 @@ local function getPedComponents(ped)
     local components = {}
     for i = 0, 11 do
         components['d' .. i] = {
+            c = i,
             d = GetPedDrawableVariation(ped, i),
             t = GetPedTextureVariation(ped, i)
         }
@@ -160,6 +160,7 @@ local function getPedProps(ped)
         local prop = GetPedPropIndex(ped, v)
         local texture = GetPedPropTextureIndex(ped, v)
         props['p' .. v] = {
+            c = v,
             d = prop == 255 or prop == -1 and -1 or prop,
             t = prop == 255 or prop == -1 and -1 or texture,
         }
@@ -199,7 +200,7 @@ end
 local function getPedHeadOverlays(ped)
     local o = {}
     for index, name in ipairs(HEAD_OVERLAYS) do
-        local success, ov, ctype, firstColor, secondColor, opacity = GetPedHeadOverlayData(ped, index - 1)
+        local success, ov, ctype, firstColor, secondColor, opacity = GetPedHeadOverlayData(ped, index - 1)        
         if success then
             o[name] = {
                 d = ov ~= 255 and ov or 0,
@@ -245,6 +246,7 @@ end
 local function setPlayerModel(playerId, model)
     local p = promise.new()
     local ped = PlayerPedId()
+    if type(model) == "string" then model = joaat(model) end
     local currentModel = GetEntityModel(ped)
     if currentModel == model then
         p:resolve(true)
@@ -292,7 +294,7 @@ end
 
 local function setPedComponents(ped, components)
     if not components then return end
-    for _, item in next, components do
+    for _, item in next, components do        
         setPedComponent(ped, item)
     end
 end
@@ -400,7 +402,7 @@ end
 local function setPlayerAppearance(appearance)
     if not appearance then return end
     local model = appearance?.model or `mp_m_freemode_01`
-    Citizen.Await(setPlayerModel(PlayerId(), model))
+    setPlayerModel(PlayerId(), model)
     local ped = PlayerPedId()
     setPedAppearance(ped, appearance)
 end
@@ -473,7 +475,7 @@ local function getPedHairs(ped)
     }
 end
 
-local function preparePlayer()
+local function disablePlayerControls()
     ClearPedTasksImmediately(PlayerPedId())
     in_editor = true
     CreateThread(function()
@@ -521,6 +523,7 @@ local function changeCam(offsetId)
         while IsCamInterpolating(cam) do Wait(0) end
         SetCamActiveWithInterp(camx, cam, 1000, 1, 1)
         Wait(1001)
+        SetCamActive(cam, false)
         DestroyCam(cam, true)
         cam = camx
     else
@@ -533,17 +536,12 @@ end
 local function exitPlayerCustomization(appearance)
     isNuiOpen = false
     in_editor = false
-    SetNuiFocus(false, false)
-    if playerCam then
-        SetCamActiveWithInterp(playerCam, cam, 1000, 1, 1)
-        Wait(1000)
-    else
-        RenderScriptCams(false, true, 1000, true, true)
-        Wait(1000)
-    end
-    DestroyCam(cam, false)
-    local ped = PlayerPedId()
     SendNUIMessage({ action = 'CLOSE', data = {} })
+    SetNuiFocus(false, false)
+    RenderScriptCams(false, false, 250, true, true)
+    Wait(250)    
+    DestroyCam(cam, true)
+    local ped = PlayerPedId()   
     ClearPedTasksImmediately(ped)
     SetEntityInvincible(ped, false)
     if not appearance then
@@ -564,14 +562,12 @@ local function exitPlayerCustomization(appearance)
 
     callback = nil
     old_player_app = nil
-    cam = nil
-    playerCam = nil
+    cam = nil    
     tattoo_cache = {}
     tattoo_player = {}
     isReversedCam = false
     lastCamPage = 'body'
     lastSide = false
-    config = table.clone(DEFAULT_CONFIG)
 end
 
 local function startPlayerCustomization(fn, config, disableControls, oldcam)
@@ -579,7 +575,6 @@ local function startPlayerCustomization(fn, config, disableControls, oldcam)
     if not fn then error('callback function not found') end
     if not config then config = DEFAULT_CONFIG end
     if oldcam and DoesCamExist(oldcam) then
-        playerCam = oldcam
         cam = oldcam
     end
 
@@ -596,10 +591,21 @@ local function startPlayerCustomization(fn, config, disableControls, oldcam)
     isReversedCam = false
     lastCamPage = 'body'
 
+    local model = getPedModel(PlayerPedId())
+    if model ~= `mp_m_freemode_01` and model ~= `mp_f_freemode_01` then
+        setPlayerModel(PlayerId(), `mp_m_freemode_01`)
+    else
+        setPedHeadBlend(PlayerPedId(), {
+            shapeFirst = 21,
+            shapeSecond = 0,
+        })
+        SetPedDefaultComponentVariation(PlayerPedId())
+    end
+
     changeCam(lastCamPage)
 
     if disableControls then
-        preparePlayer()
+        disablePlayerControls()
     end
 
     old_player_app = getPedAppearance(PlayerPedId())
@@ -649,9 +655,9 @@ RegisterNUICallback('getPropMaxTexture', function(data, cb)
     cb({ max = max })
 end)
 
-RegisterNUICallback('setPropTexture', function(data, cb)    
+RegisterNUICallback('setPropTexture', function(data, cb)
     cb({ status = 'ok' })
-    setPedProp(PlayerPedId(), { c = data.component, d = data.propId, t = data.texture })    
+    setPedProp(PlayerPedId(), { c = data.component, d = data.propId, t = data.texture })
 end)
 
 
@@ -664,7 +670,7 @@ RegisterNUICallback('setFaceFeature', function(data, cb)
     cb({ status = 'ok' })
     local id = data.k
     local scale = data.scale
-    SetPedFaceFeature(PlayerPedId(), id, scale + 0.001)    
+    SetPedFaceFeature(PlayerPedId(), id, scale + 0.001)
 end)
 
 
@@ -699,19 +705,19 @@ RegisterNUICallback('getOverlays', function(_, cb)
     })
 end)
 
-RegisterNUICallback('setOverlay', function(data, cb)    
+RegisterNUICallback('setOverlay', function(data, cb)
     cb({ status = 'ok' })
-    _setPedHeadOverlay(PlayerPedId(), data.id, data)    
+    _setPedHeadOverlay(PlayerPedId(), data.id, data)
 end)
 
 RegisterNUICallback('setHair', function(data, cb)
     cb({ status = 'ok' })
-    setPedHair(PlayerPedId(), data)    
+    setPedHair(PlayerPedId(), data)
 end)
 
 RegisterNUICallback('setEye', function(data, cb)
     cb({ status = 'ok' })
-    setPedEyeColor(PlayerPedId(), data.index)    
+    setPedEyeColor(PlayerPedId(), data.index)
 end)
 
 RegisterNUICallback('getGender', function(data, cb)
@@ -746,7 +752,7 @@ RegisterNUICallback("setTattoo", function(data, cb)
 
     for _, tattoo in next, tattoo_player do
         AddPedDecorationFromHashes(ped, tattoo.c, tattoo.o)
-    end        
+    end
 end)
 
 RegisterNUICallback('change-cam', function(data, cb)
@@ -790,3 +796,16 @@ exports('setPedTattoos', setPedTattoos)
 exports('setPedAppearance', setPedAppearance)
 exports('setPlayerAppearance', setPlayerAppearance)
 exports('startPlayerCustomization', startPlayerCustomization)
+
+
+
+-- RegisterCommand('tttt', function()
+--     setPlayerAppearance(pp)
+-- end)
+
+
+-- RegisterCommand('tttx', function()
+--     startPlayerCustomization(function(appearance)
+--         print(json.encode(appearance))
+--     end, nil, true, nil)
+-- end)
