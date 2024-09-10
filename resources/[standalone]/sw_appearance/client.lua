@@ -453,10 +453,11 @@ local function getMaxPropTexture(ped, component, propId)
 end
 
 local function getTattooList(ped)
-    if not isMpPed(ped) then return nil end
+    if not isMpPed(ped) then return nil end    
     if not tattoo_cache then
-        local j = LoadResourceFile(GetCurrentResourceName(), 'data/tattoo.json')
+        local j = LoadResourceFile(GetCurrentResourceName(), 'data/tattoo.json')        
         if j then
+            print(#j)
             local tattoos = json.decode(j)
             for i = 1, #tattoos do
                 tattoos[i].label = GetLabelText(tattoos[i].label)
@@ -580,8 +581,7 @@ local function exitPlayerCustomization(appearance)
 
     callback = nil
     old_player_app = nil
-    cam = nil
-    tattoo_cache = {}
+    cam = nil    
     tattoo_player = {}
     isReversedCam = false
     lastCamPage = 'body'
@@ -809,25 +809,3 @@ exports('setPedTattoos', setPedTattoos)
 exports('setPedAppearance', setPedAppearance)
 exports('setPlayerAppearance', setPlayerAppearance)
 exports('startPlayerCustomization', startPlayerCustomization)
-
-
-
--- RegisterCommand('tcam', function(_, args)
---     for i = 1, 6 do
---         args[i] = tonumber(args[i])
---     end
-
---     CAM_OFFSET.head.p = vec3(args[1], args[2], args[3])
---     CAM_OFFSET.head.a = vec3(args[4], args[5], args[6])
-
---     -- lastSide = 'left'
-
---     changeCam('head')
--- end)
-
-
--- RegisterCommand('tttx', function()
---     startPlayerCustomization(function(appearance)
---         print(json.encode(appearance))
---     end, nil, true, nil)
--- end)
