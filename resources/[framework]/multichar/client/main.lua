@@ -26,9 +26,11 @@ end)
 
 local function SpawnPlayer(x, y, z, heading, oldcam, home)
     in_char_creator = false
+    NetworkEndTutorialSession()
+    while NetworkIsTutorialSessionChangePending() do Wait(0) end
     heading = heading or 0.0
     if not home then
-        if not IsScreenFadedIn() then DoScreenFadeIn(0) end
+        if not IsScreenFadedIn() then DoScreenFadeIn(100) end
         local ped = PlayerPedId()
         ClearPedTasksImmediately(ped)
         SetEntityCoordsNoOffset(ped, x, y, z, false, false, true)
@@ -86,9 +88,11 @@ local function SpawnPlayer(x, y, z, heading, oldcam, home)
         ClearPedTasksImmediately(PlayerPedId())
         FreezeEntityPosition(PlayerPedId(), false)
     end
+    
 end
 
 local function CreateSpawnMenu()
+    print('CREATE_SPAWN_MENU')
     local char = charList[last_selected_char]
     local pos = char?.last_location
     local options = {}
@@ -102,10 +106,11 @@ local function CreateSpawnMenu()
         local spawntitle = info.title
         options[#options + 1] = { label = spawntitle, args = { spawnpos } }
     end
-    local spawnpos = options[1].args[1]
-    local camx = CreateCamWithParams('DEFAULT_SCRIPTED_CAMERA', spawnpos.x, spawnpos.y, spawnpos.z + 150.0,
-        vec3(-75.0, 0.0, 0.0), 55.0, true, 2)
-    if IsScreenFadedOut() then DoScreenFadeIn(100) end
+
+    local idx = options[1].args?.home and 2 or 1
+    local spawnpos = options[idx].args[1]
+    local camx = CreateCamWithParams('DEFAULT_SCRIPTED_CAMERA', spawnpos.x, spawnpos.y, spawnpos.z + 150.0,  vec3(-75.0, 0.0, 0.0), 55.0, true, 2)
+   
     lib.registerMenu({
         id = 'spawn_menu',
         title = locale('select_spawn'),
@@ -128,6 +133,9 @@ local function CreateSpawnMenu()
     lib.showMenu('spawn_menu')
     ClearFocus()
     RenderScriptCams(true, false, 0, true, true)
+     if IsScreenFadedOut() then 
+        DoScreenFadeIn(100) 
+    end
 end
 
 local function CreateNewPlayerScreenRegister()
@@ -145,7 +153,7 @@ local function CreateNewPlayerScreenRegister()
     RenderScriptCams(true, true, 500, true, true)
     local xchar_id
     CreateThread(function()
-        DoScreenFadeIn(1000)
+        DoScreenFadeIn(900)
         Wait(1000)
         while true do
             local input = lib.inputDialog(locale('register_menu_title'), {
@@ -332,12 +340,19 @@ local function RequestCharsInfo()
             SetEntityVisible(cache.ped, true)
             CreateNewPlayerScreenRegister()
         elseif #charList == 1 and #charList >= max_allowed then
+            DoScreenFadeOut(500)            
+            -- print(LocalPlayer.state.isLoggedIn)
+            Wait(1000)
             last_selected_char = 1
             local character = charList[last_selected_char]
-            if character?.custom?.model then
-                exports.sw_appearance:setPlayerAppearance(character.custom)
+            if lib.callback.await('multichar:server:login', false, character.id) then
+                LocalPlayer.state:set('isLoggedIn', true, true)
+                if character?.custom?.model then
+                    exports.sw_appearance:setPlayerAppearance(character.custom)
+                end                    
+                TriggerEvent('playerReady')            
+                CreateSpawnMenu()
             end
-            CreateSpawnMenu()
         else
             CreateSelectCharacterMenu()
         end
@@ -345,16 +360,16 @@ local function RequestCharsInfo()
 end
 
 CreateThread(function()
+    NetworkStartSoloTutorialSession()    
     ClearFocus()
     DoScreenFadeOut(0)
     lib.hideContext()
     lib.hideRadial()
     lib.hideTextUI()
-    lib.hideMenu()
-    lib.closeAlertDialog()
-    Wait(0)
+    lib.hideMenu()    
+    Wait(100)
     while not NetworkIsPlayerActive(cache.playerId) do Wait(100) end
-    Wait(0)
+    
     exports.spawnmanager:spawnPlayer({
         x = MulticharConfig.spawn_preview.x,
         y = MulticharConfig.spawn_preview.y,

@@ -57,7 +57,7 @@ lib.callback.register('multichar:server:requestCharsInfo', function(source)
             inside = info?.datatable?.inside or nil
         }
     end
-    vRP.setPlayerBucket(source, source + 1, false)
+    -- vRP.setPlayerBucket(source, source + 1, false)
     local max_chars = tonumber(vRP.getUData(user_id, 'vrp:max_char') or 1) or 1
     return max_chars, _characters
 end)
@@ -100,7 +100,7 @@ lib.callback.register("multichar:server:createchar", function(source, firstname,
         Wait(1000)
     until firstcreation[source]
 
-    vRP.setPlayerBucket(source, 0, false)
+    -- vRP.setPlayerBucket(source, 0, false)
 
 
     pcall(function()
@@ -116,7 +116,7 @@ end)
 
 lib.callback.register("multichar:server:login", function(source, char_id)
     if vRP.login(source, vRP.getUserId(source), char_id, false) then
-        vRP.setPlayerBucket(source, 0, false)
+        -- vRP.setPlayerBucket(source, 0, false)
         return true
     end
     return false
