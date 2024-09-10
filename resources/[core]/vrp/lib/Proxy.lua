@@ -1,13 +1,13 @@
 -- Proxy interface system, used to add/call functions between resources
 
-local Tools = require "lib.Tools"
+local Tools = require "@vrp.lib.Tools"
 
 local Proxy = {}
 local rscname = GetCurrentResourceName()
 
 if IsDuplicityVersion() then
   if not GlobalState.vrp_proxy then
-    GlobalState.vrp_proxy = lib.string.random('_AAAA_111_P_AAA1AA111A')
+    GlobalState.vrp_proxy = lib.string.random('P_AAA1AA111A_')
   end
 end
 
