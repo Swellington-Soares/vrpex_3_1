@@ -34,7 +34,9 @@ AddEventHandler('getMapDirectives', function(add)
 
                 -- add the spawnpoint
                 addSpawnPoint({
-                    x = x, y = y, z = z,
+                    x = x,
+                    y = y,
+                    z = z,
                     heading = heading,
                     model = model
                 })
@@ -122,7 +124,7 @@ function addSpawnPoint(spawn)
     spawnNum = spawnNum + 1
 
     -- all OK, add the spawn entry to the list
-    spawnPoints[#spawnPoints+1] = spawn
+    spawnPoints[#spawnPoints + 1] = spawn
 
     return spawn.idx
 end
@@ -172,9 +174,9 @@ local function freezePlayer(id, freeze)
             SetEntityVisible(ped, false, false)
         end
         SetEntityCollision(ped, false, false)
-        FreezeEntityPosition(ped, true)        
+        FreezeEntityPosition(ped, true)
         SetPlayerInvincible(player, true)
-        
+
         if not IsPedFatallyInjured(ped) then
             ClearPedTasksImmediately(ped)
         end
@@ -253,7 +255,7 @@ function spawnPlayer(spawnIdx, cb)
 
             -- RDR3 player model bits
             if N_0x283978a15512b2fe then
-				N_0x283978a15512b2fe(PlayerPedId(), true)
+                N_0x283978a15512b2fe(PlayerPedId(), true)
             end
         end
 
@@ -261,7 +263,7 @@ function spawnPlayer(spawnIdx, cb)
         RequestCollisionAtCoord(spawn.x, spawn.y, spawn.z)
 
         -- spawn the player
-        local ped = PlayerPedId()        
+        local ped = PlayerPedId()
         SetEntityCoordsNoOffset(ped, spawn.x, spawn.y, spawn.z, false, false, false)
         NetworkResurrectLocalPlayer(spawn.x, spawn.y, spawn.z, spawn.heading, 0, true)
 
@@ -291,14 +293,15 @@ function spawnPlayer(spawnIdx, cb)
 
         ShutdownLoadingScreen()
 
-        if IsScreenFadedOut() then
-            DoScreenFadeIn(500)
+        if not spawn.skipFade then
+            if IsScreenFadedOut() then
+                DoScreenFadeIn(500)
 
-            while not IsScreenFadedIn() do
-                Citizen.Wait(0)
+                while not IsScreenFadedIn() do
+                    Citizen.Wait(0)
+                end
             end
         end
-
         -- and unfreeze the player
         freezePlayer(PlayerId(), false)
 
