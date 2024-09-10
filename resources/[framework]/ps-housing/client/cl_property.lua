@@ -22,6 +22,7 @@ Property = {
 
     blip = nil,
 }
+
 Property.__index = Property
 
 function Property:new(propertyData)
@@ -32,7 +33,9 @@ function Property:new(propertyData)
     propertyData.furnitures = {}
     self.propertyData = propertyData
 
-    local citizenid = LocalPlayer.state.char_id    
+    -- local citizenid = LocalPlayer.state.char_id    
+    local citizenid = vRP.getPlayer().id
+
     self.owner = propertyData.owner == citizenid
     self.has_access = lib.table.contains(self.propertyData.has_access, citizenid)
 
@@ -60,12 +63,12 @@ end
 function Property:GetDoorCoords()
     local coords = nil
 
-    local dataApartment = self.propertyData.apartment
+    local dataApartment = self.propertyData?.apartment
     if dataApartment then
         local apartment = dataApartment
         coords = Config.Apartments[apartment].door
     else
-        coords = self.propertyData.door_data
+        coords = self.propertyData?.door_data
     end
 
     return coords

@@ -75,7 +75,7 @@ AddEventHandler("ps-housing:server:registerProperty", function(propertyData, pre
     TriggerClientEvent("ps-housing:client:addProperty", -1, propertyData)
 
     if propertyData.apartment and not preventEnter then
-        local user_id = vRP.getsUserIdByPlayerId(propertyData.owner)
+        local user_id = vRP.getUserIdByPlayerId(propertyData.owner)
         if not user_id then return false end
         -- local player = QBCore.Functions.GetPlayerByCitizenId(propertyData.owner)
 

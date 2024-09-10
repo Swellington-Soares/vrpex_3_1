@@ -1,4 +1,7 @@
 lib.locale()
+local Proxy = require('@vrp.lib.Proxy')
+vRP = Proxy.getInterface('vRP')
+
 PropertiesTable = {}
 ApartmentsTable = {}
 
@@ -19,8 +22,7 @@ for i = 1, #Config.RealtorJobNames do
 end
 
 if IsDuplicityVersion() then
-    local Proxy = require('@vrp.lib.Proxy')
-    vRP = Proxy.getInterface('vRP')
+   
     Framework.ox = {}
     Framework.qb = {}
     Framework.vrpex = {}
@@ -39,16 +41,17 @@ if IsDuplicityVersion() then
     end
 
     function GetPlayerData(src)
-        return vRP.getPlayerDataInfo(src) --vRP.getUserIdentity( vRP.getUserId( src ) )
+        return vRP.getPlayerInfo(src) --vRP.getUserIdentity( vRP.getUserId( src ) )
     end
     
     
     function GetCitizenid(targetSrc, callerSrc)
         local char_id = vRP.getPlayerId( vRP.getUserId( targetSrc ) )
-        if not char_id then
+        if not char_id and callerSrc then
             Framework[Config.Notify].Notify(callerSrc, "Player not found.", "error")
             return false
         end
+        
         return char_id    
     end
     

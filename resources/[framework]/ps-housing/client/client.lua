@@ -1,5 +1,5 @@
--- QBCore = exports['qb-core']:GetCoreObject()
-PlayerData = {}
+local loaded = false
+
 
 local function createProperty(property)
     PropertiesTable[property.property_id] = Property:new(property)
@@ -18,7 +18,9 @@ RegisterNetEvent('ps-housing:client:removeProperty', function(property_id)
 end)
 
 function InitialiseProperties(properties)
+    if loaded then return end
     Debug("Initialising properties")
+    
     lib.callback('vrp:server:getPlayerData', false, function(result)
         PlayerData = result or {}
     end)
@@ -38,6 +40,7 @@ function InitialiseProperties(properties)
     TriggerEvent("ps-housing:client:initialisedProperties")
 
     Debug("Initialised properties")
+    loaded = true
 end
 
 AddEventHandler("playerReady", InitialiseProperties)
