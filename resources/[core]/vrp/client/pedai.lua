@@ -362,8 +362,16 @@ lib.onCache('weapon', function(value)
 end)
 
 lib.onCache('ped', function(value)
-    if LocalPlayer.state.isLoggedIn then
-        vRP.setPedFlags(value)
+    if value then 
+        if LocalPlayer.state.isLoggedIn then
+            vRP.setPedFlags(value)
+        end
+
+        for k in next, block?.weapons or {} do
+            SetCanPedEquipWeapon(value, k, false)
+        end
+
+        SetPedDropsWeaponsWhenDead(value, false)
     end
 end)
 
