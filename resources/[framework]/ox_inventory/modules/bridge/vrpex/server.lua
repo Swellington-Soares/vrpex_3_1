@@ -28,16 +28,24 @@ local function setCharacterInventory(source, character)
 	}
 	server.setPlayerInventory(player)
 	
-	Inventory.SetItem(source, "money", character?.money?.wallet or 0)
+	Inventory.SetItem(source, "money", character?.money?.cash or 0)
 end
 
 AddEventHandler('vrp:login', function(source, user_id)
 	setCharacterInventory(source, vRP.getPlayerTable(user_id))
 end)
 
+SetTimeout(500, function()
+    
+    for k, v in pairs(vRP.getUsers()) do		
+		setCharacterInventory(v, vRP.getPlayerTable(k))        
+    end
+end)
+
 
 AddEventHandler('vRP:PlayerMoneyUpdate', function (user_id, amount, moneytype)
-	if moneytype ~= 'wallet' then return end
+	print('vRP:PlayerMoneyUpdate', user_id, amount, moneytype)
+	if moneytype ~= 'cash' then return end
 	local src = vRP.getUserSource(user_id)
 	if not src then return end
 	Inventory.SetItem(src, 'money', amount)
@@ -101,12 +109,22 @@ function server.syncInventory(inv)
 	local accounts = Inventory.GetAccountItemCounts(inv)
 	if not accounts then return end
 	for account, amount in pairs(accounts) do
-		account = account == 'money' and 'wallet' or account
+		account = account == 'money' and 'cash' or account
 		if vRP.getMoney(inv.player.user_id, account) ~= amount then
+			lib.print.info('Money Sync', account, amount)
 			vRP.setMoney(inv.player.user_id, amount, account, ('Sync %s with inventory'):format(account), false)
 		end
 	end
 end
+
+
+AddStateBagChangeHandler('loadInventory', nil, function(bagName, _, value)
+    if not value then return end
+    local plySrc = GetPlayerFromStateBagName(bagName)
+	print('loadInventory', bagName, _, value)
+    -- if not plySrc then return end
+    -- setupPlayer(QBX:GetPlayer(plySrc).PlayerData)
+end)
 
 -- AddEventHandler('vRP:playerLeave', function(_, source)
 -- 	server.playerDropped(source)
