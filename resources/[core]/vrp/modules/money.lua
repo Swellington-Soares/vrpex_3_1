@@ -1,11 +1,12 @@
 function vRP.getMoney(user_id, moneytype)  
-  moneytype = moneytype or 'wallet'
+  moneytype = moneytype or 'cash'
   return vRP.getPlayerTable(user_id)?.money[moneytype] or 0.0
 end
 
 -- set money
 function vRP.setMoney(user_id, value, moneytype, reason, notify)
-  moneytype = moneytype or 'wallet'
+  moneytype = moneytype or 'cash'
+  local src = vRP.getUserSource(user_id)
   local player = vRP.getPlayerTable(user_id)
   if not player then
     return false
@@ -13,11 +14,11 @@ function vRP.setMoney(user_id, value, moneytype, reason, notify)
 
   player.money[moneytype] = value >= 0 and value or 0
   if notify and reason then
-    local source = vRP.getUserSource(user_id)
-    vRPclient._Notify(source, reason, "info", 3000)
+    vRP.notify(source, 'Money', reason, 5000, "inform")
   end
 
   TriggerEvent('vRP:PlayerMoneyUpdate', user_id, value, moneytype)
+  TriggerClientEvent('vRP:client:PlayerMoneyUpdate', src, value, moneytype)
   return true
 end
 
@@ -26,18 +27,16 @@ end
 function vRP.tryPayment(user_id, amount, reason, notify)
   local money = vRP.getMoney(user_id)
   if amount >= 0 and money >= amount then
-    vRP.setMoney(user_id, money - amount, 'wallet', reason, notify)
-    return true
+    return vRP.setMoney(user_id, money - amount, 'cash', reason, notify)     
   else
     return false
   end
 end
 
-
 function vRP.removeMoney(user_id, amount, moneytype, reason, notify)
   local money = vRP.getMoney(user_id, moneytype)
   if money > 0 and amount > 0 and money >= amount then
-      vRP.setMoney(user_id, money - amount, moneytype, reason, notify)
+      return vRP.setMoney(user_id, money - amount, moneytype, reason, notify)
   end
   return false
 end
@@ -66,6 +65,10 @@ function vRP.giveBankMoney(user_id, amount, reason, notify)
   return vRP.giveMoney(user_id, amount, 'bank', reason, notify)
 end
 
+function vRP.removeBankMoney(user_id, amount, reason, notify)
+  return vRP.removeMoney(user_id, amount, 'bank', reason, notify)
+end
+
 -- try a withdraw
 -- return true or false (withdrawn if true)
 function vRP.tryWithdraw(user_id, amount)
@@ -83,15 +86,12 @@ end
 -- return true or false (deposited if true)
 function vRP.tryDeposit(user_id, amount)
   if amount >= 0 and vRP.tryPayment(user_id, amount) then
-    vRP.giveBankMoney(user_id, amount)
-    return true
+    return vRP.giveBankMoney(user_id, amount)    
   else
     return false
   end
 end
 
--- try full payment (wallet + bank to complete payment)
--- return true or false (debited if true)
 function vRP.tryFullPayment(user_id, amount)
   local money = vRP.getMoney(user_id)
   if money >= amount then                          -- enough, simple payment

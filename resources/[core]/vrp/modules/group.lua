@@ -92,15 +92,16 @@ function vRP.addUserGroup(user_id, group, grade)
         gtype = ngroup._config.gtype
       end
       TriggerEvent("vRP:playerJoinGroup", user_id, group, gtype, user_groups[group].rank, user_groups[group]['duty'])
-      local src = vRP.getUserSource(user_id)
-      if src then
-        TriggerClientEvent("vRP:updateGroupInfo", src, {
+      
+      if player then
+        TriggerClientEvent("vRP:updateGroupInfo", player, {
           group = group,
           type = gtype,
           rank = user_groups[group]?.rank or 0,
           duty = user_groups[group]['duty'],
           action = 'enter'
         })
+        TriggerClientEvent('vrp:client:updatePlayerData', player, vRP.getUserDataTable(user_id))
       end
     end
   end
@@ -174,6 +175,7 @@ function vRP.removeUserGroup(user_id, group)
       duty = user_groups[group]['duty'],
       action = 'leave'
     })
+    TriggerClientEvent('vrp:client:updatePlayerData', src, vRP.getUserDataTable(user_id))
   end
 
   user_groups[group] = nil
@@ -398,6 +400,7 @@ function vRP.userGroupPromote(user_id, group)
     local src = vRP.getUserSource(user_id)
     if src then
       TriggerClientEvent("vRP:updateGroupRank", src, { group = group, rank = user_groups[group].rank })
+      TriggerClientEvent('vrp:client:updatePlayerData', src, vRP.getUserDataTable(user_id))
     end
     return true
   end
@@ -413,6 +416,7 @@ function vRP.userGroupDemote(user_id, group)
     local src = vRP.getUserSource(user_id)
     if src then
       TriggerClientEvent("vRP:updateGroupRank", src, { group = group, rank = user_groups[group].rank })
+      TriggerClientEvent('vrp:client:updatePlayerData', src, vRP.getUserDataTable(user_id))
     end
     return true
   end

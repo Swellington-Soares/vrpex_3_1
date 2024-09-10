@@ -1,13 +1,3 @@
--- function tvRP.updateWeapons(weapons)
---   local user_id = vRP.getUserId(source)
---   if user_id then
---     local data = vRP.getUserDataTable(user_id)
---     if data then
---       data.weapons = weapons
---     end
---   end
--- end
-
 function tvRP.updateCustomization(customization)
   local user_id = vRP.getUserId(source)
   if user_id then
@@ -39,7 +29,7 @@ function vRP.createPlayer(user_id, firstname, lastname, gender, date)
     stress = 0
   }
   local inventory = {}
-  local money = { wallet = 5000, bank = 15000 }
+  local money = { cash = vRPconfig?.money_type?.cash or 1000, bank = vRPconfig?.money_type?.bank or 1000 }
   local registration = vRP.generateRegistrationNumber()
   local phone = vRP.generateRandomPhoneNumber()
   return vRP.createNewCharacter(user_id, firstname, lastname, gender, registration, phone, date, money, inventory, datatable)
@@ -87,6 +77,8 @@ function vRP.giveWeapons(user_id, weapons, clear_before)
 
     datatable.weapons[weapon] = prop
   end
+
+  TriggerClientEvent('vrp:client:updatePlayerData', src, datatable)
 end
 
 function vRP.replaceWeapons(user_id, weapons)
@@ -108,10 +100,17 @@ function vRP.getPlayerId( user_id)
   return vRP.getPlayerTable(user_id)?.id  
 end
 
-function vRP.getsUserIdByPlayerId( char_id )
+function vRP.getCharId( src )
+  local id = Player(src).state.char_id
+  if id then return id end
+  local user_id = vRP.getUserId( src )
+  return vRP.getPlayerId( user_id)
+end
+
+function vRP.getUserIdByPlayerId( char_id )
   local id = MySQL.scalar.await('SELECT user_id	FROM players WHERE id = ?', {char_id})
-  if vRP.user_tables[id] then return tonumber(id) end
-  return nil
+
+  return id and tonumber(id) or nil
 end
 
 function vRP.login(source, user_id, char_id, firstcreation)
@@ -146,6 +145,7 @@ function vRP.login(source, user_id, char_id, firstcreation)
   Player(source).state:set('id', user_id)
   Player(source).state:set('char_id', character.id, true)
   TriggerEvent("vrp:login", source, user_id, char_id, firstcreation)
+  TriggerClientEvent('vrp:client:updatePlayer', source, vRP.getPlayerInfo(source))
   return true
 end
 

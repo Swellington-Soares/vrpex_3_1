@@ -54,7 +54,7 @@ function vRP.getPlayerIdentity(user_id, offline)
     lastname = xPlayer.lastname,
     license = xPlayer.license,
     gender = xPlayer.gender,
-    job = jobName and { name = jobName, rank = jobData.rank, onduty = jobData.duty } or {}
+    job = jobName and { name = jobName, rank = jobData?.rank or 0, onduty = jobData?.duty or false } or {}
   }
 end
 
