@@ -1,21 +1,69 @@
 lib.locale()
-cfg = module("cfg/base")
+cfg = require "@vrp.cfg.base" 
 
-local Tunnel = module("vrp", "lib/Tunnel")
-local Proxy = module("vrp", "lib/Proxy")
-local Tools = module("vrp", "lib/Tools")
+local Tunnel = require '@vrp.lib.Tunnel' --module("vrp", "lib/Tunnel")
+local Proxy = require '@vrp.lib.Proxy' --module("vrp", "lib/Proxy")
+local Tools = require '@vrp.lib.Tools' --module("vrp", "lib/Tools")
 
 vRP = {}
 tvRP = {}
-local players = {} -- keep track of connected players (server id)
 
 Tunnel.bindInterface("vRP", tvRP)
-vRPserver = Tunnel.getInterface("vRP")
-Proxy.addInterface("vRP", tvRP)
+Proxy.addInterface("vRP", vRP)
 
--- functions
+vRPserver = Tunnel.getInterface("vRP")
 
 local user_id
+
+
+local players = {} -- keep track of connected players (server id)
+
+---@class TPlayer
+---@field birth_date string
+---@field datatable { [key: string] : any }
+---@field lastname string
+---@field firstname string
+---@field gender string
+---@field phone string
+---@field registration string
+---@field id number
+---@field license string
+---@field server_id number
+---@field source number
+---@field job { name : string, rank: number, onduty: boolean } | nil
+---@field char_id number
+---@field user_id number
+---@field money { cash:number, bank: number }
+local player
+
+function vRP.getPlayer()
+  return player
+end
+
+RegisterNetEvent('vrp:client:updatePlayer', function(xPlayer)
+  print(json.encode(xPlayer))
+  player = xPlayer
+end)
+
+RegisterNetEvent('vrp:client:updatePlayerData', function(xplayerData)
+  if player then
+    player.datatable = xplayerData
+  end  
+end)
+
+RegisterNetEvent('vRP:client:PlayerMoneyUpdate', function(value, _type)
+  lib.print.info('money sync', value, _type)
+  if player then
+    player.money = player.money or {}
+    player.money[_type] = value
+  end
+end)
+
+-- functions
+function vRP.playSound(name, coord, looped, maxdist)
+  TriggerServerEvent('chHyperSound:play', nil, name, looped, coord, maxdist, GetPlayerServerId(PlayerId()))
+end
+
 function tvRP.setUserId(_user_id)
   user_id = _user_id
 end
@@ -116,18 +164,29 @@ function tvRP.getNearestPlayer(radius)
   return lib.getClosestPlayer(GetEntityCoords(cache.ped), radius, false)
 end
 
-function tvRP.notify(msg)
-  BeginTextCommandThefeedPost("STRING")
-  AddTextComponentSubstringPlayerName(msg)
-  EndTextCommandThefeedPostTicker(true, false)
+function vRP.notify(title, message, duration, _type)
+  lib.notify({
+    title = title,
+    description = message,
+    duration = duration,
+    showDuration = true,
+    position = 'top-right',
+    type = _type or 'inform'
+  })
 end
 
-function tvRP.notifyPicture(icon, iconType, sender, flash, text, sub)
-  BeginTextCommandThefeedPost("STRING")
-  AddTextComponentSubstringPlayerName(text)
-  EndTextCommandThefeedPostMessagetext(icon, icon, flash, iconType, sender, sub)
-  EndTextCommandThefeedPostTicker(false, true)
-end
+-- function tvRP.notify(msg)
+--   BeginTextCommandThefeedPost("STRING")
+--   AddTextComponentSubstringPlayerName(msg)
+--   EndTextCommandThefeedPostTicker(true, false)
+-- end
+
+-- function tvRP.notifyPicture(icon, iconType, sender, flash, text, sub)
+--   BeginTextCommandThefeedPost("STRING")
+--   AddTextComponentSubstringPlayerName(text)
+--   EndTextCommandThefeedPostMessagetext(icon, icon, flash, iconType, sender, sub)
+--   EndTextCommandThefeedPostTicker(false, true)
+-- end
 
 -- SCREEN
 
@@ -285,13 +344,13 @@ AddEventHandler("playerSpawned", function()
   TriggerServerEvent("vRPcli:playerSpawned")
 end)
 
-function vRP.setPedFlags(value)
-  SetPedDropsWeaponsWhenDead(value, false)
-  SetPedConfigFlag(value, 422, true)
-  SetPedConfigFlag(value, 35, false)
-  SetPedConfigFlag(value, 128, false)
-  SetPedConfigFlag(value, 184, true)
-  SetPedConfigFlag(value, 229, true)
+function vRP.setPedFlags(ped)
+  SetPedDropsWeaponsWhenDead(ped, false)
+  SetPedConfigFlag(ped, 422, true)
+  SetPedConfigFlag(ped, 35, false)
+  SetPedConfigFlag(ped, 128, false)
+  SetPedConfigFlag(ped, 184, true)
+  SetPedConfigFlag(ped, 229, true)
 end
 
 -- AddEventHandler('onClientResourceStart', function()
