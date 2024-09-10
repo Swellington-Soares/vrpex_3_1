@@ -74,8 +74,8 @@ function vRP.getCharacter(char_id, include_deleted)
 
     if xPlayer then
         xPlayer.datatable = json.decode(xPlayer.datatable) or {}
-        xPlayer.money = json.decode(xPlayer.money) or { wallet = 0, bank = 0}
-        xPlayer.inventory = json.decode(xPlayer.inventory) or {}
+        xPlayer.money = json.decode(xPlayer.money) or { cash = 0, bank = 0}
+        --xPlayer.inventory = json.decode(xPlayer.inventory) or {}
     end
 
     return xPlayer
@@ -92,7 +92,7 @@ function vRP.getAllUserCharacter(user_id, include_deleted)
     for i = 1, #xPlayers or {} do
         xPlayers[i].datatable = json.decode(xPlayers[i].datatable) or {}
         xPlayers[i].money = json.decode(xPlayers[i].money) or {}
-        xPlayers[i].inventory = json.decode(xPlayers[i].inventory) or {}
+        -- xPlayers[i].inventory = json.decode(xPlayers[i].inventory) or {}
     end
 
     return xPlayers
@@ -104,7 +104,7 @@ function vRP.getCharacterBy(column, value)
     for i = 1, #xPlayers or {} do
         xPlayers[i].datatable = json.decode(xPlayers[i].datatable) or {}
         xPlayers[i].money = json.decode(xPlayers[i].money) or {}
-        xPlayers[i].inventory = json.decode(xPlayers[i].inventory) or {}
+        -- xPlayers[i].inventory = json.decode(xPlayers[i].inventory) or {}
     end
 
     return xPlayers
