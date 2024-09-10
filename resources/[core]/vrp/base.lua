@@ -5,7 +5,7 @@ Debug = module("lib/Debug")
 
 lib.locale()
 
-local config = module("cfg/base")
+vRPconfig = module("cfg/base")
 
 vRP = {}
 Proxy.addInterface("vRP", vRP)
@@ -258,6 +258,17 @@ function vRP.getPlayerIdentifier(source, xtype)
   return GetPlayerIdentifierByType(source, xtype or "license")
 end
 
+function vRP.notify(source, title, message, time, _type)
+  TriggerClientEvent('ox_lib:notify', source, {
+    title = title,
+    description = message,
+    duration = time or 5000,
+    showDuration = true,
+    position = 'top-right',
+    type = _type or 'inform',-- 'inform' or 'error' or 'success'or 'warning'
+  })
+end
+
 local function deffer_uppdate(d, m)
   d.update(m)
   Wait(1000)
@@ -303,7 +314,7 @@ AddEventHandler("playerConnecting", function(name, setMessage, deferrals)
 
   deffer_uppdate(deferrals, locale('conn_check_allowed'))
 
-  if config.enable_allowlist and not user.allowed then
+  if vRPconfig.enable_allowlist and not user.allowed then
     return deferrals.done(locale('user_not_allowed', user.id, GetConvar('vrp:discord', 'DISCORD LINK NOT FOUND')))
   end
 
@@ -365,7 +376,7 @@ AddEventHandler('playerJoining', function(_)
   end  
 end)
 
-function vRP.getPlayerDataInfo( source )
+function vRP.getPlayerInfo( source )
   local playerTable = vRP.getPlayerTable(vRP.getUserId(source))
   if playerTable then
     local job = vRP.getUserGroupByType(playerTable.user_id, "job")
@@ -385,7 +396,9 @@ function vRP.getPlayerDataInfo( source )
       user_id = playerTable.user_id,
       license = playerTable.license,
       server_id = source,
-      job = group and { name = job, rank = group.rank, onduty = group.duty } or { name = '', rank = 0, onduty = false }
+      source = source,
+      id = playerTable.id,
+      job = group and { name = job, rank = group.rank, onduty = group.duty } or { name = '', rank = 0, onduty = false }      
     }
   end
 
@@ -393,7 +406,7 @@ function vRP.getPlayerDataInfo( source )
 end
 
 lib.callback.register('vrp:server:getPlayerData', function(source)
-  return vRP.getPlayerDataInfo( source )
+  return vRP.getPlayerInfo( source )
 end)
 
 

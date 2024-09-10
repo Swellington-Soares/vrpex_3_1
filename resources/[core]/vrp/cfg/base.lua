@@ -25,15 +25,10 @@ local cfg = {
     -- illegal items (seize)
     -- specify list of "idname" or "*idname" to seize all parametric items
     money_type = {
-        wallet = 5000,
-        bank = 15000
+        cash = 1000,
+        bank = 10000
     },
-    seizable_items = {
-        "dirty_money",
-        "weed",
-        "*wbody",
-        "*wammo"
-    },
+   
     discord = {
         enabled = false,
         showPlayerCount = true,
