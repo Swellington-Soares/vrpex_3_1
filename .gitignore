@@ -140,3 +140,4 @@ web_modules/
 .yarn/install-state.gz
 .pnp.*
 resources/\[core]/ox_lib/created_zones.lua
+resources/\[framework]/doorlock/saves/doorstates.json
