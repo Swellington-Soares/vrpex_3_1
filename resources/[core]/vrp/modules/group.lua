@@ -7,7 +7,7 @@
 
 local cfg = module("cfg/groups")
 local groups = cfg.groups or {}
-local users = cfg.users or {}
+local xusers = cfg.users or {}
 
 function vRP.getGroupGradeInfo(group, gradeNameOrRank)
   if not groups[group]?._config?.grades then return nil end
@@ -101,7 +101,7 @@ function vRP.addUserGroup(user_id, group, grade)
           duty = user_groups[group]['duty'],
           action = 'enter'
         })
-        TriggerClientEvent('vrp:client:updatePlayerData', player, vRP.getUserDataTable(user_id))
+        TriggerClientEvent('vRP:SetPlayerData', player, vRP.getUserDataTable(user_id))
       end
     end
   end
@@ -175,7 +175,7 @@ function vRP.removeUserGroup(user_id, group)
       duty = user_groups[group]['duty'],
       action = 'leave'
     })
-    TriggerClientEvent('vrp:client:updatePlayerData', src, vRP.getUserDataTable(user_id))
+    TriggerClientEvent('vRP:SetPlayerData', src, vRP.getUserDataTable(user_id))
   end
 
   user_groups[group] = nil
@@ -217,27 +217,27 @@ vRP.registerPermissionFunction('grade', function(user_id, parts)
 
   if user_groups[group] then
     if op == '=' then
-      return user_groups[group]?.rank == gradeInfo.rank
+      return (user_groups[group]?.rank or 0) == (gradeInfo.rank or 0)
     end
 
     if op == "!=" then
-      return user_groups[group]?.rank ~= gradeInfo.rank
+      return (user_groups[group]?.rank or 0) ~= (gradeInfo.rank or 0)
     end
 
     if op == '>' then
-      return user_groups[group]?.rank > gradeInfo.rank
+      return (user_groups[group]?.rank or 0) > (gradeInfo.rank or 0)
     end
 
     if op == '<' then
-      return user_groups[group]?.rank < gradeInfo.rank
+      return (user_groups[group]?.rank or 0) < (gradeInfo.rank or 0)
     end
 
     if op == '>=' then
-      return user_groups[group]?.rank >= gradeInfo.rank
+      return (user_groups[group]?.rank or 0) >= (gradeInfo.rank or 0)
     end
 
     if op == '<=' then
-      return user_groups[group]?.rank <= gradeInfo.rank
+      return (user_groups[group]?.rank or 0) <= (gradeInfo.rank or 0)
     end
   end
 
@@ -400,7 +400,7 @@ function vRP.userGroupPromote(user_id, group)
     local src = vRP.getUserSource(user_id)
     if src then
       TriggerClientEvent("vRP:updateGroupRank", src, { group = group, rank = user_groups[group].rank })
-      TriggerClientEvent('vrp:client:updatePlayerData', src, vRP.getUserDataTable(user_id))
+      TriggerClientEvent('vRP:SetPlayerData', src, vRP.getUserDataTable(user_id))
     end
     return true
   end
@@ -416,7 +416,7 @@ function vRP.userGroupDemote(user_id, group)
     local src = vRP.getUserSource(user_id)
     if src then
       TriggerClientEvent("vRP:updateGroupRank", src, { group = group, rank = user_groups[group].rank })
-      TriggerClientEvent('vrp:client:updatePlayerData', src, vRP.getUserDataTable(user_id))
+      TriggerClientEvent('vRP:SetPlayerData', src, vRP.getUserDataTable(user_id))
     end
     return true
   end
@@ -432,7 +432,7 @@ end
 
 AddEventHandler('vrp:login', function(source, user_id, char_id, first_spawn)
   if first_spawn then
-    local user = users[char_id]
+    local user = xusers[char_id]
     if user then
       for k, v in next, user do
         vRP.addUserGroup(user_id, v.name, v.rank or 0)
@@ -456,4 +456,5 @@ AddEventHandler('vrp:login', function(source, user_id, char_id, first_spawn)
       group._config.onspawn(source)
     end
   end
+  
 end)

@@ -40,11 +40,11 @@ function vRP.getPlayer()
   return player
 end
 
-RegisterNetEvent('vrp:client:updatePlayer', function(xPlayer)  
+RegisterNetEvent('vRP:SetPlayerData', function(xPlayer)  
   player = xPlayer
 end)
 
-RegisterNetEvent('vrp:client:updatePlayerData', function(xplayerData)
+RegisterNetEvent('vRP:SetPlayerMetadata', function(xplayerData)
   if player then
     player.datatable = xplayerData
   end  

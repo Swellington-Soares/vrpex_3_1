@@ -94,20 +94,20 @@ function vRP.varyExp(user_id, group, aptitude, amount)
       local aptitude_title = def[1]
 
       --- exp
-      if amount < 0 then
-        -- vRPclient._notify(player,lang.aptitude.lose_exp({group_title,aptitude_title,-1*amount}))
-      elseif amount > 0 then
-        -- vRPclient._notify(player,lang.aptitude.earn_exp({group_title,aptitude_title,amount}))
+      if amount < 0 then        
+        vRP.notify(player, locale('aptitude.lose_exp', group_title, aptitude_title, -1*amount), 3000, 'inform')
+      elseif amount > 0 then        
+        vRP.notify(player, locale('aptitude.earn_exp', group_title, aptitude_title, amount), 3000, 'inform')
       end
       --- level up/down
       local new_level = math.floor(vRP.expToLevel(exp))
       local diff = new_level-level
       if diff < 0 then
-        -- vRPclient._notify(player,lang.aptitude.level_down({group_title,aptitude_title,new_level}))
-      elseif diff > 0 then
-        -- vRPclient._notify(player,lang.aptitude.level_up({group_title,aptitude_title,new_level}))
+        vRP.notify(player, locale('aptitude.level_down', group_title, aptitude_title, new_level), 3000, 'inform')        
+      elseif diff > 0 then        
+        vRP.notify(player, locale('aptitude.level_up', group_title, aptitude_title, new_level), 3000, 'inform')
       end
-      TriggerClientEvent('vrp:client:updatePlayerData', player, vRP.getUserDataTable(user_id))
+      TriggerClientEvent('vRP:SetPlayerData', player, vRP.getUserDataTable(user_id))
     end
   end
 end

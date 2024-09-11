@@ -18,7 +18,7 @@ function vRP.setMoney(user_id, value, moneytype, reason, notify)
   end
 
   TriggerEvent('vRP:PlayerMoneyUpdate', user_id, value, moneytype)
-  TriggerClientEvent('vRP:client:PlayerMoneyUpdate', src, value, moneytype)
+  TriggerClientEvent('vRP:client:PlayerMoneyUpdate', src, value, moneytype)  
   return true
 end
 

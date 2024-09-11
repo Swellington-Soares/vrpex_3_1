@@ -164,7 +164,10 @@ end
 function vRP.setUserMetadata(user_id, key, value)
   if type(key) ~= 'string' then return end
   if vRP.user_tables[user_id]?.datatable then
-    vRP.user_tables[user_id].datatable[key] = value
+    if vRP.user_tables[user_id].datatable[key] ~= value then
+      vRP.user_tables[user_id].datatable[key] = value
+      TriggerClientEvent('vRP:SetPlayerMetadata', vRP.getUserSource(user_id), vRP.user_tables[user_id].datatable)
+    end
   end
 end
 
@@ -380,8 +383,10 @@ function vRP.getPlayerInfo( source )
   local playerTable = vRP.getPlayerTable(vRP.getUserId(source))
   if playerTable then
     local job = vRP.getUserGroupByType(playerTable.user_id, "job")
+    local gang = vRP.getUserGroupByType(playerTable.user_id, "gang")
 
     local group = playerTable?.datatable?.groups[job]
+    local _gang = playerTable?.datatable?.groups[gang]
 
     return {
       birth_date = os.date('%d/%m/%Y', playerTable.birth_date // 1000),
@@ -398,7 +403,8 @@ function vRP.getPlayerInfo( source )
       server_id = source,
       source = source,
       id = playerTable.id,
-      job = group and { name = job, rank = group.rank, onduty = group.duty } or { name = '', rank = 0, onduty = false }      
+      job = group and { name = job, rank = group.rank, onduty = group.duty } or { name = '', rank = -1, onduty = false },
+      gang = _gang and { name = gang, rank = _gang.rank } or { name = '', rank = -1}
     }
   end
 

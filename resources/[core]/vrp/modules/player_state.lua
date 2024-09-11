@@ -78,7 +78,7 @@ function vRP.giveWeapons(user_id, weapons, clear_before)
     datatable.weapons[weapon] = prop
   end
 
-  TriggerClientEvent('vrp:client:updatePlayerData', src, datatable)
+  TriggerClientEvent('vRP:SetPlayerData', src, datatable)
 end
 
 function vRP.replaceWeapons(user_id, weapons)
@@ -145,7 +145,7 @@ function vRP.login(source, user_id, char_id, firstcreation)
   Player(source).state:set('id', user_id)
   Player(source).state:set('char_id', character.id, true)
   TriggerEvent("vrp:login", source, user_id, char_id, firstcreation)
-  TriggerClientEvent('vrp:client:updatePlayer', source, vRP.getPlayerInfo(source))
+  TriggerClientEvent('vRP:SetPlayerData', source, vRP.getPlayerInfo(source))
   return true
 end
 
