@@ -36,3 +36,4 @@ function client.setPlayerStatus(values)
     --     player.addStatus(name, value)
     -- end
 end
+
