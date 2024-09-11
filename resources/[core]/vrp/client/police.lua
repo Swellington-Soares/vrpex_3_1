@@ -123,8 +123,9 @@ local function StartHandcuffThread()
 end
 
 local beforeCuffDrawable
-AddStateBagChangeHandler('handcuffed', ('player:%s'):format(cache.serverId), function(_, _, value)
+AddStateBagChangeHandler('handcuffed', ('player:%s'):format(cache.serverId), function(_, _, value)  
   handcuffed = value
+  LocalPlayer.state.disableControls = value
   SetEnableHandcuffs(cache.ped, value)
   SetEnableBoundAnkles(cache.ped, value)
   SetPedConfigFlag(cache.ped, 48, value)

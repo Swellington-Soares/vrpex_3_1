@@ -40,8 +40,7 @@ function vRP.getPlayer()
   return player
 end
 
-RegisterNetEvent('vrp:client:updatePlayer', function(xPlayer)
-  print(json.encode(xPlayer))
+RegisterNetEvent('vrp:client:updatePlayer', function(xPlayer)  
   player = xPlayer
 end)
 
