@@ -8,6 +8,20 @@ Config.Warp = true                 -- true == warp player into vehicle | false =
 Config.DebugPoly = false
 Config.BaseImageUrl = 'https://cfx-nui-garages/vehicles/'
 
+
+---['itemname'] = true
+Config.BlockItemsToAddInVehicleTrunk = {
+    water = true,
+    money = true,
+    black_money = true,
+    burger = true,
+    sprunk = true,
+    garbage = true,
+    identification = true,
+    mustard = true,
+}
+
+
 -- https://docs.fivem.net/natives/?_0x29439776AAA00A62
 Config.VehicleClass = {
     all = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22 },

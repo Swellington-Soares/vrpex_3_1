@@ -8,6 +8,7 @@ local GarageConfig = Config
 --#region VARIABLES
 local OutsideVehicles = {}
 local command_lock = {}
+local invHook = {}
 
 --#endregion
 
@@ -21,34 +22,33 @@ local function filterVehicleTable(vehicles, category)
     return filtered
 end
 
-lib.callback.register('garages:server:isSpawnOk', function (_, plate)
-    return not ( OutsideVehicles[plate] and DoesEntityExist( OutsideVehicles[plate].entity ))
+lib.callback.register('garages:server:isSpawnOk', function(_, plate)
+    return not (OutsideVehicles[plate] and DoesEntityExist(OutsideVehicles[plate].entity))
 end)
 
 
-lib.callback.register('garages:server:depotVehicle', function (source, vehNet, plate, class, garageId, props)
-    if command_lock[ source ] then return false end
-    command_lock[ source ] = true
-    local user_id = vRP.getUserId( source )
-    local char_id = vRP.getPlayerTable( user_id )?.id
-    if not ( user_id and char_id ) then return false, locale('error.no_user') end
+lib.callback.register('garages:server:depotVehicle', function(source, vehNet, plate, class, garageId, props)
+    if command_lock[source] then return false end
+    command_lock[source] = true
+    local user_id = vRP.getUserId(source)
+    local char_id = vRP.getPlayerTable(user_id)?.id
+    if not (user_id and char_id) then return false, locale('error.no_user') end
     local vehicle = NetworkGetEntityFromNetworkId(vehNet)
 
 
     if Entity(vehicle).state?.is_service then
-
         if OutsideVehicles[plate] then
-            OutsideVehicles[plate] = nil        
+            OutsideVehicles[plate] = nil
         end
 
-        SetTimeout(2000, function ()
-            DeleteEntity( vehicle )
+        SetTimeout(2000, function()
+            DeleteEntity(vehicle)
         end)
 
         return true
     end
 
-    
+
     local garageInfo = GarageConfig.Garages[garageId]
     if garageInfo?.category and not table.contains(garageInfo?.category, class) then
         return false, locale('error.not_correct_type')
@@ -57,9 +57,9 @@ lib.callback.register('garages:server:depotVehicle', function (source, vehNet, p
     local ownerId = Entity(vehicle).state?.owner
     if ownerId and ownerId ~= source then return false, locale('error.not_owned') end
 
-    
-    
-    if GarageConfig.Garages[garageId]?.type == 'house' then 
+
+
+    if GarageConfig.Garages[garageId]?.type == 'house' then
         local houseId = string.gsub(garageId, 'house_', '')
         if not exports['ps-housing']:IsOwner(source, houseId) then
             return false, locale('error.not_correct_type')
@@ -67,16 +67,17 @@ lib.callback.register('garages:server:depotVehicle', function (source, vehNet, p
     end
 
     if OutsideVehicles[plate] then
-        OutsideVehicles[plate] = nil        
+        OutsideVehicles[plate] = nil
     end
 
-    MySQL.update.await('UPDATE player_vehicles SET properties=?, garage=? WHERE plate = ?', { json.encode(props or {}), garageId, plate })
+    MySQL.update.await('UPDATE player_vehicles SET properties=?, garage=? WHERE plate = ?',
+        { json.encode(props or {}), garageId, plate })
 
-    SetTimeout(2000, function ()
+    SetTimeout(2000, function()
         DeleteEntity(vehicle)
     end)
 
-    command_lock[ source ] = nil
+    command_lock[source] = nil
 
     return true
 end)
@@ -84,29 +85,29 @@ end)
 
 lib.callback.register('garages:server:getVehicles', function(source, garageId)
     local user_id = vRP.getUserId(source)
-    if not user_id then 
-        return false,  locale('error.no_user')
+    if not user_id then
+        return false, locale('error.no_user')
     end
     local charId = vRP.getPlayerId(user_id)
 
     if not charId then
-        return false,  locale('error.no_user')
+        return false, locale('error.no_user')
     end
 
     local vehicles
 
     local garageInfo = GarageConfig.Garages[garageId]
-    
+
     if not garageInfo then return false, locale('error.no_garage') end
     if garageInfo?.type ~= 'service' then
         if garageInfo?.type ~= 'depot' then
-            if not GarageConfig.SharedGarages  then
+            if not GarageConfig.SharedGarages then
                 vehicles = MySQL.query.await(
                     'SELECT vehicle, properties, seized, plate, garage, created_at FROM player_vehicles WHERE player_id = ? AND garage = ?',
                     { charId, garageId })
             else
                 vehicles = MySQL.query.await(
-                'SELECT vehicle, properties, seized, plate, created_at FROM player_vehicles WHERE player_id = ?',
+                    'SELECT vehicle, properties, seized, plate, created_at FROM player_vehicles WHERE player_id = ?',
                     { charId })
             end
         else
@@ -164,41 +165,40 @@ lib.callback.register('garages:server:spawnVehicle', function(source, vehicleNam
     local vehicle
     if garageInfo?.type ~= 'services' then
         vehicle = MySQL.single.await(
-        'SELECT plate, properties, gear_type FROM player_vehicles WHERE player_id = ? AND vehicle = LOWER(?) and plate = UPPER(?)',
+            'SELECT plate, properties, gear_type FROM player_vehicles WHERE player_id = ? AND vehicle = LOWER(?) and plate = UPPER(?)',
             { playerId, vehicleName, plate })
 
         if vehicle then
             vehicle.properties = json.decode(vehicle.properties) or {}
             vehicle.properties.plate = plate
         end
-        
     elseif garageInfo?.type == 'service' then
         if GarageConfig.ServiceGarages[garageInfo?.id][vehicleName] then
             vehicle = {
                 vehicle = vehicleName,
                 ---@type VehicleProperties
                 properties = GarageConfig.ServiceGarages[garageInfo?.id][vehicleName]?.props or {}
-            }            
+            }
             vehicle.properties.bodyHealth = 1000
             vehicle.properties.engineHealth = 1000
-            vehicle.properties.fuelLevel = 100            
+            vehicle.properties.fuelLevel = 100
         end
     end
     if not vehicle then return false, locale('vehicle_find_fail') end
-    local vehicleEntity = vRP.spawnVehicle(vehicleName, garageInfo.spawnPoint[vagacy])    
+    local vehicleEntity = vRP.spawnVehicle(vehicleName, garageInfo.spawnPoint[vagacy])
     if garageInfo?.type == 'service' then
-        Entity(vehicleEntity).state:set('is_service', true, true)                
+        Entity(vehicleEntity).state:set('is_service', true, true)
     end
     Entity(vehicleEntity).state:set('owner', source, true)
     lib.setVehicleProperties(vehicleEntity, vehicle.properties)
     if vehicle?.gear_type then
-        vRP.setVehicleGearType( vehicleEntity, vehicle.gear_type )
+        vRP.setVehicleGearType(vehicleEntity, vehicle.gear_type)
     end
     if not plate then
-        plate = GetVehicleNumberPlateText( vehicleEntity )
+        plate = GetVehicleNumberPlateText(vehicleEntity)
     end
     if plate then
-        SetVehicleNumberPlateText( vehicleEntity, plate )
+        SetVehicleNumberPlateText(vehicleEntity, plate)
     end
     local netId = NetworkGetNetworkIdFromEntity(vehicleEntity)
     OutsideVehicles[plate] = { netId = netId, entity = vehicleEntity, owner = source, model = vehicleName }
@@ -216,4 +216,48 @@ end)
 
 RegisterNetEvent('garages:server:syncGarage', function(updatedGarages)
     GarageConfig.Garages = updatedGarages
+end)
+
+
+AddEventHandler('onResourceStop', function (resource)
+    if resource == GetCurrentResourceName() then
+        for _, hook in next, invHook do
+            exports.ox_inventory:removeHooks(hook)
+        end
+    end   
+end)
+
+--Invetory Item Hook
+CreateThread(function()
+    if #GarageConfig.BlockItemsToAddInVehicleTrunk > 0 then
+        invHook[#invHook + 1] = exports.ox_inventory:registerHook('swapItems', function()
+            return false
+        end, {
+
+            itemFilter = GarageConfig.BlockItemsToAddInVehicleTrunk,
+            inventoryFilter = {
+                '^glove[%w]+',
+                '^trunk[%w]+',
+            }
+        })
+    end
+
+    invHook[#invHook + 1] = exports.ox_inventory:registerHook('openInventory', function(payload)
+        local src = payload.source
+        local inventoryType = payload.inventoryType
+        if inventoryType == 'glovebox' or inventoryType == 'trunk' then
+            local vehicle = NetworkGetEntityFromNetworkId(payload.netId)
+            if inventoryType == 'glovebox' then
+                local ped = GetPlayerPed(src)
+                local pedSeat = GetPedInVehicleSeat(vehicle, -1)
+                return ped == pedSeat
+            end
+        end
+        return true
+    end, {
+        inventoryFilter = {
+            '^glove[%w]+',
+            '^trunk[%w]+',
+        }
+    })
 end)

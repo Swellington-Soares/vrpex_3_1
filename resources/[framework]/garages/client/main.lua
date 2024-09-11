@@ -269,6 +269,8 @@ local function TrySpawnVehicle(vehicleData)
                 SetPedIntoVehicle(PlayerPedId(), vehicle, -1)
             end
 
+            TriggerEvent('vehiclekeys:client:SetOwner', GetVehicleNumberPlateText(vehicle))
+
         end, vehicleData.vehicle, vehicleData.plate, garage, spawnPoint)
     end, vehicleData.plate)
 end
