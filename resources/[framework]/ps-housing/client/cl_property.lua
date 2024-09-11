@@ -33,7 +33,7 @@ function Property:new(propertyData)
     propertyData.furnitures = {}
     self.propertyData = propertyData
 
-    -- local citizenid = LocalPlayer.state.char_id    
+    -- local citizenid = LocalPlayer.state.char_id        
     local citizenid = vRP.getPlayer().id
 
     self.owner = propertyData.owner == citizenid

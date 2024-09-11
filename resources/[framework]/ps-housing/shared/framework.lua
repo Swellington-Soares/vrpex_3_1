@@ -2,6 +2,7 @@ lib.locale()
 local Proxy = require('@vrp.lib.Proxy')
 vRP = Proxy.getInterface('vRP')
 
+
 PropertiesTable = {}
 ApartmentsTable = {}
 
