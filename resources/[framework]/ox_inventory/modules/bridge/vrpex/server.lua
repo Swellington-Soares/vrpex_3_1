@@ -26,8 +26,7 @@ local function setCharacterInventory(source, character)
 		sex = character.gender or 'M',
 		source = source
 	}
-	server.setPlayerInventory(player)
-	
+	server.setPlayerInventory(player)	
 	Inventory.SetItem(source, "money", character?.money?.cash or 0)
 end
 
@@ -35,8 +34,7 @@ AddEventHandler('vrp:login', function(source, user_id)
 	setCharacterInventory(source, vRP.getPlayerTable(user_id))
 end)
 
-SetTimeout(500, function()
-    
+SetTimeout(500, function()    
     for k, v in pairs(vRP.getUsers()) do		
 		setCharacterInventory(v, vRP.getPlayerTable(k))        
     end
@@ -69,7 +67,7 @@ function server.hasLicense(inv, name)
 	-- if not player then return end
 
 	-- return player.getLicense(name)
-	return false
+	return true
 end
 
 ---@diagnostic disable-next-line: duplicate-set-field
@@ -110,8 +108,7 @@ function server.syncInventory(inv)
 	if not accounts then return end
 	for account, amount in pairs(accounts) do
 		account = account == 'money' and 'cash' or account
-		if vRP.getMoney(inv.player.user_id, account) ~= amount then
-			lib.print.info('Money Sync', account, amount)
+		if vRP.getMoney(inv.player.user_id, account) ~= amount then			
 			vRP.setMoney(inv.player.user_id, amount, account, ('Sync %s with inventory'):format(account), false)
 		end
 	end

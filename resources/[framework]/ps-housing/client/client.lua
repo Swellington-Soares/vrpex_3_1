@@ -21,9 +21,10 @@ function InitialiseProperties(properties)
     if loaded then return end
     Debug("Initialising properties")
     
-    lib.callback('vrp:server:getPlayerData', false, function(result)
-        PlayerData = result or {}
-    end)
+    -- lib.callback('vrp:server:getPlayerData', false, function(result)
+    --     PlayerData = result or {}
+    -- end)
+    PlayerData = vRP.getPlayer()
 
     for k, v in pairs(Config.Apartments) do
         ApartmentsTable[k] = Apartment:new(v)
