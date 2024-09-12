@@ -91,8 +91,7 @@ async function addSound(eventData) {
 
     let howlerIds = [];
 
-    _.forEach(eventData.coordinates, (coordinate, key) => {
-        console.log(key, coordinate)
+    _.forEach(eventData.coordinates, (coordinate, key) => {        
         howlerIds[key] = howlerSound.play();
 
         if (coordinate === 'self') {

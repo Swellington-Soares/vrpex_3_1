@@ -297,7 +297,7 @@ BeatyConfig.stores = {
     --#endregion
     --#region BARBER
     {
-        location = vector3(-3167.02, 1059.33, 20.86),
+        location = vec3(-282.58, 6233.62, 31.49),
         label = locale('barber_shop_title'),
         type = 2,
         blip = {
@@ -398,6 +398,24 @@ BeatyConfig.stores = {
         ped = {
             model = `s_f_m_fembarber`,
             pos = vec4(1214.26, -473.32, 66.21, 70.11),
+            anim = {
+                dict = 'anim@heists@heist_corona@team_idles@male_a',
+                name = 'idle'
+            }
+        }
+    },
+    {
+        location = vec3(131.51, -1713.55, 29.27),
+        label = locale('barber_shop_title'),
+        type = 2,
+        blip = {
+            icon = 71,
+            color = 0,
+            size = 1.0,
+        },
+        ped = {
+            model = `s_f_m_fembarber`,
+            pos = vec4(138.28, -1706.91, 29.29, 135.90),
             anim = {
                 dict = 'anim@heists@heist_corona@team_idles@male_a',
                 name = 'idle'
