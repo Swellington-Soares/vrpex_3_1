@@ -107,7 +107,7 @@ function vRP.varyExp(user_id, group, aptitude, amount)
       elseif diff > 0 then        
         vRP.notify(player, locale('aptitude.level_up', group_title, aptitude_title, new_level), 3000, 'inform')
       end
-      TriggerClientEvent('vRP:SetPlayerData', player, vRP.getUserDataTable(user_id))
+      TriggerClientEvent('vRP:SetPlayerData', player, vRP.getPlayerInfo(user_id))
     end
   end
 end

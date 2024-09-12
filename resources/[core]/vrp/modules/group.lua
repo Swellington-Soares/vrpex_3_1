@@ -30,10 +30,8 @@ end
 -- return group title
 function vRP.getGroupTitle(group)
   local g = groups[group]
-  if g and g._config and g._config.title then
-    return g._config.title
-  end
-  return group
+
+  return g?._config?.title or ""
 end
 
 function vRP.getGroupData(group)
@@ -91,20 +89,82 @@ function vRP.addUserGroup(user_id, group, grade)
       if ngroup._config then
         gtype = ngroup._config.gtype
       end
-      TriggerEvent("vRP:playerJoinGroup", user_id, group, gtype, user_groups[group].rank, user_groups[group]['duty'])
-      
+
+      local rank = user_groups[group]?.rank or 0
+      local rankName = rank > 0 and ngroup[group]?._config?.grades[rank] or ""
+      local jobType = ngroup[group]?._config?.jobType or ""
+
+      TriggerEvent("vRP:playerJoinGroup", {
+        user_id = user_id,
+        group = group,
+        gtype = gtype,
+        rank = rank,
+        rankName = rankName,
+        jobType = jobType,
+        onduty = user_groups[group]['duty']
+      })
+
       if player then
         TriggerClientEvent("vRP:updateGroupInfo", player, {
           group = group,
-          type = gtype,
-          rank = user_groups[group]?.rank or 0,
+          gtype = gtype,
+          jobType = jobType,
+          rankName = rankName,
+          rank = rank,
           duty = user_groups[group]['duty'],
           action = 'enter'
         })
-        TriggerClientEvent('vRP:SetPlayerData', player, vRP.getUserDataTable(user_id))
+        TriggerClientEvent('vRP:SetPlayerData', player, vRP.getPlayerInfo(user_id))
       end
     end
   end
+end
+
+-- remove a group from a connected user
+function vRP.removeUserGroup(user_id, group)
+  local user_groups = vRP.getUserGroups(user_id)
+  local groupdef = groups[group]
+  if groupdef and groupdef._config and groupdef._config.onleave then
+    local source = vRP.getUserSource(user_id)
+    if source then
+      groupdef._config.onleave(source) -- call leave callback
+    end
+  end
+
+  -- trigger leave event
+  local gtype = nil
+  if groupdef._config then
+    gtype = groupdef._config.gtype
+  end
+
+  local rank = user_groups[group]?.rank or 0
+  local rankName = rank > 0 and groupdef[group]?._config?.grades[rank] or ""
+  local jobType = groupdef[group]?._config?.jobType or ""
+
+  TriggerEvent("vRP:playerLeaveGroup", {
+    user_id = user_id,
+    group = group,
+    gtype = gtype,
+    rank = rank,
+    rankName = rankName,
+    jobType = jobType,
+    onduty = user_groups[group]['duty']
+  })
+
+  local player = vRP.getUserSource(user_id)
+  if player then
+    TriggerClientEvent("vRP:updateGroupInfo", player, {
+      group = group,
+      gtype = gtype,
+      jobType = jobType,
+      rankName = rankName,
+      rank = rank,
+      duty = user_groups[group]['duty'],
+      action = 'enter'
+    })
+    TriggerClientEvent('vRP:SetPlayerData', player, vRP.getPlayerInfo(user_id))
+  end    
+  user_groups[group] = nil
 end
 
 -- get user group by type
@@ -115,7 +175,7 @@ function vRP.getUserGroupByType(user_id, gtype)
     local kgroup = groups[k]
     if kgroup then
       if kgroup._config and kgroup._config.gtype and kgroup._config.gtype == gtype then
-        return k, v
+        return k, v, kgroup
       end
     end
   end
@@ -147,39 +207,7 @@ function vRP.getUsersByPermission(perm)
   return users
 end
 
--- remove a group from a connected user
-function vRP.removeUserGroup(user_id, group)
-  local user_groups = vRP.getUserGroups(user_id)
-  local groupdef = groups[group]
-  if groupdef and groupdef._config and groupdef._config.onleave then
-    local source = vRP.getUserSource(user_id)
-    if source then
-      groupdef._config.onleave(source) -- call leave callback
-    end
-  end
 
-  -- trigger leave event
-  local gtype = nil
-  if groupdef._config then
-    gtype = groupdef._config.gtype
-  end
-  --"vRP:playerJoinGroup", user_id, group, gtype, user_groups[group].rank, user_groups[group]['duty']
-  TriggerEvent("vRP:playerLeaveGroup", user_id, group, gtype, user_groups[group]?.rank or 0, user_groups[group]?.duty)
-  -- remove reference
-  local src = vRP.getUserSource(user_id)
-  if src then
-    TriggerClientEvent("vRP:updateGroupInfo", src, {
-      group = group,
-      type = gtype,
-      rank = user_groups[group]?.rank or 0,
-      duty = user_groups[group]['duty'],
-      action = 'leave'
-    })
-    TriggerClientEvent('vRP:SetPlayerData', src, vRP.getUserDataTable(user_id))
-  end
-
-  user_groups[group] = nil
-end
 
 -- check if the user has a specific group
 function vRP.hasGroup(user_id, group, grade)
@@ -400,7 +428,7 @@ function vRP.userGroupPromote(user_id, group)
     local src = vRP.getUserSource(user_id)
     if src then
       TriggerClientEvent("vRP:updateGroupRank", src, { group = group, rank = user_groups[group].rank })
-      TriggerClientEvent('vRP:SetPlayerData', src, vRP.getUserDataTable(user_id))
+      TriggerClientEvent('vRP:SetPlayerData', src, vRP.getPlayerInfo(user_id))
     end
     return true
   end
@@ -416,7 +444,7 @@ function vRP.userGroupDemote(user_id, group)
     local src = vRP.getUserSource(user_id)
     if src then
       TriggerClientEvent("vRP:updateGroupRank", src, { group = group, rank = user_groups[group].rank })
-      TriggerClientEvent('vRP:SetPlayerData', src, vRP.getUserDataTable(user_id))
+      TriggerClientEvent('vRP:SetPlayerData', src, vRP.getPlayerInfo(user_id))
     end
     return true
   end
@@ -456,5 +484,4 @@ AddEventHandler('vrp:login', function(source, user_id, char_id, first_spawn)
       group._config.onspawn(source)
     end
   end
-  
 end)

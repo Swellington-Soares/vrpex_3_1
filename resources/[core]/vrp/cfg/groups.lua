@@ -51,14 +51,16 @@ cfg.groups = {
     _config = {
       title = "Police",
       gtype = "job",
-      onjoin = function(player) vRPclient._setCop(player, true) end,
-      onspawn = function(player) vRPclient._setCop(player, true) end,
-      onleave = function(player) vRPclient._setCop(player, false) end,
+      jobtype = 'leo',
+      -- onjoin = function(player) vRPclient._setCop(player, true) end,
+      -- onspawn = function(player) vRPclient._setCop(player, true) end,
+      -- onleave = function(player) vRPclient._setCop(player, false) end,
       grades = {
         [1] = { name = 'Recruta', },
         [2] = { name = 'Capitão', },
         [3] = { name = 'Major', },
-        [4] = { name = 'Sargento', isboss = true },
+        [4] = { name = 'Sargento' },
+        [5] = { name = 'Comando', isboss = true },
       }
     },
     "police.menu",

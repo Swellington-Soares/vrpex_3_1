@@ -5,6 +5,8 @@ Debug = module("lib/Debug")
 
 lib.locale()
 
+local BLOKED_META <const> = {'health','position', 'hunger', 'thirst', 'weapons', 'groups', 'health'}
+
 vRPconfig = module("cfg/base")
 
 vRP = {}
@@ -163,6 +165,7 @@ end
 
 function vRP.setUserMetadata(user_id, key, value)
   if type(key) ~= 'string' then return end
+  if table.contains(BLOKED_META, key) then return end
   if vRP.user_tables[user_id]?.datatable then
     if vRP.user_tables[user_id].datatable[key] ~= value then
       vRP.user_tables[user_id].datatable[key] = value
@@ -382,11 +385,34 @@ end)
 function vRP.getPlayerInfo( source )
   local playerTable = vRP.getPlayerTable(vRP.getUserId(source))
   if playerTable then
-    local job = vRP.getUserGroupByType(playerTable.user_id, "job")
-    local gang = vRP.getUserGroupByType(playerTable.user_id, "gang")
+    -- local job = vRP.getUserGroupByType(playerTable.user_id, "job")
+    -- local gang = vRP.getUserGroupByType(playerTable.user_id, "gang")
 
-    local group = playerTable?.datatable?.groups[job]
-    local _gang = playerTable?.datatable?.groups[gang]
+    -- local group = playerTable?.datatable?.groups[job]
+    -- local _gang = playerTable?.datatable?.groups[gang]
+    local playerJob = { label = 'Desempregado', name = 'civil', rankName = "",  rank = 0, onduty = false, isboss = false, type = nil }
+    local playerGang = { label = 'Nenhuma', name = 'none', rankName = "", rank = 0, isboss = false }
+
+    local job, jinfo, jkgroup = vRP.getUserGroupByType(playerTable.user_id, "job")
+    if job then
+      playerJob.label = jkgroup?._config?.title or ""
+      playerJob.name = job
+      playerJob.onduty = jinfo?.duty or false
+      playerJob.rank = jinfo?.rank or 0
+      playerJob.rankName = jkgroup?._config?.grades?[playerJob.rank]?.name or ""
+      playerJob.type = jkgroup?._config?.jobtype
+      playerJob.isboss = jkgroup?._config?.grades?[playerJob.rank]?.isboss or false
+    end
+
+    local gang, ginfo, gkgroup = vRP.getUserGroupByType(playerTable.user_id)
+    if gang then
+      playerGang.label = gkgroup?._config?.title or ""
+      playerGang.name = gang
+      playerGang.rank = ginfo?.rank or 0
+      playerGang.rankName = gkgroup?._config?.grades?[playerGang.rank]?.name or ""
+      playerGang.isboss = gkgroup?._config?.grades?[playerGang.rank]?.isboss or false
+    end
+
 
     return {
       birth_date = os.date('%d/%m/%Y', playerTable.birth_date // 1000),
@@ -402,9 +428,9 @@ function vRP.getPlayerInfo( source )
       license = playerTable.license,
       server_id = source,
       source = source,
-      id = playerTable.id,
-      job = group and { name = job, rank = group.rank, onduty = group.duty } or { name = '', rank = -1, onduty = false },
-      gang = _gang and { name = gang, rank = _gang.rank } or { name = '', rank = -1}
+      id = playerTable.id,     
+      job = playerJob,
+      gang = playerGang      
     }
   end
 

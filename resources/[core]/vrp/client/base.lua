@@ -20,7 +20,7 @@ local players = {} -- keep track of connected players (server id)
 
 ---@class TPlayer
 ---@field birth_date string
----@field datatable { [key: string] : any }
+---@field datatable table<string, any>
 ---@field lastname string
 ---@field firstname string
 ---@field gender string
@@ -30,7 +30,8 @@ local players = {} -- keep track of connected players (server id)
 ---@field license string
 ---@field server_id number
 ---@field source number
----@field job { name : string, rank: number, onduty: boolean } | nil
+---@field job { label : string, name: string, rankName:string,  rank: string, onduty : boolean, isboss : boolean, type? : string } | nil
+---@field gang { label : string, name: string, rankName:string,  rank: string, isboss : boolean} | nil
 ---@field char_id number
 ---@field user_id number
 ---@field money { cash:number, bank: number }

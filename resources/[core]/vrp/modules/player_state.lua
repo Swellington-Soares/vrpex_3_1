@@ -78,7 +78,7 @@ function vRP.giveWeapons(user_id, weapons, clear_before)
     datatable.weapons[weapon] = prop
   end
 
-  TriggerClientEvent('vRP:SetPlayerData', src, datatable)
+  TriggerClientEvent('vRP:SetPlayerMetadata', src, datatable)
 end
 
 function vRP.replaceWeapons(user_id, weapons)
