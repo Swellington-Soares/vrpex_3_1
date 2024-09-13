@@ -8,6 +8,7 @@ keys.cfg
 \[test\]/
 \[devtools\]/
 server.cfg
+backup/
 
 # Logs
 logs

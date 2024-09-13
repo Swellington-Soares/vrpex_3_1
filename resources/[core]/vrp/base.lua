@@ -5,7 +5,7 @@ Debug = module("lib/Debug")
 
 lib.locale()
 
-local BLOKED_META <const> = {'health','position', 'hunger', 'thirst', 'weapons', 'groups', 'health'}
+local BLOKED_META <const> = { 'health', 'position', 'hunger', 'thirst', 'weapons', 'groups', 'health' }
 
 vRPconfig = module("cfg/base")
 
@@ -16,13 +16,16 @@ tvRP = {}
 Tunnel.bindInterface("vRP", tvRP) -- listening for client tunnel
 
 -- init
-vRPclient = Tunnel.getInterface("vRP") -- server -> client tunnel
+vRPclient              = Tunnel.getInterface("vRP") -- server -> client tunnel
 
-vRP.users = {}                         -- will store logged users (id) by first identifier
-vRP.rusers = {}                        -- store the opposite of users
-vRP.user_tables = {}                   -- user data tables (logger storage, saved to database)
-vRP.user_tmp_tables = {}               -- user tmp data tables (logger storage, not saved)
-vRP.user_sources = {}                  -- user sources
+vRP.users              = {}            -- will store logged users (id) by first identifier
+vRP.rusers             = {}            -- store the opposite of users
+vRP.user_tables        = {}            -- user data tables (logger storage, saved to database)
+vRP.user_tmp_tables    = {}            -- user tmp data tables (logger storage, not saved)
+vRP.user_sources       = {}            -- user sources
+vRP.character_source   = {}            -- char_id -> source
+vRP.character_user     = {}            -- char_id -> user_id
+vRP.source_character   = {}            -- source -> char_id
 
 local prepared_queries = {}
 
@@ -235,6 +238,7 @@ function vRP.dropPlayer(source)
 
   local user_id = vRP.getUserId(source)
   if user_id then
+    local char_id = vRP.source_character[source]
     vRP.user_tables[user_id].isReady = false
     TriggerEvent("vRP:playerLeave", user_id, source)
     vRP.save(user_id, '__INTERNAL__')
@@ -244,6 +248,11 @@ function vRP.dropPlayer(source)
     vRP.user_tables[user_id] = nil
     vRP.user_tmp_tables[user_id] = nil
     vRP.user_sources[user_id] = nil
+    if char_id then
+      vRP.source_character[source] = nil
+      vRP.character_source[char_id] = nil
+      vRP.character_user[char_id] = nil
+    end
   end
 end
 
@@ -271,7 +280,7 @@ function vRP.notify(source, title, message, time, _type)
     duration = time or 5000,
     showDuration = true,
     position = 'top-right',
-    type = _type or 'inform',-- 'inform' or 'error' or 'success'or 'warning'
+    type = _type or 'inform', -- 'inform' or 'error' or 'success'or 'warning'
   })
 end
 
@@ -281,14 +290,14 @@ local function deffer_uppdate(d, m)
 end
 
 AddEventHandler("playerConnecting", function(name, setMessage, deferrals)
-  local source = source  
+  local source = source
   local license = vRP.getPlayerIdentifier(source, 'license')
 
   deferrals.defer()
 
   Wait(0)
 
-  lib.print.info('Player trying to login', GetPlayerName(source), source)
+  lib.print.info('Player trying to enter', GetPlayerName(source), source)
 
   if not license then
     return deferrals.done(locale('license_not_found'))
@@ -379,18 +388,13 @@ AddEventHandler('playerJoining', function(_)
     end
     vRPclient._addPlayer(-1, source)
     TriggerEvent("vRP:playerJoin", source, user_id, first_spawn)
-  end  
+  end
 end)
 
-function vRP.getPlayerInfo( source )
+function vRP.getPlayerInfo(source)
   local playerTable = vRP.getPlayerTable(vRP.getUserId(source))
-  if playerTable then
-    -- local job = vRP.getUserGroupByType(playerTable.user_id, "job")
-    -- local gang = vRP.getUserGroupByType(playerTable.user_id, "gang")
-
-    -- local group = playerTable?.datatable?.groups[job]
-    -- local _gang = playerTable?.datatable?.groups[gang]
-    local playerJob = { label = 'Desempregado', name = 'civil', rankName = "",  rank = 0, onduty = false, isboss = false, type = nil }
+  if playerTable then   
+    local playerJob = { label = 'Desempregado', name = 'civil', rankName = "", rank = 0, onduty = false, isboss = false, type = nil }
     local playerGang = { label = 'Nenhuma', name = 'none', rankName = "", rank = 0, isboss = false }
 
     local job, jinfo, jkgroup = vRP.getUserGroupByType(playerTable.user_id, "job")
@@ -404,7 +408,7 @@ function vRP.getPlayerInfo( source )
       playerJob.isboss = jkgroup?._config?.grades?[playerJob.rank]?.isboss or false
     end
 
-    local gang, ginfo, gkgroup = vRP.getUserGroupByType(playerTable.user_id)
+    local gang, ginfo, gkgroup = vRP.getUserGroupByType(playerTable.user_id, "gang")
     if gang then
       playerGang.label = gkgroup?._config?.title or ""
       playerGang.name = gang
@@ -428,17 +432,74 @@ function vRP.getPlayerInfo( source )
       license = playerTable.license,
       server_id = source,
       source = source,
-      id = playerTable.id,     
+      id = playerTable.id,
       job = playerJob,
-      gang = playerGang      
+      gang = playerGang
     }
   end
 
   return nil
 end
 
+local function prepareGroup(user_grous, gtype)
+  local groups = vRP.getGroups()
+  for k, v in next, user_grous or {} do
+    if groups[k]?._config?.gtype == gtype then
+      return k, v, groups[k]
+    end
+  end
+end
+
+function vRP.getPlayerInfoOffLine(char_id)
+  local character = vRP.getCharacter(char_id, false)
+  if character then
+    local playerJob = { label = 'Desempregado', name = 'civil', rankName = "", rank = 0, onduty = false, isboss = false, type = nil }
+    local playerGang = { label = 'Nenhuma', name = 'none', rankName = "", rank = 0, isboss = false }
+
+    local job, jinfo, jkgroup = prepareGroup(character.datatable.groups, "job")
+    if job then
+      playerJob.label = jkgroup?._config?.title or ""
+      playerJob.name = job
+      playerJob.onduty = jinfo?.duty or false
+      playerJob.rank = jinfo?.rank or 0
+      playerJob.rankName = jkgroup?._config?.grades?[playerJob.rank]?.name or ""
+      playerJob.type = jkgroup?._config?.jobtype
+      playerJob.isboss = jkgroup?._config?.grades?[playerJob.rank]?.isboss or false
+    end
+
+    local gang, ginfo, gkgroup = prepareGroup(character.user_id, "gang")
+    if gang then
+      playerGang.label = gkgroup?._config?.title or ""
+      playerGang.name = gang
+      playerGang.rank = ginfo?.rank or 0
+      playerGang.rankName = gkgroup?._config?.grades?[playerGang.rank]?.name or ""
+      playerGang.isboss = gkgroup?._config?.grades?[playerGang.rank]?.isboss or false
+    end
+
+    return {
+      birth_date = os.date('%d/%m/%Y', character.birth_date // 1000),
+      datatable = character.datatable,
+      lastname = character.lastname,
+      firstname = character.firstname,
+      gender = character.gender,
+      char_id = character.id,
+      money = character.money,
+      phone = character.phone,
+      registration = character.registration,
+      user_id = character.user_id,
+      license = character.license,
+      server_id = 0,
+      source = 0,
+      id = character.id,
+      job = playerJob,
+      gang = playerGang
+    }
+  end
+  return nil
+end
+
 lib.callback.register('vrp:server:getPlayerData', function(source)
-  return vRP.getPlayerInfo( source )
+  return vRP.getPlayerInfo(source)
 end)
 
 

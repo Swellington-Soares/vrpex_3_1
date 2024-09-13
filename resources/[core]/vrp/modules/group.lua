@@ -9,6 +9,10 @@ local cfg = module("cfg/groups")
 local groups = cfg.groups or {}
 local xusers = cfg.users or {}
 
+function vRP.getGroups()
+  return groups
+end
+
 function vRP.getGroupGradeInfo(group, gradeNameOrRank)
   if not groups[group]?._config?.grades then return nil end
   local isRank = tonumber(gradeNameOrRank) ~= nil
@@ -111,6 +115,7 @@ function vRP.addUserGroup(user_id, group, grade)
           jobType = jobType,
           rankName = rankName,
           rank = rank,
+          isboss = ngroup[group]?._config?.grades[rank]?.isboss,
           duty = user_groups[group]['duty'],
           action = 'enter'
         })
@@ -159,8 +164,9 @@ function vRP.removeUserGroup(user_id, group)
       jobType = jobType,
       rankName = rankName,
       rank = rank,
+      isboss = groupdef[group]?._config?.grades[rank]?.isboss,
       duty = user_groups[group]['duty'],
-      action = 'enter'
+      action = 'leave'
     })
     TriggerClientEvent('vRP:SetPlayerData', player, vRP.getPlayerInfo(user_id))
   end    

@@ -23,7 +23,7 @@ function vRP.createPlayer(user_id, firstname, lastname, gender, date)
     groups = { user = true },
     health = 200,
     weapons = {},
-    position = vec3(0.0, 0.0, 0.0),
+    position = nil,
     thirst = 0,
     hunger = 0,
     stress = 0
@@ -144,9 +144,27 @@ function vRP.login(source, user_id, char_id, firstcreation)
   Player(source).state:set('name', ("%s %s"):format(character.firstname, character.lastname), true)
   Player(source).state:set('id', user_id)
   Player(source).state:set('char_id', character.id, true)
+
+  vRP.character_source[character.id] = source
+  vRP.character_user[character.id] = user_id
+  vRP.source_character[source] = char_id
+
   TriggerEvent("vrp:login", source, user_id, char_id, firstcreation)
   TriggerClientEvent('vRP:SetPlayerData', source, vRP.getPlayerInfo(source))
   return true
+end
+
+
+function vRP.getCharaterIdBySource( src )
+  return vRP.source_character[src]
+end
+
+function vRP.getUserIdByCharacterId( char_id )
+  return vRP.character_user[char_id]
+end
+
+function vRP.getSourceByCharacterId( char_id )
+  return vRP.character_source[char_id]
 end
 
 function vRP.save(user_id, x)
