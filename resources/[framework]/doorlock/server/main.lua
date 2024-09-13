@@ -176,84 +176,63 @@ end)
 
 -- Events
 
-RegisterNetEvent('doorlock:server:updateState',
-	function(doorID, locked, src, usedLockpick, unlockAnyway, enableSounds, enableAnimation, sentSource)
-		local playerId = sentSource or source
-		local xPlayer = vRP.getPlayerInfo(playerId)
-		if not xPlayer then return end
-		if type(doorID) ~= 'number' and type(doorID) ~= 'string' then
-			if Config.Warnings then
-				showWarning(locale("general.warn_wrong_doorid_type", xPlayer.firstname, xPlayer.license, tostring(doorID)))
-			end
-			return
-		end
-
-		if type(locked) ~= 'boolean' then
-			if Config.Warnings then
-				showWarning(locale("general.warn_wrong_state", xPlayer.firstname, xPlayer.license, tostring(locked)))
-			end
-			return
-		end
-
-		if not Config.DoorList[doorID] then
-			if Config.Warnings then
-				showWarning(locale("general.warn_wrong_doorid", xPlayer.firstname, xPlayer.license, tostring(doorID)))
-			end
-			return
-		end
-
-		if not unlockAnyway and not isAuthorized(Player, Config.DoorList[doorID], usedLockpick) then
-			if Config.Warnings then
-				showWarning(locale("general.warn_no_authorisation", xPlayer.firstname, xPlayer.license, tostring(doorID)))
-			end
-			return
-		end
-
-		Config.DoorList[doorID].locked = locked
-		if Config.DoorStates[doorID] == nil then Config.DoorStates[doorID] = locked elseif Config.DoorStates[doorID] ~= locked then Config.DoorStates[doorID] = nil end
-		TriggerClientEvent('doorlock:client:setState', -1, playerId, doorID, locked, src or false, enableSounds,
-			enableAnimation)
-
-		if not Config.DoorList[doorID].autoLock then return end
-		SetTimeout(Config.DoorList[doorID].autoLock, function()
-			if Config.DoorList[doorID].locked then return end
-			Config.DoorList[doorID].locked = true
-			if Config.DoorStates[doorID] == nil then Config.DoorStates[doorID] = locked elseif Config.DoorStates[doorID] ~= locked then Config.DoorStates[doorID] = nil end
-			TriggerClientEvent('doorlock:client:setState', -1, playerId, doorID, true, src or false, enableSounds,
-				enableAnimation)
-		end)
-	end)
-
-RegisterNetEvent('doorlock:server:saveNewDoor', function(data, doubleDoor)
-	local src = source
-	local xPlayer = vRP.getPlayerInfo(src)
+RegisterNetEvent('doorlock:server:updateState',	function(doorID, locked, src, usedLockpick, unlockAnyway, enableSounds, enableAnimation, sentSource)
+	local playerId = sentSource or source
+	local xPlayer = vRP.getPlayerInfo(playerId)
 	if not xPlayer then return end
-
-	if not vRP.hasPermission(xPlayer.user_id, Config.CommandPermission) and not IsPlayerAceAllowed(src, 'command') then
+	if type(doorID) ~= 'number' and type(doorID) ~= 'string' then
 		if Config.Warnings then
-			showWarning(locale("general.warn_no_permission_newdoor", xPlayer.firstname, xPlayer.license, tostring(source)))
+			showWarning(locale("general.warn_wrong_doorid_type", xPlayer.firstname, xPlayer.license, tostring(doorID)))
 		end
 		return
 	end
 
+	if type(locked) ~= 'boolean' then
+		if Config.Warnings then
+			showWarning(locale("general.warn_wrong_state", xPlayer.firstname, xPlayer.license, tostring(locked)))
+		end
+		return
+	end
+
+	if not Config.DoorList[doorID] then
+		if Config.Warnings then
+			showWarning(locale("general.warn_wrong_doorid", xPlayer.firstname, xPlayer.license, tostring(doorID)))
+		end
+		return
+	end
+
+	if not unlockAnyway and not isAuthorized(Player, Config.DoorList[doorID], usedLockpick) then
+		if Config.Warnings then
+			showWarning(locale("general.warn_no_authorisation", xPlayer.firstname, xPlayer.license, tostring(doorID)))
+		end
+		return
+	end
+
+	Config.DoorList[doorID].locked = locked
+	if Config.DoorStates[doorID] == nil then Config.DoorStates[doorID] = locked elseif Config.DoorStates[doorID] ~= locked then Config.DoorStates[doorID] = nil end
+	TriggerClientEvent('doorlock:client:setState', -1, playerId, doorID, locked, src or false, enableSounds,
+		enableAnimation)
+
+	if not Config.DoorList[doorID].autoLock then return end
+	SetTimeout(Config.DoorList[doorID].autoLock, function()
+		if Config.DoorList[doorID].locked then return end
+		Config.DoorList[doorID].locked = true
+		if Config.DoorStates[doorID] == nil then Config.DoorStates[doorID] = locked elseif Config.DoorStates[doorID] ~= locked then Config.DoorStates[doorID] = nil end
+		TriggerClientEvent('doorlock:client:setState', -1, playerId, doorID, true, src or false, enableSounds,
+			enableAnimation)
+	end)
+end)
+
+local function saveNewDoor(src, data, doubleDoor)
+	local xPlayer = vRP.getPlayerInfo(src) 
+	if not xPlayer then return end
+
 	local configData = {}
 	local jobs, gangs, cids, items, doorType, identifier
-	if data.job then
-		configData.authorizedJobs = { [data.job] = 0 }
-		jobs = "['" .. data.job .. "'] = 0"
-	end
-	if data.gang then
-		configData.authorizedGangs = { [data.gang] = 0 }
-		gangs = "['" .. data.gang .. "'] = 0"
-	end
-	if data.cid then
-		configData.authorizedCitizenIDs = { [data.cid] = true }
-		cids = "['" .. data.cid .. "'] = true"
-	end
-	if data.item then
-		configData.items = { [data.item] = 1 }
-		items = "['" .. data.item .. "'] = 1"
-	end
+	if data.job then configData.authorizedJobs = { [data.job] = 0 } jobs = "['"..data.job.."'] = 0" end
+	if data.gang then configData.authorizedGangs = { [data.gang] = 0 } gangs = "['"..data.gang.."'] = 0" end
+	if data.cid then configData.authorizedCitizenIDs = { [data.cid] = true } cids = "['"..data.cid.."'] = true" end
+	if data.item then configData.items = { [data.item] = 1 } items = "['"..data.item.."'] = 1" end
 	configData.locked = data.locked
 	configData.pickable = data.pickable
 	configData.cantUnlock = data.cantunlock
@@ -262,26 +241,15 @@ RegisterNetEvent('doorlock:server:saveNewDoor', function(data, doubleDoor)
 	configData.doorType = data.doortype
 	configData.doorRate = 1.0
 	configData.doorLabel = data.doorlabel
-	doorType = "'" .. data.doortype .. "'"
-	identifier = data.configfile .. '-' .. data.dooridentifier
+	doorType = "'"..data.doortype.."'"
+	identifier = data.id or data.configfile..'-'..data.dooridentifier
 	if doubleDoor then
 		configData.doors = {
-			{
-				objName = data.objName[1] or nil,
-				objHash = data.objHash or data.model[1],
-				objYaw = data.heading[1],
-				objCoords = data.coords[1]
-			},
-			{
-				objName = data.objName[2] or nil,
-				objHash = data.objHash or data.model[2],
-				objYaw = data.heading[2],
-				objCoords = data.coords[2]
-			}
+			{objName = data.model[1], objYaw = data.heading[1], objCoords = data.coords[1]},
+			{objName = data.model[2], objYaw = data.heading[2], objCoords = data.coords[2]}
 		}
 	else
-		configData.objName = data.objName -- data.model
-		configData.objHash = data.objHash or data.model
+		configData.objName = data.model
 		configData.objYaw = data.heading
 		configData.objCoords = data.coords
 		configData.fixText = false
@@ -290,23 +258,20 @@ RegisterNetEvent('doorlock:server:saveNewDoor', function(data, doubleDoor)
 	local path = GetResourcePath(GetCurrentResourceName())
 
 	if data.configfile then
-		local tempfile, err = io.open(
-			path:gsub('//', '/') .. '/configs/' .. string.gsub(data.configfile, ".lua", "") .. '.lua', 'a+')
+		local tempfile, err = io.open(path:gsub('//', '/')..'/configs/'..string.gsub(data.configfile, ".lua", "")..'.lua', 'a+')
 		if tempfile then
 			tempfile:close()
-			path = path:gsub('//', '/') .. '/configs/' .. string.gsub(data.configfile, ".lua", "") .. '.lua'
+			path = path:gsub('//', '/')..'/configs/'..string.gsub(data.configfile, ".lua", "")..'.lua'
 		else
 			return error(err)
 		end
 	else
-		path = path:gsub('//', '/') .. '/config.lua'
+		path = path:gsub('//', '/')..'/config.lua'
 	end
 
 	local file = io.open(path, 'a+')
-	local label = "\n\n-- " ..
-		data.dooridentifier ..
-		" " ..
-		locale("general.created_by") .. " " .. xPlayer.firstname .. "\nConfig.DoorList['" .. identifier .. "'] = {"
+	if not file then return end
+	local label = ("\n\n-- %s %s %s\nConfig.DoorList['%s'] = {"):format(data.id or data.dooridentifier, Lang:t("general.created_by"), Player.PlayerData.name, identifier)
 	file:write(label)
 	for k, v in pairs(configData) do
 		if k == 'authorizedJobs' or k == 'authorizedGangs' or k == 'authorizedCitizenIDs' or k == 'items' then
@@ -323,11 +288,7 @@ RegisterNetEvent('doorlock:server:saveNewDoor', function(data, doubleDoor)
 		elseif k == 'doors' then
 			local doors = {}
 			for i = 1, 2 do
-				doors[i] = ("    {objName = '%s', objHash = %s, objYaw = %s, objCoords = %s}"):format(
-					configData.doors[i].objName,
-					configData.doors[i].objHash,
-					configData.doors[i].objYaw,
-					configData.doors[i].objCoords)
+				doors[i] = ("    {objName = %s, objYaw = %s, objCoords = %s}"):format(configData.doors[i].objName, configData.doors[i].objYaw, configData.doors[i].objCoords)
 			end
 			local str = ("\n    %s = {\n    %s,\n    %s\n    },"):format(k, doors[1], doors[2])
 			file:write(str)
@@ -335,9 +296,6 @@ RegisterNetEvent('doorlock:server:saveNewDoor', function(data, doubleDoor)
 			local str = ("\n    %s = %s,"):format(k, doorType)
 			file:write(str)
 		elseif k == 'doorLabel' then
-			local str = ("\n    %s = '%s',"):format(k, v)
-			file:write(str)
-		elseif k == 'objName' and v ~= nil then
 			local str = ("\n    %s = '%s',"):format(k, v)
 			file:write(str)
 		else
@@ -349,7 +307,33 @@ RegisterNetEvent('doorlock:server:saveNewDoor', function(data, doubleDoor)
 	file:close()
 
 	Config.DoorList[identifier] = configData
-	TriggerClientEvent('doorlock:client:newDoorAdded', -1, configData, identifier, src)
+	TriggerClientEvent('qb-doorlock:client:newDoorAdded', -1, configData, identifier, src)
+end
+
+exports('getDoor', function(id)
+	return Config.DoorList[id]
+end)
+
+exports('updateDoor', function(id, data)
+	local door = Config.DoorList[id]
+	if not door then return end
+
+	for k,v in pairs(data) do
+		door[k] = v
+	end
+
+	TriggerClientEvent('doorlock:client:newDoorAdded', -1, door, id)
+end)
+
+RegisterNetEvent('doorlock:server:saveNewDoor', function(data, doubleDoor)
+	local src = source
+	if not vRP.hasPermission(vRP.getUserId(src), 'door.create') and not IsPlayerAceAllowed(src, 'command') then
+		if Config.Warnings then
+			showWarning(locale("general.warn_no_permission_newdoor", GetPlayerName(src), GetPlayerIdentifierByType(source, 'license'), src))
+		end
+		return
+	end
+	saveNewDoor(src, data, doubleDoor)
 end)
 
 AddEventHandler('onResourceStart', function(resource)
@@ -383,6 +367,7 @@ RegisterNetEvent('txAdmin:events:scheduledRestart', function(eventData)
 end)
 
 RegisterNetEvent('doorlock:server:removeLockpick', function(type)
+	if not vRP.getUserId( source ) then return end
 	if type == "advancedlockpick" or type == "lockpick" then
 		exports.ox_inventory:RemoveItem(source, type, 1)
 	end
