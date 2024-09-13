@@ -51,8 +51,7 @@ RegisterNetEvent('vRP:SetPlayerMetadata', function(xplayerData)
   end  
 end)
 
-RegisterNetEvent('vRP:client:PlayerMoneyUpdate', function(value, _type)
-  lib.print.info('money sync', value, _type)
+RegisterNetEvent('vRP:client:PlayerMoneyUpdate', function(value, _type)  
   if player then
     player.money = player.money or {}
     player.money[_type] = value
