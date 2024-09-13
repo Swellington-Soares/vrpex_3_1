@@ -2,6 +2,8 @@ Property = {
     property_id = nil,
     propertyData = nil,
 
+    mloData = nil,
+
     shell = nil,
     shellData = nil,
     inProperty = false,
@@ -10,8 +12,8 @@ Property = {
     has_access = false,
     owner = false,
 
-    storageTarget = nil,
     clothingTarget = nil,
+    storageTarget = {},
     furnitureObjs = {},
 
     garageZone = nil,
@@ -22,8 +24,8 @@ Property = {
 
     blip = nil,
 }
-
 Property.__index = Property
+
 
 function Property:new(propertyData)
     local self = setmetatable({}, Property)
@@ -32,9 +34,7 @@ function Property:new(propertyData)
     -- Remove furnitures from property data for memory purposes
     propertyData.furnitures = {}
     self.propertyData = propertyData
-
-    -- local citizenid = LocalPlayer.state.char_id        
-    local citizenid = vRP.getPlayer().id
+    local citizenid = PlayerData.citizenid
 
     self.owner = propertyData.owner == citizenid
     self.has_access = lib.table.contains(self.propertyData.has_access, citizenid)
@@ -63,12 +63,12 @@ end
 function Property:GetDoorCoords()
     local coords = nil
 
-    local dataApartment = self.propertyData?.apartment
+    local dataApartment = self.propertyData.apartment
     if dataApartment then
         local apartment = dataApartment
         coords = Config.Apartments[apartment].door
     else
-        coords = self.propertyData?.door_data
+        coords = self.propertyData.door_data
     end
 
     return coords
@@ -77,7 +77,7 @@ end
 function Property:CreateShell()
     local coords = self:GetDoorCoords()
 
-    coords = vec3(coords.x, coords.y, coords.z - 175.0)
+    coords = vec3(coords.x, coords.y, coords.z - 25.0)
     self.shell = Shell:CreatePropertyShell(self.propertyData.shell, coords)
 
     self.shellObj = self.shell.entity
@@ -85,9 +85,8 @@ function Property:CreateShell()
     local doorOffset = self.shellData.doorOffset
     local offset = GetOffsetFromEntityInWorldCoords(self.shellObj, doorOffset.x, doorOffset.y, doorOffset.z)
     self:RegisterDoorZone(offset)
-
     SetEntityCoordsNoOffset(cache.ped, offset.x, offset.y, offset.z, false, false, true)
-    SetEntityHeading(cache.ped, self.shellData.doorOffset.h)
+    SetEntityHeading(cache.ped, doorOffset.h)
 end
 
 function Property:RegisterDoorZone(offset)
@@ -99,18 +98,75 @@ function Property:RegisterDoorZone(offset)
         self:OpenDoorbellMenu()
     end
 
-    local coords = offset
-    local size = vector3(1.0, self.shellData.doorOffset.width, 3.0)
-    local heading = self.shellData.doorOffset.h
+    local doorOffset = self.shellData.doorOffset
+    local size = vector3(1.0, doorOffset.width, 3.0)
+    local heading = doorOffset.h
 
-    self.exitTarget = Framework[Config.Target].AddDoorZoneInside(coords, size, heading, leave, checkDoor)
+    self.exitTarget = Framework[Config.Target].AddDoorZoneInside(offset, size, heading, leave, checkDoor)
 end
 
+local function convertToVector(zone, garden)
+    if not zone or not zone[1] then return end
+    local z = garden and zone[1].z - 0.2 or zone[1].z - 1
+    local points = {}
+    for k,v in ipairs(zone) do
+        points[k] = vec3(v.x, v.y, z)
+    end
+    return points
+end
+
+function Property:RegisterMlo()
+    local data = lib.callback.await("ps-housing:cb:getMainMloDoor", false, self.property_id, 1)
+    if not data then return end
+    
+    local coords = data.objCoords or data.coords or data.doors[1] and data.doors[1].coords or data.doors[1].objCoords
+    local zoneData = type(self.propertyData.zone_data) == 'string' and json.decode(self.propertyData.zone_data) or self.propertyData.zone_data
+    if not zoneData then return end
+
+    -- we creating point only if mlo is owned by someone
+    if self.propertyData.owner then
+        self.mloData = {}
+        self.mloData.point = lib.points.new({
+            coords = vec3(coords.x, coords.y, coords.z),
+            distance = 40,
+            onEnter = function()
+                self:LoadFurnitures()
+            end,
+            onExit = function()
+                self:UnloadFurnitures()
+                self.propertyData.furnitures = {}
+            end
+        })
+    end
+
+    if self.owner or self.has_access then
+    -- this only for who have access or owning the house
+        self.mloData = self.mloData or {}
+        self.mloData.poly = lib.zones.poly({
+            points = convertToVector(zoneData.points),
+            thickness = zoneData.thickness + 3,
+            debug = Config.DebugMode,
+            onEnter = function()
+                TriggerServerEvent("ps-housing:server:enterProperty", self.property_id)
+            end,
+            onExit = function()
+                self:LeaveShell()
+            end
+        })
+    end
+
+    return {
+        x = coords.x,
+        y = coords.y,
+        z = coords.z,
+        length = 2.0,
+        h = 100.0,
+        width = 2.0,
+    }
+end
+
+
 function Property:RegisterPropertyEntrance()
-    local door = self.propertyData.door_data
-    local size = vector3(door.length, door.width, 2.5)
-    local heading = door.h
-    --Can be anon functions but I like to keep them named its more readable
     local function enter()
         TriggerServerEvent("ps-housing:server:enterProperty", self.property_id)
     end
@@ -141,9 +197,52 @@ function Property:RegisterPropertyEntrance()
     end
 
     local targetName = string.format("%s_%s", self.propertyData.street, self.property_id)
+    local isMlo = self.propertyData.shell == 'mlo'
 
-    self.entranceTarget = Framework[Config.Target].AddEntrance(door, size, heading, self.property_id, enter, raid, showcase, showData, targetName)
+    if not isMlo then
+        local zoneData = type(self.propertyData.zone_data) == 'string' and json.decode(self.propertyData.zone_data) or self.propertyData.zone_data
+        if not zoneData then return end
 
+        local coords = convertToVector(zoneData.points, true)
+        if not coords then
+            goto skip
+        end
+        
+        local poly = lib.zones.poly({
+            points = coords,
+            debug = Config.DebugMode,
+            onEnter = function()
+                self:GiveMenus(true)
+                self.inGarden = true
+                TriggerServerEvent("ps-housing:server:enterGarden", self.property_id)
+            end,
+            onExit = function()
+                self:RemoveMenus(true)
+                self.inGarden = false
+            end
+        })
+        self.propertyData.garden_data = {
+            poly = poly,
+            point = lib.points.new({
+                coords = vec3(coords[1].x, coords[1].y, coords[1].z),
+                distance = 40,
+                onEnter = function()
+                    self:LoadFurnitures(poly)
+                end,
+                onExit = function()
+                    self:UnloadFurnitures()
+                    self.propertyData.furnitures = {}
+                end
+            })
+        }
+    end
+
+    ::skip::
+    local door = isMlo and self:RegisterMlo() or self.propertyData.door_data
+    if not door or not door.length then return end
+
+    local size = vector3(door.length, door.width, 2.5)
+    self.entranceTarget = Framework[Config.Target].AddEntrance(door, size, door.h, self.property_id, enter, raid, showcase, showData, targetName)
     if self.owner or self.has_access then
         self:CreateBlip()
     end
@@ -164,100 +263,131 @@ function Property:RegisterGarageZone()
     end
 
     local garageData = self.propertyData.garage_data
-    local garageName = string.format("property-%s-garage", self.property_id)
+    local label = self.propertyData.street .. self.property_id .. " Garage"
 
-    local data = {
-        takeVehicle = {
-            x = garageData.x,
-            y = garageData.y,
-            z = garageData.z,
-            w = garageData.h or garageData.w
-        },
-        type = "house",
-        label = self.propertyData.street .. self.property_id .. " Garage",
-        garage = garageName
-    }
+    local isQbx = GetResourceState('qbx_garages') == 'started'
+    local coords = vec4(garageData.x, garageData.y, garageData.z, garageData.h)
 
-    TriggerEvent("garages:client:addHouseGarage", self.property_id, data)
-    -- TriggerEvent('garages:client:setHouseGarage', self.property_id, true)
-    -- self.garageZone = { remove = function () end }    
-    self.garageZone = lib.zones.box({
-        coords = vec3(garageData.x, garageData.y, garageData.z),
-        size = vector3(garageData.length + 5.0, garageData.width + 5.0, 3.5),
-        rotation = garageData.h,
-        debug = Config.DebugMode,
-        onEnter = function()
-            TriggerEvent('garages:client:setHouseGarage', self.property_id, true)
-        end,
-    })
+    if isQbx then
+        TriggerServerEvent('ps-housing:server:qbxRegisterHouse', self.property_id)
+    else
+        TriggerEvent("qb-garages:client:addHouseGarage", self.property_id, {
+            takeVehicle = {
+                x = garageData.x,
+                y = garageData.y,
+                z = garageData.z,
+                w = garageData.h
+            },
+            type = "house",
+            label = label,
+        })
+    end
+    if not isQbx then
+        self.garageZone = lib.zones.box({
+            coords = coords.xyz,
+            size = vector3(garageData.length + 5.0, garageData.width + 5.0, 3.5),
+            rotation = coords.w,
+            debug = Config.DebugMode,
+            onEnter = function()
+                TriggerEvent('qb-garages:client:setHouseGarage', self.property_id, true)
+            end,
+        })
+    end
 end
 
 function Property:UnregisterGarageZone()
     if not self.garageZone then return end
 
-    TriggerEvent("garages:client:removeHouseGarage", self.property_id)
+    TriggerEvent("qb-garages:client:removeHouseGarage", self.property_id)
 
     self.garageZone:remove()
     self.garageZone = nil
 end
 
+
 function Property:EnterShell()
-    print('Property:EnterShell()')
-    DoScreenFadeOut(250)
-    SetTimecycleModifier('warehouse')
-    TriggerServerEvent('chHyperSound:play', -1, 'DoorOpen', false, 'self', 2.0, GetPlayerServerId(PlayerId()))
-    
-    Wait(250)
+    self = self
+    local isMlo = self.propertyData.shell == 'mlo'
+    local isIpl = self.propertyData.apartment and Config.Apartments[self.propertyData.apartment]
+    self.shellData = Config.Shells[self.propertyData.shell]
+
+    if not isMlo or isIpl then
+        DoScreenFadeOut(250)
+        TriggerServerEvent("InteractSound_SV:PlayOnSource", "houses_door_open", 0.25)
+        Wait(250)
+        
+        if isIpl and isIpl.zone then
+            self.mloData = {}
+            self.mloData.poly = lib.zones.poly({
+                points = isIpl.zone,
+                thickness = isIpl.thickness,
+                debug = Config.DebugMode,
+            })
+            local coords = isIpl.interior
+            self:RegisterDoorZone(coords)
+            SetEntityCoordsNoOffset(cache.ped, coords.x, coords.y, coords.z, false, false, true)
+        else
+            self:CreateShell()
+        end
+        self:LoadFurnitures()
+    end
 
     self.inProperty = true
-
-    self.shellData = Config.Shells[self.propertyData.shell]
-    self:CreateShell()
-
-    self:LoadFurnitures()
-
     self:GiveMenus()
 
-    Wait(250)
-    DoScreenFadeIn(250)
+    if not isMlo or isIpl then
+        DoScreenFadeIn(250)
+    end
 end
 
+
 function Property:LeaveShell()
-    print('Property:LeaveShell()')
     if not self.inProperty then return end
 
-    DoScreenFadeOut(250)
-    ClearTimecycleModifier()
-    
-    TriggerServerEvent('chHyperSound:play', -1, 'DoorClose', false, 'self', 2.0, GetPlayerServerId(PlayerId()))
-    Wait(250)
+    local isMlo = self.propertyData.shell == 'mlo'
+    local isIpl = self.propertyData.apartment and Config.Apartments[self.propertyData.apartment].interior
 
-    local coords = self:GetDoorCoords()
-    SetEntityCoordsNoOffset(cache.ped, coords.x, coords.y, coords.z, false, false, true)
+    if not isMlo or isIpl then
+        DoScreenFadeOut(250)
+        TriggerServerEvent("InteractSound_SV:PlayOnSource", "houses_door_open", 0.25)
+        Wait(250)
+
+        local coords = self:GetDoorCoords()
+        SetEntityCoordsNoOffset(cache.ped, coords.x, coords.y, coords.z, false, false, true)
+
+        self:UnloadFurnitures()
+        self.propertyData.furnitures = {}
+        if not isIpl then
+            self.shell:DespawnShell()
+            self.shell = nil
+        else
+            local mloData = self.mloData
+            if mloData and mloData.poly then
+                mloData.poly:remove()
+                self.mloData = nil
+            end
+        end
+    end
 
     TriggerServerEvent("ps-housing:server:leaveProperty", self.property_id)
 
-    self:UnloadFurnitures()
-    self.propertyData.furnitures = {}
-
-    self.shell:DespawnShell()
-    self.shell = nil
     if self.exitTarget then
         Framework[Config.Target].RemoveTargetZone(self.exitTarget)
         self.exitTarget = nil
     end
 
     self:RemoveMenus()
-
     self.doorbellPool = {}
-
     self.inProperty = false
-    Wait(250)
-    DoScreenFadeIn(250)
+
+    if not isMlo or isIpl then
+        Wait(250)
+        DoScreenFadeIn(250)
+    end
 end
 
-function Property:GiveMenus()
-    if not self.inProperty then return end
+function Property:GiveMenus(garden)
+    if not garden and not self.inProperty then return end
 
     local accessAndConfig = self.has_access and Config.AccessCanEditFurniture
 
@@ -274,7 +404,7 @@ function Property:GiveMenus()
         )
     end
 
-    if self.owner then
+    if self.owner and not garden then
         Framework[Config.Radial].AddRadialOption(
             "access_menu",
             "Manage Property",
@@ -288,8 +418,8 @@ function Property:GiveMenus()
     end
 end
 
-function Property:RemoveMenus()
-    if not self.inProperty then return end
+function Property:RemoveMenus(force)
+    if not force and not self.inProperty then return end
 
     Framework[Config.Radial].RemoveRadialOption("furniture_menu")
 
@@ -310,19 +440,19 @@ function Property:ManageAccessMenu()
     local id = "property-" .. self.property_id .. "-access"
     local menu = {
         id = id,
-        title = locale("info.apt_manage_label"),
+        title = "Manage Access",
         options = {},
     }
 
     menu.options[#menu.options + 1] = {
-        title = locale("info.apt_give_access_label"),
+        title = "Give Access",
         onSelect = function()
             self:GiveAccessMenu()
         end,
     }
 
     menu.options[#menu.options + 1] = {
-        title = locale("info.apt_revoke_access_label"),
+        title = "Revoke Access",
         onSelect = function()
             self:RevokeAccessMenu()
         end,
@@ -342,7 +472,7 @@ function Property:GiveAccessMenu()
     local id = "property-" .. self.property_id .. "-access-give"
     local menu = {
         id = id,
-        title = locale("info.apt_give_access_label"),
+        title = "Give Access",
         options = {},
     }
 
@@ -353,7 +483,7 @@ function Property:GiveAccessMenu()
             local v = players[i]
             menu.options[#menu.options + 1] = {
                 title = v.name,
-                description =locale("info.apt_give_access_label"),
+                description = "Give Access",
                 onSelect = function()
                     TriggerServerEvent("ps-housing:server:addAccess", self.property_id, v.src)
                 end,
@@ -363,7 +493,7 @@ function Property:GiveAccessMenu()
         lib.registerContext(menu)
         lib.showContext(id)
     else
-        Framework[Config.Notify].Notify("error.not_in_property", "error")
+        Framework[Config.Notify].Notify("No one is in the property", "error")
     end
 end
 
@@ -375,7 +505,7 @@ function Property:RevokeAccessMenu()
     local id = "property-" .. self.property_id .. "-access-already"
     local alreadyAccessMenu = {
         id = id,
-        title = locale("error.apt_revoke_access_label"),
+        title = "Revoke Access",
         options = {},
     }
 
@@ -387,7 +517,7 @@ function Property:RevokeAccessMenu()
             local v = playersWithAccess[i]
             alreadyAccessMenu.options[#alreadyAccessMenu.options + 1] = {
                 title = v.name,
-                description = locale("error.apt_remove_access_label"),
+                description = "Remove Access",
                 onSelect = function()
                     TriggerServerEvent("ps-housing:server:removeAccess", self.property_id, v.citizenid)
                 end,
@@ -397,7 +527,7 @@ function Property:RevokeAccessMenu()
         lib.registerContext(alreadyAccessMenu)
         lib.showContext(id)
     else
-        Framework[Config.Notify].Notify(locale("error.no_one_access"), "error")
+        Framework[Config.Notify].Notify("No one has access to this property", "error")
     end
 end
 
@@ -405,14 +535,14 @@ function Property:OpenDoorbellMenu()
     if not self.inProperty then return end
 
     if not next(self.doorbellPool) then
-        Framework[Config.Notify].Notify(locale("error.no_one_door"), "error")
+        Framework[Config.Notify].Notify("No one is at the door", "error")
         return
     end
 
     local id = string.format("property-%s-doorbell", self.property_id)
     local menu = {
         id = id,
-        title = locale("info.apt_people_at_door"),
+        title = "People at the door",
         options = {},
     }
 
@@ -433,7 +563,7 @@ function Property:OpenDoorbellMenu()
 end
 
 function Property:LoadFurniture(furniture)
-    local coords = GetOffsetFromEntityInWorldCoords(self.shellObj, furniture.position.x, furniture.position.y, furniture.position.z)
+    local coords = self.shellObj and GetOffsetFromEntityInWorldCoords(self.shellObj, furniture.position.x, furniture.position.y, furniture.position.z) or vec3(furniture.position.x, furniture.position.y, furniture.position.z)
     local hash = furniture.object
 
     lib.requestModel(hash)
@@ -448,12 +578,14 @@ function Property:LoadFurniture(furniture)
     end
 
     if furniture.type and Config.FurnitureTypes[furniture.type] then
-        Config.FurnitureTypes[furniture.type](entity, self.property_id, self.propertyData.shell)
+        Config.FurnitureTypes[furniture.type](entity, self.property_id, self.propertyData.shell, #self.furnitureObjs == 1 or furniture.id)
     end
+
 
     self.furnitureObjs[#self.furnitureObjs + 1] = {
         entity = entity,
         id = furniture.id,
+        propertyId = self.property_id,
         label = furniture.label,
         object = furniture.object,
         position = {
@@ -466,13 +598,20 @@ function Property:LoadFurniture(furniture)
     }
 end
 
-function Property:LoadFurnitures()
+function Property:LoadFurnitures(isGarden)
     self.propertyData.furnitures = lib.callback.await('ps-housing:cb:getFurnitures', false, self.property_id) or {}
+
+    local garden = self.propertyData.garden_data and self.propertyData.garden_data.poly
     
     for i = 1, #self.propertyData.furnitures do
         local furniture = self.propertyData.furnitures[i]
-        self:LoadFurniture(furniture)
+        local isInGarden = garden and garden:contains(vec3(furniture.position.x, furniture.position.y, furniture.position.z))
+
+        if (isGarden and isInGarden) or (not isGarden and not isInGarden) then
+            self:LoadFurniture(furniture)
+        end
     end
+    return self.propertyData.furnitures
 end
 
 function Property:UnloadFurniture(furniture, index)
@@ -486,13 +625,13 @@ function Property:UnloadFurniture(furniture, index)
         end
     end
 
-    if self.clothingTarget == entity or self.storageTarget == entity then
+    if self.clothingTarget == entity or self.storageTarget[entity] then
         Framework[Config.Target].RemoveTargetEntity(entity)
 
         if self.clothingTarget == entity then
             self.clothingTarget = nil
-        elseif self.storageTarget == entity then
-            self.storageTarget = nil
+        elseif self.storageTarget[entity] then
+            self.storageTarget[entity] = nil
         end
     end
 
@@ -510,11 +649,16 @@ function Property:UnloadFurniture(furniture, index)
 end
 
 function Property:UnloadFurnitures()
+    local garden = self.propertyData.garden_data and self.propertyData.garden_data.poly
     for i = 1, #self.furnitureObjs do
         local furniture = self.furnitureObjs[i]
-        self:UnloadFurniture(furniture, i)
+        if furniture.propertyId == self.property_id then
+            if not garden or not garden:contains(vec3(furniture.position.x, furniture.position.y, furniture.position.z)) then
+                self:UnloadFurniture(furniture, i)
+                self.furnitureObjs[i] = nil
+            end
+        end
     end
-    self.furnitureObjs = {}
 end
 
 function Property:CreateBlip()
@@ -542,12 +686,33 @@ end
 
 function Property:RemoveProperty()
     if Config.Target == "ox" then
-        
-        Framework[Config.Target].RemoveTargetZone(self.entranceTarget)    
+        Framework[Config.Target].RemoveTargetZone(self.entranceTarget)
+    else
+        local targetName = string.format("%s_%s", self.propertyData.street, self.property_id)
+        Framework[Config.Target].RemoveTargetZone(targetName)
+    end
+
+    local mloData = self.mloData
+    if mloData then
+        if mloData.point then
+            mloData.point:remove()
+        end
+        if mloData.poly then
+            mloData.poly:remove()
+        end
+    end
+
+    local gardenData = self.propertyData.garden_data
+    if gardenData then
+        if gardenData.point then
+            gardenData.point:remove()
+        end
+        if gardenData.poly then
+            gardenData.poly:remove()
+        end
     end
 
     self:RemoveBlip()
-
     self:LeaveShell()
 
     --@@ comeback to this
@@ -599,16 +764,34 @@ local function findFurnitureDifference(new, old)
     return added, removed, edited
 end
 
--- I think this whole furniture sync is a bit shit, but I cbf thinking 
-function Property:UpdateFurnitures(newFurnitures)
-    if not self.inProperty then return end
+local function prepareFornitures(newFurnitures)
+    local furnitures = {}
+    for i = 1, #newFurnitures do
+        local newFurniture = newFurnitures[i]
+        furnitures[i] = {
+            id = newFurniture.id,
+            label = newFurniture.label,
+            object = newFurniture.object,
+            position = newFurniture.position,
+            rotation = newFurniture.rotation,
+            type = newFurniture.type
+        }
+    end
+    return furnitures
+end
 
-    local oldFurnitures = self.propertyData.furnitures
-    local added, removed, edited = findFurnitureDifference(newFurnitures, oldFurnitures)
+-- I think this whole furniture sync is a bit shit, but I cbf thinking 
+function Property:UpdateFurnitures(newFurnitures, isGarden)
+    if not isGarden and not self.inProperty then return end
+
+    local added, removed, edited = findFurnitureDifference(newFurnitures, self.propertyData.furnitures)
+    local poly = self.propertyData.garden_data and self.propertyData.garden_data.poly
 
     for i = 1, #added do
         local furniture = added[i]
-        self:LoadFurniture(furniture)
+        if not isGarden or poly:contains(vec3(furniture.position.x, furniture.position.y, furniture.position.z)) then
+            self:LoadFurniture(furniture)
+        end
     end
 
     for i = 1, #removed do
@@ -619,23 +802,12 @@ function Property:UpdateFurnitures(newFurnitures)
     for i = 1, #edited do
         local furniture = edited[i]
         self:UnloadFurniture(furniture)
-        self:LoadFurniture(furniture)
+        if not isGarden or poly:contains(vec3(furniture.position.x, furniture.position.y, furniture.position.z)) then
+            self:LoadFurniture(furniture)
+        end
     end
 
-    local furnitures = {}
-
-    for i = 1, #newFurnitures do
-        furnitures[i] = {
-            id = newFurnitures[i].id,
-            label = newFurnitures[i].label,
-            object = newFurnitures[i].object,
-            position = newFurnitures[i].position,
-            rotation = newFurnitures[i].rotation,
-            type = newFurnitures[i].type
-        }
-    end
-
-    self.propertyData.furnitures = furnitures
+    self.propertyData.furnitures = prepareFornitures(newFurnitures)
 
     Modeler:UpdateFurnitures()
 end
@@ -662,13 +834,15 @@ function Property:UpdateShell(newShell)
 end
 
 function Property:UpdateOwner(newOwner)
-
     self.propertyData.owner = newOwner
 
-    local citizenid = LocalPlayer.state.char_id
+    local citizenid = PlayerData.citizenid
 
     self.owner = newOwner == citizenid
 
+    if self.propertyData.shell == 'mlo' then
+        self:RegisterMlo()
+    end
     self:UnregisterGarageZone()
     self:RegisterGarageZone()
 
@@ -736,7 +910,7 @@ function Property.Get(property_id)
 end
 
 RegisterNetEvent("ps-housing:client:enterProperty", function(property_id)
-    local property = Property.Get(property_id)    
+    local property = Property.Get(property_id)
     property:EnterShell()
 end)
 
@@ -745,10 +919,11 @@ RegisterNetEvent("ps-housing:client:updateDoorbellPool", function(property_id, d
     property.doorbellPool = data
 end)
 
-RegisterNetEvent("ps-housing:client:updateFurniture", function(property_id, furnitures)
+RegisterNetEvent("ps-housing:client:updateFurniture", function(property_id, furnitures, isGarden)
     local property = Property.Get(property_id)
     if not property then return end
-    property:UpdateFurnitures(furnitures)
+
+    property:UpdateFurnitures(furnitures, isGarden)
 end)
 
 RegisterNetEvent("ps-housing:client:updateProperty", function(type, property_id, data)
@@ -765,7 +940,22 @@ RegisterNetEvent("ps-housing:client:openFurnitureMenu", function(data)
     Modeler:OpenMenu(data.options.propertyId)
 end)
 
-RegisterNetEvent("ps-housing:client:openManagePropertyAccessMenu", function(data)
+RegisterNetEvent("ps-housing:client:createOxDoors", function(data)
+    local doors, id in data
+
+    for index, door in ipairs(doors) do
+        local isArray = door[1] ~= nil
+        local name = ('ps_mloproperty%s_%s'):format(id, index)
+
+        door.name = not isArray and name
+
+        local payload = isArray and { doors = door, name = name, maxDistance = 2.5} or door
+
+        TriggerServerEvent('ox_doorlock:editDoorlock', false, payload)
+    end
+end)
+
+AddEventHandler("ps-housing:client:openManagePropertyAccessMenu", function(data)
     local property = Property.Get(data.options.propertyId)
     if not property then return end
 

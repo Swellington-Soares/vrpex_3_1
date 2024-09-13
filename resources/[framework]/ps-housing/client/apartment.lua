@@ -1,3 +1,5 @@
+-- TBH I should have learnt how lua inheritance worked instead of making a new class but oh well. Maybe next time
+
 Apartment = {
     apartmentData = {},
     apartments = {},
@@ -22,7 +24,7 @@ function Apartment:RegisterPropertyEntrance()
     local targetName = string.format("%s_apartment",self.apartmentData.label)
 
     -- not sure why but referencing self directy runs it when registering the zones
-    local function enterApartment() 
+    local function enterApartment()
         self:EnterApartment()
     end
 
@@ -49,29 +51,29 @@ function Apartment:EnterApartment()
         end
     end
 
-    Framework[Config.Notify].Notify(locale('error.no_have_apt'), "error")
+    Framework[Config.Notify].Notify("You dont have an apartment here.", "error")
 end
 
 function Apartment:GetMenuForAll()
     if next(self.apartments) == nil then 
-        Framework[Config.Notify].Notify(locale("error.no_apt_there"), "error")
+        Framework[Config.Notify].Notify("There are no apartments here.", "error")
         return
     end
 
     local id = "apartments-" .. self.apartmentData.label
     local menu = {
         id = id,
-        title = locale("info.apt_title"),
+        title = "Apartments",
         options = {}
     }
 
     for propertyId, _ in pairs(self.apartments) do
-        menu.options[#menu.options] = {
+        table.insert(menu.options,{
             title = self.apartmentData.label .. " " .. propertyId,
             onSelect = function()
                 TriggerServerEvent('ps-housing:server:enterProperty', propertyId) 
             end,
-        }
+        })
     end 
 
     lib.registerContext(menu)
@@ -80,14 +82,14 @@ end
 
 function Apartment:GetMenuForAllToRaid()
     if next(self.apartments) == nil then 
-        Framework[Config.Notify].Notify(locale("error.no_apt_there"), "error")
+        Framework[Config.Notify].Notify("There are no apartments here.", "error")
         return
     end
 
     local id = "apartments-" .. self.apartmentData.label
     local menu = {
         id = id,
-        title = locale("info.apt_to_raid"),
+        title = "Apartments To Raid",
         options = {}
     }
 

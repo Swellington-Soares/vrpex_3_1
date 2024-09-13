@@ -1,9 +1,10 @@
 fx_version 'cerulean'
+use_experimental_fxv2_oal 'yes'
 
 game "gta5"
 
 author "Xirvin & Project Sloth"
-version '0.0.6'
+version '2.0.0'
 
 lua54 'yes'
 
@@ -13,7 +14,6 @@ ui_page 'html/index.html'
 
 shared_script {
   '@ox_lib/init.lua',
-  '@vrp/lib/utils.lua',
   "shared/**",
 }
 
@@ -24,6 +24,7 @@ server_script {
 client_script {
   'client/**',
 }
+
 
 
 files {

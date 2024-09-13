@@ -357,7 +357,7 @@ local function setPedHeadOverlays(ped, overlays)
     if not overlays then return end
     for index, name in next, HEAD_OVERLAYS do
         local o = overlays[name]
-        _setPedHeadOverlay(ped, index, o)
+        _setPedHeadOverlay(ped, index - 1, o)
     end
 end
 
@@ -404,7 +404,7 @@ local function setPedAppearance(ped, appearance)
     setPedTattoos(ped, tattoos)
 end
 
-local function setPlayerAppearance(appearance)
+local function setPlayerAppearance(appearance)    
     if not appearance then return end
     local model = appearance?.model or `mp_m_freemode_01`
     setPlayerModel(PlayerId(), model)
@@ -456,8 +456,7 @@ local function getTattooList(ped)
     if not isMpPed(ped) then return nil end    
     if not tattoo_cache then
         local j = LoadResourceFile(GetCurrentResourceName(), 'data/tattoo.json')        
-        if j then
-            print(#j)
+        if j then            
             local tattoos = json.decode(j)
             for i = 1, #tattoos do
                 tattoos[i].label = GetLabelText(tattoos[i].label)

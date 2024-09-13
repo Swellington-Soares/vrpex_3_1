@@ -1,75 +1,69 @@
-lib.locale()
-local Proxy = require('@vrp.lib.Proxy')
-local vRP = Proxy.getInterface('vRP')
+local QBCore = exports['qb-core']:GetCoreObject()
 
-RegisterNetEvent("bl-realtor:server:updateProperty", function(type, property_id, data)    
+RegisterNetEvent('QBCore:Server:UpdateObject', function()
+	if source ~= '' then return false end
+	QBCore = exports['qb-core']:GetCoreObject() 
+end)
+
+RegisterNetEvent("bl-realtor:server:updateProperty", function(type, property_id, data)
+    -- Job check
     local src = source
-    local user_id = vRP.getUserId( src )
-    if not user_id then return false end
-    local group = vRP.getUserGroupByType(user_id, 'job')
-    if not RealtorJobs[group] then return false end
-    data.realtorSrc = src    
+    local Player = QBCore.Functions.GetPlayer(src)
+    local PlayerData = Player.PlayerData
+    if not RealtorJobs[PlayerData.job.name] then return false end
+
+    data.realtorSrc = src
+    -- Update property
     TriggerEvent("ps-housing:server:updateProperty", type, property_id, data)
 end)
 
 RegisterNetEvent("bl-realtor:server:registerProperty", function(data)
     local src = source
-    local user_id = vRP.getUserId( src )
-    if not user_id then return false end
-    local group = vRP.getUserGroupByType(user_id, 'job')
-    if not RealtorJobs[group] then return false end
-    data.realtorSrc = src    
-    TriggerEvent("ps-housing:server:registerProperty", data)
+    local Player = QBCore.Functions.GetPlayer(src)
+    local PlayerData = Player.PlayerData
+    if not RealtorJobs[PlayerData.job.name] then return false end
+
+    data.realtorSrc = src
+    return exports['ps-housing']:registerProperty(data, nil, src)
 end)
 
 RegisterNetEvent("bl-realtor:server:addTenantToApartment", function(data)
     -- Job check
     local src = source
-    local user_id = vRP.getUserId( src )
+    local Player = QBCore.Functions.GetPlayer(src)
+    local PlayerData = Player.PlayerData
+    if not RealtorJobs[PlayerData.job.name] then return false end
 
-    lib.print.info('bl-realtor:server:addTenantToApartment', src, user_id, vRP.getUserGroupByType(user_id, 'job'), RealtorJobs[group])
-
-    if not user_id then return false end
-    local group = vRP.getUserGroupByType(user_id, 'job')
-    if not RealtorJobs[group] then return false end
-    data.realtorSrc = src   
-
-    lib.print.info('bl-realtor:server:addTenantToApartment', data)
-
-
+    data.realtorSrc = src
+    -- Add tenant
     TriggerEvent("ps-housing:server:addTenantToApartment", data)
 end)
 
 lib.callback.register("bl-realtor:server:getNames", function (source, data)
-
     local src = source
-    local user_id = vRP.getUserId( src )
-    if not user_id then return false end
-    local group = vRP.getUserGroupByType(user_id, 'job')
-    if not RealtorJobs[group] then return false end
-
+    local Player = QBCore.Functions.GetPlayer(src)
+    local PlayerData = Player.PlayerData
+    if not RealtorJobs[PlayerData.job.name] then return false end
     
     local names = {}
     for i = 1, #data do
-        local target = vRP.getPlayerIdentity(user_id) or vRP.getPlayerIdentity(user_id, true)
+        local target = QBCore.Functions.GetPlayerByCitizenId(data[i]) or QBCore.Functions.GetOfflinePlayerByCitizenId(data[i])
         if target then
-            names[i] = target.firstname .. ' ' .. target.lastname
+            names[#names+1] = target.PlayerData.charinfo.firstname .. " " .. target.PlayerData.charinfo.lastname
         else
-            names[i] = "Unknown"
+            names[#names+1] = "Unknown"
         end
     end
     
     return names
 end)
 
-
-
--- if Config.UseItem then
---     QBCore.Functions.CreateUseableItem(Config.ItemName, function(source, item)
---         local src = source
---         local Player = QBCore.Functions.GetPlayer(src)
---         if Player.Functions.GetItemByName(item.name) ~= nil then
---             TriggerClientEvent("bl-realtor:client:toggleUI", src)
---         end
---     end)
--- end
+if Config.UseItem then
+    QBCore.Functions.CreateUseableItem(Config.ItemName, function(source, item)
+        local src = source
+        local Player = QBCore.Functions.GetPlayer(src)
+        if Player.Functions.GetItemByName(item.name) ~= nil then
+            TriggerClientEvent("bl-realtor:client:toggleUI", src)
+        end
+    end)
+end

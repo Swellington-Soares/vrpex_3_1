@@ -62,7 +62,6 @@ end
 -- end)
 -- this is used as a constructor for third party scripts
 function Shell:CreateTempShell(shellName, position, rotation, leaveCb)
-    print('Shell:CreateTempShell')
     local self = setmetatable({}, Shell)
     self.shellData = Config.Shells[shellName]
     self.hash = self.shellData.hash
