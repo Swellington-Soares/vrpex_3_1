@@ -87,7 +87,7 @@ function zoneCreator.addPoint(point)
     if zoneCreator.editIndex then
         zoneCreator.polygon[zoneCreator.editIndex] = point
     else
-        table.insert(zoneCreator.polygon, point)
+        zoneCreator.polygon[#zoneCreator.polygon+1] = point
     end
 
     if not zoneCreator.lowestPoint or not zoneCreator.highestPoint then

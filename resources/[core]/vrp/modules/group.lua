@@ -110,6 +110,7 @@ function vRP.addUserGroup(user_id, group, grade)
 
       if player then
         TriggerClientEvent("vRP:updateGroupInfo", player, {
+          name = group, --fix compat
           group = group,
           gtype = gtype,
           jobType = jobType,
@@ -159,6 +160,7 @@ function vRP.removeUserGroup(user_id, group)
   local player = vRP.getUserSource(user_id)
   if player then
     TriggerClientEvent("vRP:updateGroupInfo", player, {
+      name = group,
       group = group,
       gtype = gtype,
       jobType = jobType,

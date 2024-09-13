@@ -14,7 +14,8 @@ ui_page 'html/index.html'
 
 shared_script {
   '@ox_lib/init.lua',
-  "shared/**",
+  'shared/vrpex.lua',
+  "shared/config.lua",
 }
 
 server_script {
@@ -24,7 +25,6 @@ server_script {
 client_script {
   'client/**',
 }
-
 
 
 files {
