@@ -301,7 +301,7 @@ function Property:UpdateOwner(data)
 
     local previousOwner = self.propertyData.owner
 
-    local targetPlayer  = vRP.getPlayer(tonumber(targetSrc))
+    local targetPlayer  = vRP.getPlayerInfo(tonumber(targetSrc))
     if not targetPlayer then return end
     
     local bank = targetPlayer.money.bank
@@ -339,7 +339,7 @@ function Property:UpdateOwner(data)
     local realtor = vRP.getPlayerInfo(tonumber(realtorSrc))
     local realtorGradeLevel = realtor?.job.rank 
 
-    local commission = math.floor(self.propertyData.price * Config.Commissions[realtorGradeLevel])
+    local commission = math.floor(self.propertyData.price * (Config.Commissions[realtorGradeLevel] or 0.05))
 
     local totalAfterCommission = self.propertyData.price - commission
 
@@ -359,7 +359,7 @@ function Property:UpdateOwner(data)
 
     self.propertyData.owner = citizenid
 
-    MySQL.update("UPDATE properties SET owner_citizenid = , for_sale = ? WHERE property_id = ?", {
+    MySQL.update("UPDATE properties SET owner_citizenid = ?, for_sale = ? WHERE property_id = ?", {
         citizenid,
         0,
         self.property_id
@@ -446,10 +446,11 @@ function Property:UpdateHas_access(data)
     Debug("Changed Has Access of property with id: " .. self.property_id)
 end
 
-function Property:UpdateGarage(data)
+function Property:UpdateGarage(data)    
     local garage = data.garage
     local realtorSrc = data.realtorSrc
 
+    
     local newData = {}
 
     if data ~= nil then 

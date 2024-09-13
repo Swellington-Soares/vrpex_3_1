@@ -57,6 +57,8 @@ Framework.ox = {
     AddEntrance = function (coords, size, heading, propertyId, enter, raid, showcase, showData, _)
         local property_id = propertyId
 
+        
+
         local handler = exports.ox_target:addBoxZone({
             coords = vector3(coords.x, coords.y, coords.z),
             size = vector3(size.y, size.x, size.z),
@@ -113,7 +115,7 @@ Framework.ox = {
                     canInteract = function()
                         local job = PlayerData.job
                         local jobName = job.name
-                        local gradeAllowed = tonumber(job.grade.level) >= Config.MinGradeToRaid
+                        local gradeAllowed = tonumber(job.rank) >= Config.MinGradeToRaid
                         local onDuty = job.onduty
 
                         return PoliceJobs[jobName] and onDuty and gradeAllowed

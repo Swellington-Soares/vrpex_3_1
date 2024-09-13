@@ -51,7 +51,7 @@ end)
 
 --@diagnostic disable-next-line: duplicate-set-field
 function server.setPlayerData(player)
-	lib.print.info('setPlayerData', player)
+	
 	local user_id = vRP.getUserId(player.source)
 	if user_id then
 		local groups = vRP.getUserGroups(user_id)

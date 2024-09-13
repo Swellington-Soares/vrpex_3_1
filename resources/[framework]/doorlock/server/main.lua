@@ -78,8 +78,7 @@ end
 local function isAuthorized(src, door, usedLockpick)
 	if door.allAuthorized then return true end
 	local xPlayer = vRP.getPlayerInfo(src)
-
-	lib.print.info(xPlayer ~= nil)
+	
 
 	if Config.AdminAccess and vRP.hasGroup(xPlayer.user_id, Config.AdminPermission) then --QBCore.Functions.HasPermission(Player.PlayerData.source, Config.AdminPermission) then
 		if Config.Warnings then
@@ -307,7 +306,7 @@ local function saveNewDoor(src, data, doubleDoor)
 	file:close()
 
 	Config.DoorList[identifier] = configData
-	TriggerClientEvent('qb-doorlock:client:newDoorAdded', -1, configData, identifier, src)
+	TriggerClientEvent('doorlock:client:newDoorAdded', -1, configData, identifier, src)
 end
 
 exports('getDoor', function(id)

@@ -55,15 +55,14 @@ Config.RealtorJobNames = { -- add multiple realestate jobs that are allowed to s
 
 -- If you are utilizing qb-banking and wish for the funds to be deposited directly into the Realestate bank account, set this value to true. 
 -- In case you are using an alternative Boss Menu, replace the qb-banking export with the appropriate script export or event.
-Config.QBManagement = false
 
 -- Realtor Commisions based on job grade, the rest goes to the owner, if any.
 Config.Commissions = {
-    [0] = 0.05, -- 5% commision for each sale
-    [1] = 0.10,
-    [2] = 0.15,
-    [3] = 0.20,
-    [4] = 0.25,
+    [1] = 0.05, -- 5% commision for each sale
+    [2] = 0.10,
+    [3] = 0.15,
+    [4] = 0.20,
+    [5] = 0.25,
 }
 
 -- Set this value to false if you don't want to assign a starting apartment.

@@ -1,3 +1,4 @@
+---@diagnostic disable: missing-fields, param-type-mismatch, missing-parameter
 PropertiesTable = {}
 UiLoaded = false
 
@@ -190,14 +191,20 @@ RegisterNUICallback("startZonePlacement", function(data, cb)
 		type = "UpdateDoor"
 	elseif type == "garage" then
 		type = "UpdateGarage"
+		newData = {
+			x = MathFloor(newData.x),
+			y = MathFloor(newData.y),
+			z = MathFloor(newData.z),
+			h = MathFloor(GetEntityHeading(ped)),
+		}
 
 		SendNUIMessage({
 			action = "garageMade",
 			data = {
-				x = MathFloor(newData.x),
-				y = MathFloor(newData.y),
-				z = MathFloor(newData.z),
-				h = MathFloor(GetEntityHeading(ped)),
+				x = newData.x,
+				y = newData.y,
+				z = newData.z,
+				h = newData.h,
 				length = 3.0,
 				width = 5.0,
 			}
@@ -247,8 +254,7 @@ function ZoneThread(type, promise)
 	local height = 2.5
 
 	if type == "garage" then
-		lib.notify({ description = "Best to get in a vehicle to see how the zone would look.", type = "error" })
-
+		lib.notify({ description = "Best to get in a vehicle to see how the zone would look.", type = "error", duration = 7000 })
 		length = 3.0
 		width = 5.0
 	end

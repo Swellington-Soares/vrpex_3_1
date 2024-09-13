@@ -329,30 +329,8 @@ RegisterNetEvent('garages:client:setHouseGarage', function(house, hasKey)
     end
 end)
 
--- RegisterNetEvent('garages:client:houseGarageConfig', function(houseGarages)
---     for _, garageConfig in pairs(houseGarages) do
---         local formattedHouseName = string.gsub(string.lower(garageConfig.label), ' ', '')
---         if garageConfig.takeVehicle and garageConfig.takeVehicle.x and garageConfig.takeVehicle.y and garageConfig.takeVehicle.z and garageConfig.takeVehicle.w then
---             Config.Garages[formattedHouseName] = {
---                 houseName = garageConfig.name,
---                 takeVehicle = vector3(garageConfig.takeVehicle.x, garageConfig.takeVehicle.y, garageConfig.takeVehicle.z),
---                 spawnPoint = {
---                     vector4(garageConfig.takeVehicle.x, garageConfig.takeVehicle.y, garageConfig.takeVehicle.z,
---                         garageConfig.takeVehicle.w)
---                 },
---                 label = garageConfig.label,
---                 type = 'house',
---                 category = Config.VehicleClass['all']
---             }
---         end
---     end
---     TriggerServerEvent('garages:server:syncGarage', Config.Garages)
--- end)
-
 RegisterNetEvent('garages:client:addHouseGarage', function(house, garageInfo) -- event from housing on garage creation
     local formattedHouseName = string.gsub(string.lower(house), ' ', '')
-
-    lib.print.info('garages:client:addHouseGarage', house, formattedHouseName, garageInfo)
 
     Config.Garages['house_' .. formattedHouseName] = {
         takeVehicle = vector3(garageInfo.takeVehicle.x, garageInfo.takeVehicle.y, garageInfo.takeVehicle.z),
@@ -372,7 +350,7 @@ RegisterNetEvent('garages:client:addHouseGarage', function(house, garageInfo) --
 end)
 
 RegisterNetEvent('garages:client:removeHouseGarage', function(house)
-    Config.Garages['house_' .. house] = nil
+    Config.Garages['house' .. house] = nil
 end)
 
 AddEventHandler('playerReady', function()    

@@ -12,10 +12,10 @@ exports('HasKey', HasKey)
 
 
 function GiveKeys(id, plate)
-    lib.print.info('GiveKeys', id, plate)
+    
     local xPlayer = vRP.getPlayerInfo(id)
 
-    lib.print.info(xPlayer.char_id)
+    
 
 
     if not xPlayer then return end

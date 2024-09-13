@@ -166,6 +166,7 @@ lib.callback.register("ps-housing:cb:inventoryHasItems", function(_, name)
 end)
 
 AddEventHandler("ps-housing:server:updateProperty", function(type, property_id, data)
+    
     local property = Property.Get(property_id)
     if not property then return end
 

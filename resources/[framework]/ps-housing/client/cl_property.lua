@@ -34,7 +34,7 @@ function Property:new(propertyData)
     -- Remove furnitures from property data for memory purposes
     propertyData.furnitures = {}
     self.propertyData = propertyData
-    local citizenid = PlayerData.citizenid
+    local citizenid = PlayerData.id
 
     self.owner = propertyData.owner == citizenid
     self.has_access = lib.table.contains(self.propertyData.has_access, citizenid)
@@ -264,41 +264,35 @@ function Property:RegisterGarageZone()
 
     local garageData = self.propertyData.garage_data
     local label = self.propertyData.street .. self.property_id .. " Garage"
-
-    local isQbx = GetResourceState('qbx_garages') == 'started'
     local coords = vec4(garageData.x, garageData.y, garageData.z, garageData.h)
 
-    if isQbx then
-        TriggerServerEvent('ps-housing:server:qbxRegisterHouse', self.property_id)
-    else
-        TriggerEvent("qb-garages:client:addHouseGarage", self.property_id, {
-            takeVehicle = {
-                x = garageData.x,
-                y = garageData.y,
-                z = garageData.z,
-                w = garageData.h
-            },
-            type = "house",
-            label = label,
-        })
-    end
-    if not isQbx then
-        self.garageZone = lib.zones.box({
-            coords = coords.xyz,
-            size = vector3(garageData.length + 5.0, garageData.width + 5.0, 3.5),
-            rotation = coords.w,
-            debug = Config.DebugMode,
-            onEnter = function()
-                TriggerEvent('qb-garages:client:setHouseGarage', self.property_id, true)
-            end,
-        })
-    end
+    
+    TriggerEvent("garages:client:addHouseGarage", self.property_id, {
+        takeVehicle = {
+            x = garageData.x,
+            y = garageData.y,
+            z = garageData.z,
+            w = garageData.h
+        },
+        type = "house",
+        label = label,
+    })
+
+    self.garageZone = lib.zones.box({
+        coords = coords.xyz,
+        size = vector3(garageData.length + 5.0, garageData.width + 5.0, 3.5),
+        rotation = coords.w,
+        debug = Config.DebugMode,
+        onEnter = function()
+            TriggerEvent('garages:client:setHouseGarage', self.property_id, true)
+        end,
+    })
 end
 
 function Property:UnregisterGarageZone()
     if not self.garageZone then return end
 
-    TriggerEvent("qb-garages:client:removeHouseGarage", self.property_id)
+    TriggerEvent("garages:client:removeHouseGarage", self.property_id)
 
     self.garageZone:remove()
     self.garageZone = nil
@@ -927,6 +921,7 @@ RegisterNetEvent("ps-housing:client:updateFurniture", function(property_id, furn
 end)
 
 RegisterNetEvent("ps-housing:client:updateProperty", function(type, property_id, data)
+    
     local property = Property.Get(property_id)
 
     if not property then return end

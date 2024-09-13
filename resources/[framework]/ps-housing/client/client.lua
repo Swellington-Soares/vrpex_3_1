@@ -1,4 +1,3 @@
-QBCore = exports['qb-core']:GetCoreObject()
 PlayerData = {}
 local loaded = false
 
@@ -20,7 +19,7 @@ end)
 function InitialiseProperties(properties)
     if loaded then return end
     Debug("Initialising properties")
-    PlayerData = QBCore.Functions.GetPlayerData()
+    PlayerData = vRP.getPlayer()
 
     for k, v in pairs(Config.Apartments) do
         ApartmentsTable[k] = Apartment:new(v)
@@ -30,7 +29,7 @@ function InitialiseProperties(properties)
     	properties = lib.callback.await('ps-housing:server:requestProperties')
 	end
 	
-    for k, v in pairs(properties) do
+    for _, v in pairs(properties) do
         createProperty(v.propertyData)
     end
 
@@ -39,47 +38,18 @@ function InitialiseProperties(properties)
     Debug("Initialised properties")
     loaded = true
 end
-AddEventHandler("QBCore:Client:OnPlayerLoaded", InitialiseProperties)
+AddEventHandler("playerReady", InitialiseProperties)
 RegisterNetEvent('ps-housing:client:initialiseProperties', InitialiseProperties)
 
--- AddEventHandler("onResourceStart", function(resourceName) -- Used for when the resource is restarted while in game
--- 	if (GetCurrentResourceName() == resourceName) then
---         InitialiseProperties()
--- 	end
--- end)
-
-if GetResourceState('qbx_properties') == 'started' then
-    local data = {}
-    for k, v in pairs(Config.Apartments) do
-        data[#data +1] = {
-            label = v.label,
-            description = 'Luxury Apartments!',
-            enter = vec3(v.door.x, v.door.y, v.door.z),
-            id = k
-        }
-    end
-    TriggerEvent('ps-housing:setApartments', data)
-end
-
-RegisterNetEvent('QBCore:Client:OnJobUpdate', function(job)
-    PlayerData.job = job
+AddEventHandler("onResourceStart", function(resourceName) -- Used for when the resource is restarted while in game
+	if (GetCurrentResourceName() == resourceName) then
+        Wait(1000)
+        InitialiseProperties()
+	end
 end)
 
-RegisterNetEvent('ps-housing:client:setupSpawnUI', function(cData)
-    DoScreenFadeOut(1000)
-    local result = lib.callback.await('ps-housing:cb:GetOwnedApartment', source, cData.citizenid)
-    if result then
-        TriggerEvent('qb-spawn:client:setupSpawns', cData, false, nil)
-        TriggerEvent('qb-spawn:client:openUI', true)
-    else
-        if Config.StartingApartment then
-            TriggerEvent('qb-spawn:client:setupSpawns', cData, true, Config.Apartments)
-            TriggerEvent('qb-spawn:client:openUI', true)
-        else
-            TriggerEvent('qb-spawn:client:setupSpawns', cData, false, nil)
-            TriggerEvent('qb-spawn:client:openUI', true)
-        end
-    end
+RegisterNetEvent('vRP:setPlayerData', function(data)
+    PlayerData = data
 end)
 
 AddEventHandler("onResourceStop", function(resourceName)

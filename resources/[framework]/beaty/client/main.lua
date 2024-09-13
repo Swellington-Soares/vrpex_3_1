@@ -125,8 +125,7 @@ AddEventHandler('beatyshop:client:open', function(data)
     NetworkSetEntityInvisibleToNetwork(PlayerPedId(), true)
     LocalPlayer.state.not_save_custom = true
     exports.sw_appearance:startPlayerCustomization(function(app)
-        LocalPlayer.state.not_save_custom = nil
-        lib.print.info('UPDATE')
+        LocalPlayer.state.not_save_custom = nil        
         NetworkSetEntityInvisibleToNetwork(PlayerPedId(), false)
         if data.type ~= 1 then
             SetEntityVisible(data.entity, true, true)
