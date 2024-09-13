@@ -17,6 +17,7 @@ dependency {
 
 shared_script {
   '@ox_lib/init.lua',
+  'shared/vrpex.lua',
   "shared/config.lua",
   "shared/framework.lua",
 }

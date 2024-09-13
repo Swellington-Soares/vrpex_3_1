@@ -488,8 +488,8 @@ function vRP.getPlayerInfoOffLine(char_id)
       registration = character.registration,
       user_id = character.user_id,
       license = character.license,
-      server_id = 0,
-      source = 0,
+      server_id = nil,
+      source = nil,
       id = character.id,
       job = playerJob,
       gang = playerGang

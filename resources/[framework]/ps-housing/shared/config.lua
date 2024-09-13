@@ -7,11 +7,11 @@ exports('GetApartments', function() return ApartmentsTable end)
 Config = {}
 
 -- If you're not utilizing ox_lib, it's time to question your approach.
-Config.Target = "qb" -- "ox" or "qb"
-Config.Notify = "qb" -- "ox" or "qb"
-Config.Radial = "qb" -- "ox" or "qb"
+Config.Target = "ox" -- "ox" or "qb"
+Config.Notify = "ox" -- "ox" or "qb"
+Config.Radial = "ox" -- "ox" or "qb"
 Config.Inventory = "ox" -- "ox" or "qb"
-Config.Logs = "qb" -- "qb"
+Config.Logs = "ox" -- "qb"
 
 -- Anyone provided with keys to a property has the ability to modify its furnishings.
 Config.AccessCanEditFurniture = true
@@ -67,7 +67,6 @@ Config.Commissions = {
 }
 
 -- Set this value to false if you don't want to assign a starting apartment.
-Config.StartingApartment = true
 
 --- With this enabled, the customizer will open when starting apartment is false.
 Config.ShowCustomizerWhenNoStartingApartment = true
