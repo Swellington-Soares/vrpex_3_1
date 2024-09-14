@@ -6,12 +6,10 @@ import { Quasar, Dialog } from 'quasar'
 import quasarIconSet from 'quasar/icon-set/fontawesome-v6'
 
 // Import icon libraries
-import '@quasar/extras/roboto-font/roboto-font.css'
+// import '@quasar/extras/roboto-font/roboto-font.css'
 // import '@quasar/extras/fontawesome-v6/fontawesome-v6.css'
 // Import Quasar css
 import 'quasar/src/css/index.sass'
-
-import 'animate.css'
 
 import './style.scss'
 

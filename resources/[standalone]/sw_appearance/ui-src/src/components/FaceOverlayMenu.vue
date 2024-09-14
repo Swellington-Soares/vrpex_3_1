@@ -101,7 +101,7 @@ async function updateOverlay() {
             faceOverlay[k].color1Value = current[k]?.color1 || 0
             faceOverlay[k].color2Value = current[k]?.color2 || 0            
             faceOverlay[k].current = current[k]?.d || 0
-            faceOverlay[k].opacity = current[k]?.opacity || 1.0
+            faceOverlay[k].opacity = parseFloat(current[k]?.opacity?.toPrecision(2)) || 1.0
         })
 
     })
@@ -115,7 +115,7 @@ async function setOverlay(overlay: TFaceOverlay) {
         d: overlay.current,
         color1: overlay.color1Value,
         color2: overlay.color2Value,
-        opacity: overlay.opacity
+        opacity: parseFloat(overlay.opacity.toPrecision(2))
     }).then(() => { })
 }
 

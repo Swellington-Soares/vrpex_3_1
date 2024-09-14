@@ -76,8 +76,8 @@ const getFatherSkinId = computed(() => fathers[fatherSkin.value])
 
 function updateHeadBlend() {
     nuiRequest('getHeadblend', {}).then(response => {
-        shapeMix.value = response.shapeMix
-        skinMix.value = response.skinMix
+        shapeMix.value = parseFloat(response.shapeMix.toPrecision(2))
+        skinMix.value = parseFloat(response.skinMix.toPrecision(2))
         motherIndex.value = mothers.indexOf(response.shapeFirst)
         fatherIndex.value = fathers.indexOf(response.shapeSecond)
         motherSkin.value = mothers.indexOf(response.skinFirst)
@@ -92,8 +92,8 @@ function setHeadBlend() {
         shapeSecond: getFatherId.value,
         skinFirst: getMotherSkinId.value,
         skinSecond: getFatherSkinId.value,
-        skinMix: skinMix.value,
-        shapeMix: shapeMix.value,
+        skinMix: parseFloat(skinMix.value.toPrecision(2)),
+        shapeMix: parseFloat(shapeMix.value.toPrecision(2)),
         shapeThird: 0,
         skinThird: 0,
         thirdMix: 0

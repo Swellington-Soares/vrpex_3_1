@@ -36,7 +36,7 @@
 </template>
 
 <script setup lang="ts">
-import { defineAsyncComponent, reactive, ref } from 'vue';
+import { defineAsyncComponent, onMounted, reactive, ref } from 'vue';
 import { useNuiEvent } from './utils/use-nui'
 import { useQuasar } from 'quasar';
 
@@ -131,6 +131,18 @@ const finish = () => {
     await quit(true)
   })
 }
+
+// onMounted(() => {
+//   if (import.meta.env.DEV) {
+//    configComponents.allowExit = false
+//    configComponents.headBlend = true
+//    configComponents.faceFeatures = true
+//    configComponents.headOverlays = true
+//    configComponents.components = true
+//    configComponents.props = true
+//    configComponents.gender = 'Masculino'
+//   }
+// })
 
 </script>
 

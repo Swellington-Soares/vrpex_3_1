@@ -2,6 +2,12 @@
   user-select: none;
 }
 
+@import '../node_modules/animate.css/source/_base.css';
+@import '../node_modules/animate.css/source/_base.css';
+
+@import '../node_modules/animate.css/source/sliding_entrances/slideInLeft.css';
+@import '../node_modules/animate.css/source/sliding_exits/slideOutLeft.css';
+
 /* Firefox (uncomment to work in Firefox, although other properties will not work!)  */
 /** {
   scrollbar-width: thin;
