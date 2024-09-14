@@ -3,10 +3,7 @@ local cfg = {
     loggin_system = '', --discord, print or database
     fristspawn = vec3(0, 0, 0),
     save_interval = GetConvarInt('vrp:save_interval', 60),
-    enable_allowlist = GetConvarInt('vrp:enable_allowlist', 1) == 1, -- enable/disable whitelist
-    lang = GetConvar('locale', 'en-US'),
-    debug = GetConvarInt('vrp:debug', 0) == 1,
-    debug_async_time = 2,
+    enable_allowlist = GetConvarInt('vrp:enable_allowlist', 1) == 1, -- enable/disable whitelist     
     inventory_weight_per_strength = GetConvarInt('vrp:inventory_weight', 10),
     thirst_per_minute = tonumber(GetConvar('vrp:thirst_per_minute', '2.5')) or 2.5,
     hunger_per_minute = tonumber(GetConvar('vrp:hunger_per_minute', '1.25')) or 1.25,

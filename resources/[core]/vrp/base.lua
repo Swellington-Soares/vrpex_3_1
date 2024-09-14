@@ -1,7 +1,6 @@
 local blockCfg = require('@vrp.cfg.block') or {}
 local Proxy = module("lib/Proxy")
 local Tunnel = module("lib/Tunnel")
-Debug = module("lib/Debug")
 
 lib.locale()
 
@@ -365,8 +364,7 @@ AddEventHandler("playerConnecting", function(name, setMessage, deferrals)
 end)
 
 AddEventHandler("playerDropped", function(reason)
-  local source = source
-  Debug.log("playerDropped " .. source)
+  local source = source  
   vRP.dropPlayer(source)
 end)
 

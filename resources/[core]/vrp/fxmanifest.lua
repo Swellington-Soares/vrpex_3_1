@@ -73,8 +73,7 @@ files {
   'lib/weapons.lua',
   'lib/vehicles.lua',
   'lib/Tunnel.lua',
-  'lib/Proxy.lua',
-  'lib/Debug.lua',
+  'lib/Proxy.lua',  
   'lib/Tools.lua',
   'loading/**'
 }

@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `banned` (
   CONSTRAINT `FK_banned_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Copiando dados para a tabela vrpex.banned: ~0 rows (aproximadamente)
+-- Exportação de dados foi desmarcado.
 
 -- Copiando estrutura para tabela vrpex.logs
 CREATE TABLE IF NOT EXISTS `logs` (
@@ -39,7 +39,189 @@ CREATE TABLE IF NOT EXISTS `logs` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Copiando dados para a tabela vrpex.logs: ~0 rows (aproximadamente)
+-- Exportação de dados foi desmarcado.
+
+-- Copiando estrutura para tabela vrpex.mdt_bolos
+CREATE TABLE IF NOT EXISTS `mdt_bolos` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `author` varchar(50) DEFAULT NULL,
+  `title` varchar(50) DEFAULT NULL,
+  `plate` varchar(50) DEFAULT NULL,
+  `owner` varchar(50) DEFAULT NULL,
+  `individual` varchar(50) DEFAULT NULL,
+  `detail` text DEFAULT NULL,
+  `tags` text DEFAULT NULL,
+  `gallery` text DEFAULT NULL,
+  `officersinvolved` text DEFAULT NULL,
+  `time` varchar(20) DEFAULT NULL,
+  `jobtype` varchar(25) NOT NULL DEFAULT 'police',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Exportação de dados foi desmarcado.
+
+-- Copiando estrutura para tabela vrpex.mdt_bulletin
+CREATE TABLE IF NOT EXISTS `mdt_bulletin` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `title` text NOT NULL,
+  `desc` text NOT NULL,
+  `author` varchar(50) NOT NULL,
+  `time` varchar(20) NOT NULL,
+  `jobtype` varchar(25) DEFAULT 'police',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Exportação de dados foi desmarcado.
+
+-- Copiando estrutura para tabela vrpex.mdt_clocking
+CREATE TABLE IF NOT EXISTS `mdt_clocking` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `user_id` varchar(50) NOT NULL DEFAULT '',
+  `firstname` varchar(255) NOT NULL DEFAULT '',
+  `lastname` varchar(255) NOT NULL DEFAULT '',
+  `clock_in_time` varchar(255) NOT NULL DEFAULT '',
+  `clock_out_time` varchar(50) DEFAULT NULL,
+  `total_time` int(10) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`user_id`) USING BTREE,
+  KEY `id` (`id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Exportação de dados foi desmarcado.
+
+-- Copiando estrutura para tabela vrpex.mdt_convictions
+CREATE TABLE IF NOT EXISTS `mdt_convictions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cid` int(11) DEFAULT NULL,
+  `linkedincident` int(11) NOT NULL DEFAULT 0,
+  `warrant` varchar(50) DEFAULT NULL,
+  `guilty` varchar(50) DEFAULT NULL,
+  `processed` varchar(50) DEFAULT NULL,
+  `associated` varchar(50) DEFAULT '0',
+  `charges` text DEFAULT NULL,
+  `fine` int(11) DEFAULT 0,
+  `sentence` int(11) DEFAULT 0,
+  `recfine` int(11) DEFAULT 0,
+  `recsentence` int(11) DEFAULT 0,
+  `time` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Exportação de dados foi desmarcado.
+
+-- Copiando estrutura para tabela vrpex.mdt_data
+CREATE TABLE IF NOT EXISTS `mdt_data` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cid` int(11) NOT NULL,
+  `information` mediumtext DEFAULT NULL,
+  `tags` text NOT NULL,
+  `gallery` text NOT NULL,
+  `jobtype` varchar(25) DEFAULT 'police',
+  `pfp` text DEFAULT NULL,
+  `fingerprint` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`cid`),
+  KEY `id` (`id`),
+  CONSTRAINT `FK_mdt_data_players` FOREIGN KEY (`cid`) REFERENCES `players` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Exportação de dados foi desmarcado.
+
+-- Copiando estrutura para tabela vrpex.mdt_impound
+CREATE TABLE IF NOT EXISTS `mdt_impound` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `vehicleid` int(11) NOT NULL,
+  `linkedreport` int(11) NOT NULL,
+  `fee` int(11) DEFAULT NULL,
+  `time` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Exportação de dados foi desmarcado.
+
+-- Copiando estrutura para tabela vrpex.mdt_incidents
+CREATE TABLE IF NOT EXISTS `mdt_incidents` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `author` varchar(50) NOT NULL DEFAULT '',
+  `title` varchar(50) NOT NULL DEFAULT '0',
+  `details` longtext NOT NULL,
+  `tags` text NOT NULL,
+  `officersinvolved` text NOT NULL,
+  `civsinvolved` text NOT NULL,
+  `evidence` text NOT NULL,
+  `time` varchar(20) DEFAULT NULL,
+  `jobtype` varchar(25) NOT NULL DEFAULT 'police',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Exportação de dados foi desmarcado.
+
+-- Copiando estrutura para tabela vrpex.mdt_logs
+CREATE TABLE IF NOT EXISTS `mdt_logs` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `text` text NOT NULL,
+  `time` varchar(20) DEFAULT NULL,
+  `jobtype` varchar(25) DEFAULT 'police',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Exportação de dados foi desmarcado.
+
+-- Copiando estrutura para tabela vrpex.mdt_reports
+CREATE TABLE IF NOT EXISTS `mdt_reports` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `author` varchar(50) DEFAULT NULL,
+  `title` varchar(255) DEFAULT NULL,
+  `type` varchar(50) DEFAULT NULL,
+  `details` longtext DEFAULT NULL,
+  `tags` text DEFAULT NULL,
+  `officersinvolved` text DEFAULT NULL,
+  `civsinvolved` text DEFAULT NULL,
+  `gallery` text DEFAULT NULL,
+  `time` varchar(20) DEFAULT NULL,
+  `jobtype` varchar(25) DEFAULT 'police',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Exportação de dados foi desmarcado.
+
+-- Copiando estrutura para tabela vrpex.mdt_vehicleinfo
+CREATE TABLE IF NOT EXISTS `mdt_vehicleinfo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `plate` varchar(50) DEFAULT NULL,
+  `information` text NOT NULL DEFAULT '',
+  `stolen` tinyint(1) NOT NULL DEFAULT 0,
+  `code5` tinyint(1) NOT NULL DEFAULT 0,
+  `image` text NOT NULL DEFAULT '',
+  `points` int(11) DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Exportação de dados foi desmarcado.
+
+-- Copiando estrutura para tabela vrpex.mdt_weaponinfo
+CREATE TABLE IF NOT EXISTS `mdt_weaponinfo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `serial` varchar(50) DEFAULT NULL,
+  `owner` int(11) DEFAULT NULL,
+  `information` text NOT NULL DEFAULT '',
+  `weapClass` varchar(50) DEFAULT NULL,
+  `weapModel` varchar(50) DEFAULT NULL,
+  `image` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `serial` (`serial`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Exportação de dados foi desmarcado.
+
+-- Copiando estrutura para tabela vrpex.ox_inventory
+CREATE TABLE IF NOT EXISTS `ox_inventory` (
+  `owner` varchar(60) DEFAULT NULL,
+  `name` varchar(100) NOT NULL,
+  `data` longtext DEFAULT NULL,
+  `lastupdated` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  UNIQUE KEY `owner` (`owner`,`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Exportação de dados foi desmarcado.
 
 -- Copiando estrutura para tabela vrpex.players
 CREATE TABLE IF NOT EXISTS `players` (
@@ -48,6 +230,7 @@ CREATE TABLE IF NOT EXISTS `players` (
   `firstname` varchar(50) NOT NULL,
   `lastname` varchar(50) NOT NULL,
   `registration` varchar(8) NOT NULL,
+  `gender` enum('M','F','TF','TM') NOT NULL DEFAULT 'M',
   `phone` varchar(10) NOT NULL,
   `birth_date` date NOT NULL,
   `money` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT json_object() CHECK (json_valid(`money`)),
@@ -62,7 +245,7 @@ CREATE TABLE IF NOT EXISTS `players` (
   CONSTRAINT `FK__players_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Copiando dados para a tabela vrpex.players: ~2 rows (aproximadamente)
+-- Exportação de dados foi desmarcado.
 
 -- Copiando estrutura para tabela vrpex.player_data
 CREATE TABLE IF NOT EXISTS `player_data` (
@@ -73,24 +256,54 @@ CREATE TABLE IF NOT EXISTS `player_data` (
   CONSTRAINT `FK__player_data_players` FOREIGN KEY (`player_id`) REFERENCES `players` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Copiando dados para a tabela vrpex.player_data: ~2 rows (aproximadamente)
+-- Exportação de dados foi desmarcado.
 
 -- Copiando estrutura para tabela vrpex.player_vehicles
 CREATE TABLE IF NOT EXISTS `player_vehicles` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `vehicle` varchar(30) NOT NULL,
   `player_id` int(11) NOT NULL,
   `seized` tinyint(1) DEFAULT 0,
   `properties` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT json_object() CHECK (json_valid(`properties`)),
   `plate` char(8) NOT NULL DEFAULT '',
+  `garage` varchar(50) DEFAULT NULL,
+  `gear_type` enum('GEAR_AUTO','GEAR_MANUAL') NOT NULL DEFAULT 'GEAR_AUTO',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`vehicle`),
+  `glovebox` longtext DEFAULT NULL,
+  `trunk` longtext DEFAULT NULL,
+  PRIMARY KEY (`id`),
   UNIQUE KEY `vehicle_player_id` (`vehicle`,`player_id`),
   UNIQUE KEY `plate` (`plate`),
   KEY `FK__players_vehicles` (`player_id`),
+  KEY `garage` (`garage`),
   CONSTRAINT `FK__players_vehicles` FOREIGN KEY (`player_id`) REFERENCES `players` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Copiando dados para a tabela vrpex.player_vehicles: ~0 rows (aproximadamente)
+-- Exportação de dados foi desmarcado.
+
+-- Copiando estrutura para tabela vrpex.properties
+CREATE TABLE IF NOT EXISTS `properties` (
+  `property_id` int(11) NOT NULL AUTO_INCREMENT,
+  `owner_citizenid` int(11) DEFAULT NULL,
+  `street` varchar(100) DEFAULT NULL,
+  `region` varchar(100) DEFAULT NULL,
+  `description` longtext DEFAULT NULL,
+  `has_access` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT json_array() CHECK (json_valid(`has_access`)),
+  `extra_imgs` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT json_array() CHECK (json_valid(`extra_imgs`)),
+  `furnitures` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT json_array() CHECK (json_valid(`furnitures`)),
+  `for_sale` tinyint(1) NOT NULL DEFAULT 1,
+  `price` int(11) NOT NULL DEFAULT 0,
+  `shell` varchar(50) NOT NULL,
+  `apartment` varchar(50) DEFAULT NULL,
+  `door_data` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`door_data`)),
+  `garage_data` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`garage_data`)),
+  `zone_data` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`zone_data`)),
+  PRIMARY KEY (`property_id`),
+  UNIQUE KEY `UQ_owner_apartment` (`owner_citizenid`,`apartment`),
+  CONSTRAINT `FK_properties_players` FOREIGN KEY (`owner_citizenid`) REFERENCES `players` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Exportação de dados foi desmarcado.
 
 -- Copiando estrutura para tabela vrpex.server_data
 CREATE TABLE IF NOT EXISTS `server_data` (
@@ -99,7 +312,25 @@ CREATE TABLE IF NOT EXISTS `server_data` (
   UNIQUE KEY `dkey` (`dkey`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Copiando dados para a tabela vrpex.server_data: ~0 rows (aproximadamente)
+-- Exportação de dados foi desmarcado.
+
+-- Copiando estrutura para tabela vrpex.sw_vehicleshop
+CREATE TABLE IF NOT EXISTS `sw_vehicleshop` (
+  `vehicle` varchar(50) NOT NULL,
+  `price` bigint(20) DEFAULT NULL,
+  `shop` varchar(50) NOT NULL DEFAULT '',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `max_speed` decimal(5,2) DEFAULT 0.00,
+  `traction` decimal(5,2) DEFAULT 0.00,
+  `acceleration` decimal(5,2) DEFAULT 0.00,
+  `agility` decimal(5,2) DEFAULT 0.00,
+  `seats` int(11) DEFAULT 1,
+  `trunk` int(11) DEFAULT 0,
+  PRIMARY KEY (`vehicle`),
+  KEY `shop` (`shop`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Exportação de dados foi desmarcado.
 
 -- Copiando estrutura para tabela vrpex.users
 CREATE TABLE IF NOT EXISTS `users` (
@@ -115,7 +346,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   UNIQUE KEY `fivem_id` (`fivem_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Copiando dados para a tabela vrpex.users: ~0 rows (aproximadamente)
+-- Exportação de dados foi desmarcado.
 
 -- Copiando estrutura para tabela vrpex.user_data
 CREATE TABLE IF NOT EXISTS `user_data` (
@@ -126,7 +357,25 @@ CREATE TABLE IF NOT EXISTS `user_data` (
   CONSTRAINT `FK__user_data_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Copiando dados para a tabela vrpex.user_data: ~1 rows (aproximadamente)
+-- Exportação de dados foi desmarcado.
+
+-- Copiando estrutura para view vrpex.vplayers
+-- Criando tabela temporária para evitar erros de dependência de VIEW
+CREATE TABLE `vplayers` (
+	`id` INT(11) NOT NULL,
+	`user_id` INT(11) NOT NULL,
+	`license` VARCHAR(1) NULL COLLATE 'utf8mb4_unicode_ci',
+	`firstname` VARCHAR(1) NOT NULL COLLATE 'utf8mb4_unicode_ci',
+	`lastname` VARCHAR(1) NOT NULL COLLATE 'utf8mb4_unicode_ci',
+	`registration` VARCHAR(1) NOT NULL COLLATE 'utf8mb4_unicode_ci',
+	`gender` ENUM('M','F','TF','TM') NOT NULL COLLATE 'utf8mb4_unicode_ci',
+	`phone` VARCHAR(1) NOT NULL COLLATE 'utf8mb4_unicode_ci',
+	`birth_date` DATE NOT NULL,
+	`money` LONGTEXT NOT NULL COLLATE 'utf8mb4_bin',
+	`datatable` LONGTEXT NOT NULL COLLATE 'utf8mb4_bin',
+	`created_at` TIMESTAMP NOT NULL,
+	`deleted_at` TIMESTAMP NULL
+) ENGINE=MyISAM;
 
 -- Copiando estrutura para procedure vrpex.add_player_vehicle
 DELIMITER //
@@ -230,6 +479,24 @@ DELIMITER ;
 DELIMITER //
 CREATE PROCEDURE `wipe`()
 BEGIN
+	#ps-mdt
+	DELETE FROM mdt_convictions; 
+	DELETE FROM mdt_data; 
+	DELETE FROM mdt_logs; 
+	DELETE FROM mdt_bolos; 
+	DELETE FROM mdt_incidents; 
+	DELETE FROM mdt_vehicleinfo; 
+	DELETE FROM mdt_clocking; 
+	DELETE FROM mdt_reports; 
+	DELETE FROM mdt_bulletin; 
+	DELETE FROM mdt_weaponinfo; 
+	DELETE FROM mdt_impound; 
+	#ps-housing
+	DELETE FROM properties;
+	
+	#ox_inventort
+	DELETE FROM ox_inventory;
+	
 	#VRPEX CORE
 	DELETE FROM `logs`;
 	DELETE FROM users;
@@ -238,6 +505,10 @@ BEGIN
 	ALTER TABLE players AUTO_INCREMENT=1;	
 END//
 DELIMITER ;
+
+-- Removendo tabela temporária e criando a estrutura VIEW final
+DROP TABLE IF EXISTS `vplayers`;
+CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `vplayers` AS select `players`.`id` AS `id`,`players`.`user_id` AS `user_id`,(select `users`.`license` from `users` where `users`.`id` = `players`.`user_id`) AS `license`,`players`.`firstname` AS `firstname`,`players`.`lastname` AS `lastname`,`players`.`registration` AS `registration`,`players`.`gender` AS `gender`,`players`.`phone` AS `phone`,`players`.`birth_date` AS `birth_date`,`players`.`money` AS `money`,`players`.`datatable` AS `datatable`,`players`.`created_at` AS `created_at`,`players`.`deleted_at` AS `deleted_at` from `players`;
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
