@@ -124,14 +124,14 @@ end)
 
 if Config.UseCommand then
 	RegisterCommand("housing", function()	
-		if not LocalPlayer.state.handcuffed and not IsEntityDead(cache.ped) and not IsPauseMenuActive() and not LocalPlayer.state.disableControls then
+		if not LocalPlayer.state.handcuffed and not IsEntityDead(cache.ped) and not IsPauseMenuActive() and not LocalPlayer.state.enable_command then
 			toggleUI(not UIOpen)
 		end
 	end, false)
 end
 
 RegisterNetEvent('bl-realtor:client:toggleUI', function()
-	if not LocalPlayer.state.handcuffed and not IsEntityDead(cache.ped) and not IsPauseMenuActive() and not LocalPlayer.state.disableControls then
+	if not LocalPlayer.state.handcuffed and not IsEntityDead(cache.ped) and not IsPauseMenuActive() and not LocalPlayer.state.enable_command then
 		toggleUI(not UIOpen)
 	end
 end)

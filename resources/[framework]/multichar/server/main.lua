@@ -115,11 +115,7 @@ end)
 
 
 lib.callback.register("multichar:server:login", function(source, char_id)
-    if vRP.login(source, vRP.getUserId(source), char_id, false) then
-        -- vRP.setPlayerBucket(source, 0, false)
-        return true
-    end
-    return false
+    return vRP.login(source, vRP.getUserId(source), char_id, false)        
 end)
 
 

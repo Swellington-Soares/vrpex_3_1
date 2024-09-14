@@ -19,6 +19,7 @@ local lastSide = nil
 local isNuiOpen = false
 local old_player_app
 local callback
+local isRotating = false
 
 
 local CAM_OFFSET = {
@@ -624,6 +625,21 @@ local function startPlayerCustomization(fn, config, disableControls, oldcam)
     SetNuiFocus(true, true)
 end
 
+local function rotatePed()
+    if isRotating then return end
+    isRotating = true
+    CreateThread(function()
+        local ped = PlayerPedId()
+        local pos = GetEntityCoords(ped)
+        ClearPedTasksImmediately(ped)
+        FreezeEntityPosition(ped, false)
+        TaskGoStraightToCoord(ped, pos.x, pos.y, pos.z, 8.0, 1500, GetEntityHeading(ped) + 180.0, 0.1)
+        Wait(1500)
+        isReversedCam = not isReversedCam
+        isRotating = false
+    end)    
+end
+
 RegisterNUICallback('getDrawables', function(data, cb)
     local ped = PlayerPedId()
     local m = getMaxDrawable(ped)
@@ -776,8 +792,9 @@ RegisterNUICallback('change-cam', function(data, cb)
         lastSide = lastSide ~= data.cam and data.cam or nil
         changeCam(lastCamPage)
     elseif data.cam == 'rotatePed' then
-        isReversedCam = not isReversedCam
-        changeCam(lastCamPage)
+        -- isReversedCam = not isReversedCam
+        -- changeCam(lastCamPage)
+        rotatePed()
     end
 end)
 
