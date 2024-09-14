@@ -5,7 +5,7 @@ BeatyConfig = {}
 BeatyConfig.stores = {
     --#region CLOTHE STORES
     {
-        location = vec3(1686.07, 4820.67, 41.98),
+        location = vec3(1693.5, 4826.5, 42.25),
         label = locale('clothe_shop_title'),
         type = 1,
         blip = {
@@ -16,7 +16,7 @@ BeatyConfig.stores = {
         zone = {
             coord = vec3(1693.5, 4827.55, 42.0),
             heading = 185.0,
-            size = vec3(2.5, 2.5, 3.0),
+            size = vec3(1.75, 2.25, 2.25),
         }
     },
     {

@@ -59,7 +59,7 @@ local function createStoreTargetZone(store)
         rotation = store.zone.heading,
         drawSprite = false,
         size = store.zone.size,
-        debug = true,
+        debug = false,
         options = {
             {
                 label = locale('open_shop'),
@@ -138,8 +138,7 @@ CreateThread(function()
         addStoreBlip(store)
         if store.type == 1 then
             createStoreTargetZone(store)
-        else
-            print(store.label)
+        else            
             createStoreTargetEntity(store)
         end
     end
