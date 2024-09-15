@@ -95,17 +95,17 @@ function vRP.varyExp(user_id, group, aptitude, amount)
 
       --- exp
       if amount < 0 then        
-        vRP.notify(player, locale('aptitude.lose_exp', group_title, aptitude_title, -1*amount), 3000, 'inform')
+        vRP.notify(player, locale('aptitude.lose_exp', group_title, aptitude_title, -1*amount), nil, 7000, 'inform')
       elseif amount > 0 then        
-        vRP.notify(player, locale('aptitude.earn_exp', group_title, aptitude_title, amount), 3000, 'inform')
+        vRP.notify(player, locale('aptitude.earn_exp', group_title, aptitude_title, amount), nil, 7000, 'inform')
       end
       --- level up/down
       local new_level = math.floor(vRP.expToLevel(exp))
       local diff = new_level-level
       if diff < 0 then
-        vRP.notify(player, locale('aptitude.level_down', group_title, aptitude_title, new_level), 3000, 'inform')        
+        vRP.notify(player, locale('aptitude.level_down', group_title, aptitude_title, new_level), nil, 7000, 'inform')        
       elseif diff > 0 then        
-        vRP.notify(player, locale('aptitude.level_up', group_title, aptitude_title, new_level), 3000, 'inform')
+        vRP.notify(player, locale('aptitude.level_up', group_title, aptitude_title, new_level), nil, 7000, 'inform')
       end
       TriggerClientEvent('vRP:SetPlayerData', player, vRP.getPlayerInfo(user_id))
     end
@@ -147,12 +147,12 @@ end
 
 -- return float
 function vRP.expToLevel(exp)
-  return (math.sqrt(1+8*exp/exp_step)-1)/2
+  return math.floor((math.sqrt(1+8*exp/exp_step)-1)/2)
 end
 
 -- return integer
 function vRP.levelToExp(lvl)
-  return math.floor((exp_step*lvl*(lvl+1))/2)
+  return (exp_step*lvl*(lvl+1))/2
 end
 
 -- CONFIG

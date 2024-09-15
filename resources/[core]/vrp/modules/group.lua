@@ -79,7 +79,9 @@ function vRP.addUserGroup(user_id, group, grade)
 
       -- add group
       user_groups[group] = { rank = grade or 0 }
-      if ngroup._config.gtype == 'job' then
+      local gtype = ngroup?._config?.gtype
+
+      if gtype == 'job' then
         user_groups[group]['duty'] = true
       end
 
@@ -89,7 +91,7 @@ function vRP.addUserGroup(user_id, group, grade)
       end
 
       -- trigger join event
-      local gtype = ngroup?._config?.gtype
+      
 
       local user_group = user_groups[group]
       local rank = user_group?.rank or 0
@@ -121,7 +123,7 @@ function vRP.addUserGroup(user_id, group, grade)
           duty = user_groups[group]['duty'],
           action = 'enter'
         })
-        TriggerClientEvent('vRP:SetPlayerData', player, vRP.getPlayerInfo(user_id))
+        TriggerClientEvent('vRP:SetPlayerData', player, vRP.getPlayerInfo(player))
       end
     end
   end
@@ -170,7 +172,7 @@ function vRP.removeUserGroup(user_id, group)
       duty = false,
       action = 'leave'
     })
-    TriggerClientEvent('vRP:SetPlayerData', player, vRP.getPlayerInfo(user_id))
+    TriggerClientEvent('vRP:SetPlayerData', source, vRP.getPlayerInfo(source))
   end
 end
 
@@ -433,7 +435,7 @@ function vRP.userGroupPromote(user_id, group)
     local src = vRP.getUserSource(user_id)
     if src then
       TriggerClientEvent("vRP:updateGroupRank", src, { group = group, rank = user_groups[group].rank })
-      TriggerClientEvent('vRP:SetPlayerData', src, vRP.getPlayerInfo(user_id))
+      TriggerClientEvent('vRP:SetPlayerData', src, vRP.getPlayerInfo(src))
     end
     return true
   end
@@ -449,7 +451,7 @@ function vRP.userGroupDemote(user_id, group)
     local src = vRP.getUserSource(user_id)
     if src then
       TriggerClientEvent("vRP:updateGroupRank", src, { group = group, rank = user_groups[group].rank })
-      TriggerClientEvent('vRP:SetPlayerData', src, vRP.getPlayerInfo(user_id))
+      TriggerClientEvent('vRP:SetPlayerData', src, vRP.getPlayerInfo(src))
     end
     return true
   end

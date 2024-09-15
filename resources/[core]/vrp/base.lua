@@ -1,10 +1,11 @@
+---@diagnostic disable: duplicate-set-field
 local blockCfg = require('@vrp.cfg.block') or {}
 local Proxy = module("lib/Proxy")
 local Tunnel = module("lib/Tunnel")
 
 lib.locale()
 
-local BLOKED_META <const> = { 'health', 'position', 'hunger', 'thirst', 'weapons', 'groups', 'health' }
+local BLOKED_META <const> = { 'health', 'position', 'hunger', 'thirst', 'weapons', 'groups', 'health', 'gaptitudes' }
 
 vRPconfig = module("cfg/base")
 
@@ -272,7 +273,7 @@ function vRP.getPlayerIdentifier(source, xtype)
   return GetPlayerIdentifierByType(source, xtype or "license")
 end
 
-function vRP.notify(source, title, message, time, _type)
+function vRP.notify(source, title, message, time, _type)  
   TriggerClientEvent('ox_lib:notify', source, {
     title = title,
     description = message,

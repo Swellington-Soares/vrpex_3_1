@@ -11,5 +11,11 @@
     "user_as_banned": "Você foi banido por [%s], seu ID: %d.",
     "user_already_connected": "Sua conta foi acessada por outro lugar, desconectando todas.",
     "wait_help": "Espere por ajuda...",
-    "press_E_to_respawn": "Pressione [E] para tentar novamente, ou espere."
+    "press_E_to_respawn": "Pressione [E] para tentar novamente, ou espere.",
+    "aptitude":{
+        "lose_exp": "Aptitude **%s/%s** %.3f exp.",
+        "earn_exp": "Aptitude **%s/%s** %.3f exp.",
+        "level_down": "Aptitude **%s/%s** lose level (%d).",
+        "level_up": "Aptitude **%s/%s** level up (%d)."
+    }
 }

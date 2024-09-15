@@ -1,5 +1,5 @@
 local PlayerData = vRP.getPlayer()
-local isLoggedIn = LocalPlayer.state['isLoggedIn']
+local isLoggedIn = LocalPlayer.state.isLoggedIn
 local Config = Config
 local canContinue = true
 local playerPed = PlayerPedId()
@@ -369,10 +369,12 @@ end
 
 function SetupDoors()
 	local p = promise.new()
-	lib.callback('doorlock:server:setupDoors', false, function(result)
+	lib.callback('doorlock:server:setupDoors', false, function(result)				
 		p:resolve(result)
 	end)
 	Config.DoorList = Citizen.Await(p)
+	-- PlayerData = vRP.getPlayer()
+	-- isLoggedIn = LocalPlayer.state.isLoggedIn
 	print('SetupDoors')
 end
 
@@ -395,7 +397,7 @@ RegisterNetEvent('vRP:SetPlayerData', function(val)
 	PlayerData = val
 end)
 
-RegisterNetEvent('doorlock:client:setState', function(serverId, doorID, state, src, enableSounds, enableAnimation)
+RegisterNetEvent('doorlock:client:setState', function(serverId, doorID, state, src, enableSounds, enableAnimation)	
 	if not Config.DoorList[doorID] then return end
 	if enableAnimation == nil then enableAnimation = true end
 	if enableSounds == nil then enableSounds = true end
@@ -825,11 +827,11 @@ RegisterCommand('toggledoorlock', function()
 
 	local distanceCheck = closestDoor.distance > (closestDoor.data.distance or closestDoor.data.maxDistance)
 	local unlockableCheck = (closestDoor.data.cantUnlock and closestDoor.data.locked)
-	local busyCheck = false --PlayerData.metadata['isdead'] or PlayerData.metadata['inlaststand'] or		PlayerData.metadata['ishandcuffed']
+	local busyCheck = IsEntityDead(PlayerPedId()) or LocalPlayer.state.handcuffed
 	if distanceCheck or unlockableCheck or busyCheck then return end
 
 	playerPed = PlayerPedId()
-	local veh = GetVehiclePedIsIn(playerPed)
+	local veh = GetVehiclePedIsIn(playerPed, false)
 	if veh then
 		CreateThread(function()
 			local siren = IsVehicleSirenOn(veh)
@@ -843,14 +845,14 @@ RegisterCommand('toggledoorlock', function()
 		end)
 	end
 	local locked = not closestDoor.data.locked
-	local src = false
+	local src
 	if closestDoor.data.audioRemote then
 		src = NetworkGetNetworkIdFromEntity(playerPed)
 	end
-	print('okok')
 
 	TriggerServerEvent('doorlock:server:updateState', closestDoor.id, locked, src, false, false, true, true) -- Broadcast new state of the door to everyone
 end, false)
+
 TriggerEvent("chat:removeSuggestion", "/toggledoorlock")
 RegisterKeyMapping('toggledoorlock', locale("general.keymapping_description"), 'keyboard', 'E')
 
@@ -881,7 +883,7 @@ RegisterCommand('remotetriggerdoor', function()
 	if unlockableCheck or busyCheck then return end
 
 	playerPed = PlayerPedId()
-	local veh = GetVehiclePedIsIn(playerPed)
+	local veh = GetVehiclePedIsIn(playerPed, false)
 	if veh then
 		CreateThread(function()
 			for _ = 0, 100 do
@@ -943,7 +945,7 @@ CreateThread(function()
 						playerCoords = GetEntityCoords(playerPed)
 						closestDoor.distance = #(closestDoor.data.textCoords - playerCoords)
 						if closestDoor.distance < (closestDoor.data.distance or closestDoor.data.maxDistance) then
-							local authorized = isAuthorized(closestDoor.data)
+							local authorized = isAuthorized(closestDoor.data)							
 							local displayText = ""
 
 							if not closestDoor.data.hideLabel and Config.UseDoorLabelText and closestDoor.data.doorLabel then

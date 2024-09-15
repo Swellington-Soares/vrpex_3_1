@@ -1,5 +1,5 @@
 
--- módulo de skill, muito último para scripts de buff e aumento de prêmios baseado no desempenho.
+-- módulo de skill, muito ultil para scripts de buff e aumento de prêmios baseado no desempenho.
 
 local cfg = {}
 -- exp notes:
@@ -15,7 +15,7 @@ local cfg = {}
 cfg.gaptitudes = {
   ["physical"] = {
     _title = "Physical",
-    ["strength"] = {"Strength", 30, 105} -- required, level 3 to 6 (by default, can carry 10kg per level)
+    ["strength"] = {"Strength", 30, 1050} -- required, level 3 to 6 (by default, can carry 10kg per level)
   },
   ["science"] = {
     _title = "Science",
