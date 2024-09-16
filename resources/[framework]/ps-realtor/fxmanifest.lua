@@ -29,10 +29,12 @@ client_script {
 ox_lib {
   'locale',
   'cache',
-  'zones'
+  'zones',
+  'interface'
 }
 
 
 files {
   'html/**',
+  'locales/*.json'
 }

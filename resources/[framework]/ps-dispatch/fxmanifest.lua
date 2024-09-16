@@ -13,7 +13,7 @@ ui_page 'html/index.html'
 shared_script {
   '@ox_lib/init.lua',
   'shared/vrpex.lua',
-  "shared/**",
+  "shared/config.lua",
  
 }
 
@@ -32,6 +32,9 @@ files {
 }
 
 ox_lib {
-  'locale'
+  'locale',
+  'require',
+  'interface',
+  'cache'
 }
 

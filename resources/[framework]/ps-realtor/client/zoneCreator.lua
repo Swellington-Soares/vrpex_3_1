@@ -22,7 +22,7 @@ local zoneCreator = {
     lowestPoint = nil
 }
 
-local polyText = '[C] - +/- point  \n [H] finish  \n [Scroll] change height \n [K] Edit Point'
+local polyText = locale('poly_text')
 
 local function render()
     local points = zoneCreator.polygon
@@ -113,9 +113,9 @@ function zoneCreator.editPoint()
         zoneCreator.editIndex = zoneCreator.deleteIndex
 
         lib.hideTextUI()
-        lib.showTextUI('[K] - Set Point \n [N] - Cancel Set')
+        lib.showTextUI(locale('poly_help'))
     else
-        lib.notify({ description = 'Need to be close to a point', type = 'error' })
+        lib.notify({ description = locale('error.poly_error'), type = 'error' })
     end
 end
 
@@ -278,7 +278,7 @@ local function mloDoor()
     local doubleDoors = false
     local data
 
-    lib.showTextUI('[E] - to add door | [h] cancel')
+    lib.showTextUI(locale('door_help'))
 
     while true do
         local hit, entity, coords = lib.raycast.cam(1|16)
@@ -299,7 +299,7 @@ local function mloDoor()
 
             if IsDisabledControlJustPressed(0, 38) and entity > 0 and GetEntityType(entity) == 3 then
                 if GetResourceState('ox_doorlock') == 'started' and exports.ox_doorlock:getDoorIdFromEntity(entity) then
-                    lib.notify({ description = 'This door already registered in ox_doorlock', type = 'error' })
+                    lib.notify({ description = locale('error.door_registered'), type = 'error' })
                 end
 
                 if lastEntity then
@@ -307,8 +307,8 @@ local function mloDoor()
                 end
 
                 local alert = not doubleDoors and lib.alertDialog({
-                    header = 'Double Doors?',
-                    content = 'Confirm if MLO has 2 doors',
+                    header = locale('alert_door.double_door'),
+                    content = locale('alert_door.confirm_mlo_2_door'),
                     centered = true,
                     cancel = true
                 })
@@ -322,7 +322,7 @@ local function mloDoor()
                 }
 
                 if doubleDoors and #(door.coords - data.coords) <= 0 then
-                    lib.notify({ description = 'Select another door, you already selected this as first door!', type = 'error' })
+                    lib.notify({ description = locale('alert_door.select_another_door'), type = 'error' })
                 else
                     data = doubleDoors and {
                         data,

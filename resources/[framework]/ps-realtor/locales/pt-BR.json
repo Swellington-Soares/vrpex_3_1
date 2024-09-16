@@ -1,0 +1,29 @@
+{
+    "error": {
+        "ui_not_loaded": "UI não carregada!",
+        "interior_not_exist": "O interior %s não existe!",
+        "poly_error": "É necessário estar próximo a um ponto",
+        "door_registered": "Essa porta já está registrada"
+    },
+    "info": {
+        "way_point_set": "Ponto de referência definido!",
+        "get_vehicle_to_define_zone": "É melhor entrar em um veículo para ver como a zona ficaria.",
+        "propety_for_sale": "Propriedade à venda",
+        "owned_property": "Propriedade própria",
+        "garage_set": "Garagem foi definida!",
+        "door_set": "Porta foi definida!",
+        "door_removed": "Porta foi removida!",
+        "garage_removed": "Garagem foi removida!",
+        "garden_removed": "Jardim foi removido!",
+        "property_created": "Propriedade foi criada!"
+    },
+    "alert_door": {
+        "double_door": "Portas duplas?",
+        "confirm_mlo_2_door": "Confirme se o MLO tem 2 portas",
+        "select_another_door": "Selecione outra porta, você já selecionou essa como a primeira!"
+    },
+    "poly_text": "[C] - +/- ponto  \n [H] finalizar  \n [Scroll] mudar altura \n [K] Editar Ponto",
+    "poly_help": "[K] - Definir Ponto \n [N] - Cancelar Definição",
+    "poly_help2": "[E] - para confirmar | [h] para cancelar",
+    "door_help": "[E] - para adicionar porta | [h] para cancelar"
+}

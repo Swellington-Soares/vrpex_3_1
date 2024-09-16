@@ -1,0 +1,29 @@
+{
+    "error": {
+        "ui_not_loaded": "UI not loaded!",
+        "interior_not_exist": "The Interior %s does not exist!",
+        "poly_error": "Need to be close to a point",
+        "door_registered": "This door already registered"
+    },
+    "info": {
+        "way_point_set": "Waypoint was set!",
+        "get_vehicle_to_define_zone": "Best to get in a vehicle to see how the zone would look.",
+        "propety_for_sale": "Property For Sale",
+        "owned_property": "Owned Property",
+        "garage_set": "Garage was set!",
+        "door_set": "Door was set!",
+        "door_removed": "Door was removed!",
+        "garage_removed": "Garage was removed!",
+        "garden_removed": "Garden was removed!",
+        "property_created": "Property was created!"
+    },
+    "alert_door": {
+        "double_door": "Double Doors?",
+        "confirm_mlo_2_door": "Confirm if MLO has 2 doors",
+        "select_another_door": "Select another door, you already selected this as first door!"
+    },
+    "poly_text": "[C] - +/- point  \n [H] finish  \n [Scroll] change height \n [K] Edit Point",
+    "poly_help": "[K] - Set Point \n [N] - Cancel Set",
+    "poly_help2": "[E] - to confirm | [h] to cancel",
+    "door_help": "[E] - to add door | [h] cancel"
+}

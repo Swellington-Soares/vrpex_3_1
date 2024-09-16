@@ -20,12 +20,9 @@ local tabletRot = vector3(10.0, 160.0, 0.0)
 
 local function doAnimation()
 	if not UIOpen then return end
-	-- Animation
-	RequestAnimDict(tabletDict)
-	while not HasAnimDictLoaded(tabletDict) do Wait(100) end
-	-- Model
-	RequestModel(tabletProp)
-	while not HasModelLoaded(tabletProp) do Wait(100) end
+	lib.requestAnimDict(tabletDict)
+	lib.requestModel(tabletProp)
+	
 
 	local plyPed = PlayerPedId()
 	tabletObj = CreateObject(tabletProp, 0.0, 0.0, 0.0, true, true, false)
@@ -48,14 +45,16 @@ local function doAnimation()
 		Wait(250)
 		DetachEntity(tabletObj, true, false)
 		DeleteEntity(tabletObj)
+		RemoveAnimDict(tabletDict)
+		SetModelAsNoLongerNeeded(tabletProp)
 	end)
 end
 
 local function toggleUI(bool)
 	if bool and not UiLoaded then
-		lib.notify({ description = 'UI not loaded!', type = 'error' })
+		lib.notify({ description = locale('error.ui_not_loaded'), type = 'error' })
 		return
-	end
+	end	
 
 	UIOpen = bool
 	SetNuiFocus(bool, bool)
@@ -138,7 +137,7 @@ end)
 
 -- Callbacks
 RegisterNUICallback("setWaypoint", function(data, cb)
-	lib.notify({ description = 'Waypoint was set!', type = 'success' })
+	lib.notify({ description = locale('info.way_point_set'), type = 'success' })
 	SetNewWaypoint(data.x, data.y)
 	cb("ok")
 end)
@@ -153,7 +152,7 @@ RegisterNUICallback("updatePropertyData", function(data, cb)
 		local shellName = currentShells[newData.shell].hash
 
 		if not IsModelInCdimage(shellName) then
-			lib.notify({ description = 'The Interior ' .. newData.shell .. ' does not exist!', type = 'error' })
+			lib.notify({ description = locale('interior_not_exist', newData.shell)'', type = 'error' })
 			return
 		end
 	end
@@ -254,7 +253,7 @@ function ZoneThread(type, promise)
 	local height = 2.5
 
 	if type == "garage" then
-		lib.notify({ description = "Best to get in a vehicle to see how the zone would look.", type = "error", duration = 7000 })
+		lib.notify({ description = locale('info.get_vehicle_to_define_zone'), type = "error", duration = 7000 })
 		length = 3.0
 		width = 5.0
 	end
@@ -318,7 +317,7 @@ end)
 function CreateBlipsOnMap(type)
 	if type ~= "forSale" and type ~= "owned" then return end
 	local blipsTable = type == "forSale" and blipsForSale or blipsOwned
-	local nameType = type == "forSale" and "Property For Sale" or "Owned Property"
+	local nameType = type == "forSale" and locale('info.propety_for_sale') or locale('owned_property')
 
 	RemoveBlipsOnMap(type)
 	for k, data in pairs(PropertiesTable) do

@@ -40,7 +40,7 @@ local createProperty = {
         local ped = cache.ped
         local function createZone()
             local zoneDataPromise = promise.new()
-            lib.showTextUI('[E] - to confirm | [h] to cancel')
+            lib.showTextUI(locale('poly_help2'))
             ZoneThread(type, zoneDataPromise)
 
             local success = Citizen.Await(zoneDataPromise)
@@ -79,7 +79,7 @@ local createProperty = {
             elseif type == "garage" then
                 local zoneData = createZone()
                 if not zoneData then return false end
-                setZoneData(zoneData, 3.0, 5.0, 'Garage was set!')
+                setZoneData(zoneData, 3.0, 5.0, locale('info.garage_set'))
                 self.garage_data = zoneData
             end
         else
@@ -93,10 +93,10 @@ local createProperty = {
 
             if type == "door" then
                 zoneData.locked = false
-                setZoneData(zoneData, 1.5, 2.2, 'Door was set!')
+                setZoneData(zoneData, 1.5, 2.2, locale('info.door_set'))
                 self.door_data = zoneData
             elseif type == "garage" then
-                setZoneData(zoneData, 3.0, 5.0, 'Garage was set!')
+                setZoneData(zoneData, 3.0, 5.0, locale('info.garage_set'))
                 self.garage_data = zoneData
             end
         end
@@ -112,18 +112,18 @@ local createProperty = {
     removeDoor = function(self, index)
         if not self.door_data then return end
         self.door_data[index] = nil
-        lib.notify({ description = 'Door was removed!', type = 'error'})
+        lib.notify({ description = locale('info.door_removed'), type = 'success'})
     end,
 
     removeGarage = function(self)
         self.garage_data = nil
-        lib.notify({ description = 'Garage was removed!', type = 'error'})
+        lib.notify({ description = locale('info.garage_removed'), type = 'success'})
         return true
     end,
 
     removeGarden = function(self)
         self.zone_data = nil
-        lib.notify({ description = 'Garden was removed!', type = 'error'})
+        lib.notify({ description = locale('info.garden_removed'), type = 'success'})
         return true
     end,
 
@@ -144,7 +144,7 @@ local createProperty = {
 
         TriggerServerEvent('bl-realtor:server:registerProperty', data)
 
-        lib.notify({ description = 'Property was created!', type = 'success'})
+        lib.notify({ description = locale('info.property_created'), type = 'success'})
         self:cancelCreating()
     end,
 }
