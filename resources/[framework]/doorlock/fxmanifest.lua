@@ -17,6 +17,12 @@ shared_scripts {
 server_script 'server/main.lua'
 client_script 'client/main.lua'
 
+ox_lib {
+    'locale',
+    'cache'
+}
+
+
 files {
     'html/*.html',
     'html/*.js',

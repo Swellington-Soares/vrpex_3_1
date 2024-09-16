@@ -1,5 +1,3 @@
-lib.locale()
-
 BeatyConfig = {}
 
 BeatyConfig.stores = {

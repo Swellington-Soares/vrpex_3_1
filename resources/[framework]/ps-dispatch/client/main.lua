@@ -310,7 +310,7 @@ end)
 
 -- EventHandlers
 --TODO FAZER DEPOIS
-RegisterNetEvent("QBCore:Client:OnJobUpdate", setupDispatch)
+RegisterNetEvent("vRP:SetPlayerData", setupDispatch)
 
 AddEventHandler('playerReady', function()
     setupDispatch()

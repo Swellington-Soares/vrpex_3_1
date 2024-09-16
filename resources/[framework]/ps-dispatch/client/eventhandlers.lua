@@ -77,18 +77,18 @@ AddEventHandler('CEventShockingSeenMeleeAction', function(witnesses, ped)
     end)
 end)
 
-AddEventHandler('CEventPedJackingMyVehicle', function(_, ped)
-    WaitTimer('Autotheft', function()
-        if cache.ped ~= ped then return end
-        local vehicle = GetVehiclePedIsUsing(ped, true)
-        exports['ps-dispatch']:CarJacking(vehicle)
-    end)
-end)
+-- AddEventHandler('CEventPedJackingMyVehicle', function(_, ped)
+--     WaitTimer('Autotheft', function()
+--         if cache.ped ~= ped then return end
+--         local vehicle = GetVehiclePedIsUsing(ped)
+--         exports['ps-dispatch']:CarJacking(vehicle)
+--     end)
+-- end)
 
 AddEventHandler('CEventShockingCarAlarm', function(_, ped)
     WaitTimer('Autotheft', function()
         if cache.ped ~= ped then return end
-        local vehicle = GetVehiclePedIsUsing(ped, true)
+        local vehicle = GetVehiclePedIsUsing(ped)
         exports['ps-dispatch']:VehicleTheft(vehicle)
     end)
 end)

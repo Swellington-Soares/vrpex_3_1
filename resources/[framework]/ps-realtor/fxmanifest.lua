@@ -26,6 +26,12 @@ client_script {
   'client/**',
 }
 
+ox_lib {
+  'locale',
+  'cache',
+  'zones'
+}
+
 
 files {
   'html/**',

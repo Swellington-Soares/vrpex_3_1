@@ -22,6 +22,11 @@ files {
     'locales/*.json'
 }
 
+ox_lib {
+    'locale',
+    'cache',
+    'zones'
+}
 
 dependencies  {
     'ox_lib',

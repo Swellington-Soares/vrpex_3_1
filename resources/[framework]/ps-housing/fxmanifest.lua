@@ -38,6 +38,13 @@ server_script {
   "server/migrate.lua",
 }
 
+ox_lib {
+  'locale',
+  'cache',
+  'zones'
+}
+
+
 files {
   'html/**',
 }
