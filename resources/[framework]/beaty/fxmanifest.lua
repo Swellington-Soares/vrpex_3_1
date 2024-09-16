@@ -4,6 +4,8 @@ author 'Swellington Soares'
 version '1'
 lua54 'yes'
 
+nui_callback_strict_mode 'true'
+
 shared_scripts {
     '@ox_lib/init.lua',    
     'config.lua'
