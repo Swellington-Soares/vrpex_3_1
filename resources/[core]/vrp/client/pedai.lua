@@ -369,6 +369,7 @@ lib.onCache('ped', function(value)
 
         for k in next, block?.weapons or {} do
             SetCanPedEquipWeapon(value, k, false)
+            RemoveWeaponFromPed(value, k)
         end
 
         SetPedDropsWeaponsWhenDead(value, false)
@@ -376,24 +377,8 @@ lib.onCache('ped', function(value)
 end)
 
 lib.onCache('vehicle', function(value)
-    if value then
-        if DoesVehicleHaveWeapons(value) then
-            for i = 0, 10 do
-                SetVehicleWeaponsDisabled(value, i)
-            end
-        end
-    end
-end)
-
---GUN EVENT
-local lastShootTime = 0
-AddEventHandler('CEventGunShot', function(_, p2, _)
-    if GetGameTimer() - lastShootTime > 250 then
-        lastShootTime = GetGameTimer()
-        if p2 == cache.ped then
-            local weaponHash = GetSelectedPedWeapon(p2)
-            TriggerServerEvent('vrp:server:GunShotNotify', weaponHash, GetPedAmmoTypeFromWeapon(cache.ped, weaponHash))
-        end
-        CancelEvent()
-    end
+    if not value then return end
+    DisablePlayerVehicleRewards(cache.playerId)
+    SetVehicleWeaponCapacity(value, 0, 0)
+    SetVehicleWeaponCapacity(value, 1, 0)
 end)
