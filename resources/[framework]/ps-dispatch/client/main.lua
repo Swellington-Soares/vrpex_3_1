@@ -88,8 +88,16 @@ local function createZones()
     end
 end
 
-local function setupDispatch()
-    local playerInfo = vRP.getPlayer()  
+
+local isLoading = false
+
+local function setupDispatch(data)
+    if isLoading then return end
+    isLoading = true
+    local playerInfo = data or vRP.getPlayer()  
+
+    while playerInfo == nil do Wait(100) end
+
     local locales = lib.getLocales()
     PlayerData = {
         charinfo = {
@@ -119,6 +127,9 @@ local function setupDispatch()
             shortCalls = Config.ShortCalls,
         }
     })
+
+    lib.print.info("started")
+    isLoading = false
 end
 
 ---@param data string | table -- The player job or an array of jobs to check against
@@ -308,8 +319,7 @@ RegisterNetEvent('ps-dispatch:client:openMenu', function(data)
     end
 end)
 
--- EventHandlers
---TODO FAZER DEPOIS
+
 RegisterNetEvent("vRP:SetPlayerData", setupDispatch)
 
 AddEventHandler('playerReady', function()
