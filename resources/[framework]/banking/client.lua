@@ -41,13 +41,18 @@ RegisterNetEvent('vRP:SetPlayerData', function(data)
 	PlayerData = data
 end)
 
+-- Citizen.CreateThread(function()
+-- 	while vRP.getPlayer() == nil do Citizen.Wait(10) end
+-- 	PlayerData = vRP.getPlayer()
+-- 	CreateZones()
+-- end)	
+
 AddEventHandler('playerReady', function()
 	Citizen.CreateThread(function()
 		while vRP.getPlayer() == nil do Citizen.Wait(10) end
 		PlayerData = vRP.getPlayer()
-	end)
-
-	CreateZones()
+		CreateZones()
+	end)	
 end)
 
 Citizen.CreateThread(function()
@@ -115,7 +120,7 @@ local function openBank()
 	if playeJob ~= nil then
 		hasJob = true
 		playerJobName = playeJob.name
-		playerJobGrade = playeJob.rank
+		playerJobGrade = playeJob?.rank or 0
 		jobLabel = playeJob.label
 		onDuty = playeJob?.onduty
 		society = 'society_' .. playerJobName
@@ -123,7 +128,7 @@ local function openBank()
 
 	lib.callback("okokBanking:GetPlayerInfo", false, function(data)
 		lib.callback("okokBanking:GetOverviewTransactions", false, function(cb, identifier, allDays)
-			canAccessSociety = onDuty and playerJobName and Config.Societies[playerJobName] >= playerJobGrade
+			canAccessSociety = onDuty and playerJobName and Config.Societies[playerJobName] ~= nil and Config.Societies[playerJobName] >= playerJobGrade
 
 			if canAccessSociety then
 				lib.callback("okokBanking:SocietyInfo", false, function(cb)

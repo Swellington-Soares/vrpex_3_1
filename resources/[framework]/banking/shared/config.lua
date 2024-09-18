@@ -1,21 +1,12 @@
 Config = {}
 
-Config.okokTextUI = false            -- true = okokTextUI (I recommend you using this since it is way more optimized than the default ShowHelpNotification) | false = ShowHelpNotification
-
 Config.IBANPrefix = "SW"             -- the prefix of the IBAN
-
 Config.IBANNumbers = 6               -- How many characters the IBAN has by default
-
 Config.CustomIBANMaxChars = 10       -- How many characters the IBAN can have when changing it to a custom one (on Settings tab)
-
 Config.CustomIBANAllowLetters = true -- If the custom IBAN can have letters or only numbers (on Settings tab)
-
 Config.IBANChangeCost = 5000         -- How much it costs to change the IBAN to a custom one (on Settings tab)
-
 Config.PINChangeCost = 1000          -- How much it costs to change the PIN (on Settings tab)
-
 Config.AnimTime = 2 * 1000           -- 2 * 1000 = 2 seconds (ATM animation)
-
 Config.Societies = {                 -- Which societies have bank accounts
 	["police"] = 4,
 	["ambulance"] = 3,
@@ -30,7 +21,6 @@ Config.BankLocations = {    -- to get blips and colors check this: https://wiki.
 	{ blip = 108, blipColor = 2, blipScale = 0.9, x = -112.202,  y = 6469.295,  z = 31.626, blipText = "Bank", BankDistance = 3 },
 	{ blip = 108, blipColor = 2, blipScale = 0.9, x = 314.187,   y = -278.621,  z = 54.170, blipText = "Bank", BankDistance = 3 },
 	{ blip = 108, blipColor = 2, blipScale = 0.9, x = -351.534,  y = -49.529,   z = 49.042, blipText = "Bank", BankDistance = 3 },
-	{ blip = 108, blipColor = 3, blipScale = 1.2, x = 252.33,    y = 218.11,    z = 106.29, blipText = "Bank", BankDistance = 13 },
 	{ blip = 108, blipColor = 2, blipScale = 0.9, x = 1175.064,  y = 2706.643,  z = 38.094, blipText = "Bank", BankDistance = 3 },
 }
 
@@ -49,6 +39,26 @@ Config.BankZones = {
 		coords = vec3(-2962.07, 482.67, 16.0),
 		size = vec3(5.25, 1.25, 2.75),
 		rotation = 268.0,
+	},
+	{
+		coords = vec3(-113.35, 6470.35, 32.0),
+		size = vec3(4.0, 0.5, 2.5),
+		rotation = 313.0,
+	},
+	{
+		coords = vec3(313.84, -279.19, 54.0),
+		size = vec3(5.0, 1.0, 3.5),
+		rotation = 160.0,
+	},
+	{
+		coords = vec3(-351.41, -49.99, 49.5),
+		size = vec3(5.0, 1.0, 3.0),
+		rotation = 162.0,
+	},
+	{
+		coords = vec3(1175.69, 2706.97, 38.0),
+		size = vec3(5.0, 1, 3),
+		rotation = 0.0,
 	}
 }
 

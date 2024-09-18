@@ -235,7 +235,7 @@ function zoneCreator.freecamMode(bool)
     end
 end
 
-RegisterCommand('+usePoint', function()
+RegisterCommand('usePoint', function()
     if not zoneCreator.active then return end
 
     if not zoneCreator.cursor then return end
@@ -247,17 +247,17 @@ RegisterCommand('+usePoint', function()
     end
 end, false)
 
-RegisterCommand('+editPoint', function()
+RegisterCommand('editPoint', function()
     if not zoneCreator.active then return end
     if not zoneCreator.cursor then return end
-
-
     zoneCreator.editPoint()
-
 end, false)
 
-RegisterKeyMapping('+editPoint', 'edit Point', 'keyboard', 'k')
-RegisterKeyMapping('+usePoint', 'Add/Remove Point', 'keyboard', 'c')
+RegisterKeyMapping('editPoint', 'edit Point', 'keyboard', 'k')
+RegisterKeyMapping('usePoint', 'Add/Remove Point', 'keyboard', 'c')
+
+TriggerEvent('chat:removeSuggestion', 'usePoint')
+TriggerEvent('chat:removeSuggestion', 'editPoint')
 
 local function polyCreator()
     zoneCreator.freecamMode(false)

@@ -1,0 +1,562 @@
+* {
+    margin: 0;
+    padding: 0;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    /* cursor: default; */
+}
+
+
+body {
+    font-family: 'Rubik';
+    background-size: 100%;
+    overflow-x: hidden;
+    overflow-y: hidden;
+
+    /* background: #242424; */
+}
+
+
+/* .logo {
+    height: 6vh;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 4%;
+    margin: auto;
+    zoom: 1.1;
+    animation: guitrotation 20s ease-out infinite;
+
+} */
+
+.logo {
+    height: 15vh;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -2%;
+    margin: auto;
+    zoom: 1.1;
+    animation: guitrotation 20s ease-out infinite;
+
+}
+
+@keyframes guitrotation {
+
+    10%,
+    100% {
+        transform: rotateY(360deg);
+    }
+}
+
+
+
+/*
+=========================================
+  Player Hud
+=========================================
+*/
+
+.playerHud {
+    position: absolute;
+    width: auto;
+    height: 5vh;
+    bottom: 3.5%;
+    right: 3.5%;
+}
+
+
+.playerHud .circle {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+}
+
+.fIconVida{
+    position: relative;
+    top: -64%;
+    left: 31.5%;
+    color: #ccc;
+}
+
+.fIconColete{
+    position: relative;
+    top: -64%;
+    left: 33%;
+    color: #ccc;
+}
+
+.fIconFome{
+    position: relative;
+    top: -66%;
+    left: 32.5%;
+    color: #ccc;
+}
+
+.fIconSede{
+    position: relative;
+    top: -66%;
+    left: 38.5%;
+    color: #ccc;
+}
+
+
+/*
+=========================================
+  SVG CIRCLE
+=========================================
+*/
+
+.svgCircle {
+    height: 50px;
+    width: 50px;
+}
+
+.svgCircle circle {
+    fill: none;
+    stroke-width: 0.2vh;
+    stroke-dasharray: 125;
+    transition: all .5s;
+    transform: rotate(-90deg);
+    transform-origin: center;
+}
+
+.svgCircle .circleBack{
+    stroke: rgb(15,15,15,0.6);
+    fill: rgb(15,15,15,0.2);
+}
+
+
+.lifeFill {
+    filter: drop-shadow(0px 0px 0.2vh #f52b1c);
+    stroke: #f52b1c;
+    stroke-dashoffset: 100;
+}
+
+
+.svgCircle .circleBackArmour{
+    stroke: rgb(15,15,15,0.6);
+    fill: rgb(15,15,15,0.2);
+}
+
+.ArmourFill {
+    filter: drop-shadow(0px 0px 0.2vh #1178ee);
+    stroke: #1178ee;
+    stroke-dashoffset: 100;
+}
+
+
+.HungerFill {
+    filter: drop-shadow(0px 0px 0.2vh #ee7c11);
+    stroke: #ee7c11;
+    stroke-dashoffset: 100;
+}
+
+.sedeFill{
+    filter: drop-shadow(0px 0px 0.2vh #11cdee);
+    stroke: #11cdee;
+    stroke-dashoffset: 100;
+}
+
+.stressFill{
+    filter: drop-shadow(0px 0px 0.2vh #c211ee);
+    stroke: #c211ee;
+    stroke-dashoffset: 100;
+}
+
+
+.svgCircle .circlestressFill{
+    stroke: rgb(194, 17, 238,0.2);
+    fill: rgb(194, 17, 238,0.2);
+}
+
+.svgCircle .circlesedeFill{
+    stroke: rgb(17, 205, 238,0.2);
+    fill: rgb(17, 205, 238,0.2);
+}
+
+
+.svgCircle .circleHungerFill{
+    stroke: rgb(238, 124, 17,0.2);
+    fill: rgb(238, 124, 17,0.2);
+}
+
+
+.svgCircle .circleArmourFill{
+    stroke: rgb(17, 120, 238,0.2);
+    fill: rgb(17, 120, 238,0.2);
+}
+
+
+.svgCircle .circleBacklifeFill{
+    stroke: rgb(245, 43, 28,0.2);
+    fill: rgb(245, 43, 28,0.2);
+}
+
+
+
+
+
+.carHud{
+    position: absolute;
+    right: 4.2%;
+    bottom: 9%;
+    width: 24vh;
+    height: 17vh;
+  }
+
+  #speedLevel svg {
+    width: 24vh;
+    height: 13vh;
+    margin-top: 50%;
+    position: absolute;
+  }
+  
+  .speed-container .ldBar path.mainline {
+      stroke-width: 2;
+      stroke: rgb(255, 255, 255);
+      stroke-linecap: round;
+      transition: all 0.3s;
+  }
+  
+  .speed-container .ldBar path.baseline {
+      stroke-width: 1;
+      stroke: rgba(255, 255, 255, 0.11);
+      stroke-linecap: round;
+  } 
+    
+  .speed-container .section{
+      width: 50%;
+  }
+  
+
+
+
+
+
+
+  #car-container {
+    width: 12.865vw;
+    height: 10.417vw;
+    position: absolute;
+    right: 4%;
+    bottom: 10.5%;
+}
+
+.speedometer-frame {
+    width: 12.865vw;
+    height: 10.417vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.speedometer-frame svg path {
+    width: 11.406vw !important;
+    height: 9.271vw !important;
+    fill: none;
+    stroke-opacity: 1;
+    stroke-dasharray: 30rem;
+    stroke-dashoffset: 0;
+}
+
+.speedometer-frame svg path:nth-child(1) {
+    stroke: white;
+    stroke-opacity: .2;
+}
+
+.speedometer-frame svg path:nth-child(2) {
+    stroke-dasharray: 31rem;
+    stroke-dashoffset: 31rem;
+    stroke: white;
+    stroke-opacity: 1;
+    transition: all ease .1s;
+}
+
+.fuel-frame {
+    width: 2.344vw;
+    height: 6.563vw;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+}
+
+.fuel-frame svg path {
+    fill: none;
+    stroke-opacity: 1;
+    stroke-dasharray: 8rem;
+    stroke-dashoffset: 0;
+}
+
+.fuel-frame svg path:nth-child(1) {
+    stroke: rgb(255, 255, 255) !important;
+    stroke-opacity: .2;
+}
+
+.fuel-frame svg path:nth-child(2) {
+    stroke-dasharray: 9rem;
+    stroke-dashoffset: 9rem;
+    stroke: #FF6666 !important;
+    stroke-opacity: 1;
+    transition: all ease .1s;
+}
+
+.fuel-frame img {
+    width: 1vw;
+    height: 1.438vw;
+    position: absolute;
+    left: 1.5vw;
+    bottom: -1vw;
+}
+
+
+.nitro-frame {
+    width: 2.344vw;
+    height: 6.563vw;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.nitro-frame svg path {
+    fill: none;
+    stroke-opacity: 1;
+    stroke-dasharray: 8rem;
+    stroke-dashoffset: 0;
+}
+
+.nitro-frame svg path:nth-child(1) {
+    stroke: rgb(255, 255, 255) !important;
+    stroke-opacity: .2;
+}
+
+.nitro-frame svg path:nth-child(2) {
+    stroke-dasharray: 9rem;
+    stroke-dashoffset: 9rem;
+    stroke: #41EAB7 !important;
+    stroke-opacity: 1;
+    transition: all ease .1s;
+}
+
+.nitro-frame img {
+    width: 1vw;
+    height: 1.438vw;
+    position: absolute;
+    left: -0.3vw;
+    bottom: -1vw;
+}
+
+.mileage-frame {
+    color: #FFF;
+    position: absolute;
+    font-family: 'Rubik';
+    font-weight: 600;
+    margin-top: 1vw;
+    font-size: 3.333vw;
+    text-align: center;
+}
+
+.mileage-frame p span {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.km {
+    position: absolute;
+    bottom: -.3vw;
+    font-weight: 500;
+    font-size: 0.833vw;
+    left: 50%;
+    transform: translate(-50%);
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.icons-frame {
+    width: 4.74vw;
+    height: 1.146vw;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.infos{
+    position: absolute;
+    right: 3.5%;
+    width: auto;
+    height: 6vh;
+    top: 4%;  
+}
+
+.infos2{
+    position: absolute;
+    right: 3.5%;
+    width: auto;
+    height: 6vh;
+    top: 8%;  
+}
+  
+  
+  .item-cima{
+    width: auto;
+    height: 3.5vh;
+    border-radius: 0.5vh;
+    padding-right: 1.8vh;
+    background: rgba(15, 15, 15, 0.6);
+    font-family: "Rubik";
+    font-size: 1.4vh;
+    color: rgb(221, 221, 221,0.4);
+    line-height: 3.5vh;
+    display: inline-block;
+  }
+  
+  .item-cima2{
+    width: auto;
+    height: 3.5vh;
+    border-radius: 5px;
+    padding-right: 1.8vh;
+    background: rgba(15, 15, 15, 0.6);
+    font-family: "Rubik";
+    font-size: 1.4vh;
+    color: rgb(221, 221, 221,0.4);
+    line-height: 3.5vh;
+    display: inline-block;
+  }
+  
+  
+
+  .IconCima{
+    margin-left: 1.5vh;
+    color: #ccc;
+  }
+  
+  ss{
+    color: #fff;
+    margin-left: 1vh;
+    color: #ddd;
+  }
+
+#voice active {
+    color: rgba(43, 163, 13)
+}
+
+#voice inative {
+    color: #ddd;
+}
+
+
+
+.SpeedoIcons {
+	height: 4vh;
+	width: 50%;
+	position: absolute;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+	bottom: 0vh;
+	right: 0em;
+	transform: translateX(-50%);
+	gap: 6%;
+}
+
+.SpeedoIcons svg {
+	width: 15%;
+}
+
+.Gray {
+	fill: #fff;
+	color: #fff;
+}
+
+.Yellow {
+	fill: #fec026;
+	color: #fec026;
+}
+
+.Green {
+	fill: #83d52b;
+	color: #83d52b;
+}
+
+.Red {
+	fill: #f43252;
+	color: #f43252;
+}
+
+.Blue {
+	fill: #40a7f7;
+	color: #40a7f7;
+}
+
+.bullets {
+    position: absolute;
+    right: 0;
+    margin-top: 80;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8.35px;
+}
+
+.bullets span {
+    color: #FFF;
+    text-align: center;
+    font-size: 26.412px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.bullets b {
+    color: rgba(255, 255, 255, 0.50);
+    font-size: 20.294px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+
+div#car-container::before {
+    position: absolute;
+    content: "";
+    left: -5%;
+    top: -5%;
+    right: -5%;
+    bottom: -25%;
+    background: #0000007a;
+    z-index: -100;
+    border-radius: 50%;
+    transform: translateY(1%);
+}

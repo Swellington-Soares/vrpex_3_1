@@ -115,7 +115,7 @@ RegisterNetEvent("okokBanking:TransferMoney", function(amount, ibanNumber, targe
 			MySQL.update.await('UPDATE players SET money = ? WHERE id = ?', { json.encode(xTarget.money), xTarget.id })
 			TriggerEvent('okokBanking:AddTransferTransaction', amount, 1, _source, targetName, targetIdentifier)
 			TriggerClientEvent('okokBanking:updateTransactions', _source, xPlayer.money.bank, xPlayer.money.cash)
-			return vRP.notify(_source, "BANK", "You have transferred "..amount.."€ to "..targetName", 5000, 'success')
+			return vRP.notify(_source, "BANK", 'You have transferred '..amount..' € to '..targetName, 5000, 'success')
 		else 
 			return vRP.notify(_source, "BANK", "Nenhuma conta localizada com o ID especificado.", 5000, 'error')
 		end

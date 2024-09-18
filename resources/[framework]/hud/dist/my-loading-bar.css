@@ -1,0 +1,14 @@
+.ldBar-label {
+    opacity: 0;
+    width: 100;
+}
+
+.ldBar-label span {
+    font-size: 0;
+    color: #ec1010;
+}
+
+.solid {
+    background-color: blue;
+    fill: blue;
+}

@@ -1,0 +1,171 @@
+<html lang="pt-br">
+
+<head>
+	<meta charset="UTF-8" />
+	<title>#creative</title>
+	<link rel="stylesheet" href="style.css" />
+	<link rel="stylesheet" href="my-loading-bar.css" />
+	<link rel="stylesheet" type="text/css" href="loading-bar.min.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.min.js"
+		integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<link href="https://fonts.googleapis.com/css2?family=Jura:wght@600&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<!-- <link href="https://fonts.googleapis.com/css2?family=Rubik:ital@1&display=swap" rel="stylesheet">
+		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet"> -->
+
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700;800;900&display=swap"
+		rel="stylesheet">
+
+	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta3/css/all.css">
+	<link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v6.0.0-beta3/css/all.css">
+	<script type="text/javascript" src="loading-bar.js"></script>
+	<script src="https://code.jquery.com/jquery-3.6.1.min.js"
+		integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+</head>
+
+<body>
+
+	<div id="displayHud" style="display: none;">
+		<img class='logo' style="display: none;"
+			src="https://media.discordapp.net/attachments/996087341108178955/1203445298832220230/1LOGO_ICE_CITY_sem_fundo_completa.png?ex=65e393c6&is=65d11ec6&hm=c91b6b16973194408b4d2842f5dd836a99a574e2beeff3821ad93e57f3944f09&=&format=webp&quality=lossless&width=558&height=558">
+
+
+		<div class="infos">
+			<div class="item-cima" style="display: none;" id="safezone"><i class="fa-solid fa-map IconCima"></i>
+				<ss>Safezone</ss>
+			</div>			
+			<div class="item-cima2"><i class="fa-solid fa-walkie-talkie IconCima"></i>
+				<ss id="radio">Offline</ss>
+			</div>
+		</div>
+
+		<div class="infos2">
+			<div class="item-cima2"><i class="fa-solid fa-microphone IconCima"></i>
+				<ss id="voice">Normal</ss>
+			</div>			
+		</div>
+
+
+		<div id="car-container" style="display: none;">
+			<div class="speedometer-frame">
+				<svg width="11.406vw" height="9.271vw" viewBox="0 0 219 178" fill="none"
+					xmlns="http://www.w3.org/2000/svg">
+					<path
+						d="M25.0313 176C10.607 157.703 2 134.607 2 109.5C2 50.1294 50.1294 2 109.5 2C168.871 2 217 50.1294 217 109.5C217 134.607 208.393 157.703 193.969 176"
+						stroke="white" stroke-opacity="1.0" stroke-width="4" stroke-linecap="round" />
+					<path id="rpm"
+						d="M25.0313 176C10.607 157.703 2 134.607 2 109.5C2 50.1294 50.1294 2 109.5 2C168.871 2 217 50.1294 217 109.5C217 134.607 208.393 157.703 193.969 176"
+						stroke="white" stroke-opacity="1.0" stroke-width="4" stroke-linecap="round" />
+				</svg>
+				<div class="mileage-frame">
+					<p><span>00</span>0</p>
+					<span class="km">KM/H</span>
+				</div>
+			</div>
+			<div class="SpeedoIcons">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#ccc" class="Seatbelt">
+					<path
+						d="M12,2C13.11,2 14,2.9 14,4C14,5.11 13.11,6 12,6A2,2 0 0,1 10,4A2,2 0 0,1 12,2M12.39,14.79C14.03,14.79 15.46,14.89 16.64,15.04C16.7,12.32 16.46,9.92 16,9C15.87,8.73 15.69,8.5 15.5,8.3L7.43,15.22C8.79,15 10.5,14.79 12.39,14.79M7.46,17C7.59,18.74 7.85,20.5 8.27,22H10.34C10.05,21.12 9.84,20.09 9.68,19C9.68,19 12,18.56 14.32,19C14.16,20.09 13.95,21.12 13.66,22H15.73C16.17,20.45 16.43,18.61 16.56,16.79C15.41,16.65 14,16.54 12.39,16.54C10.46,16.54 8.78,16.75 7.46,17M12,7C12,7 9,7 8,9C7.66,9.68 7.44,11.15 7.37,12.96L13.92,7.34C12.93,7 12,7 12,7M18.57,5.67L17.43,4.34L13.92,7.35C14.47,7.54 15.05,7.84 15.5,8.3L18.57,5.67M20.67,15.83C20.58,15.8 19.14,15.33 16.64,15.04C16.63,15.61 16.6,16.2 16.56,16.79C18.81,17.07 20.1,17.5 20.12,17.5L20.67,15.83M7.37,12.96L3.43,16.34L4.32,17.82C4.34,17.81 5.5,17.36 7.46,17C7.35,15.59 7.32,14.2 7.37,12.96Z" />
+				</svg>
+
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="#ccc" class="HealthCar">
+					<path
+						d="M17.1416 7.1405C16.818 7.1405 16.5557 7.40285 16.5557 7.72644V8.31238H15.3838V7.72644C15.3838 7.40285 15.1214 7.1405 14.7979 7.1405H13.8687L12.8684 6.14023C12.7585 6.03035 12.6095 5.96863 12.4541 5.96863H11.8682V4.79675H12.4541C12.7777 4.79675 13.04 4.53441 13.04 4.21082C13.04 3.88722 12.7777 3.62488 12.4541 3.62488H6.5166C6.19301 3.62488 5.93066 3.88722 5.93066 4.21082C5.93066 4.53441 6.19301 4.79675 6.5166 4.79675H7.10254V5.96863H6.5166C6.36117 5.96863 6.21219 6.03035 6.1023 6.14023L5.10203 7.1405H3.00098C2.67738 7.1405 2.41504 7.40285 2.41504 7.72644V10.0702H1.24316V7.72644C1.24316 7.40285 0.98082 7.1405 0.657227 7.1405C0.333633 7.1405 0.0712891 7.40285 0.0712891 7.72644V13.5858C0.0712891 13.9094 0.333633 14.1718 0.657227 14.1718C0.98082 14.1718 1.24316 13.9094 1.24316 13.5858V11.2421H2.41504V13.5858C2.41504 13.9094 2.67738 14.1718 3.00098 14.1718H5.10203L7.27418 16.3439C7.38406 16.4538 7.53305 16.5155 7.68848 16.5155H13.626C13.8479 16.5155 14.0508 16.3901 14.1501 16.1916L15.16 14.1718H16.5557V14.7577C16.5557 15.0813 16.818 15.3436 17.1416 15.3436C18.757 15.3436 20.0713 14.0294 20.0713 12.4139V10.0702C20.0713 8.45476 18.757 7.1405 17.1416 7.1405ZM4.75879 12.9999H3.58691V8.31238H4.75879V12.9999ZM8.27441 4.79675H10.6963V5.96863H8.27441V4.79675ZM14.2119 13.4475L13.2638 15.3436H7.93117L5.93066 13.3431V7.96914L6.7593 7.1405C6.99762 7.1405 12.0013 7.1405 12.2114 7.1405L13.2116 8.14078C13.3216 8.25066 13.4705 8.31238 13.626 8.31238H14.2119C14.2119 8.55195 14.2119 13.2568 14.2119 13.4475ZM16.5557 12.9999H15.3838V9.48425H16.5557V12.9999ZM18.8994 12.4139C18.8994 13.1778 18.4096 13.8295 17.7275 14.0714C17.7275 13.6599 17.7275 8.56792 17.7275 8.41281C18.4096 8.65464 18.8994 9.30628 18.8994 10.0702V12.4139Z" />
+					<path
+						d="M11.2818 10.6562H9.88614L10.634 9.16038C10.7788 8.87092 10.6614 8.51897 10.372 8.37424C10.0825 8.22952 9.73059 8.34686 9.58586 8.63628L8.41399 10.98C8.21965 11.3687 8.50254 11.828 8.93805 11.828H10.3337L9.58582 13.3238C9.4411 13.6133 9.55844 13.9652 9.84785 14.11C10.1374 14.2547 10.4893 14.1372 10.634 13.8479L11.8059 11.5042C12.0002 11.1155 11.7173 10.6562 11.2818 10.6562Z" />
+				</svg>
+
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="#ccc" class="Tyres">
+					<path
+						d="M11,13H13V15H11V13M11,5H13V11H11V5M17,4.76C18.86,6.19 20,8.61 20,11C20,14 18.33,16.64 15.86,18H8.14C5.67,16.64 4,14 4,11C4,8.61 5.09,6.17 7,4.76V2H5V3.86C3.15,5.68 2,8.2 2,11C2,13.8 3.15,16.32 5,18.14V22H7V20H9V22H11V20H13V22H15V20H17V22H19V18.14C20.85,16.32 22,13.8 22,11C22,8.2 20.85,5.68 19,3.86V2H17V4.76Z" />
+				</svg>
+
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" fill="#ccc" class="Locked">
+					<path
+						d="M22,18V22H18V19H15V16H12L9.74,13.74C9.19,13.91 8.61,14 8,14A6,6 0 0,1 2,8A6,6 0 0,1 8,2A6,6 0 0,1 14,8C14,8.61 13.91,9.19 13.74,9.74L22,18M7,5A2,2 0 0,0 5,7A2,2 0 0,0 7,9A2,2 0 0,0 9,7A2,2 0 0,0 7,5Z" />
+				</svg>
+
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 26 26" fill="#ccc" class="Headlight">
+					<path
+						d="M13,4.8C9,4.8 9,19.2 13,19.2C17,19.2 22,16.5 22,12C22,7.5 17,4.8 13,4.8M13.1,17.2C12.7,16.8 12,15 12,12C12,9 12.7,7.2 13.1,6.8C16,6.9 20,8.7 20,12C20,15.3 16,17.1 13.1,17.2M2,5H9.5C9.3,5.4 9,5.8 8.9,6.4C8.8,6.6 8.8,6.8 8.7,7H2V5M8,11H2V9H8.2C8.1,9.6 8.1,10.3 8,11M8.7,17C8.9,17.8 9.2,18.4 9.6,19H2.1V17H8.7M8.2,15H2V13H8C8.1,13.7 8.1,14.4 8.2,15Z" />
+				</svg>
+			</div>
+			<div class="fuel-frame">
+				<svg width="1.563vw" height="6.198vw" viewBox="0 0 30 119" fill="none"
+					xmlns="http://www.w3.org/2000/svg">
+					<path d="M28.4592 117C11.888 95.9694 2 69.4216 2 40.5632C2 27.0971 4.15303 14.1341 8.13346 2"
+						stroke="white" stroke-opacity="1.0" stroke-width="3" stroke-linecap="round" />
+					<path id="fuel"
+						d="M28.4592 117C11.888 95.9694 2 69.4216 2 40.5632C2 27.0971 4.15303 14.1341 8.13346 2"
+						stroke="white" stroke-opacity="1.0" stroke-width="3" stroke-linecap="round" />
+				</svg>
+				<img src="images/fuel.png" />
+			</div>
+			<div class="nitro-frame">
+				<svg width="1.563vw" height="6.198vw" viewBox="0 0 30 119" fill="none"
+					xmlns="http://www.w3.org/2000/svg">
+					<path d="M1.5408 117C18.112 95.9694 28 69.4216 28 40.5632C28 27.0971 25.847 14.1341 21.8665 2"
+						stroke="white" stroke-opacity="1.0" stroke-width="3" stroke-linecap="round" />
+					<path id="nitro"
+						d="M1.5408 117C18.112 95.9694 28 69.4216 28 40.5632C28 27.0971 25.847 14.1341 21.8665 2"
+						stroke="white" stroke-opacity="1.0" stroke-width="3" stroke-linecap="round" />
+				</svg>
+				<img src="images/nitro.png" />
+			</div>
+		</div>
+
+		<div class="playerHud">
+
+			<div class="circle" id="vidaicon">
+				<svg class="svgCircle">
+					<circle class="circleBacklifeFill" r="20" cx="50%" cy="50%"></circle>
+					<circle class="circleFill2 lifeFill" r="20" cx="50%" cy="50%"></circle>
+				</svg>
+				<i class="fa-solid fa-heart-pulse fIconVida"></i>
+			</div>
+
+			<div class="circle armourkds" id="coleteicon">
+				<svg class="svgCircle">
+					<circle class="circleArmourFill" r="20" cx="50%" cy="50%"></circle>
+					<circle class="circleFill2 ArmourFill" r="20" cx="50%" cy="50%"></circle>
+				</svg>
+				<i class="fa-solid fa-shield-blank fIconColete"></i>
+			</div>
+
+			<div class="circle" id="fomeicon">
+				<svg class="svgCircle">
+					<circle class="circleHungerFill" r="20" cx="50%" cy="50%"></circle>
+					<circle class="circleFill2 HungerFill" r="20" cx="50%" cy="50%"></circle>
+				</svg>
+				<i class="fa-solid fa-burger-cheese fIconFome"></i>
+			</div>
+
+			<div class="circle" id="sedeicon">
+				<svg class="svgCircle">
+					<circle class="circlesedeFill" r="20" cx="50%" cy="50%"></circle>
+					<circle class="circleFill2 sedeFill" r="20" cx="50%" cy="50%"></circle>
+				</svg>
+				<i class="fa-solid fa-droplet fIconSede"></i>
+			</div>
+
+			<div class="circle" id="sedeicon">
+				<svg class="svgCircle">
+					<circle class="circlestressFill" r="20" cx="50%" cy="50%"></circle>
+					<circle class="circleFill2 stressFill" r="20" cx="50%" cy="50%"></circle>
+				</svg>
+				<i class="fa-solid fa-bolt fIconSede"></i>
+			</div>
+
+		</div>
+	</div>
+	<script src="jquery.js"></script>
+</body>
+
+</html>
