@@ -2,14 +2,12 @@ local PlayerData = {}
 local trans = {}
 local societyTrans = {}
 local societyIdent, societyDays
-local didAction = false
 local isBankOpened = false
 local canAccessSociety = false
 local society = ''
 local societyInfo
-local closestATM, atmPos
 
-local playerName, playerBankMoney, playerIBAN, trsIdentifier, allDaysValues, walletMoney
+local playerBankMoney, playerIBAN, trsIdentifier, allDaysValues, walletMoney
 
 
 local function CreateZones()
@@ -51,14 +49,6 @@ AddEventHandler('playerReady', function()
 
 	CreateZones()
 end)
-
-
-RegisterCommand('tbb', function(source, args, raw)
-	-- TriggerEvent('okokBanking:OpenATM')
-	PlayerData = vRP.getPlayer()
-	CreateZones()
-end)
-
 
 Citizen.CreateThread(function()
 	if Config.ShowBankBlips then
@@ -117,6 +107,7 @@ local function openBank()
 	local playerJobName = ''
 	local playerJobGrade = ''
 	local jobLabel = ''
+	local onDuty = false
 	isBankOpened = true
 
 	canAccessSociety = false
@@ -126,24 +117,13 @@ local function openBank()
 		playerJobName = playeJob.name
 		playerJobGrade = playeJob.rank
 		jobLabel = playeJob.label
+		onDuty = playeJob?.onduty
 		society = 'society_' .. playerJobName
 	end
 
 	lib.callback("okokBanking:GetPlayerInfo", false, function(data)
 		lib.callback("okokBanking:GetOverviewTransactions", false, function(cb, identifier, allDays)
-			for __, v in pairs(Config.Societies) do
-				if playerJobName == v then
-					if #Config.SocietyAccessRanks > 0 then
-						for _, v2 in pairs(Config.SocietyAccessRanks) do
-							if playerJobGrade == v2 then
-								canAccessSociety = true
-							end
-						end
-					else
-						canAccessSociety = true
-					end
-				end
-			end
+			canAccessSociety = onDuty and playerJobName and Config.Societies[playerJobName] >= playerJobGrade
 
 			if canAccessSociety then
 				lib.callback("okokBanking:SocietyInfo", false, function(cb)
@@ -218,7 +198,7 @@ RegisterNetEvent("okokBanking:OpenATM", function()
 				isBankOpened = true
 				lib.requestAnimDict(dict)
 
-				TaskPlayAnim(ped, dict, anim, 8.0, 8.0, -1, 0, 0, 0, 0, 0)
+				TaskPlayAnim(ped, dict, anim, 8.0, 8.0, -1, 0, 0, false, false, false)
 				Citizen.Wait(Config.AnimTime)
 				ClearPedTasks(ped)
 				RemoveAnimDict(dict)
@@ -292,11 +272,9 @@ RegisterNUICallback("action", function(data, cb)
 					if isUsed ~= nil then
 						if data.window == 'bankmenu' then
 							if isPlayer then
-								TriggerServerEvent('okokBanking:TransferMoney', tonumber(data.value), data.iban:upper(),
-									isUsed.citizenid, isUsed.money, name)
+								TriggerServerEvent('okokBanking:TransferMoney', tonumber(data.value), data.iban:upper(), isUsed.citizenid, isUsed.money, name)
 							elseif not isPlayer then
-								TriggerServerEvent('okokBanking:TransferMoneyToSociety', tonumber(data.value),
-									isUsed.iban:upper(), isUsed.society_name, isUsed.society)
+								TriggerServerEvent('okokBanking:TransferMoneyToSociety', tonumber(data.value),	isUsed.iban:upper(), isUsed.society_name, isUsed.society)
 							end
 						elseif data.window == 'societies' then
 							local toMyself = false
@@ -390,7 +368,7 @@ RegisterNUICallback("action", function(data, cb)
 		if Config.CustomIBANAllowLetters then
 			local iban = Config.IBANPrefix .. data.iban:upper()
 
-			lib.callback("okokBanking:IsIBanUsed", false, function(isUsed, isPlayer)
+			lib.callback("okokBanking:IsIBanUsed", false, function(isUsed)
 				if isUsed == nil then
 					TriggerServerEvent('okokBanking:UpdateIbanDB', iban, Config.IBANChangeCost)
 				elseif isUsed ~= nil then
@@ -401,7 +379,7 @@ RegisterNUICallback("action", function(data, cb)
 			if tonumber(data.iban) ~= nil then
 				local iban = Config.IBANPrefix .. data.iban:upper()
 
-				lib.callback("okokBanking:IsIBanUsed", false, function(isUsed, isPlayer)
+				lib.callback("okokBanking:IsIBanUsed", false, function(isUsed)
 					if isUsed == nil then
 						TriggerServerEvent('okokBanking:UpdateIbanDB', iban, Config.IBANChangeCost)
 					elseif isUsed ~= nil then
@@ -431,11 +409,10 @@ RegisterNUICallback("action", function(data, cb)
 	end
 end)
 
-RegisterNetEvent("okokBanking:updateTransactions")
-AddEventHandler("okokBanking:updateTransactions", function(money, wallet)
+RegisterNetEvent("okokBanking:updateTransactions", function(money, wallet)
 	Citizen.Wait(100)
 	if isBankOpened then
-		lib.callback("okokBanking:GetOverviewTransactions", false, function(cb, id, allDays)
+		lib.callback("okokBanking:GetOverviewTransactions", false, function(cb, _, allDays)
 			trans = cb
 			walletMoney = wallet
 			playerBankMoney = money
@@ -456,8 +433,7 @@ AddEventHandler("okokBanking:updateTransactions", function(money, wallet)
 	end
 end)
 
-RegisterNetEvent("okokBanking:updateMoney")
-AddEventHandler("okokBanking:updateMoney", function(money, wallet)
+RegisterNetEvent("okokBanking:updateMoney", function(money, wallet)
 	if isBankOpened then
 		playerBankMoney = money
 		walletMoney = wallet
@@ -480,7 +456,7 @@ end)
 
 RegisterNetEvent("okokBanking:updateIbanPinChange", function()
 	Citizen.Wait(100)
-	lib.callback("okokBanking:GetOverviewTransactions", false, function(cbs, ids, allDays)
+	lib.callback("okokBanking:GetOverviewTransactions", false, function(cbs)
 		trans = cbs
 	end)
 end)
@@ -489,7 +465,7 @@ RegisterNetEvent("okokBanking:updateTransactionsSociety", function(wallet)
 	Citizen.Wait(100)
 	lib.callback("okokBanking:SocietyInfo", false, function(cb)
 		lib.callback("okokBanking:GetSocietyTransactions", false, function(societyTranscb, societyID, societyAllDays)
-			lib.callback("okokBanking:GetOverviewTransactions", false, function(cbs, ids, allDays)
+			lib.callback("okokBanking:GetOverviewTransactions", false, function(cbs)
 				trans = cbs
 				walletMoney = wallet
 				societyDays = societyAllDays
@@ -506,8 +482,6 @@ RegisterNetEvent("okokBanking:updateTransactionsSociety", function(wallet)
 						isInSociety = canAccessSociety,
 						societyInfo = societyInfo,
 					})
-				else
-
 				end
 			end)
 		end, society)

@@ -92,72 +92,43 @@ RegisterNetEvent("okokBanking:WithdrawMoney", function(amount)
 end)
 
 RegisterNetEvent("okokBanking:TransferMoney", function(amount, ibanNumber, targetIdentifier, acc, targetName)
-	-- local _source = source
-	-- local xPlayer = vRP.getPlayerInfo(_source)
-	-- local xTarget = vRP.getPlayerInfo(vRP.getSourceByCharacterId(targetIdentifier))
+	local _source  = source
+	local xPlayer = vRP.getPlayerInfo(_source)
+	local xTarget = vRP.getPlayerInfo( vRP.getSourceByCharacterId( targetIdentifier )  )
+	local playerMoney = xPlayer.money.bank
+	ibanNumber = ibanNumber:upper()
 
+	if xPlayer.id == targetIdentifier then
+		return vRP.notify(_source, "BANK", "Você não pode transferir dinheiro para si mesmo.", 5000, 'error')
+	end
 
-	-- local xPlayers = vRP.getPlayerInfos()
-	
-	-- local playerMoney = xPlayer.money.bank
+	if amount > playerMoney then
+		return vRP.notify(_source, "BANK", "Você não tem dinheiro suficiente no banco.", 5000, 'error')
+	end
 
+	if not xTarget then
+		xTarget = vRP.getPlayerInfoOffLine( targetIdentifier )
+		if xTarget then
+			vRP.removeBankMoney(xPlayer.user_id, amount)
+			xPlayer = vRP.getPlayerInfo(_source)
+			xTarget.money.bank = xTarget.money.bank + amount
+			MySQL.update.await('UPDATE players SET money = ? WHERE id = ?', { json.encode(xTarget.money), xTarget.id })
+			TriggerEvent('okokBanking:AddTransferTransaction', amount, 1, _source, targetName, targetIdentifier)
+			TriggerClientEvent('okokBanking:updateTransactions', _source, xPlayer.money.bank, xPlayer.money.cash)
+			return vRP.notify(_source, "BANK", "You have transferred "..amount.."€ to "..targetName", 5000, 'success')
+		else 
+			return vRP.notify(_source, "BANK", "Nenhuma conta localizada com o ID especificado.", 5000, 'error')
+		end
+	end
 
+	vRP.removeBankMoney(xPlayer.user_id, amount)
+	vRP.giveBankMoney(xTarget.user_id, amount)
+	TriggerClientEvent('okokBanking:updateTransactions', xTarget.source, xTarget.money.bank, xTarget.money.cash)
+	vRP.notify( xTarget.source, "BANK", "Você recebeu "..amount.."€ de "..xPlayer.firstname..' '..xPlayer.lastname, 5000, 'success')
+	TriggerEvent('okokBanking:AddTransferTransaction', amount, xTarget, _source)
+	TriggerClientEvent('okokBanking:updateTransactions', _source, xPlayer.money.bank, xPlayer.money.cash)
+	vRP.notify(_source, "BANK", "Você transferiu "..amount.."€ para ".. xTarget.firstname..' '..xTarget.lastname, 5000, 'success')
 
-	-- ibanNumber = ibanNumber:upper()
-	-- if xPlayer.id ~= targetIdentifier then
-	-- 	if amount <= playerMoney then
-	-- 		if xTarget ~= nil then
-	-- 			xPlayer.Functions.RemoveMoney('bank', amount)
-	-- 			xTarget.Functions.AddMoney('bank', amount)
-	-- 			xPlayer = vRP.getPlayerInfo(_source)
-
-	-- 			for i = 1, #xPlayers, 1 do
-	-- 				local xForPlayer = vRP.getPlayerInfo(xPlayers[i])
-	-- 				if xForPlayer.PlayerData.citizenid == targetIdentifier then
-	-- 					TriggerClientEvent('okokBanking:updateTransactions', xPlayers[i], xTarget.PlayerData.money.bank,
-	-- 						xTarget.PlayerData.money.cash)
-	-- 					TriggerClientEvent('okokNotify:Alert', xPlayers[i], "BANK",
-	-- 						"You have received " ..
-	-- 						amount ..
-	-- 						"€ from " .. xPlayer.firstname ..
-	-- 						' ' .. xPlayer.lastname, 5000, 'success')
-	-- 				end
-	-- 			end
-	-- 			TriggerEvent('okokBanking:AddTransferTransaction', amount, xTarget, _source)
-	-- 			TriggerClientEvent('okokBanking:updateTransactions', _source, xPlayer.money.bank,
-	-- 				xPlayer.money.cash)
-	-- 			vRP.notify(_source, "BANK",
-	-- 				"You have transferred " ..
-	-- 				amount .. "€ to " .. xTarget.PlayerData.charinfo.firstname ..
-	-- 				' ' .. xTarget.PlayerData.charinfo.lastname, 5000, 'success')
-	-- 		elseif xTarget == nil then
-	-- 			local playerAccount = json.decode(acc)
-	-- 			playerAccount.bank = playerAccount.bank + amount
-	-- 			playerAccount = json.encode(playerAccount)
-
-	-- 			xPlayer.Functions.RemoveMoney('bank', amount)
-	-- 			xPlayer = vRP.getPlayerInfo(_source)
-
-	-- 			TriggerEvent('okokBanking:AddTransferTransaction', amount, 1, _source, targetName, targetIdentifier)
-	-- 			TriggerClientEvent('okokBanking:updateTransactions', _source, xPlayer.money.bank,
-	-- 				xPlayer.money.cash)
-	-- 			vRP.notify(_source, "BANK",
-	-- 				"You have transferred " .. amount .. "€ to " .. targetName, 5000, 'success')
-
-	-- 			MySQL.insert.await('UPDATE players SET money = @playerAccount WHERE citizenid = @target', {
-	-- 				['@playerAccount'] = playerAccount,
-	-- 				['@target'] = targetIdentifier
-	-- 			}, function(changed)
-
-	-- 			end)
-	-- 		end
-	-- 	else
-	-- 		vRP.notify(_source, "BANK", "You don't have that much money on the bank", 5000,
-	-- 			'error')
-	-- 	end
-	-- else
-	-- 	vRP.notify(_source, "BANK", "You can't send money to yourself", 5000, 'error')
-	-- end
 end)
 
 RegisterNetEvent("okokBanking:DepositMoneyToSociety", function(amount, society, societyName)
@@ -241,101 +212,72 @@ RegisterNetEvent("okokBanking:TransferMoneyToSociety", function(amount, ibanNumb
 	end
 end)
 
-RegisterNetEvent("okokBanking:TransferMoneyToSocietyFromSociety", function(amount, ibanNumber, societyNameTarget, societyTarget, society, societyName, societyMoney)
-	-- local _source = source
-	-- local xPlayer = vRP.getPlayerInfo(_source)
-	-- local xTarget = vRP.getPlayerInfoByCitizenId(targetIdentifier)
-	-- local xPlayers = vRP.getPlayerInfos()
+RegisterNetEvent("okokBanking:TransferMoneyToSocietyFromSociety", function(amount, _, societyNameTarget, societyTarget, society, societyName, societyMoney)
+	local _source = source
+	local xPlayer = vRP.getPlayerInfo(_source)
+		
+	if amount <= societyMoney then
 
-	-- if amount <= societyMoney then
-	-- 	MySQL.insert.await(
-	-- 		'UPDATE okokBanking_societies SET value = value - @value WHERE society = @society AND society_name = @society_name',
-	-- 		{
-	-- 			['@value'] = amount,
-	-- 			['@society'] = society,
-	-- 			['@society_name'] = societyName,
-	-- 		}, function(changed)
-	-- 		end)
-	-- 	MySQL.insert.await(
-	-- 		'UPDATE okokBanking_societies SET value = value + @value WHERE society = @society AND society_name = @society_name',
-	-- 		{
-	-- 			['@value'] = amount,
-	-- 			['@society'] = societyTarget,
-	-- 			['@society_name'] = societyNameTarget,
-	-- 		}, function(changed)
-	-- 		end)
-	-- 	TriggerEvent('okokBanking:AddTransferTransactionFromSociety', amount, society, societyName, societyTarget,
-	-- 		societyNameTarget)
-	-- 	TriggerClientEvent('okokBanking:updateTransactionsSociety', _source, xPlayer.money.cash)
-	-- 	vRP.notify(_source, "BANK",
-	-- 		"You have transferred " .. amount .. "€ to " .. societyNameTarget, 5000, 'success')
-	-- else
-	-- 	vRP.notify(_source, "BANK",
-	-- 		"Your society doesn't have that much money on the bank", 5000, 'error')
-	-- end
+		local queries = {
+			{ query = 'UPDATE okokBanking_societies SET value = value - ? WHERE society = ? AND society_name = ?', value = { amount, society, societyName }},
+			{ query = 'UPDATE okokBanking_societies SET value = value + ? WHERE society = ? AND society_name = ?', value = { amount, societyTarget, societyNameTarget}}
+		}
+
+		if MySQL.transaction.await(queries) then
+			TriggerEvent('okokBanking:AddTransferTransactionFromSociety', amount, society, societyName, societyTarget, societyNameTarget)
+			TriggerClientEvent('okokBanking:updateTransactionsSociety', _source, xPlayer.money.cash)
+			vRP.notify(_source, "BANK", "Você transferiu "..amount.."€ para "..societyNameTarget, 5000, 'success')
+		else
+			vRP.notify(_source, "BANK", "Problema na transação, tente novamente em alguns minutos.", 5000, 'error')	
+		end		
+	else
+		vRP.notify(_source, "BANK", "A sua sociedade não tem tanto dinheiro no banco", 5000, 'error')
+	end
 end)
 
 RegisterNetEvent("okokBanking:TransferMoneyToPlayerFromSociety", function(amount, ibanNumber, targetIdentifier, acc, targetName, society, societyName, societyMoney, toMyself)
-	-- local _source = source
-	-- local xPlayer = vRP.getPlayerInfo(_source)
-	-- local xTarget = vRP.getPlayerInfoByCitizenId(targetIdentifier)
-	-- local xPlayers = vRP.getPlayerInfos()
+	local _source  = source
+	local xPlayer = vRP.getPlayerInfo(_source)
+	local xTarget = vRP.getPlayerInfo( vRP.getSourceByCharacterId( targetIdentifier )  )
+	
+	if amount > societyMoney then
+		return vRP.notify(_source,  "BANK", "A sua sociedade não tem tanto dinheiro no banco", 5000, 'error')
+	end
 
-	-- if amount <= societyMoney then
-	-- 	MySQL.insert.await(
-	-- 		'UPDATE okokBanking_societies SET value = value - @value WHERE society = @society AND society_name = @society_name',
-	-- 		{
-	-- 			['@value'] = amount,
-	-- 			['@society'] = society,
-	-- 			['@society_name'] = societyName,
-	-- 		}, function(changed)
-	-- 		end)
-	-- 	if xTarget ~= nil then
-	-- 		xTarget.Functions.AddMoney('bank', amount)
-	-- 		if not toMyself then
-	-- 			for i = 1, #xPlayers, 1 do
-	-- 				local xForPlayer = vRP.getPlayerInfo(xPlayers[i])
-	-- 				if xForPlayer.PlayerData.citizenid == targetIdentifier then
-	-- 					TriggerClientEvent('okokBanking:updateTransactions', xPlayers[i],
-	-- 						xTarget.PlayerData.money.bank, xTarget.PlayerData.money.cash)
-	-- 					TriggerClientEvent('okokNotify:Alert', xPlayers[i], "BANK",
-	-- 						"You have received " ..
-	-- 						amount ..
-	-- 						"€ from " ..
-	-- 						xPlayer.firstname .. ' ' .. xPlayer.lastname,
-	-- 						5000, 'success')
-	-- 				end
-	-- 			end
-	-- 		end
-	-- 		TriggerEvent('okokBanking:AddTransferTransactionFromSocietyToP', amount, society, societyName,
-	-- 			targetIdentifier, targetName)
-	-- 		TriggerClientEvent('okokBanking:updateTransactionsSociety', _source, xPlayer.money.cash)
-	-- 		vRP.notify(_source, "BANK",
-	-- 			"You have transferred " ..
-	-- 			amount .. "€ to " .. xTarget.PlayerData.charinfo.firstname ..
-	-- 			' ' .. xTarget.PlayerData.charinfo.lastname, 5000, 'success')
-	-- 	elseif xTarget == nil then
-	-- 		local playerAccount = json.decode(acc)
-	-- 		playerAccount.bank = playerAccount.bank + amount
-	-- 		playerAccount = json.encode(playerAccount)
+	if not xTarget then
+		xTarget = vRP.getPlayerInfoOffLine( targetIdentifier )
+		if not xTarget then
+			return vRP.notify(_source, 'BANK', 'Conta de destino não encontrada.', 5000, 'error')
+		end
+		MySQL.update.await('UPDATE okokBanking_societies SET value = value - ? WHERE society = ? AND society_name = ?',
+		{
+			amount,
+			society,
+			societyName
+		})
+		xTarget.money.bank = xTarget.money.bank + amount
+		MySQL.update.await('UPDATE players SET money = ? WHERE id = ?', { json.encode(xTarget.money), xTarget.id })
+		TriggerEvent('okokBanking:AddTransferTransactionFromSocietyToP', amount, society, societyName, targetIdentifier, targetName)
+		TriggerClientEvent('okokBanking:updateTransactionsSociety', _source, xPlayer.money.cash)
+		return vRP.notify( _source, "BANK", "Você transferiu "..amount.."€ to "..targetName, 5000, 'success')
+	end
 
-	-- 		TriggerEvent('okokBanking:AddTransferTransactionFromSocietyToP', amount, society, societyName,
-	-- 			targetIdentifier, targetName)
-	-- 		TriggerClientEvent('okokBanking:updateTransactionsSociety', _source, xPlayer.money.cash)
-	-- 		vRP.notify(_source, "BANK",
-	-- 			"You have transferred " .. amount .. "€ to " .. targetName, 5000, 'success')
+	MySQL.update.await('UPDATE okokBanking_societies SET value = value - ? WHERE society = ? AND society_name = ?',
+	{
+		amount,
+		society,
+		societyName
+	})
+	vRP.giveBankMoney(xTarget.user_id, amount)
+	if not toMyself then
+		TriggerClientEvent('okokBanking:updateTransactions', xTarget.source, xTarget.money.bank, xTarget.money.cash)
+		vRP.notify( xTarget.source, "BANK", "Você recebeu "..amount.."€ de "..xPlayer.firstname..' '..xPlayer.lastname, 5000, 'success')
+	end
 
-	-- 		MySQL.insert.await('UPDATE players SET money = @playerAccount WHERE citizenid = @target', {
-	-- 			['@playerAccount'] = playerAccount,
-	-- 			['@target'] = targetIdentifier
-	-- 		}, function(changed)
+	TriggerEvent('okokBanking:AddTransferTransactionFromSocietyToP', amount, society, societyName, targetIdentifier, targetName)
+	TriggerClientEvent('okokBanking:updateTransactionsSociety', _source, xPlayer.money.cash)
+	vRP.notify( _source, "BANK", "Você transferiu "..amount.."€ para"..xTarget.firstname..' '..xTarget.lastname, 5000, 'success')
 
-	-- 		end)
-	-- 	end
-	-- else
-	-- 	vRP.notify(_source, "BANK",
-	-- 		"Your society doesn't have that much money on the bank", 5000, 'error')
-	-- end
 end)
 
 lib.callback.register("okokBanking:GetOverviewTransactions", function(source)

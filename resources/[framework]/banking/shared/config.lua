@@ -17,13 +17,8 @@ Config.PINChangeCost = 1000          -- How much it costs to change the PIN (on 
 Config.AnimTime = 2 * 1000           -- 2 * 1000 = 2 seconds (ATM animation)
 
 Config.Societies = {                 -- Which societies have bank accounts
-	"police",
-	"ambulance",
-}
-
-Config.SocietyAccessRanks = { -- Which ranks of the society have access to it
-	"Recruit",
-	--"Chief",
+	["police"] = 4,
+	["ambulance"] = 3,
 }
 
 Config.ShowBankBlips = true -- true = show bank blips on the map | false = don't show blips

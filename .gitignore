@@ -9,7 +9,7 @@ keys.cfg
 \[devtools\]/
 server.cfg
 backup/
-
+created_zones.lua
 # Logs
 logs
 *.log
