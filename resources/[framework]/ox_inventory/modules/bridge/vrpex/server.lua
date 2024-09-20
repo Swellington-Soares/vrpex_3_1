@@ -41,15 +41,14 @@ SetTimeout(500, function()
 end)
 
 
-AddEventHandler('vRP:PlayerMoneyUpdate', function (user_id, amount, moneytype)
-	print('vRP:PlayerMoneyUpdate', user_id, amount, moneytype)
+AddEventHandler('vRP:PlayerMoneyUpdate', function (user_id, amount, moneytype)	
 	if moneytype ~= 'cash' then return end
 	local src = vRP.getUserSource(user_id)
 	if not src then return end
 	Inventory.SetItem(src, 'money', amount)
 end)
 
---@diagnostic disable-next-line: duplicate-set-field
+---@diagnostic disable-next-line: duplicate-set-field
 function server.setPlayerData(player)
 	
 	local user_id = vRP.getUserId(player.source)
@@ -113,15 +112,6 @@ function server.syncInventory(inv)
 		end
 	end
 end
-
-
-AddStateBagChangeHandler('loadInventory', nil, function(bagName, _, value)
-    if not value then return end
-    local plySrc = GetPlayerFromStateBagName(bagName)
-	print('loadInventory', bagName, _, value)
-    -- if not plySrc then return end
-    -- setupPlayer(QBX:GetPlayer(plySrc).PlayerData)
-end)
 
 -- AddEventHandler('vRP:playerLeave', function(_, source)
 -- 	server.playerDropped(source)

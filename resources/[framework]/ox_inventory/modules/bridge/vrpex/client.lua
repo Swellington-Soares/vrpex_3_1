@@ -1,20 +1,30 @@
-
-
 local Weapon = require 'modules.weapon.client'
 
 AddStateBagChangeHandler('isLoggedIn', ('player:%s'):format(cache.serverId), function(_, _, value)
-    if not value then client.onLogout() end
+    PlayerData.loaded = value
+    if not value then
+        return client.onLogout()
+    end    
 end)
 
 AddStateBagChangeHandler('handcuffed', ('player:%s'):format(cache.serverId), function(_, _, value)
     LocalPlayer.state:set('invBusy', value, false)
+    PlayerData.cuffed = value
     if not value then return end
     Weapon.Disarm()
 end)
 
 
-RegisterNetEvent('vRP:client:UpdateGroups', function (groups)
-    lib.print.info('GROUPS', groups)        
+RegisterNetEvent('vRP:updateGroupInfo', function(group)
+    local groups = PlayerData.groups
+    if group.action == 'leave' or not group?.rank or group.rank == 0 then
+        if groups[group.name] then
+            groups[group.name] = nil
+        end
+    elseif group.action == 'enter' and group?.rank and group?.rank > 0 then
+        groups[group.name] = group.rank
+    end
+    client.setPlayerData('groups', groups)
 end)
 
 ---@diagnostic disable-next-line: duplicate-set-field
@@ -37,3 +47,8 @@ function client.setPlayerStatus(values)
     -- end
 end
 
+---@diagnostic disable-next-line: duplicate-set-field
+function client.setPlayerData(key, value)
+    PlayerData[key] = value
+    OnPlayerData(key, value)
+end

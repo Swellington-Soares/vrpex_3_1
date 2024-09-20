@@ -13,7 +13,7 @@ local cfg = {}
 
 cfg.groups = {
   ["superadmin"] = {
-    _config = { onspawn = function(player) vRPclient._notify(player, "You are superadmin.") end },
+    _config = { onjoin = function(player) vRP._notify(player, "You are superadmin.", nil, 5000, 'inform') end },
     "player.group.add",
     "player.group.remove",
     "player.givemoney",

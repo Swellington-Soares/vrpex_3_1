@@ -10,6 +10,7 @@ local charList
 local last_selected_char = -1
 local in_char_creator = true
 local max_allowed = 1
+local isLoading = false
 
 CreateThread(function()
     LocalPlayer.state:set('isLoggedIn', false, true)
@@ -128,6 +129,7 @@ local function CreateSpawnMenu()
             end
         end
     }, function(_, _, args)
+        if isLoading then return end
         SpawnPlayer(args[1].x, args[1].y, args[1].z, args[1].w, camx, args?.home)
     end)
     lib.showMenu('spawn_menu')
@@ -289,6 +291,7 @@ local function CreateSelectCharacterMenu()
             local currentChar = charList[args.index]
             if last_selected_char ~= args.index then
                 last_selected_char = args.index
+                isLoading = true
                 if currentChar?.custom?.model then
                     exports.sw_appearance:setPlayerAppearance(currentChar.custom)
                 else
@@ -297,12 +300,13 @@ local function CreateSelectCharacterMenu()
                     cache.ped = PlayerPedId()
                     SetPedDefaultComponentVariation(cache.ped)
                     SetEntityVisible(cache.ped, true, false)
-                end
-                cache.ped = PlayerPedId()
+                end                
+                cache.ped = PlayerPedId()                
                 local anim = config.spawn_preview_anims[math.random(1, #config.spawn_preview_anims)]
                 lib.requestAnimDict(anim.dict)
                 TaskPlayAnim(cache.ped, anim.dict, anim.name, 4.0, -4.0, -1, 1, 0.0, false, false, false)
                 RemoveAnimDict(anim.dict)
+                isLoading = false
             end
         end
     }, function(_, _, args)

@@ -70,7 +70,7 @@ function vRP.addUserGroup(user_id, group, grade)
         end
 
         for k in pairs(_user_groups) do -- remove all groups with the same gtype
-          local kgroup = groups[k]          
+          local kgroup = groups[k]
           if kgroup?._config?.gtype == ngroup?._config?.gtype then
             vRP.removeUserGroup(user_id, k)
           end
@@ -91,7 +91,7 @@ function vRP.addUserGroup(user_id, group, grade)
       end
 
       -- trigger join event
-      
+
 
       local user_group = user_groups[group]
       local rank = user_group?.rank or 0
@@ -113,7 +113,7 @@ function vRP.addUserGroup(user_id, group, grade)
 
       if player then
         TriggerClientEvent("vRP:updateGroupInfo", player, {
-          name = group, --fix compat
+          name = group,
           group = group,
           gtype = gtype,
           jobType = jobType,
@@ -134,7 +134,6 @@ function vRP.removeUserGroup(user_id, group)
   local groupdef = groups[group]
   local user_groups = vRP.getUserGroups(user_id)
   local source = vRP.getUserSource(user_id)
-
 
   local gtype = groupdef?._config?.gtype
   local user_group = user_groups[group]
@@ -466,25 +465,36 @@ function vRP.isGroupGradeBoss(group, grade)
 end
 
 AddEventHandler('vrp:login', function(source, user_id, char_id, first_spawn)
-  if first_spawn then
-    local user = xusers[char_id]
-    if user then
-      for k, v in next, user do
-        vRP.addUserGroup(user_id, v.name, v.rank or 0)
-      end
-
-      vRP.addUserGroup(user_id, 'user', 0)
+  local user = xusers[char_id]
+  if user then
+    for _, v in next, user or {} do
+      vRP.addUserGroup(user_id, v, 0)
     end
+
+    vRP.addUserGroup(user_id, 'user', 0)
   end
 
   local user_groups = vRP.getUserGroups(user_id)
   for k in next, user_groups or {} do
-    local group = groups[k]
+    local group = k
+    local ngroup = groups[group]
+
+    local user_group = user_groups[group]
+    local rank = user_group?.rank or 0
+    local rankName = rank > 0 and ngroup?._config?.grades?[rank]?.name or ""
+    local jobType = ngroup?._config?.jobType or false
+    local isboss = ngroup?._config?.grades?[rank]?.isboss or false
+
+
     TriggerClientEvent("vRP:updateGroupInfo", source, {
+      name = group,
       group = group,
-      type = groups[k]?._config?.gtype,
-      rank = user_groups[group]?.rank or 0,
-      duty = user_groups[group]?.duty or false,
+      gtype = ngroup?._config?.gtype,
+      jobType = jobType,
+      rankName = rankName,
+      rank = rank,
+      isboss = isboss,
+      duty = user_groups[group]['duty'],
       action = 'enter'
     })
     if group?._config?.onspawn then
