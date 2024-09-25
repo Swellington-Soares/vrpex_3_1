@@ -8,7 +8,8 @@ nui_callback_strict_mode 'true'
 
 shared_scripts {
     '@ox_lib/init.lua',    
-    'config.lua'
+    'config.lua',
+    'vrpex.lua'
 }
 
 server_scripts {

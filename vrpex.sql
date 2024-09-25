@@ -37,7 +37,7 @@ CREATE TABLE IF NOT EXISTS `logs` (
   `data` longtext NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Exportação de dados foi desmarcado.
 
@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS `mdt_clocking` (
   `total_time` int(10) NOT NULL DEFAULT 0,
   PRIMARY KEY (`user_id`) USING BTREE,
   KEY `id` (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Exportação de dados foi desmarcado.
 
@@ -212,6 +212,32 @@ CREATE TABLE IF NOT EXISTS `mdt_weaponinfo` (
 
 -- Exportação de dados foi desmarcado.
 
+-- Copiando estrutura para tabela vrpex.okokBanking_societies
+CREATE TABLE IF NOT EXISTS `okokBanking_societies` (
+  `society` varchar(255) DEFAULT NULL,
+  `society_name` varchar(255) DEFAULT NULL,
+  `value` int(50) DEFAULT NULL,
+  `iban` varchar(255) NOT NULL,
+  `is_withdrawing` int(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Exportação de dados foi desmarcado.
+
+-- Copiando estrutura para tabela vrpex.okokBanking_transactions
+CREATE TABLE IF NOT EXISTS `okokBanking_transactions` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `receiver_identifier` varchar(255) NOT NULL,
+  `receiver_name` varchar(255) NOT NULL,
+  `sender_identifier` varchar(255) NOT NULL,
+  `sender_name` varchar(255) NOT NULL,
+  `date` varchar(255) NOT NULL,
+  `value` int(50) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- Exportação de dados foi desmarcado.
+
 -- Copiando estrutura para tabela vrpex.ox_inventory
 CREATE TABLE IF NOT EXISTS `ox_inventory` (
   `owner` varchar(60) DEFAULT NULL,
@@ -238,6 +264,8 @@ CREATE TABLE IF NOT EXISTS `players` (
   `datatable` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT json_object() CHECK (json_valid(`datatable`)),
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `deleted_at` timestamp NULL DEFAULT NULL,
+  `iban` varchar(255) DEFAULT NULL,
+  `pincode` int(50) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `registration` (`registration`),
   UNIQUE KEY `phone` (`phone`),
@@ -374,7 +402,9 @@ CREATE TABLE `vplayers` (
 	`money` LONGTEXT NOT NULL COLLATE 'utf8mb4_bin',
 	`datatable` LONGTEXT NOT NULL COLLATE 'utf8mb4_bin',
 	`created_at` TIMESTAMP NOT NULL,
-	`deleted_at` TIMESTAMP NULL
+	`deleted_at` TIMESTAMP NULL,
+	`iban` VARCHAR(1) NULL COLLATE 'utf8mb4_unicode_ci',
+	`pincode` INT(50) NULL
 ) ENGINE=MyISAM;
 
 -- Copiando estrutura para procedure vrpex.add_player_vehicle
@@ -497,18 +527,35 @@ BEGIN
 	#ox_inventort
 	DELETE FROM ox_inventory;
 	
+	DELETE FROM okokBanking_societies;
+	DELETE FROM okokBanking_transactions;
+	
 	#VRPEX CORE
 	DELETE FROM `logs`;
 	DELETE FROM users;
 	DELETE FROM server_data;
 	ALTER TABLE users AUTO_INCREMENT=1;
 	ALTER TABLE players AUTO_INCREMENT=1;	
+	ALTER TABLE mdt_data AUTO_INCREMENT=1;
+	ALTER TABLE mdt_bolos AUTO_INCREMENT=1;
+	ALTER TABLE mdt_bulletin AUTO_INCREMENT=1;
+	ALTER TABLE mdt_clocking AUTO_INCREMENT=1;
+	ALTER TABLE mdt_impound AUTO_INCREMENT=1;
+	ALTER TABLE mdt_incidents AUTO_INCREMENT=1;
+	ALTER TABLE mdt_logs AUTO_INCREMENT=1;
+	ALTER TABLE mdt_reports AUTO_INCREMENT=1;
+	ALTER TABLE mdt_vehicleinfo AUTO_INCREMENT=1;
+	ALTER TABLE mdt_weaponinfo AUTO_INCREMENT=1;
+	ALTER TABLE okokBanking_transactions AUTO_INCREMENT = 1;
+	
+	ALTER TABLE `logs` AUTO_INCREMENT=1;
+	
 END//
 DELIMITER ;
 
 -- Removendo tabela temporária e criando a estrutura VIEW final
 DROP TABLE IF EXISTS `vplayers`;
-CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `vplayers` AS select `players`.`id` AS `id`,`players`.`user_id` AS `user_id`,(select `users`.`license` from `users` where `users`.`id` = `players`.`user_id`) AS `license`,`players`.`firstname` AS `firstname`,`players`.`lastname` AS `lastname`,`players`.`registration` AS `registration`,`players`.`gender` AS `gender`,`players`.`phone` AS `phone`,`players`.`birth_date` AS `birth_date`,`players`.`money` AS `money`,`players`.`datatable` AS `datatable`,`players`.`created_at` AS `created_at`,`players`.`deleted_at` AS `deleted_at` from `players`;
+CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `vplayers` AS select `players`.`id` AS `id`,`players`.`user_id` AS `user_id`,(select `users`.`license` from `users` where `users`.`id` = `players`.`user_id`) AS `license`,`players`.`firstname` AS `firstname`,`players`.`lastname` AS `lastname`,`players`.`registration` AS `registration`,`players`.`gender` AS `gender`,`players`.`phone` AS `phone`,`players`.`birth_date` AS `birth_date`,`players`.`money` AS `money`,`players`.`datatable` AS `datatable`,`players`.`created_at` AS `created_at`,`players`.`deleted_at` AS `deleted_at`,`players`.`iban` AS `iban`,`players`.`pincode` AS `pincode` from `players`;
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;

@@ -112,9 +112,10 @@ local function createStoreTargetEntity(store)
 end
 
 AddEventHandler('beatyshop:client:open', function(data)
+    lib.print.info(data)
     if not data then return end
     if isOpen then return end
-    if data.distance > 2.0 then return end
+    if data.distance > 3.0 then return end
     if not data.type then return error(locale('store_type_not_found')) end
     local sconfig = STORE_CONFIG[data.type]
     SetEntityHeading(cache.ped, data.heading)
@@ -124,12 +125,21 @@ AddEventHandler('beatyshop:client:open', function(data)
     end
     NetworkSetEntityInvisibleToNetwork(PlayerPedId(), true)
     LocalPlayer.state.not_save_custom = true
+    old_appareance = exports.sw_appearance:getPedAppearance(PlayerPedId())
     exports.sw_appearance:startPlayerCustomization(function(app)
         LocalPlayer.state.not_save_custom = nil        
         NetworkSetEntityInvisibleToNetwork(PlayerPedId(), false)
         if data.type ~= 1 then
             SetEntityVisible(data.entity, true, true)
         end
+        if not app then return end
+        if vRP.getPlayer()?.money?.cash >= 500 then
+            TriggerServerEvent('beaty:checkpayment')        
+        else
+            exports.sw_appearance:setPedAppearance(PlayerPedId(), old_appareance)
+            vRP.notify('Loja', 'Você não possui dinheiro suficiente.', 5000, 'error')            
+        end
+        old_appareance = nil
     end, sconfig, true, false)
 end)
 

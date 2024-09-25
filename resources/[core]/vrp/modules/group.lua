@@ -465,15 +465,7 @@ function vRP.isGroupGradeBoss(group, grade)
 end
 
 AddEventHandler('vrp:login', function(source, user_id, char_id, first_spawn)
-  local user = xusers[char_id]
-  if user then
-    for _, v in next, user or {} do
-      vRP.addUserGroup(user_id, v, 0)
-    end
-
-    vRP.addUserGroup(user_id, 'user', 0)
-  end
-
+    
   local user_groups = vRP.getUserGroups(user_id)
   for k in next, user_groups or {} do
     local group = k
@@ -484,7 +476,6 @@ AddEventHandler('vrp:login', function(source, user_id, char_id, first_spawn)
     local rankName = rank > 0 and ngroup?._config?.grades?[rank]?.name or ""
     local jobType = ngroup?._config?.jobType or false
     local isboss = ngroup?._config?.grades?[rank]?.isboss or false
-
 
     TriggerClientEvent("vRP:updateGroupInfo", source, {
       name = group,

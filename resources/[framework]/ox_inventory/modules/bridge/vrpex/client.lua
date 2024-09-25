@@ -16,7 +16,7 @@ end)
 
 
 RegisterNetEvent('vRP:updateGroupInfo', function(group)
-    local groups = PlayerData.groups
+    local groups = PlayerData?.groups or {}
     if group.action == 'leave' or not group?.rank or group.rank == 0 then
         if groups[group.name] then
             groups[group.name] = nil

@@ -295,7 +295,7 @@ AddEventHandler("playerConnecting", function(name, setMessage, deferrals)
 
   deferrals.defer()
 
-  Wait(0)
+  Wait(50)
 
   lib.print.info('Player trying to enter', GetPlayerName(source), source)
 

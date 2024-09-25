@@ -20,7 +20,7 @@ end
 
 function vRP.createPlayer(user_id, firstname, lastname, gender, date)
   local datatable = {
-    groups = { user = true },
+    groups = {},
     health = 200,
     weapons = {},
     position = nil,
@@ -132,11 +132,11 @@ function vRP.login(source, user_id, char_id, firstcreation)
   vRP.user_tables[user_id].datatable['thirst'] = vRP.user_tables[user_id].datatable['thirst'] or 0.0
   vRP.user_tables[user_id].datatable['health'] = vRP.user_tables[user_id].datatable['health'] or 200
   vRP.user_tables[user_id].datatable['weapons'] = vRP.user_tables[user_id].datatable['weapons'] or {}
-  vRP.user_tables[user_id].datatable['groups'] = vRP.user_tables[user_id].datatable['groups'] or {}
-  if not firstcreation then
-    vRP.user_tables[user_id].datatable['position'] = vRP.user_tables[user_id].datatable['position'] or cfg.fristspawn
-  else
+  vRP.user_tables[user_id].datatable['groups'] = vRP.user_tables[user_id].datatable['groups'] or {}  
+  if firstcreation then
     vRP.user_tables[user_id].datatable['position'] = nil
+  else
+    vRP.user_tables[user_id].datatable['position'] = vRP.user_tables[user_id].datatable['position'] or cfg.fristspawn 
   end
 
   -- local custom = vRP.getPlayerData(character.id, 'player:custom')
