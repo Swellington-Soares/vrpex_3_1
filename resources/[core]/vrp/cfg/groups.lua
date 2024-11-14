@@ -56,11 +56,11 @@ cfg.groups = {
       -- onspawn = function(player) vRPclient._setCop(player, true) end,
       -- onleave = function(player) vRPclient._setCop(player, false) end,
       grades = {
-        [1] = { name = 'Recruta', },
-        [2] = { name = 'Capitão', },
-        [3] = { name = 'Major', },
-        [4] = { name = 'Sargento' },
-        [5] = { name = 'Comando', isboss = true },
+        [1] = { name = 'Recruta', salary = 1600},
+        [2] = { name = 'Capitão', salary = 2400},
+        [3] = { name = 'Major', salary = 3800},
+        [4] = { name = 'Sargento', salary = 4500 },
+        [5] = { name = 'Comando', salary = 8000, isboss = true },
       }
     },
     "police.menu",
@@ -84,7 +84,14 @@ cfg.groups = {
   ["emergency"] = {
     _config = {
       title = "Emergency",
-      gtype = "job"
+      gtype = "job",
+      jobtype = 'ems',
+      grades = {
+        [1] = { name = 'Enfermeiro', salary = 1580 },
+        [2] = { name = 'Médico', salary = 2500 },
+        [3] = { name = 'Médico Especialista', salary = 3500 },
+        [4] = { name = 'Diretor', salary = 4500, isboss = true },
+      }
     },
     "emergency.revive",
     "emergency.shop",

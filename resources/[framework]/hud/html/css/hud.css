@@ -1,0 +1,311 @@
+@font-face {
+	font-family: 'Oswald-Regular';
+	src: url('../fonts/Oswald-Regular.eot');
+	src: url('../fonts/Oswald-Regular.eot#iefix') format('embedded-opentype'),
+		 url('../fonts/Oswald-Regular.woff') format('woff'),
+		 url('../fonts/Oswald-Regular.woff2') format('woff2'),
+		 url('../fonts/Oswald-Regular.ttf') format('truetype'),
+		 url('../fonts/Oswald-Regular.svg#webfont34M5alKg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+@font-face {
+	font-family: 'Oswald-Light';
+	src: url('../fonts/Oswald-Light.eot');
+	src: url('../fonts/Oswald-Light.eot#iefix') format('embedded-opentype'),
+		 url('../fonts/Oswald-Light.woff') format('woff'),
+		 url('../fonts/Oswald-Light.woff2') format('woff2'),
+		 url('../fonts/Oswald-Light.ttf') format('truetype'),
+		 url('../fonts/Oswald-Light.svg#webfont34M5alKg') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+* {
+	box-sizing: content-box;
+    user-select: none;
+}
+
+
+.gauge-title {
+	font-size: 14px;
+	fill: #FFFFFF;
+}
+.gauge-value {
+	font-size: 24px;
+	fill: #FFFFFF;
+}
+
+.gauge-unity {
+	font-size: 14px;
+	fill: #FFFFFF;
+}
+
+
+#container {
+	/* display: block; */
+	position: absolute;	
+	width: 256px;
+	height: 256px;
+	right: 1%;
+	bottom: 6%;
+}
+
+
+#rpmshow, #rpmbg {
+	position: absolute;	
+	filter: drop-shadow(0px 0px 4px rgba(0,0,0,0.1));
+	top: 0;
+	left: 0;
+}
+
+
+#rpmbg {
+	filter: drop-shadow(0px 0px 4px rgba(0,0,0,0.2));
+}
+
+
+.speedcircle {
+	width: 64px;
+    height: 64px;
+    position: absolute;
+    top: 50%;
+	left: 50%;	
+	transform: translate(-50%, -50%);
+	filter: drop-shadow(0px 0px 4px rgba(0,0,0,0.1));
+}
+
+.geardisplay {
+	text-align: center;
+    font-family: 'Oswald-Regular';
+    font-size: 29px;
+    width: 45px;
+    height: 45px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+	transform: translate(-50%, -50%);
+    color: rgb(63, 249, 165);
+    border: 3px solid rgb(63, 249, 165);
+    border-radius: 50%;
+    font-style: italic;
+    font-weight: bold;
+    filter: drop-shadow(0px 0px 4px rgba(0, 0, 0, 0.1));
+}
+
+.geardisplay span {
+	margin-left: -10px;
+	filter: drop-shadow(0px 0px 4px rgba(0,0,0,0.1));
+}
+
+.speeddisplay {
+	font-size: 80px;
+    position: absolute;
+    bottom: 0;
+	right: 50%;
+	transform: translate(90%);
+    font-family: 'Oswald-Light';
+    font-style: italic;
+    font-weight: 100;
+    color: #FFF;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.gray {
+	color: rgba(255,255,255,0.5);
+}
+
+.unitdisplay {
+	position: absolute;
+    bottom: 40%;
+    right: 10%;
+	transform: translateX(30%);
+    color: rgba(255, 255, 255, 0.6);
+    font-family: 'Oswald-Regular';
+    font-style: italic;
+    font-weight: 100;
+    font-size: 25px;
+}
+
+.abs {
+	position: absolute;
+    bottom: 28%;
+    left: 28%;
+    color: rgba(255, 255, 255, 1);
+    font-family: 'Oswald-Regular';
+    font-style: normal;
+    font-weight: 100;
+    font-size: 13px;
+}
+
+.handbrake {
+	position: absolute;
+    bottom: 35%;
+    left: 25%;
+    color: rgba(255, 255, 255, 1);
+    font-family: 'Oswald-Regular';
+    font-style: normal;
+    font-weight: 100;
+    font-size: 13px;
+}
+
+
+.icon {		
+	position: absolute;
+	font-size: 20px;
+	color: white;   
+}
+
+
+.icon.seatbelt {
+    bottom: 45%;
+	left: 20%;
+}
+
+.icon.arrow-left {
+	bottom: 55%;
+	left: 23%;
+}
+
+.icon.key {
+	bottom: 68%;
+	left: 30%;
+}
+
+.icon.headlight {
+	bottom: 75%;
+	left: 43%;
+}
+
+.icon.engine {
+	bottom: 74%;
+	left: 55%;
+}
+
+.icon.trunk {
+	bottom: 65%;
+	left: 62%;
+}
+
+.icon.arrow-right {
+	bottom: 55%;
+	left: 68%;
+}
+
+
+body, #app {
+	height: 100dvh;
+	width: 100dvw;
+	overflow: hidden;
+	/* background-color: rgb(0, 60, 90);	 */
+	position: relative;
+}
+
+.playerHud {
+    position: absolute;
+	z-index: 200;
+    width: auto;	
+	bottom: 1%;
+	right: 1%;	
+}
+
+.playerHud .circle {
+    width: 50px;
+    height: 50px;
+    display: inline-block;
+	position: relative;	
+}
+
+.icon-hud {
+	position: absolute;
+    left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+    color: #ccc;
+}
+
+.svgCircle {
+    height: 50px;
+    width: 50px;
+}
+
+.svgCircle circle {
+    fill: none;
+    stroke-width: 0.5vh;
+    stroke-dasharray: 125;
+    transition: all .5s;
+    transform: rotate(-90deg);
+    transform-origin: center;
+}
+
+.svgCircle .circleBack{
+    stroke: rgb(15,15,15,0.6);
+    fill: rgb(15,15,15,0.2);
+}
+
+
+.lifeFill {
+    filter: drop-shadow(0px 0px 0.2vh #f52b1c);
+    stroke: #f52b1c;
+    stroke-dashoffset: 100;
+}
+
+
+.svgCircle .circleBackArmour{
+    stroke: rgb(15,15,15,0.6);
+    fill: rgb(15,15,15,0.2);
+}
+
+.ArmourFill {
+    filter: drop-shadow(0px 0px 0.2vh #1178ee);
+    stroke: #1178ee;
+    stroke-dashoffset: 100;
+}
+
+
+.HungerFill {
+    filter: drop-shadow(0px 0px 0.2vh #ee7c11);
+    stroke: #ee7c11;
+    stroke-dashoffset: 100;
+}
+
+.sedeFill{
+    filter: drop-shadow(0px 0px 0.2vh #11cdee);
+    stroke: #11cdee;
+    stroke-dashoffset: 100;
+}
+
+.stressFill{
+    filter: drop-shadow(0px 0px 0.2vh #c211ee);
+    stroke: #c211ee;
+    stroke-dashoffset: 100;
+}
+
+
+.svgCircle .circlestressFill{
+    stroke: rgb(194, 17, 238,0.2);
+    fill: rgb(194, 17, 238,0.2);
+}
+
+.svgCircle .circlesedeFill{
+    stroke: rgb(17, 205, 238,0.2);
+    fill: rgb(17, 205, 238,0.2);
+}
+
+
+.svgCircle .circleHungerFill{
+    stroke: rgb(238, 124, 17,0.2);
+    fill: rgb(238, 124, 17,0.2);
+}
+
+
+.svgCircle .circleArmourFill{
+    stroke: rgb(17, 120, 238,0.2);
+    fill: rgb(17, 120, 238,0.2);
+}
+
+
+.svgCircle .circleBacklifeFill{
+    stroke: rgb(245, 43, 28,0.2);
+    fill: rgb(245, 43, 28,0.2);
+}

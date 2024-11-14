@@ -5,13 +5,18 @@ author 'Swellington Soares'
 version '1'
 
 client_scripts {
+		'config.lua',
     'client.lua'
 }
 
-ui_page 'ui/index.html'
+ui_page 'dist/index.html'
 
 
 files {
     'data/*.json',
-    'ui/**',
+    'dist/**',
+}
+
+escrow_ignore {
+	'config.lua'
 }

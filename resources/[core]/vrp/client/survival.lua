@@ -119,6 +119,7 @@ end
 
 local function DeathScreen()
   local p = promise.new()
+  exports.hud:Hide(true)
   CreateThread(function()
     local id = 0
     local timeout = GetGameTimer() + 2000
@@ -188,7 +189,13 @@ end
 
 function tvRP.setHealth(health)
   local n = math.floor(health)
-  SetEntityHealth(PlayerPedId(), n)
+  SetEntityHealth(PlayerPedId(), n)  
+end
+
+function tvRP.setMaxHealth(health)
+  local ped = PlayerPedId()
+  SetEntityMaxHealth(ped, health)
+  SetPedMaxHealth(ped, health)
 end
 
 function tvRP.setFriendlyFire(flag)
@@ -260,11 +267,11 @@ function tvRP.revivePlayer()
   local ped = PlayerPedId()
   local pos = GetEntityCoords(ped)
   if IsEntityDead(ped) then
+    exports.hud:Hide(false)
     in_coma = false
     coma_left = COMA_MAX
     comaKey:disable(true)
     lib.hideTextUI()
-
     FreezeEntityPosition(ped, false)
     SetPlayerControl(cache.playerId, true, 0)
     NetworkResurrectLocalPlayer(pos.x, pos.y, pos.z, GetEntityHeading(ped), 0, false)

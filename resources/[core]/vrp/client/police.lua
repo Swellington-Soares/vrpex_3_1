@@ -71,7 +71,7 @@ end
 -- follow thread
 Citizen.CreateThread(function()
   while true do
-    Citizen.Wait(5000)
+    Citizen.Wait(2000)
     if follow_player then
       local tplayer = GetPlayerFromServerId(follow_player)
       local ped = PlayerPedId()

@@ -158,7 +158,7 @@ function DrawEmptyRect(name, model)
         SetScriptGfxDrawOrder(4)
         DrawRect(0.5, 0.5, 1.0, 1.0, 0, 0, 0, 0)
         SetTextRenderId(GetDefaultScriptRendertargetRenderId())
-        ReleaseNamedRendertarget(0, name)
+        ReleaseNamedRendertarget(name)
     end
 
     return true

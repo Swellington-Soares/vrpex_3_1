@@ -114,7 +114,7 @@ return {
 		consume = 0
 	},
 
-	['identification'] = {
+	['id_card'] = {
 		label = 'Identification',
 		client = {
 			image = 'card_id.png'
@@ -221,5 +221,13 @@ return {
 	['scrapmetal'] = {
 		label = 'Scrap Metal',
 		weight = 80,
+	},
+
+	['preset'] = {
+		label = 'Roupas',
+		consume = 0,
+		client = {
+			export = 'beaty.preset'
+		}
 	},
 }

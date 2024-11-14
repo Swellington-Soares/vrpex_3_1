@@ -3,7 +3,8 @@ function tvRP.updateCustomization(customization)
   if user_id then
     local playerTable = vRP.getPlayerTable(user_id)
     if playerTable?.id then
-      vRP.setPlayerData(playerTable.id, 'player:custom', customization)
+      -- vRP.setPlayerData(playerTable.id, 'player:custom', customization)
+      MySQL.update.await('UPDATE players SET skin = ? WHERE id = ?', {json.encode(customization), playerTable.id})
     end
   end
 end
@@ -151,6 +152,9 @@ function vRP.login(source, user_id, char_id, firstcreation)
 
   TriggerEvent("vrp:login", source, user_id, char_id, firstcreation)
   TriggerClientEvent('vRP:SetPlayerData', source, vRP.getPlayerInfo(source))
+  vRPclient._setMaxHealth(source, 200)
+  Wait(0)
+  vRPclient._setHealth(source, vRP.user_tables[user_id].datatable['health'])
   return true
 end
 
@@ -188,9 +192,7 @@ RegisterNetEvent('vrp:server:updatePlayerAppearance', function(char_id, data)
   if not user_id then return end
   local xPlayer = vRP.getCharacter(char_id, false)
   if not xPlayer then return end
-  if xPlayer?.id == char_id and xPlayer?.user_id == user_id then
-    vRP.setPlayerData(char_id, 'player:custom', data)
-  end
+  MySQL.update.await('UPDATE players SET skin = ? WHERE id = ?', { json.encode(data), char_id})
 end)
 
 

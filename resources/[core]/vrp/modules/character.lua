@@ -92,7 +92,7 @@ function vRP.getAllUserCharacter(user_id, include_deleted)
     for i = 1, #xPlayers or {} do
         xPlayers[i].datatable = json.decode(xPlayers[i].datatable) or {}
         xPlayers[i].money = json.decode(xPlayers[i].money) or {}
-        -- xPlayers[i].inventory = json.decode(xPlayers[i].inventory) or {}
+        xPlayers[i].skin = xPlayers[i].skin and json.decode(xPlayers[i].skin)        
     end
 
     return xPlayers

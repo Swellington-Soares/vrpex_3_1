@@ -38,9 +38,9 @@ Config = {
 
     -- Expressions, Walks, and More Menu Options
     ExpressionsEnabled = true, -- You can disable the Facial Expressions menu here.
-    PersistentExpression = true, -- Saves expression style to client and applies them on joining
+    PersistentExpression = false, -- Saves expression style to client and applies them on joining
     WalkingStylesEnabled = true, -- You can disable the Walking Styles menu here.
-    PersistentWalk = true, -- Saves walk styles to client and applies them on joining
+    PersistentWalk = false, -- Saves walk styles to client and applies them on joining
     SharedEmotesEnabled = true, -- You can disable the Shared Emotes here.
     AdultEmotesDisabled = false, -- You can disable the Adult Emotes here.
     AnimalEmotesEnabled = true, -- You can disable the Animal Emotes here.

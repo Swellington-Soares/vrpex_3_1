@@ -1,4 +1,6 @@
 BeatyConfig = {}
+BeatyConfig.allowed_save_preset = true
+BeatyConfig.save_preset_price = 1000
 
 BeatyConfig.stores = {
     --#region CLOTHE STORES

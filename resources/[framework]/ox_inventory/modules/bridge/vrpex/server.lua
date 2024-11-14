@@ -30,6 +30,13 @@ local function setCharacterInventory(source, character)
 	Inventory.SetItem(source, "money", character?.money?.cash or 0)
 end
 
+
+---@diagnostic disable-next-line: duplicate-set-field
+function server.UseItem(source, itemName, data)
+	local cb = vRP.canUseItem(itemName)	
+	return cb and cb(source, data)
+end
+
 AddEventHandler('vrp:login', function(source, user_id)
 	setCharacterInventory(source, vRP.getPlayerTable(user_id))
 end)
@@ -106,9 +113,10 @@ function server.syncInventory(inv)
 	local accounts = Inventory.GetAccountItemCounts(inv)
 	if not accounts then return end
 	for account, amount in pairs(accounts) do
-		account = account == 'money' and 'cash' or account
-		if vRP.getMoney(inv.player.user_id, account) ~= amount then			
-			vRP.setMoney(inv.player.user_id, amount, account, ('Sync %s with inventory'):format(account), false)
+		local xaccount = account == 'money' and 'cash'
+		if not xaccount then return end
+		if vRP.getMoney(inv.player.user_id, xaccount) ~= amount then			
+			vRP.setMoney(inv.player.user_id, amount, xaccount, ('Sync %s with inventory'):format(account), false)
 		end
 	end
 end
@@ -125,3 +133,5 @@ AddStateBagChangeHandler('isLoggedIn', nil, function(bagName, _, value)
 		server.playerDropped(player)
 	end
 end)
+
+

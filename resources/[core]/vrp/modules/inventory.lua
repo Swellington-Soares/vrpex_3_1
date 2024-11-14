@@ -1,3 +1,18 @@
+local usable_items = {}
+
+
+function vRP.createUseableItem(item, cb)
+    if (type(item) ~= "string") or not cb then return end
+    usable_items[item] = cb
+end
+
+function vRP.canUseItem(item)
+    return usable_items[item]
+end
+
+exports('CreateUseableItem', vRP.createUseableItem)
+exports('GetUsableItem', vRP.canUseItem)
+
 function vRP.getItemName(idname)
     return exports.ox_inventory:Items(idname)?.label
 end
@@ -64,7 +79,7 @@ function vRP.clearInventory(user_id)
     local source = vRP.getUserSource(user_id)
     if not source then return false end
     exports.ox_inventory:ClearInventory(source, {
-        'identification',
+        'id_card',
         'driver_license',
         'weapon_license'
     })

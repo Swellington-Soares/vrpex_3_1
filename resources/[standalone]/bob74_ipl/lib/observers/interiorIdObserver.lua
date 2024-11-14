@@ -8,7 +8,6 @@ Citizen.CreateThread(function()
             Global.ResetInteriorVariables()
         else
             -- Setting variables
-
             -- GTA Online
             Global.Online.isInsideApartmentHi1 = (Global.currentInteriorId == GTAOApartmentHi1.interiorId)
             Global.Online.isInsideApartmentHi2 = (Global.currentInteriorId == GTAOApartmentHi2.interiorId)

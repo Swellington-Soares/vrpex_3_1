@@ -244,11 +244,13 @@ RegisterNetEvent('qb-vehiclekeys:client:GiveKeys', function(id)
     end
 end)
 
+local function setOwner(plate)
+    TriggerServerEvent('vehiclekeys:server:AcquireVehicleKeys', plate)
+end
+
 
 RegisterNetEvent('vehiclekeys:client:SetOwner', function(plate)
-    TriggerServerEvent('vehiclekeys:server:AcquireVehicleKeys', plate)
+    setOwner(plate)
 end)
 
-exports('SetOwner', function (plate)
-    TriggerServerEvent('vehiclekeys:server:AcquireVehicleKeys', plate)
-end)
+exports('SetOwner', setOwner)

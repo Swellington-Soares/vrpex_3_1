@@ -35,6 +35,22 @@ function vRP.setHunger(user_id, value)
   end
 end
 
+
+function vRP.setStress(user_id, value)
+  local data = vRP.getUserDataTable(user_id)
+  if data then
+    data.stress = value
+    if data.stress < 0 then
+      data.stress = 0
+    elseif data.stress > 100 then
+      data.stress = 100
+    end
+
+    local src = vRP.getUserSource(user_id)
+    Player(src).state:set('stress', data.stress, true)
+  end
+end
+
 function vRP.setThirst(user_id, value)
   local data = vRP.getUserDataTable(user_id)
   if data then
@@ -47,6 +63,29 @@ function vRP.setThirst(user_id, value)
 
     local src = vRP.getUserSource(user_id)
     Player(src).state:set('thirst', data.thirst, true)
+  end
+end
+
+function vRP.varyStress(user_id, variation)
+  local data = vRP.getUserDataTable(user_id)
+  if data then
+    data.stress = data.stress + variation
+
+
+    -- apply overflow as damage
+    local overflow = data.stress - 100
+    if overflow > 0 then
+      vRPclient._varyHealth(vRP.getUserSource(user_id), -overflow * cfg.overflow_damage_factor)
+    end
+
+    if data.stress < 0 then
+      data.stress = 0
+    elseif data.stress > 100 then
+      data.stress = 100
+    end
+
+    local src = vRP.getUserSource(user_id)
+    Player(src).state:set('stress', data.stress, true)
   end
 end
 
@@ -124,6 +163,11 @@ function tvRP.notifyAfterDeath()
       'mastercard'
     })
   end
+  local user_id = vRP.getUserId(source)
+  if not user_id then return end
+  vRP.setHunger( user_id, 0.0 )
+  vRP.setThirst( user_id, 0.0 )
+  vRP.setStress( user_id, 0.0)
 end
 
 -- tasks

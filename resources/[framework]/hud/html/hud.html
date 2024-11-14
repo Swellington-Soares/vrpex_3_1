@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link href="css/hud.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/all.css">
+	<link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/sharp-duotone-solid.css">
+	<link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/sharp-thin.css">
+	<link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/sharp-solid.css">
+	<link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/sharp-regular.css">
+	<link rel="stylesheet" href="https://site-assets.fontawesome.com/releases/v6.6.0/css/sharp-light.css">
+	<script src="js/gauge.min.js"></script>
+	<!-- <script src="js/progressbar.js"></script> -->
+</head>
+
+<body>
+	<div id="app">
+		<div class="playerHud" v-show="showPlayerHud">
+			<div class="circle" id="vidaicon">
+				<svg class="svgCircle">
+					<circle class="circleBacklifeFill" r="20" cx="50%" cy="50%"></circle>
+					<circle class="circleFill2 lifeFill" r="20" cx="50%" cy="50%" :style="{ strokeDashoffset: calculateLife}"></circle>
+				</svg>
+				<i class="fa-solid fa-heart-pulse icon-hud"></i>
+			</div>
+
+			<div class="circle armourkds" id="coleteicon">
+				<svg class="svgCircle">
+					<circle class="circleArmourFill" r="20" cx="50%" cy="50%"></circle>
+					<circle class="circleFill2 ArmourFill" r="20" cx="50%" cy="50%" :style="{ strokeDashoffset: calculateArmour}"></circle>
+				</svg>
+				<i class="fa-solid fa-shield-blank icon-hud"></i>
+			</div>
+
+			<div class="circle" id="fomeicon">
+				<svg class="svgCircle">
+					<circle class="circleHungerFill" r="20" cx="50%" cy="50%"></circle>
+					<circle class="circleFill2 HungerFill" r="20" cx="50%" cy="50%" :style="{ strokeDashoffset: calculateHunger}"></circle>
+				</svg>
+				<i class="fa-solid fa-burger-cheese icon-hud"></i>
+			</div>
+
+			<div class="circle" id="sedeicon">
+				<svg class="svgCircle">
+					<circle class="circlesedeFill" r="20" cx="50%" cy="50%"></circle>
+					<circle class="circleFill2 sedeFill" r="20" cx="50%" cy="50%" :style="{ strokeDashoffset: calculateThrist}"></circle>
+				</svg>
+				<i class="fa-solid fa-droplet icon-hud"></i>
+			</div>
+
+			<div class="circle" id="sedeicon">
+				<svg class="svgCircle">
+					<circle class="circlestressFill" r="20" cx="50%" cy="50%"></circle>
+					<circle class="circleFill2 stressFill" r="20" cx="50%" cy="50%" :style="{ strokeDashoffset: calculateStress}"></circle>
+				</svg>
+				<i class="fa-solid fa-bolt icon-hud"></i>
+			</div>
+
+		</div>
+
+		<div id="container" v-show="showVehicleHud">
+			<canvas id="rpmshow" data-type="radial-gauge" data-width="256" data-height="256" 
+				:data-value="rpm"
+				data-value="0"
+				data-units="" data-title="false" data-min-value="0" data-max-value="9"
+				data-animate-on-init="false" data-major-ticks="0,1,2,3,4,5,6,7,8,9" data-minor-ticks="4"
+				data-stroke-ticks="true" data-highlights='[{"from": 7.5, "to": 9, "color": "rgba(242,83,108,0)"}]'
+				data-color-plate="rgba(0,0,0,0)" data-color-major-ticks="rgba(255,255,255,0)"
+				data-color-minor-ticks="rgba(255,255,255,0)" data-color-title="#fff"
+				data-color-units="rgba(255,255,255,0)" data-color-numbers="rgba(255,255,255,0)"
+				data-color-needle="rgb(255,255,255)" data-color-needle-start="rgb(255,255,255)"
+				data-color-needle-end="rgb(255,255,255)" data-value-box="false" data-animated-value="false"
+				data-borders="false" data-border-shadow-width="0" data-needle-type="line" data-needle-width="2"
+				data-needle-circle-size="0" data-needle-shadow="true" data-needle-circle-outer="true"
+				data-needle-circle-inner="false" data-needle-start="25" data-color-needle-circle-outer="rgba(0,0,0,0)"
+				data-color-needle-circle-inner="rgba(0,0,0,0)" data-ticks-angle="230" data-start-angle="30"
+				data-ticks-width="5" data-ticks-width-minor="5" data-color-needle-shadow-down="rgba(0,0,0,0)"
+				data-value-box-width="45" data-font-numbers="Oswald-Regular" data-font-value="Oswald-Regular"></canvas>
+			<canvas id="rpmbg" data-type="radial-gauge" data-width="256" data-height="256" data-units=""
+				data-title="false" data-min-value="0" data-max-value="9" data-value="0.00" data-animate-on-init="false"
+				data-major-ticks="0,1,2,3,4,5,6,7,8,9" data-minor-ticks="4" data-stroke-ticks="true"
+				data-highlights='[{"from": 7.5, "to": 9, "color": "rgba(242,83,108,0.9)"}]'
+				data-color-plate="rgba(0,0,0,0)" data-color-major-ticks="rgba(255,255,255,0.6)"
+				data-color-minor-ticks="rgba(255,255,255,0.6)" data-color-title="#fff"
+				data-color-units="rgba(255,255,255,0.6)" data-color-numbers="rgba(255,255,255,0.6)"
+				data-color-needle="rgba(255,255,255,0)" data-color-needle-start="rgba(255,255,255,0)"
+				data-color-needle-end="rgba(255,255,255,0)" data-value-box="false" data-animated-value="false"
+				data-borders="false" data-border-shadow-width="0" data-needle-type="none" data-needle-width="0"
+				data-needle-circle-size="0" data-needle-shadow="false" data-needle-circle-outer="true"
+				data-needle-circle-inner="false" data-needle-start="25" data-color-needle-circle-outer="rgba(0,0,0,0)"
+				data-color-needle-circle-inner="rgba(0,0,0,0)" data-ticks-angle="230" data-start-angle="30"
+				data-ticks-width="5" data-ticks-width-minor="5" data-color-needle-shadow-down="rgba(0,0,0,0)"
+				data-value-box-width="45" data-font-numbers="Oswald-Regular" data-font-value="Oswald-Regular"></canvas>
+
+			<img src="images/speedcircle.png" class="speedcircle" />
+
+			<div class="geardisplay"
+				:style="[gear == 0 ? 'color: #fff;border-color: #fff' : rpm > 7.5 ? 'color: rgb(235,30,76);border-color:rgb(235,30,76);' : '']">
+				<span>{{ gear == 0 ? 'R' : gear }}</span>
+			</div>
+
+			<div class="speeddisplay" >{{speed}}</span></div>
+			<i class="fa-solid fa-person-seat icon seatbelt" :style="{color: seatbelt ? 'gray' : 'red'}"></i>
+
+			<i class="fa-solid fa-arrow-left-to-arc icon arrow-left" :style="{color: lightIndicator == 1 || lightIndicator == 3 ? 'green' : 'gray'}"></i>
+
+			<i class="fa-solid fa-arrow-right-to-arc icon arrow-right" :style="{color: lightIndicator == 2 || lightIndicator == 3 ? 'green' : 'gray'}"></i>
+
+			<i class="fa-regular fa-light-emergency icon headlight"	:class="{'fa-solid fa-light-emergency-on': headlight }"	:style="{color: headlight ? 'green' : 'gray'}"></i>
+
+			<i class="fa-solid fa-engine icon engine" :style="{color: calculateEngineStatus}"></i>
+
+			<i class="fa-solid fa-truck-ramp icon trunk" :style="{ color: trunk ? 'white' : 'gray' }"></i>
+
+			<i class="fa-key icon key" :class="{'fa-solid' : vehicleLocked, 'fa-regular': !vehicleLocked}" :style="{color: !vehicleLocked ? 'red' : 'green' }"></i>
+
+			<div class="abs"><span :class="{gray: !abs}">ABS</span></div>
+			<div class="handbrake"><span :class="{gray: !handbreak}">HBK</span></div>
+			<div class="unitdisplay">KMH</div>
+
+		</div>
+	</div>
+	<script type="importmap">
+		{
+		  "imports": {
+			"vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js",
+			"gsap": "https://cdn.skypack.dev/gsap"
+		  }
+		}
+	</script>
+
+	<script src="js/hud.js" type="module"></script>
+</body>
+
+</html>

@@ -14,7 +14,9 @@ local STORE_CONFIG <const> = {
         components = true,
         props = true,
         allowExit = true,
-        tattoos = false
+        tattoos = false,
+        allowSavePreset = config.allowed_save_preset,
+        presetPrice = config.save_preset_price
     },
     [2] = {
         ped = false,
@@ -117,7 +119,7 @@ AddEventHandler('beatyshop:client:open', function(data)
     if isOpen then return end
     if data.distance > 3.0 then return end
     if not data.type then return error(locale('store_type_not_found')) end
-    local sconfig = STORE_CONFIG[data.type]
+    local sconfig = STORE_CONFIG[data.type]    
     SetEntityHeading(cache.ped, data.heading)
 
     if data.type ~= 1 then
@@ -127,13 +129,25 @@ AddEventHandler('beatyshop:client:open', function(data)
     LocalPlayer.state.not_save_custom = true
     old_appareance = exports.sw_appearance:getPedAppearance(PlayerPedId())
     exports.sw_appearance:startPlayerCustomization(function(app)
+
+
         LocalPlayer.state.not_save_custom = nil        
         NetworkSetEntityInvisibleToNetwork(PlayerPedId(), false)
         if data.type ~= 1 then
             SetEntityVisible(data.entity, true, true)
         end
         if not app then return end
-        if vRP.getPlayer()?.money?.cash >= 500 then
+
+        if app.is_preset then
+            if (vRP.getPlayer()?.money?.cash or 0 )>= config.save_preset_price then
+                vRP.notify('Loja', 'Preset adicionado a sua mochila.', 5000, 'success') 
+                TriggerServerEvent('beaty:savepreset', app.preset)
+            else
+                vRP.notify('Loja', 'Você não possui dinheiro suficiente.', 5000, 'error') 
+            end
+            return
+        end
+        if (vRP.getPlayer()?.money?.cash or 0 ) >= 500 then
             TriggerServerEvent('beaty:checkpayment')        
         else
             exports.sw_appearance:setPedAppearance(PlayerPedId(), old_appareance)
@@ -161,4 +175,28 @@ AddEventHandler('onResourceStop', function(resource)
         exports.ox_target:removeZone(v, false)
     end
     exports.ox_target:removeLocalEntity(pedZones)
+end)
+
+
+--ex inventory item
+exports('preset', function(data, slot)
+    lib.print.info(data, slot)
+    if not slot?.metadata?.preset_id then return end
+
+    local preset = GetResourceKvpString(slot.metadata.preset_id)
+    if not preset then
+        preset = lib.callback.await('beaty:server:getPreset', false, slot?.metadata?.preset_id)
+        
+        if not preset then return end
+        local dict = 'clothingtie'
+        pcall(lib.requestAnimDict, dict)
+        if HasAnimDictLoaded(dict) then
+           TaskPlayAnim(cache.ped, dict, 'try_tie_negative_a', 8.0, -8.0, 600, 51, 0.0, false, false, false) 
+           RemoveAnimDict(dict)
+        end
+       
+        SetResourceKvp(slot.metadata.preset_id, json.encode(preset))
+        exports.sw_appearance:setPedComponents(PlayerPedId(), preset.components)
+        exports.sw_appearance:setPedProps(PlayerPedId(), preset.props)
+    end
 end)

@@ -338,11 +338,6 @@ function tvRP.setMovement(dict)
   end
 end
 
--- events
-AddEventHandler("playerSpawned", function()
-  TriggerServerEvent("vRPcli:playerSpawned")
-end)
-
 function vRP.setPedFlags(ped)
   SetPedDropsWeaponsWhenDead(ped, false)
   SetPedConfigFlag(ped, 422, true)
