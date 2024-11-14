@@ -2,7 +2,7 @@
 -- Servidor:                     localhost
 -- Versão do servidor:           11.2.2-MariaDB-1:11.2.2+maria~ubu2204 - mariadb.org binary distribution
 -- OS do Servidor:               debian-linux-gnu
--- HeidiSQL Versão:              12.8.0.6908
+-- HeidiSQL Versão:              12.8.0.6935
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -262,6 +262,7 @@ CREATE TABLE IF NOT EXISTS `players` (
   `money` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT json_object() CHECK (json_valid(`money`)),
   `inventory` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT json_array() CHECK (json_valid(`inventory`)),
   `datatable` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT json_object() CHECK (json_valid(`datatable`)),
+  `skin` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`skin`)),
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `deleted_at` timestamp NULL DEFAULT NULL,
   `iban` varchar(255) DEFAULT NULL,
@@ -271,7 +272,7 @@ CREATE TABLE IF NOT EXISTS `players` (
   UNIQUE KEY `phone` (`phone`),
   KEY `user_id` (`user_id`),
   CONSTRAINT `FK__players_users` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Exportação de dados foi desmarcado.
 
@@ -372,7 +373,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   UNIQUE KEY `license` (`license`),
   UNIQUE KEY `discord` (`discord`),
   UNIQUE KEY `fivem_id` (`fivem_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- Exportação de dados foi desmarcado.
 
@@ -400,6 +401,7 @@ CREATE TABLE `vplayers` (
 	`phone` VARCHAR(1) NOT NULL COLLATE 'utf8mb4_unicode_ci',
 	`birth_date` DATE NOT NULL,
 	`money` LONGTEXT NOT NULL COLLATE 'utf8mb4_bin',
+	`skin` LONGTEXT NULL COLLATE 'utf8mb4_bin',
 	`datatable` LONGTEXT NOT NULL COLLATE 'utf8mb4_bin',
 	`created_at` TIMESTAMP NOT NULL,
 	`deleted_at` TIMESTAMP NULL,
@@ -555,7 +557,7 @@ DELIMITER ;
 
 -- Removendo tabela temporária e criando a estrutura VIEW final
 DROP TABLE IF EXISTS `vplayers`;
-CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `vplayers` AS select `players`.`id` AS `id`,`players`.`user_id` AS `user_id`,(select `users`.`license` from `users` where `users`.`id` = `players`.`user_id`) AS `license`,`players`.`firstname` AS `firstname`,`players`.`lastname` AS `lastname`,`players`.`registration` AS `registration`,`players`.`gender` AS `gender`,`players`.`phone` AS `phone`,`players`.`birth_date` AS `birth_date`,`players`.`money` AS `money`,`players`.`datatable` AS `datatable`,`players`.`created_at` AS `created_at`,`players`.`deleted_at` AS `deleted_at`,`players`.`iban` AS `iban`,`players`.`pincode` AS `pincode` from `players`;
+CREATE ALGORITHM=UNDEFINED SQL SECURITY DEFINER VIEW `vplayers` AS select `players`.`id` AS `id`,`players`.`user_id` AS `user_id`,(select `users`.`license` from `users` where `users`.`id` = `players`.`user_id`) AS `license`,`players`.`firstname` AS `firstname`,`players`.`lastname` AS `lastname`,`players`.`registration` AS `registration`,`players`.`gender` AS `gender`,`players`.`phone` AS `phone`,`players`.`birth_date` AS `birth_date`,`players`.`money` AS `money`,`players`.`skin` AS `skin`,`players`.`datatable` AS `datatable`,`players`.`created_at` AS `created_at`,`players`.`deleted_at` AS `deleted_at`,`players`.`iban` AS `iban`,`players`.`pincode` AS `pincode` from `players`;
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
