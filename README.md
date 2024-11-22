@@ -6,4 +6,6 @@
 * sistema de trancas
 * grupos por hierarquia
 * garagem
+* inventário
+* target
 * e mais algumas coisas.
