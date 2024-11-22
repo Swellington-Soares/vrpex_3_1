@@ -5,5 +5,5 @@
 * sistema de casa
 * sistema de trancas
 * grupos por hierarquia
-* gargem
+* garagem
 * e mais algumas coisas.
