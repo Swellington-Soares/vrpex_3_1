@@ -292,9 +292,7 @@ end
 AddEventHandler("playerConnecting", function(name, setMessage, deferrals)
   local source = source
   local license = vRP.getPlayerIdentifier(source, 'license')
-
   deferrals.defer()
-
   Wait(50)
 
   lib.print.info('Player trying to enter', GetPlayerName(source), source)

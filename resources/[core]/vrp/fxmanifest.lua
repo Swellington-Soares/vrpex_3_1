@@ -31,7 +31,7 @@ server_scripts {
   'modules/basic_garage.lua',
   'modules/basic_items.lua',
   'modules/logging.lua',
-   'tools/sv_*.lua'
+  'tools/sv_*.lua'
 }
 
 -- client scripts
