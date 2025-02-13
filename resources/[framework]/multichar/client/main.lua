@@ -509,6 +509,12 @@ local function SelectChar()
             DeletePreviewPeds()
             CreateNewPlayerScreenRegister()
         end
+    elseif chars[currentSelectedSlot]?.deleted then
+        lib.alertDialog({
+            header = 'Selecionar Personagem',
+            content = 'Personagem não pode ser selecionado',
+            centered = true
+        })
     else
         local alert = lib.alertDialog({
             header = 'Logar',
